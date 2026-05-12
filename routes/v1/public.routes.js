@@ -5,6 +5,7 @@ const vendorController = require('../../controllers/vendor.controller');
 const categoryController = require('../../controllers/category.controller');
 const billingController = require('../../controllers/billing.controller');
 const customizationController = require('../../controllers/customization.controller');
+const publicPcBuilderController = require('../../controllers/publicPcBuilder.controller');
 
 // Middleware to check if product is published (for public routes)
 const checkPublishedProduct = async (req, res, next) => {
@@ -49,6 +50,10 @@ router.get('/products', (req, res, next) => {
 }, productController.getAllProducts.bind(productController));
 
 router.get('/products/:id', checkPublishedProduct, productController.getProductById.bind(productController));
+
+// Public PC Builder Routes (only GET, only published products)
+router.get('/pc-builder/options', publicPcBuilderController.getOptions.bind(publicPcBuilderController));
+router.get('/pc-builder/products', publicPcBuilderController.getProducts.bind(publicPcBuilderController));
 
 // Public Vendors Routes (only GET)
 router.get('/vendors', vendorController.getAllVendors.bind(vendorController));

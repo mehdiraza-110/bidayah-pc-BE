@@ -289,6 +289,105 @@ Retrieves a specific category by its ID.
 
 ---
 
+## Public PC Builder API
+
+### 1. Get Categories and Vendors
+**GET** `/api/v1/public/pc-builder/options`
+
+Retrieves the categories and vendors needed to start the PC builder flow in one request.
+
+#### Success Response (200)
+```json
+{
+  "success": true,
+  "message": "PC builder options retrieved successfully",
+  "data": {
+    "categories": [
+      {
+        "id": "660e8400-e29b-41d4-a716-446655440001",
+        "category_name": "Processors",
+        "image": "https://your-bucket.s3.ca-central-1.amazonaws.com/categories/cpu.webp",
+        "created_at": "2024-01-15T10:30:00.000Z",
+        "updated_at": "2024-01-15T10:30:00.000Z"
+      }
+    ],
+    "vendors": [
+      {
+        "id": "550e8400-e29b-41d4-a716-446655440000",
+        "vendor_name": "AMD",
+        "created_at": "2024-01-15T10:30:00.000Z",
+        "updated_at": "2024-01-15T10:30:00.000Z"
+      }
+    ]
+  },
+  "counts": {
+    "categories": 1,
+    "vendors": 1
+  }
+}
+```
+
+---
+
+### 2. Get Rule-Based Products
+**GET** `/api/v1/public/pc-builder/products`
+
+Returns published products matched by active PC builder filter rules for a selected category/vendor combination.
+
+#### Query Parameters
+- `selected_category_id` or `category_id` (UUID, required) - Selected category
+- `selected_vendor_id` or `vendor_id` (UUID, optional) - Selected vendor
+- `result_category_id` (UUID, optional) - Limit products to a specific target category
+- `in_stock` (boolean/string, optional) - Filter by stock: 'true' or 'false'
+
+**Note**: This endpoint always filters products by `status = 'published'`.
+
+#### Examples
+```
+GET /api/v1/public/pc-builder/products?category_id=660e8400-e29b-41d4-a716-446655440001
+GET /api/v1/public/pc-builder/products?selected_category_id=660e8400-e29b-41d4-a716-446655440001&selected_vendor_id=550e8400-e29b-41d4-a716-446655440000&result_category_id=770e8400-e29b-41d4-a716-446655440002&in_stock=true
+```
+
+#### Success Response (200)
+```json
+{
+  "success": true,
+  "message": "Matching PC builder products retrieved successfully",
+  "data": [
+    {
+      "id": "880e8400-e29b-41d4-a716-446655440003",
+      "name": "Compatible Motherboard",
+      "category_id": "770e8400-e29b-41d4-a716-446655440002",
+      "category_name": "Motherboards",
+      "price": "199.99",
+      "image": "https://your-bucket.s3.ca-central-1.amazonaws.com/products/motherboard.webp",
+      "status": "published",
+      "vendors": [],
+      "media": [],
+      "specs": []
+    }
+  ],
+  "applied_rules": [
+    {
+      "id": "990e8400-e29b-41d4-a716-446655440004",
+      "rule_name": "AMD CPU to AM5 Motherboards",
+      "selected_category_id": "660e8400-e29b-41d4-a716-446655440001",
+      "selected_vendor_id": "550e8400-e29b-41d4-a716-446655440000",
+      "result_category_id": "770e8400-e29b-41d4-a716-446655440002",
+      "result_vendor_id": null,
+      "priority": 10
+    }
+  ],
+  "count": 1
+}
+```
+
+#### Error Responses
+- **400 Bad Request**: `selected_category_id` or `category_id` is missing
+- **500 Internal Server Error**: Server error
+
+---
+
 ## Important Notes
 
 ### Public vs Admin Endpoints
@@ -299,6 +398,7 @@ Retrieves a specific category by its ID.
 - Products: Only shows published products
 - Vendors: Shows all vendors
 - Categories: Shows all categories
+- PC Builder: Only shows published products returned by active filter rules
 
 **Admin Endpoints** (`/api/v1/products/*`, `/api/v1/vendors/*`, `/api/v1/categories/*`):
 - May require authentication (depends on implementation)
@@ -358,6 +458,18 @@ curl -X GET http://localhost:3000/api/v1/public/categories
 #### Get Category by ID
 ```bash
 curl -X GET http://localhost:3000/api/v1/public/categories/660e8400-e29b-41d4-a716-446655440001
+```
+
+### Public PC Builder
+
+#### Get Categories and Vendors
+```bash
+curl -X GET http://localhost:3000/api/v1/public/pc-builder/options
+```
+
+#### Get Rule-Based Products
+```bash
+curl -X GET "http://localhost:3000/api/v1/public/pc-builder/products?category_id=660e8400-e29b-41d4-a716-446655440001&vendor_id=550e8400-e29b-41d4-a716-446655440000&in_stock=true"
 ```
 
 ---
@@ -433,6 +545,28 @@ fetch('http://localhost:3000/api/v1/public/categories')
   });
 ```
 
+#### Get PC Builder Options
+```javascript
+fetch('http://localhost:3000/api/v1/public/pc-builder/options')
+  .then(response => response.json())
+  .then(data => {
+    console.log(data.data.categories);
+    console.log(data.data.vendors);
+  });
+```
+
+#### Get PC Builder Products
+```javascript
+const categoryId = '660e8400-e29b-41d4-a716-446655440001';
+const vendorId = '550e8400-e29b-41d4-a716-446655440000';
+
+fetch(`http://localhost:3000/api/v1/public/pc-builder/products?category_id=${categoryId}&vendor_id=${vendorId}`)
+  .then(response => response.json())
+  .then(data => {
+    console.log(data.data); // Array of published products matched by filter rules
+  });
+```
+
 ---
 
 ## Response Format
@@ -467,6 +601,8 @@ All responses follow this format:
 | `/api/v1/public/products/featured` | GET | Get featured published products | Not required |
 | `/api/v1/public/products` | GET | Get all published products | Not required |
 | `/api/v1/public/products/:id` | GET | Get published product by ID | Not required |
+| `/api/v1/public/pc-builder/options` | GET | Get categories and vendors for PC builder | Not required |
+| `/api/v1/public/pc-builder/products` | GET | Get published products matched by PC builder filter rules | Not required |
 | `/api/v1/public/vendors` | GET | Get all vendors | Not required |
 | `/api/v1/public/vendors/:id` | GET | Get vendor by ID | Not required |
 | `/api/v1/public/categories` | GET | Get all categories | Not required |

@@ -6,6 +6,7 @@ This folder contains guides and documentation for the Bidayah PC Backend APIs.
 
 - **[User CRUD API Guide](./user-api-guide.md)** - Complete documentation for User CRUD operations
 - **[Vendor & Category CRUD API Guide](./vendor-category-api-guide.md)** - Complete documentation for Vendor and Category CRUD operations
+- **[Key Features API Guide](./key-features-api-guide.md)** - Category-based product key features for admin forms and future filters
 
 ## Quick Start
 
@@ -53,6 +54,7 @@ All APIs are prefixed with: `/api/v1`
 - ✅ Role-based access control (RBAC) support
 - ✅ Vendor CRUD operations
 - ✅ Category CRUD operations with S3 image upload
+- ✅ Category-based key features for products
 
 ## Need Help?
 

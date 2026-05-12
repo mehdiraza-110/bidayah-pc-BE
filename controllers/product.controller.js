@@ -1,4 +1,5 @@
 const productService = require('../services/product.service');
+const keyFeatureService = require('../services/keyFeature.service');
 const { uploadToS3, deleteFromS3 } = require('../utils/s3.util');
 
 class ProductController {
@@ -13,12 +14,14 @@ class ProductController {
         description,
         stock,
         vendor_id,
+        vendor_ids,
         status,
         featured,
         new_product,
         rating,
         reviews_count,
-        specs
+        specs,
+        key_features
       } = req.body;
       
       // Validation
@@ -28,14 +31,14 @@ class ProductController {
           message: 'Product name and price are required'
         });
       }
-      
+
       if (!req.files || !req.files.main_image) {
         return res.status(400).json({
           success: false,
           message: 'Main product image is required'
         });
       }
-      
+
       // Upload main product image to S3
       let mainImageUrl;
       try {
@@ -48,7 +51,7 @@ class ProductController {
           error: uploadError.message
         });
       }
-      
+
       // Upload product media (up to 5 images/videos)
       const media = [];
       if (req.files.media && req.files.media.length > 0) {
@@ -67,7 +70,22 @@ class ProductController {
           }
         }
       }
-      
+
+      // Parse vendor_ids if provided as string
+      let parsedVendorIds = [];
+      const requestedVendorIds = vendor_ids || vendor_id;
+      if (requestedVendorIds) {
+        if (typeof requestedVendorIds === 'string') {
+          try {
+            parsedVendorIds = JSON.parse(requestedVendorIds);
+          } catch (e) {
+            parsedVendorIds = requestedVendorIds.split(',').map(s => s.trim()).filter(s => s);
+          }
+        } else if (Array.isArray(requestedVendorIds)) {
+          parsedVendorIds = requestedVendorIds;
+        }
+      }
+
       // Parse specs if provided as string
       let parsedSpecs = [];
       if (specs) {
@@ -81,7 +99,9 @@ class ProductController {
           parsedSpecs = specs;
         }
       }
-      
+
+      const parsedKeyFeatures = keyFeatureService.normalizeKeyFeatures(key_features) || [];
+
       const productData = {
         name,
         category_id: category_id || null,
@@ -90,14 +110,15 @@ class ProductController {
         image: mainImageUrl,
         description: description || null,
         stock: stock ? parseInt(stock) : 0,
-        vendor_id: vendor_id || null,
+        vendor_ids: parsedVendorIds,
         status: status || 'published',
         featured: featured === 'true' || featured === true,
         new_product: new_product === 'true' || new_product === true,
         rating: rating ? parseFloat(rating) : 0.00,
         reviews_count: reviews_count ? parseInt(reviews_count) : 0,
         media: media,
-        specs: parsedSpecs
+        specs: parsedSpecs,
+        key_features: parsedKeyFeatures
       };
       
       const newProduct = await productService.createProduct(productData);
@@ -109,6 +130,19 @@ class ProductController {
       });
     } catch (error) {
       console.error('Error creating product:', error);
+
+      if (
+        error.message === 'Product category is required when saving key features' ||
+        error.message === 'Each key feature requires key_feature_id or feature_key' ||
+        error.message === 'Key feature does not belong to the selected category' ||
+        error.message === 'key_features must be a valid JSON array'
+      ) {
+        return res.status(400).json({
+          success: false,
+          message: error.message
+        });
+      }
+
       res.status(500).json({
         success: false,
         message: 'Error creating product',
@@ -261,27 +295,44 @@ class ProductController {
         description,
         stock,
         vendor_id,
+        vendor_ids,
         status,
         featured,
         new_product,
         rating,
         reviews_count,
-        specs
+        specs,
+        key_features
       } = req.body;
-      
+
       if (name !== undefined) productData.name = name;
       if (category_id !== undefined) productData.category_id = category_id || null;
       if (price !== undefined) productData.price = parseFloat(price);
       if (original_price !== undefined) productData.original_price = original_price ? parseFloat(original_price) : null;
       if (description !== undefined) productData.description = description || null;
       if (stock !== undefined) productData.stock = parseInt(stock);
-      if (vendor_id !== undefined) productData.vendor_id = vendor_id || null;
       if (status !== undefined) productData.status = status;
       if (featured !== undefined) productData.featured = featured === 'true' || featured === true;
       if (new_product !== undefined) productData.new_product = new_product === 'true' || new_product === true;
       if (rating !== undefined) productData.rating = parseFloat(rating);
       if (reviews_count !== undefined) productData.reviews_count = parseInt(reviews_count);
-      
+
+      // Handle vendor_ids
+      const requestedVendorIds = vendor_ids !== undefined ? vendor_ids : vendor_id;
+      if (requestedVendorIds !== undefined) {
+        let parsedVendorIds = [];
+        if (typeof requestedVendorIds === 'string') {
+          try {
+            parsedVendorIds = JSON.parse(requestedVendorIds);
+          } catch (e) {
+            parsedVendorIds = requestedVendorIds.split(',').map(s => s.trim()).filter(s => s);
+          }
+        } else if (Array.isArray(requestedVendorIds)) {
+          parsedVendorIds = requestedVendorIds;
+        }
+        productData.vendor_ids = parsedVendorIds;
+      }
+
       // Handle specs
       if (specs !== undefined) {
         let parsedSpecs = [];
@@ -295,6 +346,10 @@ class ProductController {
           parsedSpecs = specs;
         }
         productData.specs = parsedSpecs;
+      }
+
+      if (key_features !== undefined) {
+        productData.key_features = keyFeatureService.normalizeKeyFeatures(key_features) || [];
       }
       
       if (Object.keys(productData).length === 0) {
@@ -325,6 +380,18 @@ class ProductController {
         return res.status(400).json({
           success: false,
           message: 'No fields to update'
+        });
+      }
+
+      if (
+        error.message === 'Product category is required when saving key features' ||
+        error.message === 'Each key feature requires key_feature_id or feature_key' ||
+        error.message === 'Key feature does not belong to the selected category' ||
+        error.message === 'key_features must be a valid JSON array'
+      ) {
+        return res.status(400).json({
+          success: false,
+          message: error.message
         });
       }
       

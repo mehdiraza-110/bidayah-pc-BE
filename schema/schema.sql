@@ -84,7 +84,6 @@ CREATE TABLE products (
     description TEXT NULL,
     stock INTEGER NOT NULL DEFAULT 0 CHECK (stock >= 0),
     in_stock BOOLEAN GENERATED ALWAYS AS (stock > 0) STORED,
-    vendor_id UUID NULL,
     status product_status NOT NULL DEFAULT 'published',
     featured BOOLEAN DEFAULT FALSE,
     new_product BOOLEAN DEFAULT FALSE,
@@ -92,18 +91,33 @@ CREATE TABLE products (
     reviews_count INTEGER DEFAULT 0 CHECK (reviews_count >= 0),
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    
-    FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE SET NULL,
-    FOREIGN KEY (vendor_id) REFERENCES vendors(id) ON DELETE SET NULL
+
+    FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE SET NULL
 );
 
 CREATE INDEX idx_products_category_id ON products(category_id);
-CREATE INDEX idx_products_vendor_id ON products(vendor_id);
 CREATE INDEX idx_products_status ON products(status);
 CREATE INDEX idx_products_featured ON products(featured);
 CREATE INDEX idx_products_in_stock ON products(in_stock);
 CREATE INDEX idx_products_created_at ON products(created_at);
 CREATE INDEX idx_products_name ON products(name);
+
+
+-- ============================================
+-- PRODUCT VENDORS TABLE (many-to-many)
+-- ============================================
+
+CREATE TABLE product_vendors (
+    product_id UUID NOT NULL,
+    vendor_id UUID NOT NULL,
+    PRIMARY KEY (product_id, vendor_id),
+    FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE,
+    FOREIGN KEY (vendor_id) REFERENCES vendors(id) ON DELETE CASCADE
+);
+
+CREATE INDEX idx_product_vendors_product_id ON product_vendors(product_id);
+CREATE INDEX idx_product_vendors_vendor_id ON product_vendors(vendor_id);
+
 
 -- Trigger to auto-update updated_at
 CREATE OR REPLACE FUNCTION update_updated_at_column()
@@ -157,6 +171,96 @@ CREATE TABLE product_specs (
 
 CREATE INDEX idx_product_specs_product_id ON product_specs(product_id);
 CREATE INDEX idx_product_specs_display_order ON product_specs(display_order);
+
+
+-- ============================================
+-- CATEGORY KEY FEATURES TABLE
+-- Reusable filter keys available for a category
+-- ============================================
+
+CREATE TABLE category_key_features (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    category_id UUID NOT NULL,
+    feature_key VARCHAR(255) NOT NULL,
+    display_order INTEGER NOT NULL DEFAULT 0 CHECK (display_order >= 0),
+    is_active BOOLEAN NOT NULL DEFAULT TRUE,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE CASCADE,
+    CONSTRAINT unique_category_feature_key UNIQUE (category_id, feature_key)
+);
+
+CREATE INDEX idx_category_key_features_category_id ON category_key_features(category_id);
+CREATE INDEX idx_category_key_features_is_active ON category_key_features(is_active);
+CREATE INDEX idx_category_key_features_display_order ON category_key_features(display_order);
+
+CREATE TRIGGER update_category_key_features_updated_at BEFORE UPDATE ON category_key_features
+    FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+
+
+-- ============================================
+-- PRODUCT KEY FEATURES TABLE
+-- Product-specific values for reusable category keys
+-- ============================================
+
+CREATE TABLE product_key_features (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    product_id UUID NOT NULL,
+    category_key_feature_id UUID NOT NULL,
+    feature_value VARCHAR(255) NOT NULL,
+    display_order INTEGER NOT NULL DEFAULT 0 CHECK (display_order >= 0),
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE,
+    FOREIGN KEY (category_key_feature_id) REFERENCES category_key_features(id) ON DELETE CASCADE,
+    CONSTRAINT unique_product_key_feature UNIQUE (product_id, category_key_feature_id)
+);
+
+CREATE INDEX idx_product_key_features_product_id ON product_key_features(product_id);
+CREATE INDEX idx_product_key_features_category_key_feature_id ON product_key_features(category_key_feature_id);
+CREATE INDEX idx_product_key_features_feature_value ON product_key_features(feature_value);
+
+CREATE TRIGGER update_product_key_features_updated_at BEFORE UPDATE ON product_key_features
+    FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+
+
+-- ============================================
+-- PC BUILDER FILTER RULES TABLE
+-- ============================================
+
+CREATE TYPE pc_builder_spec_match_mode AS ENUM ('any', 'all');
+
+CREATE TABLE pc_builder_filter_rules (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    rule_name VARCHAR(255) NOT NULL,
+    selected_category_id UUID NOT NULL,
+    selected_vendor_id UUID NULL,
+    result_category_id UUID NOT NULL,
+    result_vendor_id UUID NULL,
+    spec_match_terms TEXT[] NOT NULL DEFAULT ARRAY[]::TEXT[],
+    spec_match_mode pc_builder_spec_match_mode NOT NULL DEFAULT 'any',
+    priority INTEGER NOT NULL DEFAULT 0,
+    is_active BOOLEAN NOT NULL DEFAULT TRUE,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (selected_category_id) REFERENCES categories(id) ON DELETE CASCADE,
+    FOREIGN KEY (selected_vendor_id) REFERENCES vendors(id) ON DELETE SET NULL,
+    FOREIGN KEY (result_category_id) REFERENCES categories(id) ON DELETE CASCADE,
+    FOREIGN KEY (result_vendor_id) REFERENCES vendors(id) ON DELETE SET NULL
+);
+
+CREATE INDEX idx_pc_builder_rules_selected_category_id ON pc_builder_filter_rules(selected_category_id);
+CREATE INDEX idx_pc_builder_rules_selected_vendor_id ON pc_builder_filter_rules(selected_vendor_id);
+CREATE INDEX idx_pc_builder_rules_result_category_id ON pc_builder_filter_rules(result_category_id);
+CREATE INDEX idx_pc_builder_rules_result_vendor_id ON pc_builder_filter_rules(result_vendor_id);
+CREATE INDEX idx_pc_builder_rules_is_active ON pc_builder_filter_rules(is_active);
+CREATE INDEX idx_pc_builder_rules_priority ON pc_builder_filter_rules(priority);
+
+CREATE TRIGGER update_pc_builder_filter_rules_updated_at BEFORE UPDATE ON pc_builder_filter_rules
+    FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
 
 
 -- ============================================
@@ -283,3 +387,92 @@ CREATE TABLE hero_media (
 CREATE INDEX idx_hero_media_display_index ON hero_media(display_index);
 CREATE INDEX idx_hero_media_type ON hero_media(type);
 
+
+-- ============================================
+-- MIGRATION: products vendor_id -> product_vendors
+-- Run this block against an existing database instead of the full schema above.
+-- ============================================
+-- ALTER TABLE products DROP CONSTRAINT IF EXISTS products_vendor_id_fkey;
+-- ALTER TABLE products DROP COLUMN IF EXISTS vendor_id;
+-- CREATE TABLE IF NOT EXISTS product_vendors (
+--     product_id UUID NOT NULL,
+--     vendor_id  UUID NOT NULL,
+--     PRIMARY KEY (product_id, vendor_id),
+--     FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE,
+--     FOREIGN KEY (vendor_id)  REFERENCES vendors(id)  ON DELETE CASCADE
+-- );
+-- CREATE INDEX IF NOT EXISTS idx_product_vendors_product_id ON product_vendors(product_id);
+-- CREATE INDEX IF NOT EXISTS idx_product_vendors_vendor_id  ON product_vendors(vendor_id);
+
+
+-- ============================================
+-- MIGRATION: add PC builder filter rules
+-- Run this block against an existing database instead of the full schema above.
+-- ============================================
+-- CREATE TYPE pc_builder_spec_match_mode AS ENUM ('any', 'all');
+-- CREATE TABLE IF NOT EXISTS pc_builder_filter_rules (
+--     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+--     rule_name VARCHAR(255) NOT NULL,
+--     selected_category_id UUID NOT NULL,
+--     selected_vendor_id UUID NULL,
+--     result_category_id UUID NOT NULL,
+--     result_vendor_id UUID NULL,
+--     spec_match_terms TEXT[] NOT NULL DEFAULT ARRAY[]::TEXT[],
+--     spec_match_mode pc_builder_spec_match_mode NOT NULL DEFAULT 'any',
+--     priority INTEGER NOT NULL DEFAULT 0,
+--     is_active BOOLEAN NOT NULL DEFAULT TRUE,
+--     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+--     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+--     FOREIGN KEY (selected_category_id) REFERENCES categories(id) ON DELETE CASCADE,
+--     FOREIGN KEY (selected_vendor_id) REFERENCES vendors(id) ON DELETE SET NULL,
+--     FOREIGN KEY (result_category_id) REFERENCES categories(id) ON DELETE CASCADE,
+--     FOREIGN KEY (result_vendor_id) REFERENCES vendors(id) ON DELETE SET NULL
+-- );
+-- CREATE INDEX IF NOT EXISTS idx_pc_builder_rules_selected_category_id ON pc_builder_filter_rules(selected_category_id);
+-- CREATE INDEX IF NOT EXISTS idx_pc_builder_rules_selected_vendor_id ON pc_builder_filter_rules(selected_vendor_id);
+-- CREATE INDEX IF NOT EXISTS idx_pc_builder_rules_result_category_id ON pc_builder_filter_rules(result_category_id);
+-- CREATE INDEX IF NOT EXISTS idx_pc_builder_rules_result_vendor_id ON pc_builder_filter_rules(result_vendor_id);
+-- CREATE INDEX IF NOT EXISTS idx_pc_builder_rules_is_active ON pc_builder_filter_rules(is_active);
+-- CREATE INDEX IF NOT EXISTS idx_pc_builder_rules_priority ON pc_builder_filter_rules(priority);
+-- CREATE TRIGGER update_pc_builder_filter_rules_updated_at BEFORE UPDATE ON pc_builder_filter_rules
+--     FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+
+
+-- ============================================
+-- MIGRATION: add category/product key features
+-- Run this block against an existing database instead of the full schema above.
+-- ============================================
+-- CREATE TABLE IF NOT EXISTS category_key_features (
+--     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+--     category_id UUID NOT NULL,
+--     feature_key VARCHAR(255) NOT NULL,
+--     display_order INTEGER NOT NULL DEFAULT 0 CHECK (display_order >= 0),
+--     is_active BOOLEAN NOT NULL DEFAULT TRUE,
+--     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+--     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+--     FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE CASCADE,
+--     CONSTRAINT unique_category_feature_key UNIQUE (category_id, feature_key)
+-- );
+-- CREATE INDEX IF NOT EXISTS idx_category_key_features_category_id ON category_key_features(category_id);
+-- CREATE INDEX IF NOT EXISTS idx_category_key_features_is_active ON category_key_features(is_active);
+-- CREATE INDEX IF NOT EXISTS idx_category_key_features_display_order ON category_key_features(display_order);
+-- CREATE TRIGGER update_category_key_features_updated_at BEFORE UPDATE ON category_key_features
+--     FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+--
+-- CREATE TABLE IF NOT EXISTS product_key_features (
+--     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+--     product_id UUID NOT NULL,
+--     category_key_feature_id UUID NOT NULL,
+--     feature_value VARCHAR(255) NOT NULL,
+--     display_order INTEGER NOT NULL DEFAULT 0 CHECK (display_order >= 0),
+--     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+--     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+--     FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE,
+--     FOREIGN KEY (category_key_feature_id) REFERENCES category_key_features(id) ON DELETE CASCADE,
+--     CONSTRAINT unique_product_key_feature UNIQUE (product_id, category_key_feature_id)
+-- );
+-- CREATE INDEX IF NOT EXISTS idx_product_key_features_product_id ON product_key_features(product_id);
+-- CREATE INDEX IF NOT EXISTS idx_product_key_features_category_key_feature_id ON product_key_features(category_key_feature_id);
+-- CREATE INDEX IF NOT EXISTS idx_product_key_features_feature_value ON product_key_features(feature_value);
+-- CREATE TRIGGER update_product_key_features_updated_at BEFORE UPDATE ON product_key_features
+--     FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();

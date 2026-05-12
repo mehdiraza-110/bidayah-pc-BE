@@ -1,4 +1,5 @@
 const db = require('../config/db.config');
+const keyFeatureService = require('./keyFeature.service');
 
 class ProductService {
   // Create a new product with media and specs
@@ -11,11 +12,11 @@ class ProductService {
       // Insert product
       const productResult = await client.query(
         `INSERT INTO products (
-          name, category_id, price, original_price, image, description, 
-          stock, vendor_id, status, featured, new_product, rating, reviews_count,
+          name, category_id, price, original_price, image, description,
+          stock, status, featured, new_product, rating, reviews_count,
           created_at, updated_at
         )
-        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
         RETURNING *`,
         [
           productData.name,
@@ -25,7 +26,6 @@ class ProductService {
           productData.image,
           productData.description || null,
           productData.stock || 0,
-          productData.vendor_id || null,
           productData.status || 'published',
           productData.featured || false,
           productData.new_product || false,
@@ -33,9 +33,19 @@ class ProductService {
           productData.reviews_count || 0
         ]
       );
-      
+
       const newProduct = productResult.rows[0];
-      
+
+      // Insert product vendors if provided
+      if (productData.vendor_ids && productData.vendor_ids.length > 0) {
+        for (const vendorId of productData.vendor_ids) {
+          await client.query(
+            `INSERT INTO product_vendors (product_id, vendor_id) VALUES ($1, $2)`,
+            [newProduct.id, vendorId]
+          );
+        }
+      }
+
       // Insert product media if provided
       if (productData.media && productData.media.length > 0) {
         for (let i = 0; i < Math.min(productData.media.length, 5); i++) {
@@ -59,6 +69,15 @@ class ProductService {
           );
         }
       }
+
+      if (productData.key_features && productData.key_features.length > 0) {
+        await keyFeatureService.replaceProductKeyFeatures(
+          client,
+          newProduct.id,
+          newProduct.category_id,
+          productData.key_features
+        );
+      }
       
       await client.query('COMMIT');
       
@@ -77,10 +96,18 @@ class ProductService {
   // Get all products with optional filters
   async getAllProducts(filters = {}) {
     let query = `
-      SELECT 
+      SELECT
         p.*,
         c.category_name,
-        v.vendor_name,
+        COALESCE(
+          json_agg(
+            DISTINCT jsonb_build_object(
+              'id', v.id,
+              'vendor_name', v.vendor_name
+            )
+          ) FILTER (WHERE v.id IS NOT NULL),
+          '[]'::json
+        ) as vendors,
         COALESCE(
           json_agg(
             DISTINCT jsonb_build_object(
@@ -101,12 +128,27 @@ class ProductService {
             )
           ) FILTER (WHERE ps.id IS NOT NULL),
           '[]'::json
-        ) as specs
+        ) as specs,
+        COALESCE(
+          json_agg(
+            DISTINCT jsonb_build_object(
+              'id', pkf.id,
+              'key_feature_id', ckf.id,
+              'feature_key', ckf.feature_key,
+              'feature_value', pkf.feature_value,
+              'display_order', pkf.display_order
+            )
+          ) FILTER (WHERE pkf.id IS NOT NULL),
+          '[]'::json
+        ) as key_features
       FROM products p
       LEFT JOIN categories c ON p.category_id = c.id
-      LEFT JOIN vendors v ON p.vendor_id = v.id
+      LEFT JOIN product_vendors pv ON p.id = pv.product_id
+      LEFT JOIN vendors v ON pv.vendor_id = v.id
       LEFT JOIN product_media pm ON p.id = pm.product_id
       LEFT JOIN product_specs ps ON p.id = ps.product_id
+      LEFT JOIN product_key_features pkf ON p.id = pkf.product_id
+      LEFT JOIN category_key_features ckf ON pkf.category_key_feature_id = ckf.id
       WHERE 1=1
     `;
     
@@ -124,7 +166,7 @@ class ProductService {
     }
     
     if (filters.vendor_id) {
-      query += ` AND p.vendor_id = $${paramCount++}`;
+      query += ` AND EXISTS (SELECT 1 FROM product_vendors pv2 WHERE pv2.product_id = p.id AND pv2.vendor_id = $${paramCount++})`;
       params.push(filters.vendor_id);
     }
     
@@ -144,7 +186,7 @@ class ProductService {
       paramCount++;
     }
     
-    query += ` GROUP BY p.id, c.category_name, v.vendor_name ORDER BY p.created_at DESC`;
+    query += ` GROUP BY p.id, c.category_name ORDER BY p.created_at DESC`;
     
     const result = await db.query(query, params);
     
@@ -154,10 +196,18 @@ class ProductService {
   // Get product by ID
   async getProductById(productId) {
     const result = await db.query(
-      `SELECT 
+      `SELECT
         p.*,
         c.category_name,
-        v.vendor_name,
+        COALESCE(
+          json_agg(
+            DISTINCT jsonb_build_object(
+              'id', v.id,
+              'vendor_name', v.vendor_name
+            )
+          ) FILTER (WHERE v.id IS NOT NULL),
+          '[]'::json
+        ) as vendors,
         COALESCE(
           json_agg(
             DISTINCT jsonb_build_object(
@@ -178,14 +228,29 @@ class ProductService {
             )
           ) FILTER (WHERE ps.id IS NOT NULL),
           '[]'::json
-        ) as specs
+        ) as specs,
+        COALESCE(
+          json_agg(
+            DISTINCT jsonb_build_object(
+              'id', pkf.id,
+              'key_feature_id', ckf.id,
+              'feature_key', ckf.feature_key,
+              'feature_value', pkf.feature_value,
+              'display_order', pkf.display_order
+            )
+          ) FILTER (WHERE pkf.id IS NOT NULL),
+          '[]'::json
+        ) as key_features
       FROM products p
       LEFT JOIN categories c ON p.category_id = c.id
-      LEFT JOIN vendors v ON p.vendor_id = v.id
+      LEFT JOIN product_vendors pv ON p.id = pv.product_id
+      LEFT JOIN vendors v ON pv.vendor_id = v.id
       LEFT JOIN product_media pm ON p.id = pm.product_id
       LEFT JOIN product_specs ps ON p.id = ps.product_id
+      LEFT JOIN product_key_features pkf ON p.id = pkf.product_id
+      LEFT JOIN category_key_features ckf ON pkf.category_key_feature_id = ckf.id
       WHERE p.id = $1
-      GROUP BY p.id, c.category_name, v.vendor_name`,
+      GROUP BY p.id, c.category_name`,
       [productId]
     );
     
@@ -210,7 +275,7 @@ class ProductService {
       
       const allowedFields = [
         'name', 'category_id', 'price', 'original_price', 'image', 'description',
-        'stock', 'vendor_id', 'status', 'featured', 'new_product', 'rating', 'reviews_count'
+        'stock', 'status', 'featured', 'new_product', 'rating', 'reviews_count'
       ];
       
       allowedFields.forEach(field => {
@@ -220,28 +285,47 @@ class ProductService {
         }
       });
       
-      if (updateFields.length === 0) {
+      if (updateFields.length > 0) {
+        updateFields.push(`updated_at = CURRENT_TIMESTAMP`);
+        values.push(productId);
+
+        const updateQuery = `
+          UPDATE products
+          SET ${updateFields.join(', ')}
+          WHERE id = $${paramCount}
+          RETURNING *
+        `;
+
+        const result = await client.query(updateQuery, values);
+
+        if (result.rows.length === 0) {
+          await client.query('ROLLBACK');
+          throw new Error('Product not found');
+        }
+      }
+
+      if (
+        updateFields.length === 0 &&
+        productData.vendor_ids === undefined &&
+        productData.media === undefined &&
+        productData.specs === undefined &&
+        productData.key_features === undefined
+      ) {
         await client.query('ROLLBACK');
         throw new Error('No fields to update');
       }
       
-      updateFields.push(`updated_at = CURRENT_TIMESTAMP`);
-      values.push(productId);
-      
-      const updateQuery = `
-        UPDATE products 
-        SET ${updateFields.join(', ')}
-        WHERE id = $${paramCount}
-        RETURNING *
-      `;
-      
-      const result = await db.query(updateQuery, values);
-      
-      if (result.rows.length === 0) {
-        await client.query('ROLLBACK');
-        throw new Error('Product not found');
+      // Update vendors if provided
+      if (productData.vendor_ids !== undefined) {
+        await client.query('DELETE FROM product_vendors WHERE product_id = $1', [productId]);
+        for (const vendorId of productData.vendor_ids) {
+          await client.query(
+            `INSERT INTO product_vendors (product_id, vendor_id) VALUES ($1, $2)`,
+            [productId, vendorId]
+          );
+        }
       }
-      
+
       // Update media if provided
       if (productData.media !== undefined) {
         // Delete existing media
@@ -276,6 +360,27 @@ class ProductService {
             );
           }
         }
+      }
+
+      if (productData.key_features !== undefined) {
+        const productResult = await client.query(
+          'SELECT category_id FROM products WHERE id = $1',
+          [productId]
+        );
+
+        if (productResult.rows.length === 0) {
+          await client.query('ROLLBACK');
+          throw new Error('Product not found');
+        }
+
+        await keyFeatureService.replaceProductKeyFeatures(
+          client,
+          productId,
+          productResult.rows[0].category_id,
+          productData.key_features
+        );
+      } else if (productData.category_id !== undefined) {
+        await client.query('DELETE FROM product_key_features WHERE product_id = $1', [productId]);
       }
       
       await client.query('COMMIT');

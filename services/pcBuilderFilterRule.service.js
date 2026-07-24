@@ -1,4 +1,5 @@
 const db = require('../config/db.config');
+const pcBuilderCategoryVendorService = require('./pcBuilderCategoryVendor.service');
 
 class PcBuilderFilterRuleService {
   normalizeSpecTerms(specMatchTerms) {
@@ -333,6 +334,183 @@ class PcBuilderFilterRuleService {
       }
 
       params.push(rule.spec_match_terms);
+    }
+
+    query += ` GROUP BY p.id, c.category_name ORDER BY p.created_at DESC`;
+
+    const result = await db.query(query, params);
+    return result.rows;
+  }
+
+  // Active rules that fire when `vendorId` is chosen for `categoryId`, and
+  // restrict/inform the browsing of `resultCategoryId`.
+  async getRulesForTrigger({ categoryId, vendorId, resultCategoryId }) {
+    const result = await db.query(
+      `SELECT * FROM pc_builder_filter_rules
+       WHERE is_active = true
+         AND selected_category_id = $1
+         AND (selected_vendor_id IS NULL OR selected_vendor_id = $2)
+         AND result_category_id = $3
+       ORDER BY priority DESC, created_at DESC`,
+      [categoryId, vendorId, resultCategoryId]
+    );
+
+    return result.rows;
+  }
+
+  // One entry per prior selection (elsewhere in the build) that has at least
+  // one active rule constraining `resultCategoryId`. Rules within one entry
+  // are alternatives (OR); entries combine as requirements (AND).
+  async getCompatibilityConstraints(resultCategoryId, priorSelections = []) {
+    const constraintsPerTrigger = [];
+
+    for (const selection of priorSelections) {
+      if (!selection || !selection.category_id || !selection.vendor_id) continue;
+      if (selection.category_id === resultCategoryId) continue;
+
+      const rules = await this.getRulesForTrigger({
+        categoryId: selection.category_id,
+        vendorId: selection.vendor_id,
+        resultCategoryId,
+      });
+
+      if (rules.length > 0) {
+        constraintsPerTrigger.push(rules);
+      }
+    }
+
+    return constraintsPerTrigger;
+  }
+
+  // Vendors valid for `categoryId`, narrowed by whatever compatibility rules
+  // the customer's other selections (`priorSelections`) trigger.
+  async getVendorsForSelection(categoryId, priorSelections = []) {
+    const baseVendors = await pcBuilderCategoryVendorService.getVendorsForCategory(categoryId);
+    const constraintsPerTrigger = await this.getCompatibilityConstraints(categoryId, priorSelections);
+
+    let allowedVendorIds = null;
+
+    for (const triggerRules of constraintsPerTrigger) {
+      const vendorIdsForTrigger = triggerRules.map(rule => rule.result_vendor_id).filter(Boolean);
+      if (vendorIdsForTrigger.length === 0) continue;
+
+      const setForTrigger = new Set(vendorIdsForTrigger);
+      allowedVendorIds = allowedVendorIds === null
+        ? setForTrigger
+        : new Set([...allowedVendorIds].filter(id => setForTrigger.has(id)));
+    }
+
+    if (allowedVendorIds === null) {
+      return baseVendors;
+    }
+
+    return baseVendors.filter(vendor => allowedVendorIds.has(vendor.id));
+  }
+
+  // Products for a category + vendor selection, additionally constrained by
+  // any compatibility rules the customer's other selections trigger. Works
+  // even when no rules exist at all (plain category/vendor lookup).
+  async getProductsForCategorySelection({ categoryId, vendorId, priorSelections = [], status, inStock }) {
+    const constraintsPerTrigger = await this.getCompatibilityConstraints(categoryId, priorSelections);
+
+    let query = `
+      SELECT
+        p.*,
+        c.category_name,
+        COALESCE(
+          json_agg(
+            DISTINCT jsonb_build_object('id', v.id, 'vendor_name', v.vendor_name)
+          ) FILTER (WHERE v.id IS NOT NULL),
+          '[]'::json
+        ) AS vendors,
+        COALESCE(
+          json_agg(
+            DISTINCT jsonb_build_object('id', pm.id, 'url', pm.url, 'type', pm.type, 'display_order', pm.display_order)
+          ) FILTER (WHERE pm.id IS NOT NULL),
+          '[]'::json
+        ) AS media,
+        COALESCE(
+          json_agg(
+            DISTINCT jsonb_build_object('id', ps.id, 'spec_text', ps.spec_text, 'display_order', ps.display_order)
+          ) FILTER (WHERE ps.id IS NOT NULL),
+          '[]'::json
+        ) AS specs
+      FROM products p
+      LEFT JOIN categories c ON p.category_id = c.id
+      LEFT JOIN product_vendors pv ON p.id = pv.product_id
+      LEFT JOIN vendors v ON pv.vendor_id = v.id
+      LEFT JOIN product_media pm ON p.id = pm.product_id
+      LEFT JOIN product_specs ps ON p.id = ps.product_id
+      WHERE p.category_id = $1
+    `;
+
+    const params = [categoryId];
+    let paramCount = 2;
+
+    if (vendorId) {
+      query += ` AND EXISTS (
+        SELECT 1 FROM product_vendors selected_pv
+        WHERE selected_pv.product_id = p.id AND selected_pv.vendor_id = $${paramCount++}
+      )`;
+      params.push(vendorId);
+    }
+
+    if (status) {
+      query += ` AND p.status = $${paramCount++}`;
+      params.push(status);
+    }
+
+    if (inStock !== undefined) {
+      query += ` AND p.in_stock = $${paramCount++}`;
+      params.push(inStock);
+    }
+
+    for (const triggerRules of constraintsPerTrigger) {
+      const orClauses = [];
+
+      for (const rule of triggerRules) {
+        const clauseParts = [];
+
+        if (rule.result_vendor_id) {
+          clauseParts.push(`EXISTS (
+            SELECT 1 FROM product_vendors result_pv
+            WHERE result_pv.product_id = p.id AND result_pv.vendor_id = $${paramCount++}
+          )`);
+          params.push(rule.result_vendor_id);
+        }
+
+        if (rule.spec_match_terms && rule.spec_match_terms.length > 0) {
+          if (rule.spec_match_mode === 'all') {
+            clauseParts.push(`NOT EXISTS (
+              SELECT 1 FROM unnest($${paramCount++}::text[]) AS required_term(term)
+              WHERE NOT EXISTS (
+                SELECT 1 FROM product_specs term_specs
+                WHERE term_specs.product_id = p.id
+                  AND term_specs.spec_text ILIKE '%' || required_term.term || '%'
+              )
+            )`);
+          } else {
+            clauseParts.push(`EXISTS (
+              SELECT 1 FROM product_specs term_specs
+              WHERE term_specs.product_id = p.id
+                AND EXISTS (
+                  SELECT 1 FROM unnest($${paramCount++}::text[]) AS required_term(term)
+                  WHERE term_specs.spec_text ILIKE '%' || required_term.term || '%'
+                )
+            )`);
+          }
+
+          params.push(rule.spec_match_terms);
+        }
+
+        if (clauseParts.length > 0) {
+          orClauses.push(`(${clauseParts.join(' AND ')})`);
+        }
+      }
+
+      if (orClauses.length > 0) {
+        query += ` AND (${orClauses.join(' OR ')})`;
+      }
     }
 
     query += ` GROUP BY p.id, c.category_name ORDER BY p.created_at DESC`;

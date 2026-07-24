@@ -1,0 +1,6362 @@
+[
+  {
+    "vendor": "PIN",
+    "category": "Other",
+    "name": "15 PIN CONNECTOR",
+    "price": 20.0
+  },
+  {
+    "vendor": "TOTAL",
+    "category": "Other",
+    "name": "TOTAL NUMBER OF CARTOON",
+    "price": 83.5
+  },
+  {
+    "vendor": "ACER",
+    "category": "Laptop",
+    "name": "ACER LAPTOP - BATTERY",
+    "price": 0.0
+  },
+  {
+    "vendor": "ACER",
+    "category": "Other",
+    "name": "ACER ADATER AC 19V-2.37 SMALL PIN",
+    "price": 0.0
+  },
+  {
+    "vendor": "DELL",
+    "category": "Adapter",
+    "name": "ADAPTER DELL LATITUED 90W",
+    "price": 80.0
+  },
+  {
+    "vendor": "DELL",
+    "category": "Adapter",
+    "name": "ADAPTER DELL BIG PIN 65W 4.62A OVAL OG",
+    "price": 140.0
+  },
+  {
+    "vendor": "LENOVO",
+    "category": "Adapter",
+    "name": "LENOVO ADAPTER 65W STANADARD AC",
+    "price": 65.0
+  },
+  {
+    "vendor": "HP",
+    "category": "Adapter",
+    "name": "HP ORIGINAL ADAPTER 65W H6Y89",
+    "price": 0.0
+  },
+  {
+    "vendor": "HDMI",
+    "category": "Other",
+    "name": "HDMI TO VGA ADAPTOR WITH AUDIO",
+    "price": 0.0
+  },
+  {
+    "vendor": "MOWSIL",
+    "category": "Other",
+    "name": "MOWSIL VGA TO HDMI CONVERTER",
+    "price": 55.0
+  },
+  {
+    "vendor": "HAYSENSER",
+    "category": "Other",
+    "name": "HAYSENSER DP TO HDMI ADAPTOR",
+    "price": 0.0
+  },
+  {
+    "vendor": "EPSON",
+    "category": "Other",
+    "name": "EPSON A3 AUOTOMATIC DOCUMENT FEEDER 1640XL/GT-10000",
+    "price": 0.0
+  },
+  {
+    "vendor": "AIR",
+    "category": "Other",
+    "name": "AIR DUSTER",
+    "price": 15.0
+  },
+  {
+    "vendor": "APKR",
+    "category": "Other",
+    "name": "APKR 6W PDU",
+    "price": 75.0
+  },
+  {
+    "vendor": "APKR",
+    "category": "Cable",
+    "name": "APKR 305 METER CAT7 CABLE",
+    "price": 700.0
+  },
+  {
+    "vendor": "NET",
+    "category": "Other",
+    "name": "NET WORK TESTER NF-8209 TOOL KIT",
+    "price": 190.0
+  },
+  {
+    "vendor": "DELL",
+    "category": "Bag",
+    "name": "DELL ESSENTIAL TOP LOAD BAG",
+    "price": 0.0
+  },
+  {
+    "vendor": "DELL",
+    "category": "Other",
+    "name": "DELL 15.6 BACK PACK",
+    "price": 0.0
+  },
+  {
+    "vendor": "HP",
+    "category": "Other",
+    "name": "HP VALUE TOPLOAD CASE (K0B38AA/ABB)",
+    "price": 0.0
+  },
+  {
+    "vendor": "HP",
+    "category": "Bag",
+    "name": "BAG HP ENVY 15.6\" ORIGINAL BAG BLACK",
+    "price": 0.0
+  },
+  {
+    "vendor": "HP",
+    "category": "Laptop",
+    "name": "HP CASE LAPTOP",
+    "price": 0.0
+  },
+  {
+    "vendor": "LAPTOP",
+    "category": "Laptop",
+    "name": "LAPTOP BAG 15\"",
+    "price": 0.0
+  },
+  {
+    "vendor": "DELL",
+    "category": "Laptop",
+    "name": "DELL LAPTOP BAG PRO SLEEV",
+    "price": 25.0
+  },
+  {
+    "vendor": "LAPTOP",
+    "category": "Laptop",
+    "name": "LAPTOP BAG 13.3 SHOULDER BAG",
+    "price": 40.0
+  },
+  {
+    "vendor": "LAPTOP",
+    "category": "Laptop",
+    "name": "LAPTOP BAG 13.3\"",
+    "price": 0.0
+  },
+  {
+    "vendor": "LAPTOP",
+    "category": "Laptop",
+    "name": "LAPTOP BAG 15.6\" A-508",
+    "price": 0.0
+  },
+  {
+    "vendor": "LENOVO",
+    "category": "Bag",
+    "name": "LENOVO-ORGINEL 15\" BAG",
+    "price": 0.0
+  },
+  {
+    "vendor": "LENOVO",
+    "category": "Bag",
+    "name": "LENOVO TOPLOADE BAG 15.6 T210 BLK-4X40T84061-G",
+    "price": 0.0
+  },
+  {
+    "vendor": "SLEEVE",
+    "category": "Laptop",
+    "name": "SLEEVE 13 INCH LAPTOP",
+    "price": 35.0
+  },
+  {
+    "vendor": "LENOVO",
+    "category": "Other",
+    "name": "LENOVO T210 GREY CASE (IPGX40Q17231)",
+    "price": 0.0
+  },
+  {
+    "vendor": "LENOVO",
+    "category": "Bag",
+    "name": "LENOVO LEGION 15.6-inch GAMING BACKPACK",
+    "price": 0.0
+  },
+  {
+    "vendor": "LENOVO",
+    "category": "Other",
+    "name": "LENOVO T210 BLACK CASE (IPGX40Q17229)",
+    "price": 0.0
+  },
+  {
+    "vendor": "LENOVO",
+    "category": "Bag",
+    "name": "LENOVO LAOTOP CARRYBAG 15.6INCH (T210)",
+    "price": 18.0
+  },
+  {
+    "vendor": "LENOVO",
+    "category": "Bag",
+    "name": "LENOVO BACKPACK 15.6INCH BAG (B-210)",
+    "price": 0.0
+  },
+  {
+    "vendor": "PORT DESIGN",
+    "category": "Laptop",
+    "name": "PORT DESIGN PREMIUM PACK LAPTOP BAG+W/L MOUSE -501873",
+    "price": 40.0
+  },
+  {
+    "vendor": "TUCANO",
+    "category": "Bag",
+    "name": "TUCANO BRAVO 15.6\" BACKPACK TEAL BLUE",
+    "price": 125.0
+  },
+  {
+    "vendor": "ASUS",
+    "category": "Laptop",
+    "name": "Asus K53S Laptop Battery Copy.",
+    "price": 105.0
+  },
+  {
+    "vendor": "HP",
+    "category": "Battery",
+    "name": "BATTERY-HP -HT03XL",
+    "price": 210.0
+  },
+  {
+    "vendor": "HP",
+    "category": "Battery",
+    "name": "HP SPECTRE X360 BATTERY P/N:-902499-856",
+    "price": 0.0
+  },
+  {
+    "vendor": "LENOVO",
+    "category": "Laptop",
+    "name": "BATTERY LENOVO LAPTOP",
+    "price": 230.0
+  },
+  {
+    "vendor": "BELKIN",
+    "category": "Adapter",
+    "name": "Belkin BoostCharge USB TO C charger cable",
+    "price": 0.0
+  },
+  {
+    "vendor": "BELKIN",
+    "category": "Cable",
+    "name": "BELKIN 4K HDMI CABLE 3M l F3Y017BT3MBLK",
+    "price": 25.0
+  },
+  {
+    "vendor": "BELKIN",
+    "category": "Cable",
+    "name": "BELKIN 4K HDMI CABLE 5M l F3Y017BT5M-BLK",
+    "price": 45.0
+  },
+  {
+    "vendor": "BELKIN",
+    "category": "Cable",
+    "name": "BELKIN 4K HDMI CABLE 2M l F3Y021BT2M",
+    "price": 33.33
+  },
+  {
+    "vendor": "BLUETOOTH",
+    "category": "Other",
+    "name": "BLUETOOTH DONGLE USB 4",
+    "price": 0.0
+  },
+  {
+    "vendor": "BLUETOOTH",
+    "category": "Other",
+    "name": "BLUETOOTH DONGLE USB 5",
+    "price": 0.0
+  },
+  {
+    "vendor": "HAYSENSER",
+    "category": "Other",
+    "name": "CAT 7 HAYSENSER 6METER CABEL",
+    "price": 45.0
+  },
+  {
+    "vendor": "DVI",
+    "category": "Other",
+    "name": "DVI-HDMI CABEL",
+    "price": 33.0
+  },
+  {
+    "vendor": "THREE",
+    "category": "Other",
+    "name": "THREE FAN CONNECTING SPLITER",
+    "price": 0.0
+  },
+  {
+    "vendor": "HDMI",
+    "category": "Other",
+    "name": "HDMI TO VGA CABEL",
+    "price": 50.48
+  },
+  {
+    "vendor": "RJ",
+    "category": "Other",
+    "name": "RJ 45 NETWORK CABEL 0.5M",
+    "price": 100.0
+  },
+  {
+    "vendor": "THUNDERBOLT",
+    "category": "Adapter",
+    "name": "THUNDERBOLT 3 (USB C) TO THUNDERBOLT 2 ADAPTER MMEL2",
+    "price": 0.0
+  },
+  {
+    "vendor": "4U",
+    "category": "Other",
+    "name": "4U CABINET",
+    "price": 600.0
+  },
+  {
+    "vendor": "27U",
+    "category": "Other",
+    "name": "27U SHELF",
+    "price": 0.0
+  },
+  {
+    "vendor": "3M",
+    "category": "Cable",
+    "name": "3M CAT6 PATCH CABLE 5MTR",
+    "price": 100.0
+  },
+  {
+    "vendor": "HP",
+    "category": "Adapter",
+    "name": "NZXT 12VHPWR Adapter Cable - BB-CG1BB - 12+4-Pin (16-Pin) to Dual 8-Pin PCIe - Rated for 600 Watts - Black",
+    "price": 0.0
+  },
+  {
+    "vendor": "DLINK",
+    "category": "Other",
+    "name": "DLINK PATCHCOD CAT6 1 METER | DLPATCHCORD-01",
+    "price": 10.0
+  },
+  {
+    "vendor": "DLINK",
+    "category": "Other",
+    "name": "DLINK PATCHCOD CAT6 10 MTR | DLPATCHCORD-08",
+    "price": 0.0
+  },
+  {
+    "vendor": "DLINK",
+    "category": "Other",
+    "name": "DLINK PATCHCORD CAT6 2 MTR",
+    "price": 14.0
+  },
+  {
+    "vendor": "DLINK",
+    "category": "Other",
+    "name": "DLINK PATCHCORD CAT6 3 MTR",
+    "price": 23.81
+  },
+  {
+    "vendor": "3G+PLUS",
+    "category": "Cable",
+    "name": "3G+PLUS CAT6 PATCH CABLE 2M",
+    "price": 8.0
+  },
+  {
+    "vendor": "CRYSTAL",
+    "category": "Other",
+    "name": "CRYSTAL DVI ADAPTOR S4+5 HD 15F",
+    "price": 23.81
+  },
+  {
+    "vendor": "DEEPCOOL",
+    "category": "Cable",
+    "name": "DEEPCOOL PSU CABLE EC300-24P-RED EXTENSION CABLE",
+    "price": 50.0
+  },
+  {
+    "vendor": "DLINK",
+    "category": "Cable",
+    "name": "DLINK 3MTR PATCH CABLE",
+    "price": 0.0
+  },
+  {
+    "vendor": "DP",
+    "category": "Cable",
+    "name": "DP TO DVI 24+1 1.8M CABLE",
+    "price": 70.0
+  },
+  {
+    "vendor": "CABL",
+    "category": "Other",
+    "name": "CABL-DP TO HDMI 1.5 MTR",
+    "price": 55.0
+  },
+  {
+    "vendor": "HAYSENSER",
+    "category": "Cable",
+    "name": "HAYSENSER DP TO DP M/M 3m CABLE",
+    "price": 45.0
+  },
+  {
+    "vendor": "APKR",
+    "category": "Other",
+    "name": "APKR CABEL DVI TO HDMI 1.5M",
+    "price": 40.0
+  },
+  {
+    "vendor": "CABLE",
+    "category": "Cable",
+    "name": "CABLE- 3PIN CONNECTOR",
+    "price": 0.0
+  },
+  {
+    "vendor": "U",
+    "category": "Other",
+    "name": "U GREEN DP TO MALE TO VAG FAMALE CONVETRE",
+    "price": 22.0
+  },
+  {
+    "vendor": "CABLE",
+    "category": "Cable",
+    "name": "CABLE USB 3 1.3M",
+    "price": 0.0
+  },
+  {
+    "vendor": "CABLE",
+    "category": "Cable",
+    "name": "CABLE USB 3 1.8M M/M",
+    "price": 15.0
+  },
+  {
+    "vendor": "USB",
+    "category": "Cable",
+    "name": "USB EXTENSION CABLE 1.MTR",
+    "price": 15.0
+  },
+  {
+    "vendor": "100M",
+    "category": "Cable",
+    "name": "100M CAT6 PATCH CABLE 100MTRY",
+    "price": 70.0
+  },
+  {
+    "vendor": "24",
+    "category": "Adapter",
+    "name": "24 PIN TO 20 PIN ATX PSU ADAPTER CABLE CN24",
+    "price": 12.0
+  },
+  {
+    "vendor": "3M",
+    "category": "Cable",
+    "name": "3M CAT7 PATCH CABLE 3MTR",
+    "price": 23.0
+  },
+  {
+    "vendor": "8PIN",
+    "category": "Cable",
+    "name": "8PIN CABLE VGA CARD",
+    "price": 15.0
+  },
+  {
+    "vendor": "ACER",
+    "category": "Laptop",
+    "name": "ACER LAPTOP CHARGER OG 19V 3.42A-SLIM 1.1 PIN",
+    "price": 85.71
+  },
+  {
+    "vendor": "I",
+    "category": "Cable",
+    "name": "I PHONE CHARCHING CABLE ANKER",
+    "price": 0.0
+  },
+  {
+    "vendor": "ETW",
+    "category": "Cable",
+    "name": "ETW CAT6 RJ45 10M CABLE",
+    "price": 28.57
+  },
+  {
+    "vendor": "CABL",
+    "category": "Other",
+    "name": "CABL-DP TO HDMI",
+    "price": 55.0
+  },
+  {
+    "vendor": "DVI",
+    "category": "Cable",
+    "name": "DVI TO DVI 1.5 MEETER CABLE",
+    "price": 0.0
+  },
+  {
+    "vendor": "CABL",
+    "category": "Other",
+    "name": "CABL-HDMI-1.5M",
+    "price": 23.81
+  },
+  {
+    "vendor": "HDMI",
+    "category": "Cable",
+    "name": "HDMI CABLE 4K 10 METER",
+    "price": 225.0
+  },
+  {
+    "vendor": "POWER",
+    "category": "Cable",
+    "name": "POWER CABLE 3PIN NORMAL",
+    "price": 9.0
+  },
+  {
+    "vendor": "MOWSIL",
+    "category": "Cable",
+    "name": "MOWSIL DP TO HDMI 2MTR 4K CABLE MODH02",
+    "price": 48.0
+  },
+  {
+    "vendor": "MOWSIL",
+    "category": "Cable",
+    "name": "MOWSIL DP TO DP 3MTR CABLE MODB3",
+    "price": 35.0
+  },
+  {
+    "vendor": "MOWSIL",
+    "category": "Cable",
+    "name": "MOWSIL HDMI TO HDMI 10MTR CABLE 4K@ 30HZ MOHD110",
+    "price": 55.0
+  },
+  {
+    "vendor": "3G+PLUS",
+    "category": "Cable",
+    "name": "3G+PLUS CAT6 PATCH CABLE 15",
+    "price": 15.0
+  },
+  {
+    "vendor": "PROMATE",
+    "category": "Cable",
+    "name": "PROMATE HDMI CABLE 1.5M",
+    "price": 35.0
+  },
+  {
+    "vendor": "PCI",
+    "category": "Other",
+    "name": "PCI RIZER CARD",
+    "price": 0.0
+  },
+  {
+    "vendor": "SATA",
+    "category": "Cable",
+    "name": "SATA POWER CABLE SPLITTERY",
+    "price": 19.05
+  },
+  {
+    "vendor": "SATA",
+    "category": "Cable",
+    "name": "SATA TO 6/8PIN CABLE",
+    "price": 15.0
+  },
+  {
+    "vendor": "24PIN",
+    "category": "Cable",
+    "name": "24PIN RGB CABLE STRIMER",
+    "price": 180.0
+  },
+  {
+    "vendor": "TELEPHONE",
+    "category": "Cable",
+    "name": "TELEPHONE RECEVER CABLE",
+    "price": 5.0
+  },
+  {
+    "vendor": "UGREEN",
+    "category": "Cable",
+    "name": "UGREEN HDMI 5MTR CABLE - BLACK",
+    "price": 0.0
+  },
+  {
+    "vendor": "CABLE",
+    "category": "Cable",
+    "name": "CABLE USB TO RJ45 CONSOLE",
+    "price": 45.0
+  },
+  {
+    "vendor": "HAYSENSER",
+    "category": "Other",
+    "name": "HAYSENSER USB TO RS-232 MALE TO FEMALE",
+    "price": 42.86
+  },
+  {
+    "vendor": "VGA",
+    "category": "Cable",
+    "name": "VGA Y CABLE",
+    "price": 0.0
+  },
+  {
+    "vendor": "HDMI",
+    "category": "Cable",
+    "name": "HDMI CABLE 1.5M",
+    "price": 15.0
+  },
+  {
+    "vendor": "HDMI",
+    "category": "Cable",
+    "name": "HDMI CABLE FLAT 1.5M",
+    "price": 5.0
+  },
+  {
+    "vendor": "HDMI",
+    "category": "Cable",
+    "name": "HDMI CABLE 30M",
+    "price": 265.0
+  },
+  {
+    "vendor": "HDMI",
+    "category": "Cable",
+    "name": "HDMI M TO VGA M CABLE 1.5M",
+    "price": 14.29
+  },
+  {
+    "vendor": "HP",
+    "category": "Cable",
+    "name": "HP CAT6 CABLE 1.5M-2UX27AA",
+    "price": 18.0
+  },
+  {
+    "vendor": "HP",
+    "category": "Cable",
+    "name": "HP HDMI TO HDMI CABLE 1.5M - HP001GBBLK1.5TW",
+    "price": 57.0
+  },
+  {
+    "vendor": "HP",
+    "category": "Cable",
+    "name": "HP HDMI TO HDMI CABLE 3M - HP001GBBLK3TW",
+    "price": 43.0
+  },
+  {
+    "vendor": "HP",
+    "category": "Cable",
+    "name": "HP HDMI TO HDMI CABLE 5M - HP001GBBLK5TW",
+    "price": 0.0
+  },
+  {
+    "vendor": "KONGDA",
+    "category": "Cable",
+    "name": "KONGDA HDMI CABLE M/M 1.8M",
+    "price": 22.0
+  },
+  {
+    "vendor": "KONGDA",
+    "category": "Cable",
+    "name": "KONGDA HDMI CABLE M/M 10M",
+    "price": 366.67
+  },
+  {
+    "vendor": "KONGDA",
+    "category": "Cable",
+    "name": "KONGDA MINI HDMI CABLE 1.8M",
+    "price": 0.0
+  },
+  {
+    "vendor": "KONGDA",
+    "category": "Cable",
+    "name": "KONGDA CAT6 PATCH CABLE 50M",
+    "price": 0.0
+  },
+  {
+    "vendor": "KUWES",
+    "category": "Cable",
+    "name": "KUWES CAT6E UTP CABLE 5M",
+    "price": 10.0
+  },
+  {
+    "vendor": "LANTEK",
+    "category": "Cable",
+    "name": "LANTEK CAT6 UTP PATCH CABLE 2M",
+    "price": 9.5
+  },
+  {
+    "vendor": "LANTEK",
+    "category": "Cable",
+    "name": "LANTEK CAT6 UTP PATCH CABLE 5M",
+    "price": 9.0
+  },
+  {
+    "vendor": "CABLE",
+    "category": "Cable",
+    "name": "CABLE MANAGER",
+    "price": 25.0
+  },
+  {
+    "vendor": "MINI",
+    "category": "Other",
+    "name": "MINI DISPLAY PORT TO HDMI 1.8M",
+    "price": 25.0
+  },
+  {
+    "vendor": "MOWSIL",
+    "category": "Cable",
+    "name": "MOWSIL ACTIVE OPTICAL HDMI 2.0, 4K HD, 60Hz CABLE - 100meter",
+    "price": 0.0
+  },
+  {
+    "vendor": "3G+PLUS",
+    "category": "Cable",
+    "name": "3G+PLUS CAT6 PATCH CABLE 20M",
+    "price": 46.19
+  },
+  {
+    "vendor": "CAT6",
+    "category": "Cable",
+    "name": "CAT6 PATCH CABLE 10M",
+    "price": 15.0
+  },
+  {
+    "vendor": "CAT6",
+    "category": "Cable",
+    "name": "CAT6 PATCH CABLE 2M",
+    "price": 13.0
+  },
+  {
+    "vendor": "CAT6",
+    "category": "Cable",
+    "name": "CAT6 PATCH CABLE 3M",
+    "price": 8.0
+  },
+  {
+    "vendor": "OPTERN",
+    "category": "Cable",
+    "name": "OPTERN CAT6 CABLE 3METER",
+    "price": 20.0
+  },
+  {
+    "vendor": "CAT6",
+    "category": "Cable",
+    "name": "CAT6 PATCH CABLE 0.5M",
+    "price": 0.0
+  },
+  {
+    "vendor": "3PIN",
+    "category": "Cable",
+    "name": "3PIN POWER CABLE 1.5",
+    "price": 13.0
+  },
+  {
+    "vendor": "POWER",
+    "category": "Cable",
+    "name": "POWER CABLE 3PIN DESKTOP",
+    "price": 0.0
+  },
+  {
+    "vendor": "3PIN",
+    "category": "Cable",
+    "name": "3PIN POWER CABLE FUSE 1.8M",
+    "price": 0.0
+  },
+  {
+    "vendor": "3PIN",
+    "category": "Cable",
+    "name": "3PIN POWER CABLE W/FUSE 3M",
+    "price": 20.0
+  },
+  {
+    "vendor": "POWER",
+    "category": "Cable",
+    "name": "POWER CABLE 3PIN RADIO CABLE",
+    "price": 0.0
+  },
+  {
+    "vendor": "3PIN",
+    "category": "Cable",
+    "name": "3PIN NB POWER CABLE W/FUSE 1.8M",
+    "price": 8.0
+  },
+  {
+    "vendor": "RADIO",
+    "category": "Cable",
+    "name": "RADIO CABLE 2PIN",
+    "price": 15.0
+  },
+  {
+    "vendor": "SATA",
+    "category": "Cable",
+    "name": "SATA DATA CABLE",
+    "price": 9.19
+  },
+  {
+    "vendor": "SATA",
+    "category": "Cable",
+    "name": "SATA POWER CABLE",
+    "price": 14.29
+  },
+  {
+    "vendor": "STERIO",
+    "category": "Cable",
+    "name": "STERIO TO STERIO CABLE 5M",
+    "price": 35.0
+  },
+  {
+    "vendor": "TARGET",
+    "category": "Cable",
+    "name": "TARGET HDMI CABLE 1.8M",
+    "price": 10.0
+  },
+  {
+    "vendor": "TELEPHONE",
+    "category": "Cable",
+    "name": "TELEPHONE CABLE 4 CORE",
+    "price": 25.0
+  },
+  {
+    "vendor": "CABLE",
+    "category": "Cable",
+    "name": "CABLE TELEPHONE 4PIN",
+    "price": 40.0
+  },
+  {
+    "vendor": "USB",
+    "category": "Cable",
+    "name": "USB EXTENSION CABLE 3M",
+    "price": 28.0
+  },
+  {
+    "vendor": "USB",
+    "category": "Cable",
+    "name": "USB EXTENSION CABLE 5M",
+    "price": 35.0
+  },
+  {
+    "vendor": "USB",
+    "category": "Cable",
+    "name": "USB PRINTER CABLE 1.5MR",
+    "price": 12.0
+  },
+  {
+    "vendor": "USB",
+    "category": "Cable",
+    "name": "USB PRINTER CABLE 3.0MR",
+    "price": 23.81
+  },
+  {
+    "vendor": "USB",
+    "category": "Cable",
+    "name": "USB PRINTER CABLE 5.0MR",
+    "price": 7.0
+  },
+  {
+    "vendor": "VGA",
+    "category": "Cable",
+    "name": "VGA CABLE 1.5M",
+    "price": 8.1
+  },
+  {
+    "vendor": "VGA",
+    "category": "Cable",
+    "name": "VGA CABLE MM 10M",
+    "price": 20.0
+  },
+  {
+    "vendor": "SUPERMICRO",
+    "category": "Other",
+    "name": "SUPERMICRO DUAL 2.5\" SAS/SATA DRIVE KIT MCP-220-84610-0N",
+    "price": 430.0
+  },
+  {
+    "vendor": "RAZER",
+    "category": "Other",
+    "name": "RAZER KIYO RING LIGHT EQUIPPED BROADCASTING CAMERA RZ19-02320100-R3M1",
+    "price": 310.0
+  },
+  {
+    "vendor": "SPORTS",
+    "category": "Other",
+    "name": "SPORTS HD DV SQ11 WEB CAMERA",
+    "price": 0.0
+  },
+  {
+    "vendor": "CAPTURE",
+    "category": "Other",
+    "name": "CAPTURE CARD USB TO HDMI",
+    "price": 0.0
+  },
+  {
+    "vendor": "DELL",
+    "category": "Laptop",
+    "name": "DELL LAPTOP 3YEAR WARRANTY CARE PACK.",
+    "price": 0.0
+  },
+  {
+    "vendor": "ANTEC",
+    "category": "Other",
+    "name": "ANTEC NX200 MINI-TOWER GAMING CASE - BLACK",
+    "price": 0.0
+  },
+  {
+    "vendor": "ASUS",
+    "category": "Other",
+    "name": "Asus ROG Ranger Messenger15,6 90XB0310-BBP000, Messenger, 90XB0310-BBP000 (90XB0310-BBP000, Messenger case, 39.6 cm (15.6), 1.22 kg,)",
+    "price": 340.0
+  },
+  {
+    "vendor": "ASUS",
+    "category": "Other",
+    "name": "ASUS ROG STRIX HELIOS GX601 RGB MID TOWER CASE l 90DC0020-B39000",
+    "price": 960.0
+  },
+  {
+    "vendor": "ASUS",
+    "category": "Other",
+    "name": "ASUS ROG Z11-GR101 BLACK Mini-ITX/DTX Gaming Case | 90DC00B0-B39000",
+    "price": 860.0
+  },
+  {
+    "vendor": "COOLER MASTER",
+    "category": "Other",
+    "name": "COOLER MASTER CMP500 CASE WITH 500W POWER SUPPLY",
+    "price": 310.0
+  },
+  {
+    "vendor": "C0RSAIR",
+    "category": "Other",
+    "name": "C0RSAIR 3000D TEMPERED GLASS MID-TOWER BLACK | CC-9011251-WW |",
+    "price": 300.0
+  },
+  {
+    "vendor": "CORSAIR",
+    "category": "Other",
+    "name": "CORSAIR 3000D TEMPERED GLASS MID-TOWER WHITE | CC-9011252-WW |",
+    "price": 250.0
+  },
+  {
+    "vendor": "CORSAIR",
+    "category": "Other",
+    "name": "CORSAIR 4000D AIRFLOW MID TOWER BLACK CASE | CC-9011200-WW",
+    "price": 370.0
+  },
+  {
+    "vendor": "CORSAIR",
+    "category": "Other",
+    "name": "CORSAIR 5000D AIRFLOW MID TOWER CASE WHITE | CC-9011262-WW",
+    "price": 520.0
+  },
+  {
+    "vendor": "CORSAIR",
+    "category": "Other",
+    "name": "CORSAIR 7000D AIRFLOW FULL TOWER CASE BLACK | CC-9011218-WW",
+    "price": 900.0
+  },
+  {
+    "vendor": "CORSAIR",
+    "category": "Other",
+    "name": "CORSAIR ICUE 7000X RGB TEMPERED GLASS FULL TOWER SMART CASE WHITE | CC-9011227-WW |",
+    "price": 975.0
+  },
+  {
+    "vendor": "DEEPCOOL",
+    "category": "Other",
+    "name": "DEEPCOOL CH560 DIGITAL BLACK AIRFLOW E-ATX MID TOWER CASE | R-CH560-BKAPE4D-G-1",
+    "price": 350.0
+  },
+  {
+    "vendor": "DEEPCOOL",
+    "category": "Memory",
+    "name": "DeepCool CH780 Panoramicz ARGB ATX Case black | RCH780-BKADE41-G-1",
+    "price": 700.01
+  },
+  {
+    "vendor": "DEEPCOOL",
+    "category": "Memory",
+    "name": "DEEPCOOL CH780 PANORAMICA ARGB ATX Case WHITE | RCH780-WHADE41-G-1",
+    "price": 0.0
+  },
+  {
+    "vendor": "DEEPCOOL",
+    "category": "Other",
+    "name": "DEEPCOOL MATREXX 55 V3 3F RGB ATC CASE | DP-ATX-MATREXX55V3-AR-WH-3F",
+    "price": 320.0
+  },
+  {
+    "vendor": "DEEPCOOL",
+    "category": "Other",
+    "name": "DEEPCOOL MATREXX 55 MESH V4 C TEMPERED GLASS ATX CASE - BLACK | R-MATREXX55-BCAGA4-G-4",
+    "price": 240.0
+  },
+  {
+    "vendor": "DEEPCOOL",
+    "category": "Other",
+    "name": "DEEPCOOL MATREXX 55 V4 C,4FAN MID TOWER CASE BLACK | R-MATREXX55-BCADA4-G-4",
+    "price": 245.0
+  },
+  {
+    "vendor": "DESKOOZE",
+    "category": "Other",
+    "name": "DESKOOZE FASHION A3 CASE RGB FAN4",
+    "price": 220.0
+  },
+  {
+    "vendor": "DARKFLASH",
+    "category": "Other",
+    "name": "DARKFLASH DK351 ATX WITH 4 ARGB FAN BLACK",
+    "price": 0.0
+  },
+  {
+    "vendor": "DARKFLASH",
+    "category": "Other",
+    "name": "DARKFLASH DK352 PLUS ATX CASE WITH 4 RGB FAN BLACK",
+    "price": 0.0
+  },
+  {
+    "vendor": "DARK",
+    "category": "Other",
+    "name": "DARK FLASH DK431 FORT GLASS EATX CASE 4ARGB | DF231102 |",
+    "price": 0.0
+  },
+  {
+    "vendor": "DARK",
+    "category": "Other",
+    "name": "DARK FLASH DK431 FORT GLASS EATX CASE 4ARGB WHITE | DF231101|",
+    "price": 0.0
+  },
+  {
+    "vendor": "DARKFLASH",
+    "category": "Other",
+    "name": "DARKFLASH DLX 4000 FULL TOWER CASE WITH 6 RGB FAN BLACK",
+    "price": 375.0
+  },
+  {
+    "vendor": "DARK",
+    "category": "Other",
+    "name": "DARK FLASH DS900 ATX ARGB BLACK CASE",
+    "price": 340.0
+  },
+  {
+    "vendor": "FIRST",
+    "category": "Other",
+    "name": "FIRST PLAYER B7-A-M1 CASE",
+    "price": 210.0
+  },
+  {
+    "vendor": "FIRST",
+    "category": "Other",
+    "name": "FIRST PLAYER DX MIDTOWER CASE",
+    "price": 225.0
+  },
+  {
+    "vendor": "FRACTAL",
+    "category": "Other",
+    "name": "FRACTAL DESIGN MESHIFY 2 XL BLACK LIGHT FULL TOWER CASE",
+    "price": 760.0
+  },
+  {
+    "vendor": "FRACTAL",
+    "category": "Other",
+    "name": "Fractal Design Meshify 2 ATX Mid Tower White Case| FD-C-MES2A-05",
+    "price": 0.0
+  },
+  {
+    "vendor": "LG",
+    "category": "Other",
+    "name": "GALAX REVOLUTION-05-GAMING CASE-ARGB FAN | G-CGG5ANBA4B0-GXLG",
+    "price": 0.0
+  },
+  {
+    "vendor": "LG",
+    "category": "Other",
+    "name": "GALAX REVOLUTION-07-GAMING CASE-ARGB FAN | G-CGG7ANBA4B0-GXLG",
+    "price": 155.0
+  },
+  {
+    "vendor": "HYTE",
+    "category": "Other",
+    "name": "HYTE Y60 MODERN AESTHETIC GAMING CASE - WHITE | CS-HYTE-Y60-WW",
+    "price": 700.0
+  },
+  {
+    "vendor": "LIAN",
+    "category": "Other",
+    "name": "LIAN LI LANCOOL III MESH RGB E-ATX MID TOWER 4FAN WHITE CASE | LAN3RW.00",
+    "price": 490.0
+  },
+  {
+    "vendor": "LIAN",
+    "category": "Other",
+    "name": "Lian Li PC-O11 Dynamic XL(ROG) ATX Case White | PC-O11DXL-W",
+    "price": 680.0
+  },
+  {
+    "vendor": "LIAN",
+    "category": "Other",
+    "name": "LIAN LI O11 DYNAMIC EVO MID TOWER CASE BLACK | PC-O11DEX",
+    "price": 0.0
+  },
+  {
+    "vendor": "LIAN",
+    "category": "Other",
+    "name": "LIAN LI PC-O11 DYAMIC MINI BLACK CASE | 011DMI--X",
+    "price": 400.0
+  },
+  {
+    "vendor": "NUROCK",
+    "category": "Other",
+    "name": "NUROCK-TOPEDO-MID TOWER CASE -FSA3-BR",
+    "price": 0.0
+  },
+  {
+    "vendor": "HAYSNSER",
+    "category": "Other",
+    "name": "HAYSNSER NVME M.2 HY-S318",
+    "price": 66.67
+  },
+  {
+    "vendor": "NZXT",
+    "category": "Other",
+    "name": "NZXT H210 MINI-ITX WHIT GAMING CASE | CA-H210B-W1",
+    "price": 325.0
+  },
+  {
+    "vendor": "NZXT",
+    "category": "Other",
+    "name": "NZXT H5 FLOW RGB (2024) ATX MID TOWER / BLACK CASE | CC-H52FB-R1",
+    "price": 0.0
+  },
+  {
+    "vendor": "NZXT",
+    "category": "Other",
+    "name": "NZXT H6 FLOW MID TOWER BLACK CASE | CC-H61FB-01 |",
+    "price": 385.0
+  },
+  {
+    "vendor": "NZXT",
+    "category": "Other",
+    "name": "NZXT H7 ELITE ATX MID TOWER BLACK GAMING CASE | CM-H71EB-02",
+    "price": 545.0
+  },
+  {
+    "vendor": "NZXT",
+    "category": "Other",
+    "name": "NZXT H7 FLOW BLACK MID-TOWER CASE | CM-H72FB-01",
+    "price": 445.0
+  },
+  {
+    "vendor": "NZXT",
+    "category": "Other",
+    "name": "NZXT H7 FLOW RGB(2024) ATX MID TOWER BLACK CASE | CM-H72FB-R1",
+    "price": 510.0
+  },
+  {
+    "vendor": "NZXT",
+    "category": "Other",
+    "name": "NZXT H7 FLOW RGB ATX MID TOWER / WHITE CASE | CM-H72FW-R1",
+    "price": 500.0
+  },
+  {
+    "vendor": "NZXT",
+    "category": "Other",
+    "name": "NZXT H7 FLOW ATX MID TOWER GAMING CASE WHITE | CM-H71FW-01",
+    "price": 420.0
+  },
+  {
+    "vendor": "NZXT",
+    "category": "Other",
+    "name": "NZXT H9 ELITE ATX MID TOWER/4FAN(3RGB) / WHITE CASE | CM-H91EW-01",
+    "price": 0.0
+  },
+  {
+    "vendor": "NZXT",
+    "category": "Other",
+    "name": "NZXT H9 FLOW ATX MID TOWER / BLACK CASE | CM-H91FB-01",
+    "price": 565.0
+  },
+  {
+    "vendor": "RAIDMAX",
+    "category": "Other",
+    "name": "RAIDMAX ARGON MID TOWER CASE",
+    "price": 90.0
+  },
+  {
+    "vendor": "RAIDMAX",
+    "category": "Other",
+    "name": "RAIDMAX VECTOR V103 ATX MID-TOWER GAMING CASE- BLACK | V103",
+    "price": 130.0
+  },
+  {
+    "vendor": "RAIDMAX",
+    "category": "Other",
+    "name": "RAIDMAX VECTOR V151 Micro-ATX RGB MID-TOWER GAMING CASE  BLACK | V151TBS",
+    "price": 0.0
+  },
+  {
+    "vendor": "SHARKOON",
+    "category": "Other",
+    "name": "SHARKOON REBEL C50 RGB ATX CASE - BLACK | 4044951038244",
+    "price": 0.0
+  },
+  {
+    "vendor": "SILVERSTONER",
+    "category": "Other",
+    "name": "SILVERSTONER FARA R1 PRO V2 ATX MID TOWER ARGB BLACK CASE | SST-FAR1B-PRO-V2",
+    "price": 0.0
+  },
+  {
+    "vendor": "SILVERSTONE",
+    "category": "Other",
+    "name": "SILVERSTONE FARA R1 ARGB MID TOWER ATX CASE WHITE | SST-FARA1W-PRO-V2",
+    "price": 225.0
+  },
+  {
+    "vendor": "SILVERSTONE",
+    "category": "Other",
+    "name": "SILVERSTONE PRECISION PS14 BLACK CASE| SST-PS14B-W",
+    "price": 0.0
+  },
+  {
+    "vendor": "SILVERSTONE",
+    "category": "Other",
+    "name": "SILVERSTONE CASE PS15B -PRO RGB BLACK",
+    "price": 225.0
+  },
+  {
+    "vendor": "TORTOX",
+    "category": "Other",
+    "name": "TORTOX CURVO LUXURY BLACK CURVED CASE with 6 ARGB FANS | TX240502",
+    "price": 280.0
+  },
+  {
+    "vendor": "TORTOX",
+    "category": "Other",
+    "name": "TORTOX ZION ATX CASE",
+    "price": 90.0
+  },
+  {
+    "vendor": "THERMALTAKE",
+    "category": "Other",
+    "name": "THERMALTAKE LEVEL 20MT ARGB BLACK CASE",
+    "price": 220.0
+  },
+  {
+    "vendor": "THERMAL",
+    "category": "Other",
+    "name": "THERMAL TAKE S100 TG BLACK CASE | CA-1Q9-00S1WN-00",
+    "price": 135.0
+  },
+  {
+    "vendor": "THERMALTAKE",
+    "category": "Other",
+    "name": "THERMALTAKE V250 TG ARGB BLACK CASE |CA-1Q5-00M1WN-00",
+    "price": 200.0
+  },
+  {
+    "vendor": "THERMALTAKE",
+    "category": "Other",
+    "name": "THERMALTAKE VIEW 31 TG RGB BLACK MID TOWER CASE | CA-1H8-00M1WN-01",
+    "price": 260.0
+  },
+  {
+    "vendor": "XIGMATEK",
+    "category": "Other",
+    "name": "XIGMATEK AQUA ULTRA RGB 7FAN EATX CASE BLACK | EN40672",
+    "price": 470.0
+  },
+  {
+    "vendor": "CAT6",
+    "category": "Other",
+    "name": "CAT6 UTP RJ45 CRYSTAL HEAD",
+    "price": 0.35
+  },
+  {
+    "vendor": "CANON",
+    "category": "Other",
+    "name": "CANON CARTRIDGE 425",
+    "price": 52.0
+  },
+  {
+    "vendor": "CANON",
+    "category": "Other",
+    "name": "CANON CARTRIDGE 426",
+    "price": 58.0
+  },
+  {
+    "vendor": "CANON",
+    "category": "Other",
+    "name": "CANON CL41 CATRIDGE",
+    "price": 0.0
+  },
+  {
+    "vendor": "CANNON",
+    "category": "Other",
+    "name": "CANNON CARTRIDGE CL441",
+    "price": 45.0
+  },
+  {
+    "vendor": "CANNON",
+    "category": "Other",
+    "name": "CANNON CARTRIDGE CL446",
+    "price": 39.0
+  },
+  {
+    "vendor": "CANON",
+    "category": "Other",
+    "name": "CANON CARTRIDGE PG40",
+    "price": 0.0
+  },
+  {
+    "vendor": "CANNON",
+    "category": "Other",
+    "name": "CANNON CARTRIDGE PG445",
+    "price": 44.0
+  },
+  {
+    "vendor": "EPSON",
+    "category": "Other",
+    "name": "EPSON CARTRIDGE T6641 BLACK",
+    "price": 17.0
+  },
+  {
+    "vendor": "EPSON",
+    "category": "Other",
+    "name": "EPSON CARTRIDGE T6642 CYAN",
+    "price": 18.0
+  },
+  {
+    "vendor": "EPSON",
+    "category": "Other",
+    "name": "EPSON CATRRIDGE T6731/32/33/34/35/36",
+    "price": 40.0
+  },
+  {
+    "vendor": "HP",
+    "category": "Other",
+    "name": "HP CARTRIDGE 123 BLACK",
+    "price": 43.5
+  },
+  {
+    "vendor": "HP",
+    "category": "Other",
+    "name": "HP CARTRIDGE 305 BLK (3YM61AE)",
+    "price": 37.0
+  },
+  {
+    "vendor": "HP",
+    "category": "Other",
+    "name": "HP CARTRIDGE 305 CLR (3YM60AE)",
+    "price": 37.0
+  },
+  {
+    "vendor": "HP",
+    "category": "Other",
+    "name": "HP CARTRIDGE C9351A C21 BLACK",
+    "price": 45.0
+  },
+  {
+    "vendor": "HP",
+    "category": "Other",
+    "name": "HP CARTRIDGE CH561HE (122) BLACK",
+    "price": 43.5
+  },
+  {
+    "vendor": "HP",
+    "category": "Other",
+    "name": "HP CARTRIDGE 933XL MAGENTA",
+    "price": 49.0
+  },
+  {
+    "vendor": "HP",
+    "category": "Other",
+    "name": "HP CARTRIDGE 652 CLR",
+    "price": 42.5
+  },
+  {
+    "vendor": "AROZZI",
+    "category": "Other",
+    "name": "AROZZI ENZO WOVEN FABRIC - BLACK/GREY | ENZO-WF-BKGY",
+    "price": 370.0
+  },
+  {
+    "vendor": "AROZZI",
+    "category": "Other",
+    "name": "AROZZI ENZO WOVEN FABRIC- GREY | ENZO-WF-GYBK",
+    "price": 370.0
+  },
+  {
+    "vendor": "E",
+    "category": "Other",
+    "name": "E-WING GAMING CHAIR CL-RB2C",
+    "price": 0.0
+  },
+  {
+    "vendor": "FIRST",
+    "category": "Other",
+    "name": "FIRST PLAYER FK2 BLACK AND RED GAMING CHAIR",
+    "price": 475.0
+  },
+  {
+    "vendor": "HP",
+    "category": "Other",
+    "name": "HP 15-AC CHARGING",
+    "price": 0.0
+  },
+  {
+    "vendor": "CHARGER",
+    "category": "Laptop",
+    "name": "CHARGER FOR LAPTOP",
+    "price": 55.0
+  },
+  {
+    "vendor": "CMOS",
+    "category": "Battery",
+    "name": "CMOS-BATTERY",
+    "price": 2.0
+  },
+  {
+    "vendor": "CMOS",
+    "category": "Battery",
+    "name": "CMOS BATTERY",
+    "price": 10.0
+  },
+  {
+    "vendor": "MINI",
+    "category": "Other",
+    "name": "MINI HDMI TO HDMI",
+    "price": 12.0
+  },
+  {
+    "vendor": "RJ11",
+    "category": "Other",
+    "name": "RJ11 CONNECTOR 4PIN",
+    "price": 0.0
+  },
+  {
+    "vendor": "CONNECTOR",
+    "category": "Other",
+    "name": "CONNECTOR RJ45 CAT5E",
+    "price": 0.5
+  },
+  {
+    "vendor": "LG",
+    "category": "Other",
+    "name": "THERMAL TAKE LGA1700 UPGRADE KIT FOR UX100/200| CL-O027-PL00BL",
+    "price": 0.0
+  },
+  {
+    "vendor": "LG",
+    "category": "Other",
+    "name": "THERMALTAKE UPGRADE KIT FOR LGA1700/AIO/TH & FLOR RC | CL-O033-ST00BL-A",
+    "price": 0.0
+  },
+  {
+    "vendor": "HDMI",
+    "category": "Other",
+    "name": "HDMI- DVI24 +1 CONVTER",
+    "price": 16.0
+  },
+  {
+    "vendor": "AIGO",
+    "category": "CPU",
+    "name": "AIGO ICE600 PRO ARGB 6 HEAT PIPE | CPU COOLER",
+    "price": 0.0
+  },
+  {
+    "vendor": "ASUS",
+    "category": "CPU",
+    "name": "ASUS ROG STRIX LC II 360 ARGB AIO LIQUID CPU COOLER | 90RC00F1-M0UAY4",
+    "price": 800.0
+  },
+  {
+    "vendor": "ASUS",
+    "category": "Other",
+    "name": "ASUS ROG RYUJIN III 360 ARGB COOLER | 90RC00L1-M0UAY0",
+    "price": 1125.0
+  },
+  {
+    "vendor": "ASUS",
+    "category": "Other",
+    "name": "ASUS ROG RYUO III 360 ARGB COOLER l 90RC00I1-MOUAY0",
+    "price": 900.0
+  },
+  {
+    "vendor": "COOLER MASTER",
+    "category": "CPU",
+    "name": "COOLER MASTER HYPER 212 HALO BLACK CPU AIR COOLER | RR-S4KK-20PA-R1",
+    "price": 0.0
+  },
+  {
+    "vendor": "COOLER MASTER",
+    "category": "CPU",
+    "name": "COOLER MASTER HYPER 212 HALO WHITE CPU AIR COOKER",
+    "price": 0.0
+  },
+  {
+    "vendor": "COOLER MASTER",
+    "category": "Other",
+    "name": "COOLER MASTER HYPER H410R RGB COOLER | RR-H410-20PC-R1",
+    "price": 100.0
+  },
+  {
+    "vendor": "CORSAIR",
+    "category": "CPU",
+    "name": "CORSAIR H100i ELITE CAPELLIX XT EXTREME 240mm RGB LIQUID CPU COOLER BLACK | CW-9060068-WW",
+    "price": 735.0
+  },
+  {
+    "vendor": "CORSAIR",
+    "category": "CPU",
+    "name": "CORSAIR H100i ELITE LCD DISPLAY 240mm LIQUID CPU COOLER BLACK l CW-9060061-WW",
+    "price": 0.0
+  },
+  {
+    "vendor": "CORSAIR",
+    "category": "CPU",
+    "name": "CORSAIR H100 RGB 240mm LIQUID CPU COOLER 2x120mm Fan RGB BLACK | CW-9060053-WW",
+    "price": 385.0
+  },
+  {
+    "vendor": "CORSAIR",
+    "category": "Other",
+    "name": "CORSAIR ICUE H150I ELITE CAPELLIX XT 360MM RGB LIQUID COOLER BLACK | CW-9060070-WW",
+    "price": 840.0
+  },
+  {
+    "vendor": "CORSAIR",
+    "category": "Other",
+    "name": "CORSAIR H150I RGB ICUE LINK AIO 360MM LIQUID COOLER | CW-9061003-WW |",
+    "price": 750.0
+  },
+  {
+    "vendor": "CORSAIR",
+    "category": "CPU",
+    "name": "CORSAIR H150 RGB 360mm LIQUID CPU COOLER | CW-9060054-WW",
+    "price": 380.0
+  },
+  {
+    "vendor": "CORSAIR",
+    "category": "CPU",
+    "name": "CORSAIR ICUE H170I ELITE CAPELIX XT 420MM RGB LIQUID CPU COOLER BLACK | CW-9060071-WW",
+    "price": 0.0
+  },
+  {
+    "vendor": "CORSAIR",
+    "category": "CPU",
+    "name": "CORSAIR H55 RGB 120mm LIQUID CPU COOLER | 9060052-WW",
+    "price": 40.0
+  },
+  {
+    "vendor": "DEEPCOOL",
+    "category": "CPU",
+    "name": "DEEPCOOL AG200 CPU AIR COOLER | R-AG200-BKNNMN-G",
+    "price": 50.0
+  },
+  {
+    "vendor": "DEEPCOOL",
+    "category": "Other",
+    "name": "DEEPCOOL AG300 AIR COOLER | R-AG300-BKNNMN-G",
+    "price": 0.0
+  },
+  {
+    "vendor": "DEEPCOOL",
+    "category": "Other",
+    "name": "DEEPCOOL AG400 ARGB AIR COOLER BLACK | R-AG400-BKANMCG-1|",
+    "price": 105.0
+  },
+  {
+    "vendor": "DEEPCOOL",
+    "category": "CPU",
+    "name": "DEEPCOOL AG400-ARGB CPU AIR COOLER WHITE | R-AG400-WHANMC-G-2|",
+    "price": 100.0
+  },
+  {
+    "vendor": "DEEPCOOL",
+    "category": "CPU",
+    "name": "DEEPCOOL AK400 DIGITAL BLACK CPU AIR COOLER | R-AK400-BKADMN-G",
+    "price": 145.0
+  },
+  {
+    "vendor": "DEEPCOOL",
+    "category": "CPU",
+    "name": "DEEPCOOL AK620 AIR COOLER DIGITAL BLACK CPU COOLER | AK620-BKADMN-G",
+    "price": 265.0
+  },
+  {
+    "vendor": "DEEPCOOL",
+    "category": "Other",
+    "name": "DEEPCOOL LD240 AIO LIQUID DIGITAL A-RGB COOLER BLACK | R-LD240-BKMSN-G1",
+    "price": 335.0
+  },
+  {
+    "vendor": "DEEPCOOL",
+    "category": "Other",
+    "name": "DEEPCOOL LE520 ARGB BLACK AIO LIQUID COOLER | R-LE520-BKAMMN-G-1",
+    "price": 235.0
+  },
+  {
+    "vendor": "DEEPCOOL",
+    "category": "CPU",
+    "name": "DEEPCOOL LE720 360MM ARGB AIO LIQUID CPU COOLER | R-LE720-BKAMMN-G-1",
+    "price": 0.0
+  },
+  {
+    "vendor": "DEEPCOOL",
+    "category": "CPU",
+    "name": "DEEPCOOL LE720 WHITE 360MM ARGB AIO LIQUID CPU COOLER",
+    "price": 0.0
+  },
+  {
+    "vendor": "DEEPCOOL",
+    "category": "Other",
+    "name": "DEEPCOOL LS520 SE WH ARGB AIO LIQUID COOLER WHITE | R-LS520-WHAMMM-G-1",
+    "price": 280.0
+  },
+  {
+    "vendor": "DEEPCOOL",
+    "category": "Other",
+    "name": "DEEPCOOL LS720 SE ARGB AIO LIQUID COOLER360mm | R-LS720-BKAMMM-G-1",
+    "price": 335.0
+  },
+  {
+    "vendor": "DEEPCOOL",
+    "category": "Other",
+    "name": "DEEPCOOL MYSTIQUE 360 BLACK AIO LIQUID COOLER | R-LX750-BKDSNMP-G1",
+    "price": 550.0
+  },
+  {
+    "vendor": "DARKFLASH",
+    "category": "Other",
+    "name": "DARKFLASH DC240 WHITE SUPPORTED LIQUID COOLER |",
+    "price": 200.0
+  },
+  {
+    "vendor": "DARKFLASH",
+    "category": "CPU",
+    "name": "DARKFLASH / RADIANT DCS360 AIO 360MM LIQUID CPU COOLER BLACK",
+    "price": 250.0
+  },
+  {
+    "vendor": "DARKFLASH",
+    "category": "CPU",
+    "name": "DARKFLASH / RADIANT DCS360 AIO 360MM LIQUID CPU COOLER WHITE",
+    "price": 0.0
+  },
+  {
+    "vendor": "DARKFLASH",
+    "category": "CPU",
+    "name": "DARKFLASH / RADIANT DCS240 AIO 240MM LIQUID CPU COOLER BLACK",
+    "price": 0.0
+  },
+  {
+    "vendor": "DARKFLASH",
+    "category": "CPU",
+    "name": "DARKFLASH TWISTER DX240-V2 AIO 240MM LIQUID CPU COOLER",
+    "price": 235.0
+  },
+  {
+    "vendor": "DARKFLASH",
+    "category": "CPU",
+    "name": "DARKFLASH DX240 V2.6 AIO 240MM LIQUID CPU COOLER - BLACK",
+    "price": 235.0
+  },
+  {
+    "vendor": "DARKFLASH",
+    "category": "Other",
+    "name": "DARKFLASH ELLSWORTH S11PRO BLACK RGB AIR COOLER",
+    "price": 100.0
+  },
+  {
+    "vendor": "DARKFLASH",
+    "category": "CPU",
+    "name": "DARKFLASH ELLSWORTH S2X DUAL FAN CPU AIR COOLER",
+    "price": 165.0
+  },
+  {
+    "vendor": "DARKFLASH",
+    "category": "CPU",
+    "name": "DARKFLASH Z4 ARGB CPU AIR COOLER",
+    "price": 0.0
+  },
+  {
+    "vendor": "FIRST",
+    "category": "CPU",
+    "name": "FIRST PLAYER FD1 CPU COOLER",
+    "price": 60.0
+  },
+  {
+    "vendor": "LOVINGCOOL",
+    "category": "CPU",
+    "name": "LOVINGCOOL M120 90mm RGB CPU AIR COOLER - BLACK | LC-M120",
+    "price": 40.0
+  },
+  {
+    "vendor": "NZXT",
+    "category": "Other",
+    "name": "NZXT KRAKEN ELITE 240 RGB WHITE LIQUID COOLER | RL-KR24E-W1",
+    "price": 850.0
+  },
+  {
+    "vendor": "NZXT",
+    "category": "CPU",
+    "name": "NZXT KRAKEN 360 BLACK 360MM CPU LIQUID COOLER WITH 1.54\" LCD DISPLAY l KN360-B1",
+    "price": 605.0
+  },
+  {
+    "vendor": "NZXT",
+    "category": "CPU",
+    "name": "NZXT KRAKEN 360 RGB BLACK 360MM AIO CPU LIQUID COOLER | RL-KR360-B1",
+    "price": 0.0
+  },
+  {
+    "vendor": "NZXT",
+    "category": "CPU",
+    "name": "NZXT KRAKEN 360 RGB WHITE 360MM AIO CPU LIQUID COOLER | RL-KR360-W1",
+    "price": 0.0
+  },
+  {
+    "vendor": "NZXT",
+    "category": "CPU",
+    "name": "NZXT KRAKEN ELITE 360 RGB BLACK 360MM AIO CPU LIQUID COOLER | RL-KR36E-B1",
+    "price": 0.0
+  },
+  {
+    "vendor": "NZXT",
+    "category": "CPU",
+    "name": "NZXT KRAKEN ELITE 360 RGB WHITE 360MM AIO CPU LIQUID COOLER | RL-KR36E-W1",
+    "price": 1060.0
+  },
+  {
+    "vendor": "NZXT",
+    "category": "Other",
+    "name": "NZXT KRAKEN X63 RGB COOLER WITH RGB FANS WHITE | RL-KRX63-RW",
+    "price": 690.0
+  },
+  {
+    "vendor": "THERMALTAKE",
+    "category": "Other",
+    "name": "THERMALTAKE TH240 ARGB 240mm LIQUID COOLER | CL-W286-PL12SW-A",
+    "price": 270.0
+  },
+  {
+    "vendor": "XIGMATEK",
+    "category": "Other",
+    "name": "XIGMATEK- AURORA 360mm RGB AIO LIQUID COOLER | EN42814",
+    "price": 325.0
+  },
+  {
+    "vendor": "ERGOSTAND",
+    "category": "Other",
+    "name": "ERGOSTAND COOLING PAD NOTEBOOK",
+    "price": 0.0
+  },
+  {
+    "vendor": "AMD",
+    "category": "CPU",
+    "name": "AMD RYZEN 5 7600 6-CORE 4.7GHZ AM5 PROCESSOR |",
+    "price": 825.0
+  },
+  {
+    "vendor": "AMD",
+    "category": "CPU",
+    "name": "AMD RYZEN 5 7600X 6-CORE 4.7GHZ AM5 PROCESSOR | 100-100000593WOF",
+    "price": 850.0
+  },
+  {
+    "vendor": "AMD",
+    "category": "CPU",
+    "name": "AMD RYZEN 7 7700X 8-CORE 4.5GHZ AM5 PROCESSOR | 100-100000591WOF",
+    "price": 1055.0
+  },
+  {
+    "vendor": "AMD",
+    "category": "CPU",
+    "name": "AMD RYZEN 9 7950X 16-CORE 4.5GHZ AM5 PROCESSOR | 100-100000514WOF",
+    "price": 0.0
+  },
+  {
+    "vendor": "AMD",
+    "category": "CPU",
+    "name": "AMD Ryzen7 8700G AM5 | 100100001236BOX",
+    "price": 1300.0
+  },
+  {
+    "vendor": "AMD",
+    "category": "CPU",
+    "name": "AMD RYZEN-5 9600X PROCESSOR - BOX | 100100001405WOF",
+    "price": 1060.0
+  },
+  {
+    "vendor": "AMD",
+    "category": "CPU",
+    "name": "AMD RYZEN-7 9700X PROCESSOR - BOX | 100100001404WOF",
+    "price": 1280.0
+  },
+  {
+    "vendor": "AMD",
+    "category": "CPU",
+    "name": "AMD RYZEN 9 9900X 12-CORE 24-THREAD AM5 PROCESSOR | 100-100000662WOF",
+    "price": 1715.0
+  },
+  {
+    "vendor": "AMD",
+    "category": "CPU",
+    "name": "AMD RYZEN THREADRIPPER 7960X DESKTOP CPU | 100100001352WOF",
+    "price": 5620.0
+  },
+  {
+    "vendor": "AMD",
+    "category": "CPU",
+    "name": "AMD RYZEN9 9950X 16/32T DESKTOP CPU | 100100001277WOF",
+    "price": 15144.0
+  },
+  {
+    "vendor": "INTEL",
+    "category": "CPU",
+    "name": "Intel Core i5-12500 3.0GHz LGA 1700 Processor TRAY",
+    "price": 389.33
+  },
+  {
+    "vendor": "INTEL",
+    "category": "CPU",
+    "name": "INTEL CORE i9-13900KS 24cores (8 P-cores + 16 E-cores) 36MB DESKTOP PROCESSOR | BX8071513900KS",
+    "price": 2725.0
+  },
+  {
+    "vendor": "INTEL",
+    "category": "CPU",
+    "name": "INTEL CORE 19-14900KS, 6.20Ghz 14TH GEN LGA1700 PROCESSOR | BX8071514900KSSRN7R",
+    "price": 9780.0
+  },
+  {
+    "vendor": "INTEL",
+    "category": "CPU",
+    "name": "INTEL i3 8100 TRAY PROCESSOR",
+    "price": 0.0
+  },
+  {
+    "vendor": "INTEL",
+    "category": "CPU",
+    "name": "Intel Core i5-12400F LGA 1700 Processor | BX8071512400F",
+    "price": 410.0
+  },
+  {
+    "vendor": "INTEL",
+    "category": "CPU",
+    "name": "INTEL CORE i5-13400F LGA 1700 Processor| BX8071513400F",
+    "price": 625.0
+  },
+  {
+    "vendor": "INTEL",
+    "category": "CPU",
+    "name": "INTEL CORE i5-13400 LGA 1700 Processor| TRAY",
+    "price": 840.0
+  },
+  {
+    "vendor": "INTEL",
+    "category": "CPU",
+    "name": "INTEL CORE I5-14400F LGA1700 PROCESSOR | BX8071514400FSRN47",
+    "price": 610.0
+  },
+  {
+    "vendor": "INTEL",
+    "category": "CPU",
+    "name": "INTEL CORE I5-14600K 14-CORE 14thGEN, 5.30GHZmax, LGA1700 PROCESSOR | BX8071514600KSRN43",
+    "price": 1135.0
+  },
+  {
+    "vendor": "INTEL",
+    "category": "CPU",
+    "name": "Intel Core i7-12700K 12-Core 3.6GHz LGA 1700 TRAY Processor",
+    "price": 830.0
+  },
+  {
+    "vendor": "INTEL",
+    "category": "CPU",
+    "name": "INTEL CORE I7-14700F 20-CORE 14thGEN 5.40GHZmax LGA1700 PROCESSOR | BX8071514700SRN3Z",
+    "price": 1100.0
+  },
+  {
+    "vendor": "INTEL",
+    "category": "CPU",
+    "name": "INTEL CORE I7-14700K 20 Core LGA1700 PROCESSOR | BX8071514700KSRN3X",
+    "price": 1360.0
+  },
+  {
+    "vendor": "INTEL",
+    "category": "CPU",
+    "name": "INTEL CORE i7-14700KF 3.4 GHz 20 Core LGA1700 PROCESSOR",
+    "price": 1280.0
+  },
+  {
+    "vendor": "INTEL",
+    "category": "CPU",
+    "name": "INTEL CORE I9-13900KF 24-CORE 13th GEN LGA1700 PROCESSOR | BX8071513900KF",
+    "price": 1565.0
+  },
+  {
+    "vendor": "INTEL",
+    "category": "CPU",
+    "name": "INTEL CORE I9-14900K 24-CORE 14thGEN 6.00GHZmax LGA1700 PROCESSOR | BX8071514900KSRN48",
+    "price": 1680.0
+  },
+  {
+    "vendor": "INTEL",
+    "category": "CPU",
+    "name": "INTEL CORE ULTRA 7 265K ARROW LAKE LGA1851 PROCESSOR | BX80768265K",
+    "price": 1550.0
+  },
+  {
+    "vendor": "CREATIVE",
+    "category": "Other",
+    "name": "CREATIVE HEADSET 390",
+    "price": 35.25
+  },
+  {
+    "vendor": "OMNIKEY",
+    "category": "Other",
+    "name": "OMNIKEY 3121 USB Card Reader",
+    "price": 53.5
+  },
+  {
+    "vendor": "TRANSCEND",
+    "category": "Other",
+    "name": "TRANSCEND CARD READER USB 3.1 | TS-RDF8K2",
+    "price": 46.0
+  },
+  {
+    "vendor": "HP",
+    "category": "Other",
+    "name": "HP USB-C Travel HUB - Z9G82AA",
+    "price": 230.0
+  },
+  {
+    "vendor": "DLINK",
+    "category": "Other",
+    "name": "DLINK CONNECTOR-RJ45",
+    "price": 60.0
+  },
+  {
+    "vendor": "DLINK",
+    "category": "Other",
+    "name": "DLINK DES1005D 5PORT SWITCH",
+    "price": 40.5
+  },
+  {
+    "vendor": "DLINK",
+    "category": "Other",
+    "name": "DLINK DES1016D 16-PORT SWITCH",
+    "price": 95.0
+  },
+  {
+    "vendor": "DLINK",
+    "category": "Other",
+    "name": "DLINK DGS1005D 5PORT 1000Base SWITCH",
+    "price": 55.0
+  },
+  {
+    "vendor": "D",
+    "category": "Other",
+    "name": "D-LINK 8PORT GIGABIT UNMANAGED SWITCH |DGS-108",
+    "price": 104.76
+  },
+  {
+    "vendor": "DELL",
+    "category": "Other",
+    "name": "DOCKING STATION DELL WD19 130W USB TYPE",
+    "price": 640.0
+  },
+  {
+    "vendor": "ALL",
+    "category": "Storage",
+    "name": "ALL IN 1 HDD DOCKING STATION USB 3.0",
+    "price": 0.0
+  },
+  {
+    "vendor": "HP",
+    "category": "Other",
+    "name": "HP DOCKING STATION 120W G4 THUNDERBOLT (4J0A2AA)",
+    "price": 1020.0
+  },
+  {
+    "vendor": "HP",
+    "category": "Other",
+    "name": "HP DOCKING STATION 2UK38AA HP 230W THUNDERBOLT.",
+    "price": 950.0
+  },
+  {
+    "vendor": "HP",
+    "category": "Other",
+    "name": "HP 3005PR (Y4H06AA/ABU) USB3 PORT REPLICATOR",
+    "price": 425.0
+  },
+  {
+    "vendor": "HP",
+    "category": "Other",
+    "name": "HP ELITEBOOK640, 820 Docking Station D9Y32AA#ABU",
+    "price": 300.0
+  },
+  {
+    "vendor": "HP",
+    "category": "Other",
+    "name": "HP Elite USB-C Dock G3 (2DW60AA)",
+    "price": 0.0
+  },
+  {
+    "vendor": "HP",
+    "category": "Other",
+    "name": "HP USB-C Dock G4 3FF69AA C DOCK",
+    "price": 110.0
+  },
+  {
+    "vendor": "HP",
+    "category": "Other",
+    "name": "HP USB-C Dock G4 (3FF69AA)",
+    "price": 0.0
+  },
+  {
+    "vendor": "HP",
+    "category": "Other",
+    "name": "HP Elite USB-C Docking Station X7W54AA",
+    "price": 0.0
+  },
+  {
+    "vendor": "LENOVO",
+    "category": "Other",
+    "name": "LENOVO 90W ULTRA DOCK 40A20090UK",
+    "price": 0.0
+  },
+  {
+    "vendor": "LENOVO",
+    "category": "Other",
+    "name": "DOCK LENOVO THINKPAD UNIVERSAL USB-C / 40AY0090CN",
+    "price": 519.0
+  },
+  {
+    "vendor": "PORT",
+    "category": "Other",
+    "name": "PORT USB-C MINI DOCKING STATION WITH HDMI | REF-900140",
+    "price": 33.33
+  },
+  {
+    "vendor": "HAYSENSER",
+    "category": "Cable",
+    "name": "Haysenser Display Port Cable 1.8M High Speed for PC",
+    "price": 0.0
+  },
+  {
+    "vendor": "DP",
+    "category": "Adapter",
+    "name": "DP TO HDMI ADAPTER",
+    "price": 55.0
+  },
+  {
+    "vendor": "HAYSENSER",
+    "category": "Adapter",
+    "name": "HAYSENSER DP TO HDMI ADAPTER 4K",
+    "price": 20.0
+  },
+  {
+    "vendor": "DP",
+    "category": "Adapter",
+    "name": "DP TO VGA ADAPTERE",
+    "price": 25.0
+  },
+  {
+    "vendor": "LENOVO",
+    "category": "Other",
+    "name": "LENOVO DVDRW USB SLIM",
+    "price": 100.0
+  },
+  {
+    "vendor": "3.5\"",
+    "category": "Other",
+    "name": "3.5\" ENCLOSURE COMBO",
+    "price": 60.0
+  },
+  {
+    "vendor": "ADATA",
+    "category": "Other",
+    "name": "ADATA XPG USB3.1 ENCLOSURE 3.5\"-AEX500U3-CRD",
+    "price": 35.0
+  },
+  {
+    "vendor": "CRYSTAL",
+    "category": "Other",
+    "name": "CRYSTAL 2.5\" SATA ENCLOSURE",
+    "price": 41.67
+  },
+  {
+    "vendor": "SECOND",
+    "category": "Storage",
+    "name": "SECOND HDD CADDY 9.5mm",
+    "price": 20.0
+  },
+  {
+    "vendor": "HAYSENSER",
+    "category": "Storage",
+    "name": "HAYSENSER 3.5\" SATA HDD ENCLOSURE",
+    "price": 42.86
+  },
+  {
+    "vendor": "HAYSENSER",
+    "category": "Other",
+    "name": "HAYSENSER USB TO SATA",
+    "price": 39.05
+  },
+  {
+    "vendor": "ENCLOSER",
+    "category": "Other",
+    "name": "ENCLOSER M.2 SATA CASE SILVERSTONE",
+    "price": 40.0
+  },
+  {
+    "vendor": "PC",
+    "category": "Other",
+    "name": "PC ENCLOSER CADDY",
+    "price": 10.0
+  },
+  {
+    "vendor": "HARD",
+    "category": "Storage",
+    "name": "HARD DISK CASE 2.5\" SATA USB 3.0",
+    "price": 28.57
+  },
+  {
+    "vendor": "ZONIXPLAY",
+    "category": "Storage",
+    "name": "ZONIXPLAY SSD CASE 2.5\"-SATA USB 3.0",
+    "price": 19.05
+  },
+  {
+    "vendor": "COOLERMASTER",
+    "category": "Other",
+    "name": "COOLERMASTER MF120 PRISMATIC 3-in-1 (120mmx120mmx25mm) ARGB FAN | MFY-B2DN-203PA-R1",
+    "price": 0.0
+  },
+  {
+    "vendor": "CORSAIR",
+    "category": "Other",
+    "name": "CORSAIR iCUE QL120 RGB 120mm Triple Fan | CO-9050098-WW",
+    "price": 370.0
+  },
+  {
+    "vendor": "DEEPCOOL",
+    "category": "Other",
+    "name": "DEEPCOOL CF120 Plus 3 PACK RGB 120mm FAN | P-F12-AR-CF120P-3P",
+    "price": 150.0
+  },
+  {
+    "vendor": "DARK",
+    "category": "Other",
+    "name": "DARK FLASH DM12F 3 Inch FAN BLACK",
+    "price": 0.0
+  },
+  {
+    "vendor": "DARK",
+    "category": "Other",
+    "name": "DARK FLASH DM12F 3 Inch FAN WHT - DF231102",
+    "price": 95.0
+  },
+  {
+    "vendor": "DARKFLASH",
+    "category": "Other",
+    "name": "DARKFLASH INFINITY24 A-RGB COOLING FAN 3in1 PACK WHITE",
+    "price": 0.0
+  },
+  {
+    "vendor": "FAN",
+    "category": "Other",
+    "name": "FAN FLITER 140MM SILVERSTONE",
+    "price": 20.0
+  },
+  {
+    "vendor": "LG",
+    "category": "Other",
+    "name": "GALAX VORTEX WIND-02-FAN-120MM-ARGB | G-FG02T4PAR0-GXLG-F",
+    "price": 20.0
+  },
+  {
+    "vendor": "ID",
+    "category": "Other",
+    "name": "ID-COOLING XF-12025 ARGB 3 FAN",
+    "price": 125.0
+  },
+  {
+    "vendor": "LIAN",
+    "category": "Other",
+    "name": "LIAN LI UNI FAN SL120 V2 RGB BLACK120MM SINGLE FAN",
+    "price": 0.0
+  },
+  {
+    "vendor": "LIAN",
+    "category": "Other",
+    "name": "Lian Li UNI FAN TL 120 3Pcs Black | UF-TL-120-3-Black",
+    "price": 0.0
+  },
+  {
+    "vendor": "COOLERFAN",
+    "category": "Other",
+    "name": "COOLERFAN LIANLI TL120 LCD 120MM BLACK SINGLE | UF-TLLCD-120-1-Black",
+    "price": 0.0
+  },
+  {
+    "vendor": "MSI",
+    "category": "Other",
+    "name": "MSI MAG MAX F12A-3H 120mm ARGB Chassis Fan | MAX F12A-3H",
+    "price": 220.0
+  },
+  {
+    "vendor": "NZXT",
+    "category": "Other",
+    "name": "NZXT F120 CORE 120mm TRIPLE FAN PACK RGB BLACK | RF-C12TF-B1",
+    "price": 240.3
+  },
+  {
+    "vendor": "NZXT",
+    "category": "Other",
+    "name": "NZXT F120 CORE 120mm TRIPLE FAN PACK RGB WHITE | RF-C12TF-W1",
+    "price": 215.0
+  },
+  {
+    "vendor": "NZXT",
+    "category": "Other",
+    "name": "NZXT F120 RGB DUO 120MM TRIPLE FAN PACK RGB BLACK | RF-D12TF-B1",
+    "price": 320.0
+  },
+  {
+    "vendor": "NZXT",
+    "category": "Other",
+    "name": "NZXT F120 DUO 120MM TRIPLE FAN PACK RGB WHITE | RF-D12TF-W1",
+    "price": 0.0
+  },
+  {
+    "vendor": "NZXT",
+    "category": "Other",
+    "name": "NZXT F120 RGB CORE 120MM-SINGLE FAN- BLACK | RF-C12SF-B1",
+    "price": 65.0
+  },
+  {
+    "vendor": "FAN",
+    "category": "Other",
+    "name": "FAN RF120M HIGH BRIGHTNESS RGB LED SUPER",
+    "price": 25.0
+  },
+  {
+    "vendor": "SILVER",
+    "category": "Other",
+    "name": "SILVER STONE HIGH PERFORMANCE 120X38MM INDUSTRIAL FAN",
+    "price": 0.0
+  },
+  {
+    "vendor": "TRUENORT",
+    "category": "Other",
+    "name": "TRUENORT TN03120 BLACK MF120.02 6PIN 3WATS CASE FAN",
+    "price": 33.33
+  },
+  {
+    "vendor": "TRUENORT",
+    "category": "Other",
+    "name": "TRUENORT TN03120 WHITE MF120.02 6PIN 3WATS CASE FAN",
+    "price": 0.0
+  },
+  {
+    "vendor": "SANDISK",
+    "category": "Other",
+    "name": "SANDISK 16GB CRUZER BLADE - SDCZ50-016G-B35",
+    "price": 10.0
+  },
+  {
+    "vendor": "SANDISK",
+    "category": "Other",
+    "name": "SANDISK 32GB CRUZER BLADE - SDCZ50-032G-B35",
+    "price": 14.29
+  },
+  {
+    "vendor": "SANDISK",
+    "category": "Other",
+    "name": "SANDISK 64GB CRUZER BLADE - SDCZ50-064G-B35",
+    "price": 22.0
+  },
+  {
+    "vendor": "SANDISK",
+    "category": "Other",
+    "name": "SANDISK 64GB ULTRA DUAL USB3.0 SDDD2-064G-G46",
+    "price": 0.0
+  },
+  {
+    "vendor": "SANDSIK",
+    "category": "Other",
+    "name": "SANDSIK FLAIR 128GB USB3.0- SDCZ73-128G-G46",
+    "price": 40.0
+  },
+  {
+    "vendor": "SANDSIK",
+    "category": "Other",
+    "name": "SANDSIK CRUZER FLAIR 32GB USB3.0 - SDCZ73-032G-G46",
+    "price": 17.0
+  },
+  {
+    "vendor": "SANDSIK",
+    "category": "Other",
+    "name": "SANDSIK FLAIR 64GB USB3.0- SDCZ73-064G-G46",
+    "price": 15.75
+  },
+  {
+    "vendor": "SEAGATE",
+    "category": "Storage",
+    "name": "SEAGATE EXPANSION 1TB 2.5\" USB 3.0 HARD DISK | STKM1000400",
+    "price": 161.0
+  },
+  {
+    "vendor": "SEAGATE",
+    "category": "Storage",
+    "name": "SEAGATE EXPANSION 2TB 2.5\" USB3.0 HARD DISK | STKM2000400",
+    "price": 225.0
+  },
+  {
+    "vendor": "SEAGATE",
+    "category": "Storage",
+    "name": "SEAGATE 4TB ONE TOUCH EXTERNAL 3.5\" USB3.2 HARD DISK | STLC4000400",
+    "price": 0.0
+  },
+  {
+    "vendor": "SEAGATE",
+    "category": "Storage",
+    "name": "SEAGATE 5TB ONE TOUCH USB3.2 HARD DISK | STKZ5000400",
+    "price": 393.0
+  },
+  {
+    "vendor": "SEAGATE",
+    "category": "Other",
+    "name": "Seagate 8TB One Touch Desktop External Drive with Built-In Hub | STLC8000400",
+    "price": 565.0
+  },
+  {
+    "vendor": "TOSHIBA",
+    "category": "Storage",
+    "name": "TOSHIBA 1TB CANVIO USB3.0 2.5\" HARD DISK - HDTB510EK3AA",
+    "price": 166.67
+  },
+  {
+    "vendor": "TRANSCEND",
+    "category": "Storage",
+    "name": "TRANSCEND 2TB USB3.0 2.5\" HARD DISK | TS2TSJ25M3S",
+    "price": 259.5
+  },
+  {
+    "vendor": "WESTERN DIGITAL",
+    "category": "Storage",
+    "name": "WD MY PASSPORT 1TB 2.5\" USB3.0 HARD DISK - WDBYVG0010BBK-WESN",
+    "price": 185.0
+  },
+  {
+    "vendor": "WESTERN DIGITAL",
+    "category": "Storage",
+    "name": "WD MY PASSPORT 2TB 2.5\" USB3.0 HARD DISK | WDBYVG0020BBK",
+    "price": 224.0
+  },
+  {
+    "vendor": "WESTERN DIGITAL",
+    "category": "Other",
+    "name": "WD 3TB P10 Game Drive for Xbox One, Western-Digital Portable External Hard Drive with 2-Month Xbox Game Pass Black | WDBA5G0030BBK-WESN",
+    "price": 395.24
+  },
+  {
+    "vendor": "WESTERN DIGITAL",
+    "category": "Storage",
+    "name": "WD MY PASSPORT 4TB 2.5\" USB3.0 HARD DISK -WDBPKJ0040BBK-WESN",
+    "price": 360.0
+  },
+  {
+    "vendor": "SEAGATE",
+    "category": "Laptop",
+    "name": "SEAGATE 1TB 2.5\" 7MM LAPTOP HARD DISK PULLOUT",
+    "price": 0.0
+  },
+  {
+    "vendor": "WESTERN DIGITAL",
+    "category": "Laptop",
+    "name": "WD BLUE 500GB 2.5\" ,7MM LAPTOP HARD DISK | WD5000LPCX",
+    "price": 120.0
+  },
+  {
+    "vendor": "SEAGATE",
+    "category": "Storage",
+    "name": "SEAGATE 1TB SATA HARD DISK ST1000DM010",
+    "price": 0.0
+  },
+  {
+    "vendor": "SEAGATE",
+    "category": "Other",
+    "name": "SEAGATE 2TB SKYHAWK SURVEILLANCE 3.5\" SATA HARDDISK - ST2000VX017",
+    "price": 200.0
+  },
+  {
+    "vendor": "SEAGATE",
+    "category": "Storage",
+    "name": "SEAGATE 4TB SKYHAWK SURVEILLANCE 3.5\" HARD DISK | ST4000VX016",
+    "price": 270.0
+  },
+  {
+    "vendor": "TOSHIBA",
+    "category": "Storage",
+    "name": "TOSHIBA 1TB DISK 3.5 SATA HARD DISK",
+    "price": 0.0
+  },
+  {
+    "vendor": "TOSHIBA",
+    "category": "Storage",
+    "name": "TOSHIBA 1TB 3.5\" SATA HARD DISK | DT01ACA100",
+    "price": 140.0
+  },
+  {
+    "vendor": "TOSHIBA",
+    "category": "Storage",
+    "name": "TOSHIBA 6TB S300 SURVELLIANCE 3.5\" HARD DISK | HDWT360UZSVA",
+    "price": 440.0
+  },
+  {
+    "vendor": "WESTERN DIGITAL",
+    "category": "Storage",
+    "name": "WD 1TB 3.5\" SATA INTERNAL HARD DISK DRIVE",
+    "price": 0.0
+  },
+  {
+    "vendor": "WESTERN DIGITAL",
+    "category": "Other",
+    "name": "WD 4TB PURPLE SATA 3.5 SURVEILLANCE DRIVE | WD43PURZ",
+    "price": 323.81
+  },
+  {
+    "vendor": "WESTERN DIGITAL",
+    "category": "Storage",
+    "name": "WD 6TB PURPLE 3.5\" 256MB 5400RPM HARD DISK - WD64PURZ",
+    "price": 475.0
+  },
+  {
+    "vendor": "HDMI",
+    "category": "Other",
+    "name": "HDMI TO HDMI CONNECTOR",
+    "price": 14.29
+  },
+  {
+    "vendor": "HDMI",
+    "category": "Other",
+    "name": "HDMI TO DVI 24+5 ADPTER",
+    "price": 15.0
+  },
+  {
+    "vendor": "HDMI",
+    "category": "Other",
+    "name": "HDMI-1*4HDMI SPLITER",
+    "price": 60.0
+  },
+  {
+    "vendor": "HDMI",
+    "category": "Other",
+    "name": "HDMI-SWICH 1*3 POWER",
+    "price": 45.0
+  },
+  {
+    "vendor": "HEADSET",
+    "category": "Other",
+    "name": "HEADSET A-300B",
+    "price": 0.0
+  },
+  {
+    "vendor": "ASUS",
+    "category": "Other",
+    "name": "ASUS CERBERUS V2 RED HEADSET | 90YH015R-B1UA00",
+    "price": 138.1
+  },
+  {
+    "vendor": "CORSAIR",
+    "category": "Other",
+    "name": "CORSAIR HS35 STEREO CARBON GAMING HEADSET",
+    "price": 185.0
+  },
+  {
+    "vendor": "CORSAIR",
+    "category": "Other",
+    "name": "CORSAIR HS50 STEREO GAMING HEADSET GREEN (CA-9011171-AP)",
+    "price": 0.0
+  },
+  {
+    "vendor": "HYPERX",
+    "category": "Other",
+    "name": "HYPERX CLOUDII BLACK LEGENDARY COMFORT WIRED GAMING HEADSET l 4P5L9AA",
+    "price": 295.0
+  },
+  {
+    "vendor": "HYPERX",
+    "category": "Other",
+    "name": "HYPERX CLOUD III RED WIRED GAMING HEADSET",
+    "price": 285.0
+  },
+  {
+    "vendor": "HYPERX",
+    "category": "Other",
+    "name": "HYPERX CLOUDII RED/BLK LEGENDARY COMFORT WIRED GAMING HEADSET l 4P5M0AA",
+    "price": 260.0
+  },
+  {
+    "vendor": "MSI",
+    "category": "Other",
+    "name": "MSI Immerse GH50 Gaming Headset",
+    "price": 225.0
+  },
+  {
+    "vendor": "RAPOO",
+    "category": "Other",
+    "name": "RAPOO H100 STERIO WIRED HEADSET",
+    "price": 25.0
+  },
+  {
+    "vendor": "RAPOO",
+    "category": "Other",
+    "name": "RAPOO VH510 VPRO GAMING HEADSET WIRED RGB LED USB 701",
+    "price": 125.0
+  },
+  {
+    "vendor": "REDRAGON",
+    "category": "Other",
+    "name": "REDRAGON ZEUS-X WIRELESS BLACK RGB HEADSET| H510",
+    "price": 180.95
+  },
+  {
+    "vendor": "SHARKOON",
+    "category": "Other",
+    "name": "SHARKOON SKILLER SGH2 HEADSET",
+    "price": 57.14
+  },
+  {
+    "vendor": "XPG",
+    "category": "Other",
+    "name": "XPG EMIX H20 GAMING HEADSET",
+    "price": 0.0
+  },
+  {
+    "vendor": "HP",
+    "category": "Other",
+    "name": "HP TYPE C TO USB 3.0 WITH LAN",
+    "price": 0.0
+  },
+  {
+    "vendor": "NZXT",
+    "category": "Other",
+    "name": "NZXT INTERNAL USB HUB 4 PORT | AC-IUSBH-M3",
+    "price": 80.0
+  },
+  {
+    "vendor": "PORT",
+    "category": "Other",
+    "name": "PORT HUB USBC-C 4 X USB 3.0 PORT | REF-900123",
+    "price": 24.0
+  },
+  {
+    "vendor": "IBRAND",
+    "category": "Adapter",
+    "name": "IBRAND HOME CHARGER IPH5/6 IBR-H950",
+    "price": 0.0
+  },
+  {
+    "vendor": "OMNIKEY",
+    "category": "Other",
+    "name": "OMNIKEY ID CARD SCANNER SMART",
+    "price": 35.0
+  },
+  {
+    "vendor": "ASUS",
+    "category": "Keyboard",
+    "name": "ASUS CERBERUS GAMING KEYBOARD | 90YH00R1-B2ZA00",
+    "price": 100.0
+  },
+  {
+    "vendor": "C940",
+    "category": "Keyboard",
+    "name": "C940 14IKB WITH BLACKLIGHT - KEYBOARD",
+    "price": 0.0
+  },
+  {
+    "vendor": "DELL",
+    "category": "Keyboard",
+    "name": "DELL USB KEYBOARD KB216-BK",
+    "price": 24.0
+  },
+  {
+    "vendor": "DARKFLASH",
+    "category": "Keyboard",
+    "name": "DARKFLASH V200 BLUETOOTH WIRELESS KEYBOARD BLACK",
+    "price": 0.0
+  },
+  {
+    "vendor": "DUCKYONE",
+    "category": "Other",
+    "name": "DUCKYONE 3 AURA BLACK ARABIC-ENGLISH | BARCODE:l 4711394387597",
+    "price": 0.0
+  },
+  {
+    "vendor": "DUCKYONE",
+    "category": "Keyboard",
+    "name": "DUCKYONE 3 AURA WHITE SF ARABIC-ENGLISH KEYBOARD | BARCODE: 4711394387719",
+    "price": 0.0
+  },
+  {
+    "vendor": "DUCKYONE",
+    "category": "Keyboard",
+    "name": "DUCKYONE 3 AURA WHITE SF ARABIC-ENGLISH KEYBOARD | BARCODE: 4711394387733",
+    "price": 0.0
+  },
+  {
+    "vendor": "DUCKYONE",
+    "category": "Keyboard",
+    "name": "DUCKYONE 3 CLASSIC BLACK/WHITE - ARABIC KEYBOARD | BARCODE: 4711394387887",
+    "price": 0.0
+  },
+  {
+    "vendor": "DUCKYONE",
+    "category": "Keyboard",
+    "name": "DUCKYONE 3 CLASSIC BLACK/WHITE TKL KEYBOARD | BARCODE: 4711394387207",
+    "price": 0.0
+  },
+  {
+    "vendor": "DUCKYONE",
+    "category": "Keyboard",
+    "name": "DUCKYONE 3 CLASSIC BLACK/WHITE TKL KEYBOARD | BARCODE: 4711394387221",
+    "price": 0.0
+  },
+  {
+    "vendor": "DUCKYONE",
+    "category": "Keyboard",
+    "name": "DUCKYONE 3 COSMIC BLUE TKL KEYBOARD | BARCODE: 4711394380567",
+    "price": 0.0
+  },
+  {
+    "vendor": "DUCKYONE",
+    "category": "Keyboard",
+    "name": "DUCKYONE 3 MIST GREY TKL KEYBOARD | BARCODE: 4711394380444",
+    "price": 0.0
+  },
+  {
+    "vendor": "DV6",
+    "category": "Keyboard",
+    "name": "DV6 6000 KEYBOARD",
+    "price": 0.0
+  },
+  {
+    "vendor": "GIGABYTE",
+    "category": "Mouse",
+    "name": "GIGABYTE KM6300 WIRED KEYBOARD & MOUSE COMBO WITH MULTIMEDIA CONTROLS",
+    "price": 0.0
+  },
+  {
+    "vendor": "HP",
+    "category": "Keyboard",
+    "name": "HP 440 G4 ENGLISH KEYBOARD",
+    "price": 0.0
+  },
+  {
+    "vendor": "HP",
+    "category": "Mouse",
+    "name": "HP WIRLESS KEYBOARD+ MOUSE CS10 WHITE",
+    "price": 37.0
+  },
+  {
+    "vendor": "HP",
+    "category": "Mouse",
+    "name": "HP WIRELESS KEYBOARD+MOUSE COMBO CS500",
+    "price": 85.0
+  },
+  {
+    "vendor": "HP",
+    "category": "Mouse",
+    "name": "HP WIRED KEYBORAD&MOUSE KM100",
+    "price": 48.0
+  },
+  {
+    "vendor": "HP",
+    "category": "Keyboard",
+    "name": "HP WIRED KEYBOARD ARABIC",
+    "price": 40.0
+  },
+  {
+    "vendor": "HP",
+    "category": "Mouse",
+    "name": "HP ENGLISH WIRED KEYBOARD& MOUSE OEM",
+    "price": 35.0
+  },
+  {
+    "vendor": "HYPERX",
+    "category": "Keyboard",
+    "name": "HYPERX ALLOY ORIGINS 60 BLACK MECHANICAL GAMING KEYBOARD l HKB01S-RB-US/G",
+    "price": 385.0
+  },
+  {
+    "vendor": "HYPERX",
+    "category": "Keyboard",
+    "name": "HYPERX ALLOY ORIGINS 60 WHITE MECHANICAL GAMING KEYBOARD l HKB01P-RB-US/G",
+    "price": 0.0
+  },
+  {
+    "vendor": "LENOVO",
+    "category": "Mouse",
+    "name": "LENOVO WIRELESS 100 KEYBORAD+ MOUSE | GX30L66303",
+    "price": 158.0
+  },
+  {
+    "vendor": "APPLE",
+    "category": "Keyboard",
+    "name": "WIWU MAGIC KEYBOARD 10.9 FOR APPLE IPAD 10",
+    "price": 375.0
+  },
+  {
+    "vendor": "PORT",
+    "category": "Mouse",
+    "name": "PORT WIRLESS KEYBORAD & MOUSE 900904-UK-AK",
+    "price": 45.0
+  },
+  {
+    "vendor": "PROMATE",
+    "category": "Mouse",
+    "name": "PROMATE COMBO-KM1 WIRED USB KEYBOARD + MOUSE",
+    "price": 25.0
+  },
+  {
+    "vendor": "PROMATE",
+    "category": "Mouse",
+    "name": "PROMATE ERGONOMIC WIRELESS KEYBOARD + MOUSE",
+    "price": 0.0
+  },
+  {
+    "vendor": "PROMATE",
+    "category": "Mouse",
+    "name": "PROMATE PASTEL WIRLESS KEYBORAD & MOUSE",
+    "price": 75.0
+  },
+  {
+    "vendor": "COMBO",
+    "category": "Mouse",
+    "name": "COMBO RAPOO 9320M WIRELESS MULTIMODE KEYBOARD + MOUSE SLIM, WHITE",
+    "price": 0.0
+  },
+  {
+    "vendor": "COMBO",
+    "category": "Mouse",
+    "name": "COMBO RAPOO 9320M GREY WIRELESS MULTIMODE KEYBOARD + MOUSE SLIM",
+    "price": 105.0
+  },
+  {
+    "vendor": "RAPOO",
+    "category": "Mouse",
+    "name": "RAPOO 9900M MULTI MODE WIRELESS KEYBOARD MOUSE COMBO METAL - BLACK",
+    "price": 0.0
+  },
+  {
+    "vendor": "REDRAGON",
+    "category": "Mouse",
+    "name": "REDRAGON ESSENTIALS GAMING 4 IN 1 COMBO KEYBOARD | MOUSE | MOUSEPAD | HEADSET WITH ADAPTER | K552-BB-2",
+    "price": 135.0
+  },
+  {
+    "vendor": "USB",
+    "category": "Other",
+    "name": "USB KEYBORAB",
+    "price": 25.0
+  },
+  {
+    "vendor": "USB",
+    "category": "Keyboard",
+    "name": "USB GAMING KEYBOARD",
+    "price": 40.0
+  },
+  {
+    "vendor": "VERTUX",
+    "category": "Keyboard",
+    "name": "VERTUX AMBER PRO PERFOMANCE GAMING KEYBOARD",
+    "price": 0.0
+  },
+  {
+    "vendor": "VERTUX",
+    "category": "Keyboard",
+    "name": "VERTUX TOUCAN WIRED MECHANICAL GAMING KEYBOARD",
+    "price": 150.0
+  },
+  {
+    "vendor": "HP",
+    "category": "Laptop",
+    "name": "LAPTOP KEYBORAD FOR HP",
+    "price": 0.0
+  },
+  {
+    "vendor": "LENOVO",
+    "category": "Mouse",
+    "name": "Lenovo 510 Wireless Combo Keyboard with Mouse Combo, ENG-ARB",
+    "price": 100.0
+  },
+  {
+    "vendor": "MINI",
+    "category": "Other",
+    "name": "MINI NUMERIC KEYPAD",
+    "price": 0.0
+  },
+  {
+    "vendor": "LENOVO",
+    "category": "Laptop",
+    "name": "LAPTOP ADAPTER LENOVO",
+    "price": 95.0
+  },
+  {
+    "vendor": "DELL",
+    "category": "Laptop",
+    "name": "LAPTOP-ADAPTER DELL",
+    "price": 130.0
+  },
+  {
+    "vendor": "HP",
+    "category": "Laptop",
+    "name": "LAPTOP ADAPTER HP BLUE PIN",
+    "price": 50.0
+  },
+  {
+    "vendor": "INTEL",
+    "category": "CPU",
+    "name": "DELL LATITUDE 7400 INTEL CORE i7-8665U/ 16GB RAM/256GB SSD/14\" TOUCH SCREEN/WIN10 PRO.",
+    "price": 0.0
+  },
+  {
+    "vendor": "DELL",
+    "category": "Keyboard",
+    "name": "LAP-DELL KEYBOARD -3501",
+    "price": 0.0
+  },
+  {
+    "vendor": "HP",
+    "category": "Storage",
+    "name": "HP 15-FD0355NIA/i5-1334U/8GB/512GB SSD/15.6\"/ FHD/DOS/SILVER",
+    "price": 1700.0
+  },
+  {
+    "vendor": "HP",
+    "category": "CPU",
+    "name": "HP ENVY 14-ES0013DX CORE i5 13TH GEN-1355U-8GB RAM-512 SSD-14.1\" x360 FHD TOUCH-BACKLIT KB-WIN 11-SILVER",
+    "price": 2142.86
+  },
+  {
+    "vendor": "LENOVO",
+    "category": "Laptop",
+    "name": "LAPTOP KEYBORAD LENOVO",
+    "price": 130.0
+  },
+  {
+    "vendor": "LENOVO",
+    "category": "Storage",
+    "name": "LENOVO THINKPAD E14 G5 i7-1355U,16GB,512GB SSD,14\" FHD IPS,CAMERA,FPR, BT, WIFI, WINDOWS 11 PRO, BLACK.",
+    "price": 2870.0
+  },
+  {
+    "vendor": "LENOVO",
+    "category": "Laptop",
+    "name": "LENOVO IDEAPAD SLIM3 I5-12TH Gen/8GB/512GB/WIN11 HOME/15.6inch LAPTOP",
+    "price": 2000.0
+  },
+  {
+    "vendor": "LB",
+    "category": "Other",
+    "name": "LB-LINK W/L 150MBPS USB ADAPTOR",
+    "price": 0.0
+  },
+  {
+    "vendor": "LG",
+    "category": "Monitor",
+    "name": "LG 32\"32SR50F-W FHD(1920X1080) IPS SMART WEBOS 5MS HDMI,WIFI,SPEAKER,BLUETOOTH,WHITE MONITOR",
+    "price": 710.0
+  },
+  {
+    "vendor": "AOC",
+    "category": "Monitor",
+    "name": "AOC 24G4 24\" IPS 180Hz 0.5Ms GAMING MONITOR | 24G4/79",
+    "price": 475.0
+  },
+  {
+    "vendor": "AOC",
+    "category": "Monitor",
+    "name": "AOC C32G2ZE2 32\" Curved Frameless Gaming Monitor, FHD 1920x1080, VA, 0.5ms 250Hz, DP/HDMI/VGA,",
+    "price": 970.0
+  },
+  {
+    "vendor": "ASUS",
+    "category": "Monitor",
+    "name": "ASUS ProArt PA278QV 27\" WQHD 2560 x1440,HDMI DVI,MINI-DP,75 Hz,5ms MONITOR|90LM05L1-B03370|",
+    "price": 1065.0
+  },
+  {
+    "vendor": "ASUS",
+    "category": "Monitor",
+    "name": "ASUS ProArt 32\" PA329CV, 60Hz, 4K UHD (3840x2160), 16:9, IPS, AM5, DISPLAY Port, ADJUSTABLE STAND, FLAT, BLACK MONITOR",
+    "price": 2160.0
+  },
+  {
+    "vendor": "NVIDIA",
+    "category": "Monitor",
+    "name": "ASUS ROG Strix XG27ACS USB Type-C Gaming Monitor, 27\" WQHD Fast IPS Display, 180Hz, NVIDIA G-Sync & AMD FreeSync GAMING MONITOR -BLK | 90LM09Q0-B011A0",
+    "price": 0.0
+  },
+  {
+    "vendor": "AMD",
+    "category": "Monitor",
+    "name": "ASUS TUF 23.8\" VG249Q3A 180Hz, FHD (1920x1080), IPS, AMD FreeSync, HDMI, DisplayPort, FLAT GAMING MONITOR- BLACK",
+    "price": 0.0
+  },
+  {
+    "vendor": "ASUS",
+    "category": "Monitor",
+    "name": "ASUS TUF GAMING VG27AQ1A 27\" 2K WQHD(2560x1440),IPS,170HZ,1MS GAMING MONITOR l 90LM05Z0-B04370",
+    "price": 1190.0
+  },
+  {
+    "vendor": "ASUS",
+    "category": "Monitor",
+    "name": "ASUS TUF VG27AQ3A 2K 180Hz, 1ms GAMING MONITOR",
+    "price": 960.0
+  },
+  {
+    "vendor": "ASUS",
+    "category": "Monitor",
+    "name": "ASUS VG27AQML 27inch 2560x1440 180Hz, IPS, 1ms,QHD GAMING FLAT MONITOR - BLACK | 90LM05Z0-B07370",
+    "price": 0.0
+  },
+  {
+    "vendor": "ASUS",
+    "category": "Monitor",
+    "name": "ASUS ROG Strix XG27UQR 27 4K HDR (3840 x 2160) 144Hz,1ms, IPS Gaming Monitor",
+    "price": 2880.0
+  },
+  {
+    "vendor": "BENQ",
+    "category": "Monitor",
+    "name": "BENQ MOBIUZ EX2710S 27\" 1920*1080P,165HZ,1MS GAMING MONITOR",
+    "price": 850.0
+  },
+  {
+    "vendor": "BENQ",
+    "category": "Monitor",
+    "name": "BenQ GW2780 27\" FHD 1920 x 1080,5ms,60Hz, Built-in Speakers LED IPS Monitor",
+    "price": 475.0
+  },
+  {
+    "vendor": "DEL",
+    "category": "Other",
+    "name": "DEL-LED 22\"-P2217H",
+    "price": 495.0
+  },
+  {
+    "vendor": "DELL",
+    "category": "Other",
+    "name": "DELL LED 24\" E2417H",
+    "price": 445.0
+  },
+  {
+    "vendor": "DELL",
+    "category": "Monitor",
+    "name": "DELL E2220H 21.5\" FHD DP,VGA Black 1920 x 1080,60Hz MONITOR",
+    "price": 360.0
+  },
+  {
+    "vendor": "DELL",
+    "category": "Monitor",
+    "name": "DELL E2222H 21.5\" FHD,60HZ,DP,VGA MONITOR",
+    "price": 285.0
+  },
+  {
+    "vendor": "DELL",
+    "category": "Monitor",
+    "name": "DELL 24\" E2420H 60Hz MONITOR 1 X VGA, 1 X DP",
+    "price": 455.0
+  },
+  {
+    "vendor": "DELL",
+    "category": "Monitor",
+    "name": "DELL E2423H 24\" LCD MONITOR DP & VGA 3YEAR",
+    "price": 330.0
+  },
+  {
+    "vendor": "DELL",
+    "category": "Monitor",
+    "name": "DELL E2720H FHD IPS VGA HDMI MONITOR",
+    "price": 375.0
+  },
+  {
+    "vendor": "DELL",
+    "category": "Monitor",
+    "name": "DELL E2723H 27\" IPS FHD MONITOR,HDMI & VGA - Black 3YEAR",
+    "price": 380.0
+  },
+  {
+    "vendor": "DELL",
+    "category": "Monitor",
+    "name": "DELL P2422H 23.8\" FHD 60Hz MONITOR-3YRS",
+    "price": 455.0
+  },
+  {
+    "vendor": "AMD",
+    "category": "Monitor",
+    "name": "DELL 24\" SE2422H 60Hz 16:9 FHD(1920x1080), HDMI&VGA Ports, AMD FreeSync MONITOR",
+    "price": 0.0
+  },
+  {
+    "vendor": "LG",
+    "category": "Monitor",
+    "name": "GALAX VIVANCE-01 27 QHD LED GAMING MONITOR 2560 X1440 Resolution 165Hz| G-MGVIIB27NB50-GXLG",
+    "price": 700.0
+  },
+  {
+    "vendor": "HP",
+    "category": "Other",
+    "name": "HP LED 21.5\" V221VB 453F2AS#ABV",
+    "price": 250.0
+  },
+  {
+    "vendor": "HP",
+    "category": "Monitor",
+    "name": "HP SERIES 5 524SW 100Hz,IPS, WHITE MONITOR | 94C21AA#ABV",
+    "price": 395.0
+  },
+  {
+    "vendor": "HP",
+    "category": "Monitor",
+    "name": "HP 5 Series 527SW 27 \" WHITE MONITORS | 94F46AA",
+    "price": 600.0
+  },
+  {
+    "vendor": "HP",
+    "category": "Monitor",
+    "name": "HP P22V G5 21.5\" HDMI,VGA LED MONITOR | 9TT53AS",
+    "price": 255.0
+  },
+  {
+    "vendor": "HP",
+    "category": "Monitor",
+    "name": "HP P24H G5 23.8\" DP,HDMI,VGA MONITOR | 64W34AA",
+    "price": 375.0
+  },
+  {
+    "vendor": "KOORUI",
+    "category": "Monitor",
+    "name": "KOORUI 27E1QA 27\" 2K/QHD 2560x 1440/1MS/144HZ/HDMI/DP/BLACK FLAT GAMING MONITOR |MG27H7QB|",
+    "price": 620.0
+  },
+  {
+    "vendor": "KOORUI",
+    "category": "Monitor",
+    "name": "KOORUI 27GN02 27 INCH 240HZ, GAMING MONITOR",
+    "price": 547.74
+  },
+  {
+    "vendor": "KOORUI",
+    "category": "Monitor",
+    "name": "KOORUI 27\" FHD/1080P/IPS/165HZ/DP/HDMI BLACK MONITOR | MG27H11F",
+    "price": 495.0
+  },
+  {
+    "vendor": "LENOVO",
+    "category": "Other",
+    "name": "LENOVO LED 23.8 L24E-30 FHD,VGA+HMI",
+    "price": 0.0
+  },
+  {
+    "vendor": "LENOVO",
+    "category": "Monitor",
+    "name": "LENOVO L27E-30 75Hz IPS ULTRA SLIM MONITOR",
+    "price": 440.0
+  },
+  {
+    "vendor": "LG",
+    "category": "Monitor",
+    "name": "LG 34WQ75C-B AMA 34\" CURVED ULTRA WIDE, QHD, IPS MONITOR with USB Type-C",
+    "price": 1440.0
+  },
+  {
+    "vendor": "LG",
+    "category": "Other",
+    "name": "LG LED 20\" 20MP48A",
+    "price": 260.0
+  },
+  {
+    "vendor": "AMD",
+    "category": "Monitor",
+    "name": "LG 22MR410 22\" FHD 100hz VA Display Monitor, With AMD Black |22MR410-B",
+    "price": 210.0
+  },
+  {
+    "vendor": "LG",
+    "category": "Monitor",
+    "name": "LG 24MR400-B.AMAQ G 24\" FHD 3-Side Borderless IPS 100Hz Monitor With FreeSync",
+    "price": 245.0
+  },
+  {
+    "vendor": "LG",
+    "category": "Monitor",
+    "name": "LG 27\" 27MR400-B FHD IPS 100HZ MONITOR",
+    "price": 288.0
+  },
+  {
+    "vendor": "LG",
+    "category": "Monitor",
+    "name": "LG 27UP550N-W 27\" 4K( 3840x2160) UHD IPS LED HDR MONITOR USB-C,SILVER",
+    "price": 925.0
+  },
+  {
+    "vendor": "LG",
+    "category": "Monitor",
+    "name": "LG 27UP850-W 27 UHD,4K (3840 x 2160) IPS MONITOR",
+    "price": 1340.0
+  },
+  {
+    "vendor": "LG",
+    "category": "Monitor",
+    "name": "LG ULTRAGEAR 32GN50R 32\" FHD 1920x1080 165Hz,1ms BLACK GAMING MONITOR",
+    "price": 785.0
+  },
+  {
+    "vendor": "LG",
+    "category": "Monitor",
+    "name": "LG 34GP63A-B 34\" CURVEDG ULTRAGEAR QHD (3440 x 1440) 160Hz,1ms MONITOR",
+    "price": 1180.0
+  },
+  {
+    "vendor": "MSI",
+    "category": "Monitor",
+    "name": "MSI G244F E2 24 Inch FHD Gaming Monitor - 1920 x 1080 Rapid IPS Panel, 180 Hz Gamut/Adaptive-Sync - DP HDMI2 MONITOR",
+    "price": 440.0
+  },
+  {
+    "vendor": "MSI",
+    "category": "Other",
+    "name": "MSI Optix G271 eSports Gaming Montior 27\" FHD 144Hz,1ms, IPS",
+    "price": 840.0
+  },
+  {
+    "vendor": "MSI",
+    "category": "Monitor",
+    "name": "MSI G27C3F 27 \"FHD180Hz CURVED GAMING MONITOR | 9S6-3CD01H-018",
+    "price": 0.0
+  },
+  {
+    "vendor": "AMD",
+    "category": "Other",
+    "name": "MSI Optix G27CX 27\" F HD 1920 x 1080 1ms,250HZ AMD FreeSync Curved Gaming Monito | 9S6-3CA91T-200",
+    "price": 755.0
+  },
+  {
+    "vendor": "MSI",
+    "category": "Monitor",
+    "name": "MSI Optix G272 27\" FHD 165Hz 1ms Flat Gaming Monitor",
+    "price": 990.0
+  },
+  {
+    "vendor": "MSI",
+    "category": "Monitor",
+    "name": "MSI MP223 100Hz 22inch FHD FLAT MONITOR | 9S6-3PB9CH-003",
+    "price": 195.0
+  },
+  {
+    "vendor": "MSI",
+    "category": "Monitor",
+    "name": "MSI PRO MP341CQW 34\" UWQHD,100Hz,1ms CURVED GAMING MONITOR",
+    "price": 1000.0
+  },
+  {
+    "vendor": "SAMSUNG",
+    "category": "Monitor",
+    "name": "SAMSUNG LS22C310 22\" S3 FHD,75Hz, IPS,BORDERLESS FLAT MONITOR",
+    "price": 233.34
+  },
+  {
+    "vendor": "SAMSUNG",
+    "category": "Monitor",
+    "name": "SAMSUNG LS22A330NHMXUE 22\" FHD FLAT MONITOR",
+    "price": 260.0
+  },
+  {
+    "vendor": "SAMSUNG",
+    "category": "Monitor",
+    "name": "SAMSUNG LS24AM506NMXUE 24 M5 SMART MONITOR FULL HD",
+    "price": 850.0
+  },
+  {
+    "vendor": "SAMSUNG",
+    "category": "Monitor",
+    "name": "SAMSUNG LS24C310EAMXUE 24\" S3 FHD,75HZ,IPS FLAT MONITOR",
+    "price": 255.0
+  },
+  {
+    "vendor": "SAMSUNG",
+    "category": "Monitor",
+    "name": "SAMSUNG LS27BG650EMXUE 27 G6 ODYSSEY 240Hz QHD CURVED MONITOR",
+    "price": 1045.0
+  },
+  {
+    "vendor": "SAMSUNG",
+    "category": "Monitor",
+    "name": "SAMSUNG LS27C310EAMXUE S7\" S3 FHD,75Hz,IPS FLAT MONITOR",
+    "price": 305.0
+  },
+  {
+    "vendor": "SAMSUNG",
+    "category": "Monitor",
+    "name": "SAMSUNG ODYSSEY G5 27\" CURVED QHD1ms,165hz GAMING MONITOR| LS27CG552EMXUE",
+    "price": 800.0
+  },
+  {
+    "vendor": "SAMSUNG",
+    "category": "Monitor",
+    "name": "SAMSUNG LS32A600NWMXUE 32\" QHD HDR10 BUSINESS MONITOR",
+    "price": 1204.0
+  },
+  {
+    "vendor": "SAMSUNG",
+    "category": "Other",
+    "name": "SAMSUNG 32\" 4K UHD BUSINESS MONOTOR l LU32J590UQMXUE",
+    "price": 810.0
+  },
+  {
+    "vendor": "VIEWSONIC",
+    "category": "Monitor",
+    "name": "VIEWSONIC VA2405-H 241080p HDMI and VGA MONITOR",
+    "price": 480.0
+  },
+  {
+    "vendor": "LINKSYS",
+    "category": "Other",
+    "name": "LINKSYS SRW2024-K9 28 PORT GIGA MANAGED",
+    "price": 0.0
+  },
+  {
+    "vendor": "LINKSYS",
+    "category": "Other",
+    "name": "LINKSYS WAP561-E-K9 DUAL BAND RADIIO ACCESS",
+    "price": 1350.0
+  },
+  {
+    "vendor": "LOGITECH",
+    "category": "Other",
+    "name": "LOGITECH R400 PRSENTER-910-001356",
+    "price": 69.0
+  },
+  {
+    "vendor": "LOGITECH",
+    "category": "Mouse",
+    "name": "LOGITECH M90 MOUSE",
+    "price": 0.0
+  },
+  {
+    "vendor": "LOGITECH",
+    "category": "Mouse",
+    "name": "LOGITECH M185 W/L MOUSE",
+    "price": 31.0
+  },
+  {
+    "vendor": "LOGITECH",
+    "category": "Mouse",
+    "name": "LOGITECH M171 W/L MOUSE BLACK | 910-004424",
+    "price": 0.0
+  },
+  {
+    "vendor": "LOGITECH",
+    "category": "Mouse",
+    "name": "LOGITECH M170 WIRELESS MOUSE GREY | 910-004642",
+    "price": 28.0
+  },
+  {
+    "vendor": "LOGITECH",
+    "category": "Mouse",
+    "name": "LOGITECH M220 SILENT WIRELESS MOUSE | Charcoal-BLACK | 910-004878",
+    "price": 45.0
+  },
+  {
+    "vendor": "LOGITECH",
+    "category": "Mouse",
+    "name": "LOGITECH G PRO WIRELESS GAMING MOUSE BT EWR2 | 910-005273",
+    "price": 359.86
+  },
+  {
+    "vendor": "LOGITECH",
+    "category": "Mouse",
+    "name": "LOGITECH G502 WIRLESS GAMING MOUSE | 910-005568",
+    "price": 380.0
+  },
+  {
+    "vendor": "LOGITECH",
+    "category": "Mouse",
+    "name": "LOGITECH G203 LIGHTSYNC WHITE GAMING MOUSE | 910-005797",
+    "price": 70.0
+  },
+  {
+    "vendor": "LOGITECH",
+    "category": "Other",
+    "name": "LOGITECH PRO X SUPERLIGHT BLACK W/L GAMING MOSUE | 910-005881",
+    "price": 357.2
+  },
+  {
+    "vendor": "LOGITECH",
+    "category": "Mouse",
+    "name": "LOGITECH GPRO X SUPERLIGHT W/L GAMING MOUSE WHITE | 910-005943",
+    "price": 420.0
+  },
+  {
+    "vendor": "LOGITECH",
+    "category": "Mouse",
+    "name": "LOGITECH G502X WIRED GAMING MOUSE BLACK | 910-006139",
+    "price": 250.0
+  },
+  {
+    "vendor": "LOGITECH",
+    "category": "Mouse",
+    "name": "LOGITECH G502X WIRED GAMING MOUSE WHITE | 910-006147",
+    "price": 260.0
+  },
+  {
+    "vendor": "LOGITECH",
+    "category": "Mouse",
+    "name": "LOGITECH G705 W/L GAMING MOUSE WHITE | 910-006368",
+    "price": 295.0
+  },
+  {
+    "vendor": "LOGITECH",
+    "category": "Mouse",
+    "name": "LOGITECH LIFT VERTICAL ERGONOMIC W/L MOUSE | 910-006473",
+    "price": 195.24
+  },
+  {
+    "vendor": "LOGITECH",
+    "category": "Mouse",
+    "name": "LOGITECH MX MASTER 3S W/L MOUSE BLACK | 910-006559",
+    "price": 342.86
+  },
+  {
+    "vendor": "LOGITECH",
+    "category": "Mouse",
+    "name": "LOGITECH G PRO X SUPERLIGHT-2 LIGHTSPEED GAMING MOUSE - BLACK | 910-006631",
+    "price": 465.0
+  },
+  {
+    "vendor": "LOGITECH",
+    "category": "Mouse",
+    "name": "LOGITECH MX ANYWHERE 3S W/L BLUTOOTH MOUSE GRAPHITE | 910-006929",
+    "price": 235.0
+  },
+  {
+    "vendor": "LOGITECH",
+    "category": "Mouse",
+    "name": "LOGITECH G309 LIGHTSPEED W/L MOUSE - BLACK | 910-007200",
+    "price": 0.0
+  },
+  {
+    "vendor": "LOGITECH",
+    "category": "Mouse",
+    "name": "LOGITECH G309 LIGHTSPEED W/L GAMING MOUSE - WHITE | 910-007208",
+    "price": 0.0
+  },
+  {
+    "vendor": "LOGITECH",
+    "category": "Keyboard",
+    "name": "LOGITECH K120 WIRED KEYBOARD | 920-002495",
+    "price": 28.57
+  },
+  {
+    "vendor": "LOGITECH",
+    "category": "Mouse",
+    "name": "LOGITECH MK120 WIRED KB+ MOUSE ARABIC ENGLISH | 920-002546",
+    "price": 0.0
+  },
+  {
+    "vendor": "LOGITECH",
+    "category": "Mouse",
+    "name": "LOGITECH MK220 W/L KB+MOUSE | 920-003160",
+    "price": 52.5
+  },
+  {
+    "vendor": "LOGITECH",
+    "category": "Mouse",
+    "name": "LOGITECH MK330 W/L KEYBOARD+MOUSE | 920-003983",
+    "price": 135.0
+  },
+  {
+    "vendor": "LOGITECH",
+    "category": "Mouse",
+    "name": "LOGITECH MK270 W/L KB+MOUSE ENGLISH",
+    "price": 65.0
+  },
+  {
+    "vendor": "LOGITECH",
+    "category": "Mouse",
+    "name": "LOGITECH MK270 W/L KB+ MOUSE | 920-004519",
+    "price": 62.5
+  },
+  {
+    "vendor": "LOGITECH",
+    "category": "Other",
+    "name": "LOGITECH MK345 W/L COMBO -ENG| 920-006489",
+    "price": 115.0
+  },
+  {
+    "vendor": "LOGITECH",
+    "category": "Other",
+    "name": "LOGITECH K400 W/L TOUCH KEY BOARD",
+    "price": 88.0
+  },
+  {
+    "vendor": "LOGITECH",
+    "category": "Other",
+    "name": "LOGITECH G213 PRODIGY RGB GAMING KEYBORAD",
+    "price": 200.0
+  },
+  {
+    "vendor": "LOGITECH",
+    "category": "Keyboard",
+    "name": "LOGITECH MK470 W/L KEYBOARD + MOSUE WHITE - 920-009205",
+    "price": 185.0
+  },
+  {
+    "vendor": "LOGITECH",
+    "category": "Other",
+    "name": "LOGITECH G PRO MECHANICAL GAMING KEYBORAD- BLACK | 920-009392",
+    "price": 345.0
+  },
+  {
+    "vendor": "LOGITECH",
+    "category": "Keyboard",
+    "name": "LOGITECH G915 TKL TENKEYLESS LIGHTSPEED WIRELESS RGB MECHANICAL KEYBOARD,GL CLICKY | 920-009537",
+    "price": 1000.0
+  },
+  {
+    "vendor": "LOGITECH",
+    "category": "Keyboard",
+    "name": "LOGITECH G915 TKL Tenkeyless LIGHTSPEED Wireless RGB Mechanical Gaming Keyboard - WHITE -TACTILE |920-009537",
+    "price": 640.0
+  },
+  {
+    "vendor": "LOGITECH",
+    "category": "Keyboard",
+    "name": "LOGITECH G715 W/L GAMING KEYBOARD WHITE | 920-010465",
+    "price": 590.0
+  },
+  {
+    "vendor": "LOGITECH",
+    "category": "Keyboard",
+    "name": "LOGITECH MX MECHANICAL MINI kEYBOARD RF W/L+ BT QWERTY US INTL, Graphite, Grey | 920-010782",
+    "price": 510.0
+  },
+  {
+    "vendor": "LOGITECH",
+    "category": "Keyboard",
+    "name": "LOGITECH G413 SE BLACK GAMING KEYBOARD | 920-010806",
+    "price": 200.0
+  },
+  {
+    "vendor": "LOGITECH",
+    "category": "Keyboard",
+    "name": "LOGITECH G413 TKL SE BLACK GAMING KEYBOARD | 920-010809",
+    "price": 200.0
+  },
+  {
+    "vendor": "LOGITECH",
+    "category": "Keyboard",
+    "name": "LOGITECH PRO X60 LIGHTSPEED W/L GAMING KEYBOARD (TACTILE) - BLACK | 920-011911",
+    "price": 0.0
+  },
+  {
+    "vendor": "LOGITECH",
+    "category": "Keyboard",
+    "name": "LOGITECH PRO X60 LIGHTSPEED W/L BT&USB-C RGB GAMING ENG KEYBOARD (TACTILE) - WHITE | 920-011930",
+    "price": 0.0
+  },
+  {
+    "vendor": "LOGITECH",
+    "category": "Keyboard",
+    "name": "LOGITECH G515 RGB TKL TACTILE WIRED GAMING KEYBOARD - BLACK | 920-012872",
+    "price": 0.0
+  },
+  {
+    "vendor": "LOGITECH",
+    "category": "Other",
+    "name": "LOGITECH GAMEPAD F310",
+    "price": 90.0
+  },
+  {
+    "vendor": "LOGITECH",
+    "category": "Other",
+    "name": "LOGITECH G29 GAMING WHEEL | 941-000113",
+    "price": 742.98
+  },
+  {
+    "vendor": "LOGITECH",
+    "category": "Other",
+    "name": "LOGITECH G923 RACING WEHEEL WITH PEDAL FOR PS4 & PC | 941-000150",
+    "price": 1010.0
+  },
+  {
+    "vendor": "LOGITECH",
+    "category": "Mouse",
+    "name": "LOGITECH MOUSE PAD G640",
+    "price": 123.0
+  },
+  {
+    "vendor": "LOGITECH",
+    "category": "Mouse",
+    "name": "LOGITECH GAMING MOUSE PAD G840 XL MAGENTA | 943-000715",
+    "price": 130.0
+  },
+  {
+    "vendor": "LOGITECH",
+    "category": "Mouse",
+    "name": "LOGITECH G740 BLACK GAMING MOUSE PAD | 943-000806",
+    "price": 100.0
+  },
+  {
+    "vendor": "LOGITECH",
+    "category": "Other",
+    "name": "LOGITECH BCC-950 CONFERENCE CAM | 960-000867",
+    "price": 535.0
+  },
+  {
+    "vendor": "LOGITECH",
+    "category": "Other",
+    "name": "LOGITECH C920 HD PRO WEBCAM | 960-001055",
+    "price": 235.0
+  },
+  {
+    "vendor": "LOGITECH",
+    "category": "Other",
+    "name": "LOGITECH C270 HD WEBCAM | 960-001063",
+    "price": 60.0
+  },
+  {
+    "vendor": "LOGITECH",
+    "category": "Other",
+    "name": "LOGITECH HD PRO WEB CAM C922",
+    "price": 295.0
+  },
+  {
+    "vendor": "LOGITECH",
+    "category": "Other",
+    "name": "LOGITECH Z150 MULTIMEDIA STEREO SPEAKER,3.5MM AUDIO INPUT, BLACK | 980-000816",
+    "price": 68.0
+  },
+  {
+    "vendor": "LOGITECH",
+    "category": "Other",
+    "name": "LOGITECH G560 LIGHTSYNC PC GAMING SPEAKERS | 980-001302",
+    "price": 676.19
+  },
+  {
+    "vendor": "LOGITECH",
+    "category": "Other",
+    "name": "LOGITECH H110 HEADSET",
+    "price": 35.0
+  },
+  {
+    "vendor": "LOGITECH",
+    "category": "Other",
+    "name": "LOGITECH H390 USB HEADSET| 981-000406",
+    "price": 80.5
+  },
+  {
+    "vendor": "LOGITECH",
+    "category": "Other",
+    "name": "LOGITECH H340 USB HEADSET | 981-000475",
+    "price": 60.5
+  },
+  {
+    "vendor": "LOGITEC",
+    "category": "Other",
+    "name": "LOGITEC H111 STERIO HEADSET - 981-000593",
+    "price": 25.0
+  },
+  {
+    "vendor": "LOGITECH",
+    "category": "Other",
+    "name": "LOGITECH G733 LIGHTSPEED BLACK RGB WIRELESS GAMING HEADSET| 981-000864",
+    "price": 0.0
+  },
+  {
+    "vendor": "LOGITECH",
+    "category": "Other",
+    "name": "LOGITECH G733 LIGHTSPEED WIRELESS RGB HEADSET LILAC | 981-000890",
+    "price": 390.0
+  },
+  {
+    "vendor": "LOGITECH",
+    "category": "Other",
+    "name": "LOGITECH GPRO X W/L LIGHTSPEED BLACK GAMING HEADSET | 981-000907",
+    "price": 580.95
+  },
+  {
+    "vendor": "LOGITECH",
+    "category": "Other",
+    "name": "LOGITECH G733 LIGHTSPEED WIRELESS RGB HEADSET BLUE | 981-000943",
+    "price": 385.0
+  },
+  {
+    "vendor": "LOGITECH",
+    "category": "Other",
+    "name": "LOGITECH G535 LIGHTSPEED WIRELESS GAMING HEADSET BLACK | 981-000972",
+    "price": 371.43
+  },
+  {
+    "vendor": "LOGITECH",
+    "category": "Other",
+    "name": "LOGITECH G335 WIRED GAMING HEADSET BLACK | 981-000978",
+    "price": 270.0
+  },
+  {
+    "vendor": "LOGITECH",
+    "category": "Other",
+    "name": "LOGITECH G335 WIRED GAMING HEADSET WHITE | 981-001018",
+    "price": 190.0
+  },
+  {
+    "vendor": "LOGITECH",
+    "category": "Other",
+    "name": "LOGITECH G335 WIRED GAMING HEADSET MINT | 981-001024",
+    "price": 195.0
+  },
+  {
+    "vendor": "LOGITECH",
+    "category": "Other",
+    "name": "LOGITECH G435 LIGHTSPEED BLUETOOTH HEADSET WHITE | 981-001074",
+    "price": 220.0
+  },
+  {
+    "vendor": "LOGITECH",
+    "category": "Mouse",
+    "name": "LOGITECH G502X PREMIUM MOUSE - BLACK",
+    "price": 0.0
+  },
+  {
+    "vendor": "LOGITECH",
+    "category": "Mouse",
+    "name": "LOGITECH G502X PREMIUM MOUSE - WHITE",
+    "price": 0.0
+  },
+  {
+    "vendor": "LOGITECH",
+    "category": "Keyboard",
+    "name": "LOGITECH G713 GAMING KEYBOARD | LOG-920-010422",
+    "price": 490.0
+  },
+  {
+    "vendor": "HIKVISION",
+    "category": "Storage",
+    "name": "HIKVISION E1000 256GB M.2 SATA 6Gb/S | HS-SSD-E1000 256G",
+    "price": 105.0
+  },
+  {
+    "vendor": "TEAMGROUP",
+    "category": "Other",
+    "name": "TEAMGROUP MS30 512GB SATA Rev. 3.0 (6Gb/s), M.2 Solid State Drive (Read/Write Speed up to 550/480 MB/s) |",
+    "price": 250.0
+  },
+  {
+    "vendor": "M.2",
+    "category": "Other",
+    "name": "M.2 256GB PULLOUT",
+    "price": 0.0
+  },
+  {
+    "vendor": "INTEL",
+    "category": "Other",
+    "name": "ASROCK H610M-HDV/M.2 R2.0 DDR4 13TH GEN INTEL LGA1700 MOTHERBOARD | 90-MXBJH0-A0UAYZ",
+    "price": 260.0
+  },
+  {
+    "vendor": "ASUS",
+    "category": "Other",
+    "name": "ASUS ROG STRIX B650E-I GAMING WIFI AM5 DDR5 MINI-ITX MOTHERBOARD | 90MB1BI0-M0EAY0",
+    "price": 1100.0
+  },
+  {
+    "vendor": "ASUS",
+    "category": "Other",
+    "name": "ASUS ROG CROSSHAIR X670E HERO MOTHERBOARD | 90MB1BC0-M0EAY0",
+    "price": 2250.0
+  },
+  {
+    "vendor": "ASUS",
+    "category": "Other",
+    "name": "ASUS ROG Z890 MAXIMUS HERO DDR5 LGA1851 MOTHERBOARD | 90MB1ID0-M0EAY0",
+    "price": 0.0
+  },
+  {
+    "vendor": "ASUS",
+    "category": "Other",
+    "name": "ASUS PRIME B760M-A WIFI D4 LGA1700 MICRO-ATX MOTHERBOARD l 90MB1CX0-M0EAY0",
+    "price": 540.0
+  },
+  {
+    "vendor": "AMD",
+    "category": "Other",
+    "name": "ASUS PRIME B650M-K AMD AM5 DDR5 MICRO-ATX MOTHERBOARD | | 90MB1F60-M0EAY0",
+    "price": 500.0
+  },
+  {
+    "vendor": "ASUS",
+    "category": "Other",
+    "name": "ASUS PRIME B650M R 5GBPS AURA | 90MB1H30-M0EAY0",
+    "price": 415.0
+  },
+  {
+    "vendor": "AMD",
+    "category": "Other",
+    "name": "ASUS PRIME B650-PLUS AMD AM5 DDR5 MOTHERBOARD | 90MB1BS0-M0EAY0",
+    "price": 685.0
+  },
+  {
+    "vendor": "ASUS",
+    "category": "Other",
+    "name": "ASUS PRIME B760M-K D4 LGA 1700 MICRO-ATX MOTHER BOARD | 90MB1DS0-MOEAYO",
+    "price": 0.0
+  },
+  {
+    "vendor": "ASUS",
+    "category": "Other",
+    "name": "ASUS PRIME B760M-R DDR4 MOTHERBOARD | 90MB1HA0-M0EAY0",
+    "price": 395.0
+  },
+  {
+    "vendor": "ASUS",
+    "category": "Other",
+    "name": "ASUS PRIME B760 PLUS D4 LGA1700 MOTHERBOARD | 90MB1CW0-M1EAY0",
+    "price": 500.0
+  },
+  {
+    "vendor": "ASUS",
+    "category": "Other",
+    "name": "ASUS PRIME B760-PLUS LGA1700 DDR5 MOTHERBOARD l 90MB1EF0-MOEAYO",
+    "price": 535.0
+  },
+  {
+    "vendor": "ASUS",
+    "category": "Other",
+    "name": "ASUS PRIME H510M-A LGA1200 MOTHERBOARD | 90MB17C0-M0EAY0",
+    "price": 310.0
+  },
+  {
+    "vendor": "ASUS",
+    "category": "Other",
+    "name": "ASUS PRIME H510M-K R2.0 / LGA 1200 MOTHERBAORD 90MB1E80-M0MEAY0",
+    "price": 265.0
+  },
+  {
+    "vendor": "ASUS",
+    "category": "Other",
+    "name": "ASUS PRIME H610M A WIFI DDR4 MOTHERBOARD | 90MB1C80-M0EAY0",
+    "price": 335.0
+  },
+  {
+    "vendor": "ASUS",
+    "category": "Other",
+    "name": "ASUS PRIME H610M-K D4 LGA1700 DDR4 MOTHERBOARD | 90MB1A10-M0EAY0",
+    "price": 280.0
+  },
+  {
+    "vendor": "ASUS",
+    "category": "Other",
+    "name": "ASUS PRIME H610M-K DDR5 MOTHERBOARD | 90MB1GA0-M0EAY0",
+    "price": 300.0
+  },
+  {
+    "vendor": "AMD",
+    "category": "Other",
+    "name": "ASUS PRIME X670-P WIFI AMD AM5 MOTHER BOARD | 90MB1BV0-M0EAY0",
+    "price": 0.0
+  },
+  {
+    "vendor": "ASUS",
+    "category": "Other",
+    "name": "ASUS PRIME X870-P WIFI AM5 DDR5 MOTHERBOARD | 90MB1IS0-M0EAY0",
+    "price": 0.0
+  },
+  {
+    "vendor": "ASUS",
+    "category": "Other",
+    "name": "ASUS PRIME Z790-A WiFi DDR5 LGA1700 MOTHERBAORD | 90MB1CS0-MEAY0",
+    "price": 1065.0
+  },
+  {
+    "vendor": "ASUS",
+    "category": "Other",
+    "name": "ASUS PRIME Z790M-PLUS LGA1700 DDR5 MOTHERBOARD | 90MB1E70-M0EAYO",
+    "price": 830.0
+  },
+  {
+    "vendor": "ASUS",
+    "category": "Other",
+    "name": "ASUS PRIME Z790-P WIFI DDR5 LGA1700 MOTHERBOARD | 90MB1CJ0-M1EAYO",
+    "price": 870.0
+  },
+  {
+    "vendor": "ASUS",
+    "category": "Other",
+    "name": "ASUS PRIME Z890M PLUS WIFI DDR5 LGA1851 MOTHERBOARD | 90MB1J80-M0EAY0",
+    "price": 0.0
+  },
+  {
+    "vendor": "ASUS",
+    "category": "Other",
+    "name": "ASUS PRIME Z890-P WIFI DDR5 LGA1851 MOTHERBOARD | 90MB1I70-M0EAY0",
+    "price": 0.0
+  },
+  {
+    "vendor": "ASUS",
+    "category": "Other",
+    "name": "ASUS PRO WS WRX90E SAGE SE WORKSTATION MOTHERBOARD | 90MB1FW0-M0EAY0",
+    "price": 4280.0
+  },
+  {
+    "vendor": "ASUS",
+    "category": "Other",
+    "name": "ASUS ROG STRIX B650E E GAMING WIFI DDR5 MOTHERBOARD | 90MB1BB0-M0EAY0",
+    "price": 1175.0
+  },
+  {
+    "vendor": "ASUS",
+    "category": "Other",
+    "name": "ASUS ROG STRIX B760-A DDR5 GAMING WIFI MB | 90MB1EP0-M0EAY0",
+    "price": 850.0
+  },
+  {
+    "vendor": "ASUS",
+    "category": "Other",
+    "name": "ASUS ROG STRIX B760-F GAMING WIFI DDR5 LGA1700 MOTHERBOARD | 90MB1CT0-M0EAYO",
+    "price": 915.0
+  },
+  {
+    "vendor": "ASUS",
+    "category": "Other",
+    "name": "ASUS ROG STRIX X870-E E GAMING WIFI AM5 MOTHERBOARD | 90MB1IB0-M0EAY0",
+    "price": 1925.0
+  },
+  {
+    "vendor": "AMD",
+    "category": "Other",
+    "name": "ASUS TUF B650M-PLUS WIFI AMD AM5 DDR5 MOTHERBOARD | 90MB1BF0-M0EAY0",
+    "price": 0.0
+  },
+  {
+    "vendor": "ASUS",
+    "category": "Other",
+    "name": "ASUS TUF B650 PLUS MOTHERBOARD | 90MB1BY0-M0EAY0",
+    "price": 750.14
+  },
+  {
+    "vendor": "ASUS",
+    "category": "Other",
+    "name": "ASUS TUF B660M-PLUS WIFI DDR5 LGA1700 GAMING MOTHERBOARD | 90MB1AZ0-M0EAY0",
+    "price": 675.0
+  },
+  {
+    "vendor": "ASUS",
+    "category": "Other",
+    "name": "ASUS TUF GAMING B760M-PLUS WIFI DDR4 LGA1700 MICRO-ATX MOTHERBOARD l 90MB1DI0-M0EAY0",
+    "price": 685.0
+  },
+  {
+    "vendor": "ASUS",
+    "category": "Other",
+    "name": "ASUS TUF GAMING B760M-PLUS WIFI DDR5 l 90MB1ET0-M0EAY0",
+    "price": 740.0
+  },
+  {
+    "vendor": "AMD",
+    "category": "Other",
+    "name": "ASUS TUF GAMING X670E-PLUS WIFI AMD AM5 DDR5 ATX MOTHERBOARD | 90MB1BK0-M0EAY0",
+    "price": 0.0
+  },
+  {
+    "vendor": "ASUS",
+    "category": "Other",
+    "name": "ASUS TUF Z690-PLUS D4 LGA1700 MOTHERBOARD | 90MB18U0-M0EAY0",
+    "price": 1085.0
+  },
+  {
+    "vendor": "ASUS",
+    "category": "Other",
+    "name": "ASUS TUF Z690 PLUS D4 WiFi LGA1700 MOTHERBOARD | 90MB18V0-M0EAY0",
+    "price": 1085.0
+  },
+  {
+    "vendor": "GIGABYTE",
+    "category": "Other",
+    "name": "GIGABYTE B550M DS3H AM4 MOTHERBOARD",
+    "price": 390.0
+  },
+  {
+    "vendor": "GIGABYTE",
+    "category": "Other",
+    "name": "GIGABYTE B550M DS3H AC AM4 MOTHERBOARD",
+    "price": 0.0
+  },
+  {
+    "vendor": "B650M",
+    "category": "Other",
+    "name": "B650M AORUS ELITE AX ICE DDR5 Micro ATX MOTHERBOARD |",
+    "price": 810.0
+  },
+  {
+    "vendor": "AMD",
+    "category": "Other",
+    "name": "GIGABYTE B650M DS3H AMD AM5 MOTHERBOARD",
+    "price": 676.19
+  },
+  {
+    "vendor": "GIGABYTE",
+    "category": "Other",
+    "name": "GIGABYTE B760-DS3H-AX-DDR4 LGA1700 MOTHERBOARD",
+    "price": 590.0
+  },
+  {
+    "vendor": "GIGABYTE",
+    "category": "Other",
+    "name": "GIGABYTE B760M-DS3H-DDR4 LGA1700 MOTHERBOARD |",
+    "price": 420.0
+  },
+  {
+    "vendor": "GIGABYTE",
+    "category": "Other",
+    "name": "GIGABYTE B760M-DS3H-DDR5 LGA1700 MOTHERBOARD |",
+    "price": 0.0
+  },
+  {
+    "vendor": "GIGABYTE",
+    "category": "Other",
+    "name": "GIGABYTE B760M-E DDR5 M-ATX LGA1700 MOTHERBOARD",
+    "price": 0.0
+  },
+  {
+    "vendor": "GIGABYTE",
+    "category": "Other",
+    "name": "GIGABYTE B760M GAMING AC DDR4 LGA1700 MOTHER BOARD",
+    "price": 465.0
+  },
+  {
+    "vendor": "GIGABYTE",
+    "category": "Other",
+    "name": "GIGABYTE B760M GAMING DDR4 LGA1700 MOTHER BOARD",
+    "price": 415.0
+  },
+  {
+    "vendor": "GIGABYTE",
+    "category": "Other",
+    "name": "GIGABYTE B760M GAMING X DDR4 MOTHERBOARD",
+    "price": 0.0
+  },
+  {
+    "vendor": "INTEL",
+    "category": "Other",
+    "name": "GIGABYTE B760M H DDR4 INTEL LGA 1700 MOTHER BOARD |B 760M H DDR4",
+    "price": 365.0
+  },
+  {
+    "vendor": "AMD",
+    "category": "Other",
+    "name": "GIGABYTE Aorus X870 Elite Wifi7 DDR5, AM5, AMD, Black MOTHERBOARD | X870-A-ELITE-WIFI7",
+    "price": 0.0
+  },
+  {
+    "vendor": "GIGABYTE",
+    "category": "Other",
+    "name": "GIGABYTE Z690 GAMING X DDR4 LGA1700 MOTHERBOARD",
+    "price": 865.0
+  },
+  {
+    "vendor": "GIGABYTE",
+    "category": "Other",
+    "name": "GIGABYTE Z790 UD LGA1700 DDR5 ATX MOTHERBOARD",
+    "price": 795.0
+  },
+  {
+    "vendor": "GIGABYTE",
+    "category": "Other",
+    "name": "GIGABYTE Z890M AORUS ELITE ICE WIFI 7, LGA1851 DDR5 WHITE MOTHERBOARD | Z890M-A-ELITE WIFI7 ICE",
+    "price": 0.0
+  },
+  {
+    "vendor": "GIGABYTE",
+    "category": "Other",
+    "name": "GIGABYTE Z890M AORUS ELITE WIFI 7, LGA1851 DDR5 MOTHERBOARD | Z890M-A-ELITE WIFI7",
+    "price": 0.0
+  },
+  {
+    "vendor": "MSI",
+    "category": "Other",
+    "name": "MSI MAG B760 TOMAHAWK WIFI MOTHERBOARD | 911-7D96-013",
+    "price": 0.0
+  },
+  {
+    "vendor": "AMD",
+    "category": "Other",
+    "name": "MSI PRO B650M-A WIFI AM5 MICRO-ATX,DDR5 AMD MOTHERBOARD | 911-7D77-012",
+    "price": 0.0
+  },
+  {
+    "vendor": "MSI",
+    "category": "Other",
+    "name": "MSI PRO B760M-A WIFI DDR4 PCIe 4.0, M.2 slots, USB 3.2 Gen 2 MOTHERBOARD | 911-7D99-0011",
+    "price": 570.0
+  },
+  {
+    "vendor": "INTEL",
+    "category": "Other",
+    "name": "MSI PRO B760M-A WIFI INTEL LGA 1700 SOCKET, DDR5 MOTHERBOARD | 911-7D99-012",
+    "price": 590.0
+  },
+  {
+    "vendor": "MSI",
+    "category": "Other",
+    "name": "MSI PRO B760M-E DDR4 LGA 1700 MOTHERBOARD | 911-7D48-027",
+    "price": 385.0
+  },
+  {
+    "vendor": "MSI",
+    "category": "Other",
+    "name": "MSI PRO B760M-P DDR5 MOTHERBOARD | 911-7E02-023",
+    "price": 415.0
+  },
+  {
+    "vendor": "MSI",
+    "category": "Other",
+    "name": "MSI PRO H510M-B LGA1200 DDR4 MOTHER | 911-7E05-012",
+    "price": 240.0
+  },
+  {
+    "vendor": "MSI",
+    "category": "Other",
+    "name": "MSI PRO Z690-A DDR5,LGA1700,ATX MOTHERBOARD l 911-7D25-022",
+    "price": 825.0
+  },
+  {
+    "vendor": "INTEL",
+    "category": "Other",
+    "name": "MSI PRO Z790-A MAX WIFI INTEL LGA1700,DDR5,WIFI 7,MOTHERBOARD l 911-7E07-020",
+    "price": 985.0
+  },
+  {
+    "vendor": "MSI",
+    "category": "Other",
+    "name": "MSI PRO Z790-P DDR5 LGA17000 BLACK MOTHERBOARD l 911-7E06-052",
+    "price": 730.0
+  },
+  {
+    "vendor": "MSI",
+    "category": "Other",
+    "name": "MSI PRO Z790-P WIFI DDR5 LGA17000 BLACK MOTHERBOARD l 911-7E06-038",
+    "price": 790.0
+  },
+  {
+    "vendor": "MSI",
+    "category": "Other",
+    "name": "MSI PRO Z790 S WIFI DDR5 MOTHERBOARD | 911-7D88-005",
+    "price": 720.0
+  },
+  {
+    "vendor": "MSI",
+    "category": "Other",
+    "name": "MSI Z790 GAMING PLSUS WIFI DDR5 MOTHER BOARD - 911-7E06-061",
+    "price": 992.38
+  },
+  {
+    "vendor": "FIFINE",
+    "category": "Other",
+    "name": "FIFINE K678 CONDENSEER USB MICROPHONE",
+    "price": 285.0
+  },
+  {
+    "vendor": "HYPERX",
+    "category": "Other",
+    "name": "HYPERX DUOCAST BLACK CUSTOMIZABLE RGB LIGHT RING /USB l 4P5E2AA",
+    "price": 314.29
+  },
+  {
+    "vendor": "HYPERX",
+    "category": "Other",
+    "name": "HYPERX QUADCAST S CUSTOMIZABLE LIGHTING l 4P5P7AA",
+    "price": 542.86
+  },
+  {
+    "vendor": "SANDISK",
+    "category": "Other",
+    "name": "SANDISK 32GB ULTRA MICRO SDHC UHS-I CARD | SDSQUNR-032G-GN3MN",
+    "price": 11.0
+  },
+  {
+    "vendor": "MIKROTIK",
+    "category": "Other",
+    "name": "MIKROTIK RB2011UOAS-2HND",
+    "price": 390.0
+  },
+  {
+    "vendor": "MOWSIL",
+    "category": "Adapter",
+    "name": "MOWSIL MINI DP TO DP ADAPTER MOMDD",
+    "price": 18.0
+  },
+  {
+    "vendor": "GLORIOUS",
+    "category": "Mouse",
+    "name": "GLORIOUS MODEL O WIRED MATTE BLACK GAMING MOUSE | GO-BLACK",
+    "price": 160.0
+  },
+  {
+    "vendor": "GLORIOUS",
+    "category": "Mouse",
+    "name": "GLORIOUS O MINUS GAMING MOUSE MATTE BLACK | GOM-BLACK",
+    "price": 153.0
+  },
+  {
+    "vendor": "HP",
+    "category": "Mouse",
+    "name": "HP WIRELESS MOUSE 150",
+    "price": 20.0
+  },
+  {
+    "vendor": "HP",
+    "category": "Mouse",
+    "name": "HP X1000 WIRED MOUSE",
+    "price": 23.81
+  },
+  {
+    "vendor": "LENOVO",
+    "category": "Mouse",
+    "name": "LENOVO WIRELESS MOUSE 300",
+    "price": 35.0
+  },
+  {
+    "vendor": "LOGITEC",
+    "category": "Mouse",
+    "name": "LOGITEC WIRELESS MOUSE M235 SILVER",
+    "price": 70.0
+  },
+  {
+    "vendor": "TWISTED",
+    "category": "Monitor",
+    "name": "Twisted Minds Single Monitor Pipe Shaped Counterbalance Spring Assisted Monitor Arm BLACK | TM-71-C06",
+    "price": 0.0
+  },
+  {
+    "vendor": "OZONE",
+    "category": "Mouse",
+    "name": "OZONE M10 GAMING MOUSE",
+    "price": 0.0
+  },
+  {
+    "vendor": "PHLIPIS",
+    "category": "Mouse",
+    "name": "PHLIPIS GAMING MOUSE G314",
+    "price": 25.0
+  },
+  {
+    "vendor": "LG",
+    "category": "Mouse",
+    "name": "GALAX SLIDER-03-GAMING MOUSE-7 BUTTONS-7200 DPI | G-MGS03UX97RG2B0-GXLG-F",
+    "price": 85.0
+  },
+  {
+    "vendor": "MOUSEPAD",
+    "category": "Mouse",
+    "name": "MOUSEPAD PRINTED H6",
+    "price": 0.0
+  },
+  {
+    "vendor": "PROMATE",
+    "category": "Mouse",
+    "name": "PROMATE WIRELESS MOUSE CLIX-9",
+    "price": 0.0
+  },
+  {
+    "vendor": "PROMATE",
+    "category": "Mouse",
+    "name": "PROMATE WIRELESS MOUSE CLIX-8",
+    "price": 11.0
+  },
+  {
+    "vendor": "COUGAR",
+    "category": "Mouse",
+    "name": "Cougar Control 2-Small Gaming Mouse Pad - Black | CGR-KBRBS5S-C02",
+    "price": 40.0
+  },
+  {
+    "vendor": "DARKFLASH",
+    "category": "Mouse",
+    "name": "DARKFLASH FLEX800 RGB GAMING MOUSE PAD",
+    "price": 48.0
+  },
+  {
+    "vendor": "MOUS",
+    "category": "Other",
+    "name": "MOUS PAD GAMING LONG LARGE",
+    "price": 20.0
+  },
+  {
+    "vendor": "MOUSE",
+    "category": "Mouse",
+    "name": "MOUSE PAD GAMING LARGE",
+    "price": 15.24
+  },
+  {
+    "vendor": "MSI",
+    "category": "Mouse",
+    "name": "MSI THUNDERSTORM ALUMINIUM MOUSE PAD | GF9-V000001-EB9",
+    "price": 23.75
+  },
+  {
+    "vendor": "MICROSOFT",
+    "category": "Other",
+    "name": "MICROSOFT LIFECHAT LX-2000 HEADSET",
+    "price": 60.0
+  },
+  {
+    "vendor": "MICROSOFT",
+    "category": "Mouse",
+    "name": "MICROSOFT DESK600 WIRED KB+MOUSE APB-00012",
+    "price": 0.0
+  },
+  {
+    "vendor": "MICROSOFT",
+    "category": "Other",
+    "name": "MICROSOFT W/L DESK5000",
+    "price": 215.0
+  },
+  {
+    "vendor": "MISCOSOFT",
+    "category": "Other",
+    "name": "MISCOSOFT BLUETOOTH KEYBORAD | QSZ-00016",
+    "price": 162.0
+  },
+  {
+    "vendor": "MICROSOFT",
+    "category": "Mouse",
+    "name": "MICROSOFT MOBILE 1850 W/L MOUSE|U7Z-00004",
+    "price": 55.0
+  },
+  {
+    "vendor": "QNAP",
+    "category": "Other",
+    "name": "QNAP TS-653D-4G 6BAY NAS",
+    "price": 2900.0
+  },
+  {
+    "vendor": "SYNOLOGY",
+    "category": "Other",
+    "name": "SYNOLOGY DS420J 4BAY NAS",
+    "price": 1285.0
+  },
+  {
+    "vendor": "NOKIA",
+    "category": "Other",
+    "name": "NOKIA-230DS AXIOM MOBILE",
+    "price": 0.0
+  },
+  {
+    "vendor": "ADDLINK",
+    "category": "Storage",
+    "name": "ADDLINK S93 M.2 PCIe GEN4X4 1TB NVMe SSD | AD1TBS93M2P",
+    "price": 270.0
+  },
+  {
+    "vendor": "ADDLINK",
+    "category": "Storage",
+    "name": "ADDLINK S93 M.2 PCIe GEN4X4 2TB NVMe SSD | AD2TBS93M2P",
+    "price": 0.0
+  },
+  {
+    "vendor": "CRUCIAL",
+    "category": "Storage",
+    "name": "CRUCIAL T700 1TB PCIe Gen5 NVMe M.2 SSD (CT1000T700SSD3)",
+    "price": 0.0
+  },
+  {
+    "vendor": "CRUCIAL",
+    "category": "Storage",
+    "name": "CRUCIAL 1TB P3 3500MB/s PCIe 3.0 NVMe M.2 SSD l CT1000P3SSD8",
+    "price": 0.0
+  },
+  {
+    "vendor": "CRUCIAL",
+    "category": "Storage",
+    "name": "Crucial 2TB P3 NVMe PCIe M.2 Internal SSD-CT200P3SSD8",
+    "price": 362.0
+  },
+  {
+    "vendor": "CRUCIAL",
+    "category": "Storage",
+    "name": "Crucial 500GB P3 NVMe PCIe M.2 Internal SSD-CT500P3SSD8",
+    "price": 123.0
+  },
+  {
+    "vendor": "HIKVISION",
+    "category": "Storage",
+    "name": "HIKVISION DESIRE 512GB M.2 PCIe SSD | HS-SSD-DESIRE(P)512G",
+    "price": 0.0
+  },
+  {
+    "vendor": "KINGSTON",
+    "category": "Storage",
+    "name": "KINGSTON 1TB NV2 M.2 2280 NVMe PCIe SSD | SNV2S/1000G",
+    "price": 0.0
+  },
+  {
+    "vendor": "KINGSTON",
+    "category": "Storage",
+    "name": "KINGSTON 2TB NV2 M.2 2280 NVMe PCIe SSD | SNV2S/2000G",
+    "price": 340.0
+  },
+  {
+    "vendor": "KINGSTON",
+    "category": "Storage",
+    "name": "KINGSTON 4TB NV2 M.2 2280 PCIe 4.0 NVMe SSD | SNV2S/4000G",
+    "price": 850.0
+  },
+  {
+    "vendor": "KINGSTON",
+    "category": "Storage",
+    "name": "KINGSTON 500GB NV2 M.2 2280 4.0 NVMe PCIe SSD | SNV2S/500G",
+    "price": 115.0
+  },
+  {
+    "vendor": "KINGSTON",
+    "category": "Storage",
+    "name": "KINGSTON FURY RENEGADE 1TB PCIe4.0 NVMe M.2 SSD UP TO 7300MB/s | SFYRS/1000G",
+    "price": 440.0
+  },
+  {
+    "vendor": "KINGSTON",
+    "category": "Storage",
+    "name": "KINGSTON FURY RENEGADE 2TB PCIe4.0 NVMe M.2 SSD UP TO 7300MB/s | SFYRD/2000G",
+    "price": 575.0
+  },
+  {
+    "vendor": "LEXAR",
+    "category": "Other",
+    "name": "LEXAR 1TB NVME NM620 M.2 2280 PCIe Gen3x4 NVMe l LNM620X001T-RNNNG",
+    "price": 0.0
+  },
+  {
+    "vendor": "LEXAR",
+    "category": "Other",
+    "name": "LEXAR 2TBNVME NM620 M.2 2280 PCIe Gen3x4 NVMe l LNM620X002T-RNNNG",
+    "price": 0.0
+  },
+  {
+    "vendor": "LEXAR",
+    "category": "Other",
+    "name": "LEXAR 512GB NM620 M.2 2280 PCIe Gen3x4 NVMe l LNM620X512-RNNNG",
+    "price": 0.0
+  },
+  {
+    "vendor": "HYNIX",
+    "category": "Other",
+    "name": "HYNIX NVME 512GB- OVOY1W",
+    "price": 0.0
+  },
+  {
+    "vendor": "M.2",
+    "category": "Other",
+    "name": "M.2 NVME 512GB PULL OUT",
+    "price": 0.0
+  },
+  {
+    "vendor": "NVME",
+    "category": "Other",
+    "name": "NVME M.2 512GB 2242 PULL OUT",
+    "price": 0.0
+  },
+  {
+    "vendor": "PNY",
+    "category": "Other",
+    "name": "PNY CS2230 1TB M.2 NVMe l M280CS2230-1TB-RB",
+    "price": 0.0
+  },
+  {
+    "vendor": "PNY",
+    "category": "Other",
+    "name": "PNY CS2230 2TB M.2 NVMe l M280CS2230-2TB-RB",
+    "price": 365.0
+  },
+  {
+    "vendor": "1TB",
+    "category": "Storage",
+    "name": "1TB 2280 NVME PCIE M.2 SSD",
+    "price": 0.0
+  },
+  {
+    "vendor": "SAMSUNG",
+    "category": "Storage",
+    "name": "Samsung 980 500 GB PCIe 3.0 (up to 3.100 MB/s) NVMe M.2 Internal Solid State Drive (SSD) (MZ-V8V500BW)",
+    "price": 179.0
+  },
+  {
+    "vendor": "SAMSUNG",
+    "category": "Storage",
+    "name": "SAMSUNG 980 PRO 1TB PCIe 4.0 NVMe M.2 SSD | MZ - V8P1T0BW",
+    "price": 440.0
+  },
+  {
+    "vendor": "SAMSUNG",
+    "category": "Storage",
+    "name": "SAMSUNG 980 PRO 2TB PCIe NVMe Gen4 M.2 SSD | MZ-V8P2T0BW",
+    "price": 0.0
+  },
+  {
+    "vendor": "SAMSUNG",
+    "category": "Other",
+    "name": "SAMSUNG 990 PRO1TB PCIe 4.0 NVME M.2 l V9P1T0BW",
+    "price": 370.0
+  },
+  {
+    "vendor": "SAMSUNG",
+    "category": "Other",
+    "name": "SAMSUNG 990 PRO 2TB PCIe 4.0 NVME M.2 l MZ-V9P2T0BW",
+    "price": 575.0
+  },
+  {
+    "vendor": "SAMSUNG",
+    "category": "Other",
+    "name": "SAMSUNG 990 PRO 2TB PCIe 4.0 NVME M.2 HEATSINK l MZ-V9P2T0GW",
+    "price": 850.0
+  },
+  {
+    "vendor": "SAMSUNG",
+    "category": "Other",
+    "name": "SAMSUNG 990 PRO 4TB PCIe 4.0 NVME M.2 l MZ-V9P4T0BW",
+    "price": 1220.0
+  },
+  {
+    "vendor": "SAMSUNG",
+    "category": "Other",
+    "name": "SAMSUNG 990 PRO 4TB PCIe 4.0 NVME M.2 HEATSINK l MZ-V9P4T0CW",
+    "price": 1220.0
+  },
+  {
+    "vendor": "SPECTRUM",
+    "category": "Other",
+    "name": "SPECTRUM 1TB SP710 M.2 NVME | 2242",
+    "price": 0.0
+  },
+  {
+    "vendor": "TEAM",
+    "category": "Other",
+    "name": "TEAM GROUP MP33 512GB NVMe PCIe M.2 2280 | TM8FP6512G0C-101",
+    "price": 120.0
+  },
+  {
+    "vendor": "WESTERN DIGITAL",
+    "category": "Other",
+    "name": "WD BLACK 1TB SN850X NVMe Gen4 PCIe M.2 w/HEAT SINK l WDS100T2XHE",
+    "price": 420.0
+  },
+  {
+    "vendor": "WESTERN DIGITAL",
+    "category": "Other",
+    "name": "WD BLUE 1TB SN580 NVMe Gen4 x4 PCIe 16Gb/s, M.2 2280, Up to 4,150 MB/s | WDS100T3B0E",
+    "price": 210.0
+  },
+  {
+    "vendor": "WESTERN DIGITAL",
+    "category": "Storage",
+    "name": "WD 500GB BLUE SN570 NVMe PCIe Gen3 M.2 2280 SSD | WDS500G3B0C",
+    "price": 143.5
+  },
+  {
+    "vendor": "NZXT",
+    "category": "Other",
+    "name": "NZXT F120 RGB CORE 120MM-SINGLE FAN- WHITE |RF-C12SF-W1",
+    "price": 700.0
+  },
+  {
+    "vendor": "PANASONIC",
+    "category": "Other",
+    "name": "PANASONIC KXTES824 PBX SYSTEM",
+    "price": 510.0
+  },
+  {
+    "vendor": "PANASONIC",
+    "category": "Other",
+    "name": "PANASONIC KXT7730 TELEPHONE 1 LINE",
+    "price": 175.0
+  },
+  {
+    "vendor": "PAPER",
+    "category": "Other",
+    "name": "PAPER A4 KIKY",
+    "price": 47.0
+  },
+  {
+    "vendor": "COOLER MASTER",
+    "category": "Other",
+    "name": "COOLER MASTER GEL MAKER | MGZ-NDSG-NISM-122",
+    "price": 0.0
+  },
+  {
+    "vendor": "COOLER MASTER",
+    "category": "Other",
+    "name": "COOLER MASTER GEL PRO HIGH PERFOMANCE THERMAL PASTE | MGY-ZOSG-N15M-R2",
+    "price": 20.0
+  },
+  {
+    "vendor": "CORSAIR",
+    "category": "Other",
+    "name": "CORSAIR TM30 THERMAL PASTE | CT-9010001-WW",
+    "price": 20.0
+  },
+  {
+    "vendor": "CORSAIR",
+    "category": "Other",
+    "name": "CORSAIR XTM50 Thermal Paste Kit| CT-9010002-WW",
+    "price": 40.0
+  },
+  {
+    "vendor": "HAYSENSER",
+    "category": "Other",
+    "name": "HAYSENSER ST360 THERMAL PASTE SYRINGE",
+    "price": 5.0
+  },
+  {
+    "vendor": "ZALMAN",
+    "category": "Other",
+    "name": "ZALMAN STC7 THERMAL PASTE | ZM-STC7",
+    "price": 20.0
+  },
+  {
+    "vendor": "ADATA",
+    "category": "Other",
+    "name": "ADATA POWER BANK P5000MH",
+    "price": 22.0
+  },
+  {
+    "vendor": "ACER",
+    "category": "Storage",
+    "name": "Acer Aio i3-12th 4GB 256GB SSD 23.8\" Dos Aspire C24 Black",
+    "price": 1240.0
+  },
+  {
+    "vendor": "INTEL",
+    "category": "GPU",
+    "name": "HP ALL-IN-ONE 24CR0123NH I5-1335U 4.6GHz/16GB/512GB SSD/23.8\" FHD IPS/CAMERA/BT/WIFI/WIN11/INTEL IRIS XE GRAPHICS/WHITE/1YR (91A41EA#BH5)",
+    "price": 2050.0
+  },
+  {
+    "vendor": "ASUS",
+    "category": "CPU",
+    "name": "ASUS PN64-B MINI PC Barebone, Core i5-12500H PROCESSOR l 90MR00U2-M001N0",
+    "price": 2071.43
+  },
+  {
+    "vendor": "DELL",
+    "category": "Storage",
+    "name": "DELL OPTIPLEX 7020 SFF PLUS,I7-14700 VPRO,8GB DDR5, 1TB SSD,E/A KB DOS ,3YRS",
+    "price": 2940.0
+  },
+  {
+    "vendor": "DELL",
+    "category": "Storage",
+    "name": "DELL OPTIPLEX 7010 MT I5-12500/8GB/512GB SSD/DOS",
+    "price": 1625.0
+  },
+  {
+    "vendor": "DELL",
+    "category": "Storage",
+    "name": "DELL OPTIPLEX 7010 I7-13700/8GB DDR5/512 SSD/DOS",
+    "price": 0.0
+  },
+  {
+    "vendor": "DELL",
+    "category": "Storage",
+    "name": "DELL OPTIPLEX 7020 PLUS I7-14700/8GB/512 SSD/DOS/",
+    "price": 0.0
+  },
+  {
+    "vendor": "HP",
+    "category": "Storage",
+    "name": "HP PRO 400 G9-Corei7 12TH 12700 / 4 GB RAM / 1TB SSD / / DOS",
+    "price": 2045.0
+  },
+  {
+    "vendor": "HP",
+    "category": "Other",
+    "name": "HP 290G9 PRO TWR I7-12Th/8GB/ 512GB/8T2Q8ES",
+    "price": 1949.52
+  },
+  {
+    "vendor": "HP",
+    "category": "Other",
+    "name": "HP 290G9 I5-12400/8GB/512/DOS/1YR",
+    "price": 1360.0
+  },
+  {
+    "vendor": "HP",
+    "category": "Storage",
+    "name": "HP 400 G9 PRO MINI I7-13700/8GB/512 SSD/DOS | 935X2EA#BH5",
+    "price": 0.0
+  },
+  {
+    "vendor": "HP",
+    "category": "Other",
+    "name": "HP 200G4 AIO I5-1235U /8GB/512TB/21.5\"/DOS/BLACK|",
+    "price": 1695.0
+  },
+  {
+    "vendor": "HP",
+    "category": "Other",
+    "name": "HP 440G6 AIO i7-10700T2Hz8C 23.8\"FHD/8GB/512GB PCIe NVMe/W10P64/ DVDRW/1YRW | 1C7B9EA#ABV",
+    "price": 3690.0
+  },
+  {
+    "vendor": "INTEL",
+    "category": "GPU",
+    "name": "ASUS RNUC12WSH1300002I 12PRO INTEL 15-1240P/Xe GRAPHICS/4xUSB/M.2 NVME/22x42 SATA | 90AR00E1-M00080",
+    "price": 1450.0
+  },
+  {
+    "vendor": "INTEL",
+    "category": "Storage",
+    "name": "INTEL NUC12WSH 12PRO I7-1260P, M.2+2.5\"SSD slot, 2XSODIMM | 90AR00E1-M000J0",
+    "price": 1900.0
+  },
+  {
+    "vendor": "PCL",
+    "category": "Other",
+    "name": "PCL-E MULTI CONTROLLER CARD",
+    "price": 80.0
+  },
+  {
+    "vendor": "PCL",
+    "category": "Other",
+    "name": "PCL-EXPRESS CARD 4PORT USB",
+    "price": 92.0
+  },
+  {
+    "vendor": "ZOTAC",
+    "category": "Other",
+    "name": "ZOTAC ZBOX-NANO SSF, FANLESS I5-10210U,2XDDR4SODIMM,2.5\" SATA | ZBOX-CI642NANO-BE",
+    "price": 1510.0
+  },
+  {
+    "vendor": "ANKER",
+    "category": "Adapter",
+    "name": "ANKER CAR CHARGER POWER DRIVE +2 QC",
+    "price": 50.0
+  },
+  {
+    "vendor": "6W",
+    "category": "Other",
+    "name": "6W PDU MULTI GOOD QUALITY",
+    "price": 60.0
+  },
+  {
+    "vendor": "DELL",
+    "category": "Other",
+    "name": "DELL ACTIVE PEN PN338M",
+    "price": 110.0
+  },
+  {
+    "vendor": "PORT",
+    "category": "Adapter",
+    "name": "PORT UNIVERSAL 65W C TYPE ADAPTER",
+    "price": 125.0
+  },
+  {
+    "vendor": "ANKER",
+    "category": "Cable",
+    "name": "ANKER POWERPORT20w PORT & TYPE C USB CABLE",
+    "price": 40.0
+  },
+  {
+    "vendor": "ANKER",
+    "category": "Cable",
+    "name": "ANKER POWERPORT 24W 2USB PORT & MICRO USB CABLE",
+    "price": 75.0
+  },
+  {
+    "vendor": "PROMATE",
+    "category": "Other",
+    "name": "PROMATE STEREO WIRELESS HEADSET FLUID",
+    "price": 50.0
+  },
+  {
+    "vendor": "PROMATE",
+    "category": "Other",
+    "name": "PROMATE HARMONI EAROHONES HEADSET",
+    "price": 100.0
+  },
+  {
+    "vendor": "PROMATE",
+    "category": "Adapter",
+    "name": "PROMATE-MINI DP HDMI ADAPTER IVIEW.HDMI",
+    "price": 33.33
+  },
+  {
+    "vendor": "PROMATE",
+    "category": "Cable",
+    "name": "PROMATE-PREMIUM USB 3.1 TYPE-C TO TYPE-C CABLE",
+    "price": 0.0
+  },
+  {
+    "vendor": "PROMATE",
+    "category": "Other",
+    "name": "PROMATE-ULTRA FAST USB 3.0 HUB WITH DATA",
+    "price": 0.0
+  },
+  {
+    "vendor": "PROMATE",
+    "category": "Adapter",
+    "name": "PROMATE-USB-C TO HDMI ADAPTER PROLINK MEDIA LINK-H2",
+    "price": 75.0
+  },
+  {
+    "vendor": "SAMSUNG",
+    "category": "Other",
+    "name": "SAMSUNG 1TB PCIe Gen4 2230 NVMe M.2",
+    "price": 0.0
+  },
+  {
+    "vendor": "RAM",
+    "category": "Laptop",
+    "name": "RAM LAPTOP 16GB 3200",
+    "price": 0.0
+  },
+  {
+    "vendor": "CORSAIR",
+    "category": "Other",
+    "name": "CORSAIR VENGEANCE RGB PRO SL 16GB (2X8) 3600Mhz WHITE | CMH16GX4M2D3600C18W",
+    "price": 230.0
+  },
+  {
+    "vendor": "CORSAIR",
+    "category": "Other",
+    "name": "CORSAIR VENGEANCE PRO RGB 16GB (2x8GB) DDR4 3600Mhz WHITE | CMW16GX4M2D3600C18W",
+    "price": 230.0
+  },
+  {
+    "vendor": "CORSAIR",
+    "category": "Other",
+    "name": "CORSAIR VENGEANCE RGB PRO SL 32GB (2X16) 3600Mhz BLACK | CMH32GX4M2Z3600C18",
+    "price": 290.0
+  },
+  {
+    "vendor": "CORSAIR",
+    "category": "Other",
+    "name": "CORSAIR VENGEANCE RGB RS 32GB(16X2) 3600MHZ | CMG32GX4M2D3600C18",
+    "price": 300.0
+  },
+  {
+    "vendor": "CORSAIR",
+    "category": "Other",
+    "name": "CORSAIR VENGEANCE RGB PRO SL 64GB (2X32) 3600Mhz BLACK | CMH64GX4M2D3600C18",
+    "price": 535.0
+  },
+  {
+    "vendor": "CORSAIR",
+    "category": "Other",
+    "name": "CORSAIR VENGEANCE RGB RS 16GB(2x8GB) 3600Mhz DDR4| CMG16GX4M2D3600C18",
+    "price": 220.0
+  },
+  {
+    "vendor": "CORSAIR",
+    "category": "Memory",
+    "name": "CORSAIR VENGEANCE RGB DDR5 32GB (2X16) 5600MHz RAM | CMH32GX5M2B5600C40K",
+    "price": 415.0
+  },
+  {
+    "vendor": "CORSAIR",
+    "category": "Memory",
+    "name": "CORSAIR VENGEANCE RGB DDR5 32GB (2X16) 6000MHz BLACK RAM | CMH32GX5M2E6000C36",
+    "price": 0.0
+  },
+  {
+    "vendor": "CORSAIR",
+    "category": "Memory",
+    "name": "CORSAIR VENGEANCE RGB DDR5 32GB (2X16) 6400MHz BLACK RAM |CMH32GX5M2B6400C36",
+    "price": 510.0
+  },
+  {
+    "vendor": "CORSAIR",
+    "category": "Memory",
+    "name": "CORSAIR VENGEANCE RGB DDR5 32GB (2X16) 6400MHz BLACK RAM |CMH32GX5M2E6000C36W",
+    "price": 460.0
+  },
+  {
+    "vendor": "CORSAIR",
+    "category": "Memory",
+    "name": "CORSAIR VENGEANCE RGB DDR5 48GB (2X24) 5600MHz RAM | CMH48GX5M2B5600C40",
+    "price": 540.0
+  },
+  {
+    "vendor": "CORSAIR",
+    "category": "Memory",
+    "name": "CORSAIR DDR5 5600MHZ 64 GB (2X32) V CL40 RAM KIT WHITE | CMH64GX5M2B5600C40W",
+    "price": 780.0
+  },
+  {
+    "vendor": "CORSAIR",
+    "category": "Memory",
+    "name": "CORSAIR VENGEANCE RGB DDR5 64GB (2X32) 5600MHz RAM | CMH64GX5M2B5600C40",
+    "price": 755.0
+  },
+  {
+    "vendor": "CORSAIR",
+    "category": "Other",
+    "name": "CORSAIR VENGEANCE RGB DDR5 64GB(2x32GB) 6000MHZ BLACK l CMH64GX5M2B6000C38",
+    "price": 790.0
+  },
+  {
+    "vendor": "CRUCIAL",
+    "category": "Other",
+    "name": "CRUCIAL DDR4 16GB 3200MHZ DESKTOP -CT16G4DFRA32A",
+    "price": 88.0
+  },
+  {
+    "vendor": "CRUCIAL",
+    "category": "Memory",
+    "name": "CRUCIAL DDR4 32GB 3200Mhz DESKTOP RAM | CT32G4DFD832A",
+    "price": 215.0
+  },
+  {
+    "vendor": "GSKILL",
+    "category": "Other",
+    "name": "GSKILL TRIDENTZ 16GB(2X8) RGB 3200MHZ | F4-3200C16D-16GTZR",
+    "price": 260.0
+  },
+  {
+    "vendor": "GSKILL",
+    "category": "Other",
+    "name": "GSKILL TRIDENTZ RGB 64GB KIT 3200Mhz (2X32GB) | F4-3200C16D-64GTZR",
+    "price": 802.38
+  },
+  {
+    "vendor": "GSKILL",
+    "category": "Other",
+    "name": "GSKILL TRIDENT Z5 DDR5 32GB(2x16) 5200MHZ BLACK l F5-5200J4040A16GX2-TZ5RK",
+    "price": 475.0
+  },
+  {
+    "vendor": "KINGSTON",
+    "category": "Other",
+    "name": "KINGSTON FURY DDR5 16GB 5600Mhz CL40 RGB | KF556C40BBA16",
+    "price": 195.0
+  },
+  {
+    "vendor": "KINGSTON",
+    "category": "Other",
+    "name": "KINGSTON FURY DDR5 (1X32GB) 5600Mhz CL40 RGB | MEKF556C40BBA32",
+    "price": 345.0
+  },
+  {
+    "vendor": "KINGSTON",
+    "category": "Other",
+    "name": "KINGSTON FURY DDR5 32GB(2X16 )6000Mhz CL40 RGB | MEKF560C40BBAK2-32",
+    "price": 415.0
+  },
+  {
+    "vendor": "KINGSTON",
+    "category": "Other",
+    "name": "KINGSTON FURY DDR5 64GB(2X32 )6000Mhz CL40 RGB | KF560C40BBAK2-64",
+    "price": 0.0
+  },
+  {
+    "vendor": "KINGSTON",
+    "category": "Other",
+    "name": "KINGSTON HYPERX FURY 16GB (2X8) 3200Mhz RGB l KF432C16BBAK2/16",
+    "price": 0.0
+  },
+  {
+    "vendor": "KINGSTON",
+    "category": "Other",
+    "name": "KINGSTON FURY 16GB DDR4 3200MHz CL16 SINGLE MODULE RGB | KF432C16BB2A/16",
+    "price": 0.0
+  },
+  {
+    "vendor": "KINGSTON",
+    "category": "Other",
+    "name": "KINGSTON HYPERX FURY 32GB (2X16) 3600Mhz RGB | KF436C18BBAK2/32",
+    "price": 330.0
+  },
+  {
+    "vendor": "KINGSTON",
+    "category": "Other",
+    "name": "KINGSTON HYPERX FURY 64GB (2X32) 3600Mhz RGB | MEKF436C18BBAK264",
+    "price": 480.0
+  },
+  {
+    "vendor": "RAM",
+    "category": "Laptop",
+    "name": "RAM -LAPTOP -4GB DDR4 PULLOUT",
+    "price": 0.0
+  },
+  {
+    "vendor": "8GB",
+    "category": "Other",
+    "name": "8GB DDR4 3200MHz SODIMM MEMEORY",
+    "price": 0.0
+  },
+  {
+    "vendor": "CRUCIAL",
+    "category": "Laptop",
+    "name": "CRUCIAL LAPTOP RAM 16GB DDR4 3200 SODIMM l CT16G4SFRA32A",
+    "price": 139.76
+  },
+  {
+    "vendor": "CRUCIAL",
+    "category": "Laptop",
+    "name": "CRUCIAL LAPTOP RAM 32GB 3200 SODIMM | CT32G4SFD832A",
+    "price": 190.0
+  },
+  {
+    "vendor": "CRUCIAL",
+    "category": "Laptop",
+    "name": "CRUCIAL LAPTOP RAM 8GB DDR4 3200 SODIMM | CT8G4SFRA32A",
+    "price": 0.0
+  },
+  {
+    "vendor": "OSCOO",
+    "category": "Laptop",
+    "name": "OSCOO 8GB 1600MHZ DDR3 LAPTOP RAM",
+    "price": 76.19
+  },
+  {
+    "vendor": "PNY16GB",
+    "category": "Memory",
+    "name": "PNY16GB 3200 DDR4 SINGLE PACK RAM | MN16GSD43200-1TB",
+    "price": 0.0
+  },
+  {
+    "vendor": "LAPTOP",
+    "category": "Laptop",
+    "name": "LAPTOP RAM 8GB5600 DDR5",
+    "price": 0.0
+  },
+  {
+    "vendor": "SAMSUNG",
+    "category": "Laptop",
+    "name": "SAMSUNG 32GB 5600MHZ DDR5 LAPTOP RAM l M425R4GA3BB0-CWM0L",
+    "price": 310.0
+  },
+  {
+    "vendor": "SAMSUNG",
+    "category": "Laptop",
+    "name": "SAMSUNG 8GB 4800MHZ DDR5 LAPTOP RAM l M425R1GB4BB0-CQKOD",
+    "price": 0.0
+  },
+  {
+    "vendor": "SPECTRUM",
+    "category": "Laptop",
+    "name": "SPECTRUM DDR4 16GB 3200 LAPTOP RAM | SP432S16TW",
+    "price": 0.0
+  },
+  {
+    "vendor": "SPECTRUM",
+    "category": "Laptop",
+    "name": "SPECTRUM LAPTOP DDR4 8GB 3200 RAM",
+    "price": 0.0
+  },
+  {
+    "vendor": "TRANSCEND",
+    "category": "Other",
+    "name": "TRANSCEND 32GB-5600 DDR5 JM5600ASE-32",
+    "price": 0.0
+  },
+  {
+    "vendor": "LEXAR",
+    "category": "Memory",
+    "name": "LEXAR ARES DDR5 16GB 4800Mhz SINGLE DESKTOP RAM | LD5DU016G-R4800GS2A",
+    "price": 140.0
+  },
+  {
+    "vendor": "OSCOO",
+    "category": "Memory",
+    "name": "OSCOO 8GB 1600MHZ DDR3 DESKTOP RAM",
+    "price": 80.0
+  },
+  {
+    "vendor": "SAMSUNG",
+    "category": "Memory",
+    "name": "SAMSUNG 8GB 3200MHZ DDR4 DESKTOP RAM l M378A1K43EB2-CWED0",
+    "price": 0.0
+  },
+  {
+    "vendor": "SAMSUNG",
+    "category": "Memory",
+    "name": "SAMSUNG 16GB 5600MHZ DDR5 DESKTOP RAM l M323R2GA3DB0-CWM0D",
+    "price": 162.0
+  },
+  {
+    "vendor": "SAMNUNG",
+    "category": "Other",
+    "name": "SAMNUNG 16GBDDR5 4800 PULLED",
+    "price": 0.0
+  },
+  {
+    "vendor": "SAMNUNG",
+    "category": "Memory",
+    "name": "SAMNUNG 8GBDDR5 4800Mhz RAM",
+    "price": 65.0
+  },
+  {
+    "vendor": "SPECTRUM",
+    "category": "Memory",
+    "name": "SPECTRUM DDR4 16GB 3200 DESKTOP RAM | SP432U16TW|",
+    "price": 100.0
+  },
+  {
+    "vendor": "SPECTRUM",
+    "category": "Memory",
+    "name": "SPECTRUM DDR4 32GB 3200 DESKTOP RAM | SP432U32TW",
+    "price": 200.0
+  },
+  {
+    "vendor": "T",
+    "category": "Other",
+    "name": "T- FORCE DELTA RGB DDR4 16GB 3600MHz | TF3D416G3600HC18J01",
+    "price": 0.0
+  },
+  {
+    "vendor": "TEAM",
+    "category": "Other",
+    "name": "TEAM DELTA UD-DDR4 32GB(16x2) 3600Mhz RGB BLACK | TF3D432G3600HC18JDC01",
+    "price": 0.0
+  },
+  {
+    "vendor": "TEAM",
+    "category": "Memory",
+    "name": "TEAM FORCE DELTA DDR5 32GB (16X2 ) 6000Mhz RGB RAM KIT - BLACK | FF3D532G6000HC38ADC01",
+    "price": 375.0
+  },
+  {
+    "vendor": "TEAM",
+    "category": "Memory",
+    "name": "TEAM FORCE DELTA DDR5 32GB (16X2) 6000Mhz RGB RAM KIT - WHITE | FF4D532G6000HC38ADC01",
+    "price": 0.0
+  },
+  {
+    "vendor": "TEAM",
+    "category": "Memory",
+    "name": "TEAM FORCE DELTA DDR5 64GB (32x2) 6000Mhz RGB RAM KIT - BLACK | FF3D564G6000HC38ADC01",
+    "price": 680.0
+  },
+  {
+    "vendor": "TEAM",
+    "category": "Memory",
+    "name": "TEAM ELITE DDR4 8GB 3200 DESKTOP RAM",
+    "price": 0.0
+  },
+  {
+    "vendor": "TRANSCEND",
+    "category": "Memory",
+    "name": "TRANSCEND 16GB DDR5 4800MHz DESKTOP RAM | JM4800ALE-16G",
+    "price": 0.0
+  },
+  {
+    "vendor": "RAPOO",
+    "category": "Other",
+    "name": "Rapoo C260 USB Black Full HD Webcam 1080p",
+    "price": 100.0
+  },
+  {
+    "vendor": "RAPOO",
+    "category": "Keyboard",
+    "name": "RAPOO WIRED KEYBOARD NK2500",
+    "price": 35.0
+  },
+  {
+    "vendor": "RAPOO",
+    "category": "Mouse",
+    "name": "RAPOO WIRELESS MOUSE M10",
+    "price": 30.0
+  },
+  {
+    "vendor": "WIRED",
+    "category": "Mouse",
+    "name": "WIRED MOUSE RAPOO N1010USB",
+    "price": 13.0
+  },
+  {
+    "vendor": "RJ45",
+    "category": "Other",
+    "name": "RJ45 - VGA ADPTER",
+    "price": 15.0
+  },
+  {
+    "vendor": "TP-LINK",
+    "category": "Other",
+    "name": "TP-LINK AX3000 DUAL BAND GIGABIT WIFI6 ROUTER ARCHER AX55",
+    "price": 0.0
+  },
+  {
+    "vendor": "ASUS",
+    "category": "Other",
+    "name": "ASUS RT-AX92U AX6100 Tri-Band WiFi 6 GAMING ROUTER| 90IG04P0-MU2010",
+    "price": 695.0
+  },
+  {
+    "vendor": "ASUS",
+    "category": "Adapter",
+    "name": "ASUS USB-N10 Wireless-N150 USB Nano Adapter",
+    "price": 42.86
+  },
+  {
+    "vendor": "ICE",
+    "category": "Other",
+    "name": "ICE ZIPSCAN 2D Wired SCANNER | IS-2220",
+    "price": 0.0
+  },
+  {
+    "vendor": "EPSON",
+    "category": "Other",
+    "name": "EPSON GT2500 COLOR IMAGE SCANNER",
+    "price": 0.0
+  },
+  {
+    "vendor": "HP",
+    "category": "Other",
+    "name": "HP SCANJET ENTERPRISE FLOW 5000S3(L2751A) SHEETFEED SCANNER",
+    "price": 2260.0
+  },
+  {
+    "vendor": "PENPOWER",
+    "category": "Other",
+    "name": "PENPOWER WORLDCARD PRO",
+    "price": 440.0
+  },
+  {
+    "vendor": "SANDISK",
+    "category": "Other",
+    "name": "SANDISK 128GB ULTRA SD CARD- SDSDUNR-128G-GN61N",
+    "price": 38.0
+  },
+  {
+    "vendor": "SECOND",
+    "category": "Storage",
+    "name": "SECOND HDD CADDY 9.mm",
+    "price": 20.0
+  },
+  {
+    "vendor": "DELL",
+    "category": "Other",
+    "name": "DELL G15 DEAD POWER SECTION SERVICE",
+    "price": 0.0
+  },
+  {
+    "vendor": "SERVICE",
+    "category": "Laptop",
+    "name": "SERVICE-LAPTOP REPAIR",
+    "price": 370.0
+  },
+  {
+    "vendor": "ASUS",
+    "category": "Laptop",
+    "name": "ASUS ROG laptop hinge repair",
+    "price": 120.0
+  },
+  {
+    "vendor": "LENOVO",
+    "category": "Laptop",
+    "name": "LENOVO X1 CARBON LAPTOP SCREEN FIXING",
+    "price": 0.0
+  },
+  {
+    "vendor": "COMPUTER",
+    "category": "Other",
+    "name": "COMPUTER SERVICING CHARGE",
+    "price": 76.19
+  },
+  {
+    "vendor": "DELL",
+    "category": "Laptop",
+    "name": "SERVICE-LAPTOP DELL INSPIRON 7348",
+    "price": 290.0
+  },
+  {
+    "vendor": "\"THE",
+    "category": "Other",
+    "name": "\"The aforesaid supply in this invoice is subject to Reverse Charge Mechanism (RCM) in compliance with Cabinet",
+    "price": 0.0
+  },
+  {
+    "vendor": "DECISION",
+    "category": "Other",
+    "name": "Decision No. (91) of 2023 and the recipient is required to account for Tax under RCM as per the provision of Article 48(8) of the UAE VAT Decree",
+    "price": 0.0
+  },
+  {
+    "vendor": "AEROCOOL",
+    "category": "Other",
+    "name": "AEROCOOL VX PLUS 750 POWER SUPPLY",
+    "price": 190.0
+  },
+  {
+    "vendor": "AIGO",
+    "category": "Other",
+    "name": "AIGO GP750 750w 80 PLUS Bronze Power Supply",
+    "price": 180.0
+  },
+  {
+    "vendor": "AIGO",
+    "category": "Other",
+    "name": "AIGO WARRIOR AK500 POWERSUPPLY",
+    "price": 90.0
+  },
+  {
+    "vendor": "AIGO",
+    "category": "Other",
+    "name": "AIGO WARRIOR AK700 POWERSUPPLY",
+    "price": 0.0
+  },
+  {
+    "vendor": "AIGO",
+    "category": "Other",
+    "name": "AIGO AP550 80 PLUS 550W BLACK, Low-Noise FAN x1, ATX, EPS, PCIe, SATA, Molex, Floppy POWER SUPPLY",
+    "price": 0.0
+  },
+  {
+    "vendor": "AIGO",
+    "category": "Other",
+    "name": "AIGO AP650 80 PLUS 650W BLACK, Low-Noise FAN x1, ATX, EPS, PCIe, SATA, and Molex POWER SUPPLY",
+    "price": 0.0
+  },
+  {
+    "vendor": "AIGO",
+    "category": "Other",
+    "name": "AIGO AX850W /AX SERIES/ 80PLUS GOLD ATX 12V POWER SUPPLY",
+    "price": 0.0
+  },
+  {
+    "vendor": "ASUS",
+    "category": "Other",
+    "name": "ASUS ROG THOR1000P2 1000W FULLY MODULAR RGB POWER SUPPLY l 90YE00L4-BONA00",
+    "price": 0.0
+  },
+  {
+    "vendor": "ASUS",
+    "category": "Other",
+    "name": "ASUS ROG THOR1200P2 1200W FULLY MODULAR RGB POWER SUPPLY | 90YE00L0-B0NA00|",
+    "price": 0.0
+  },
+  {
+    "vendor": "ASUS",
+    "category": "Other",
+    "name": "ASUS ROG STRIX 1000G AURA PSU 1000W | 90YE00P1-B0NA00|",
+    "price": 875.0
+  },
+  {
+    "vendor": "ASUS",
+    "category": "Other",
+    "name": "ASUS ROG STRIX 1000G WHITE POWER SUPPLY | 90YE00S5-B0NA00",
+    "price": 770.0
+  },
+  {
+    "vendor": "ASUS",
+    "category": "Other",
+    "name": "ASUS ROG STRIX 850G AURA GAMING 850W PSU l 90YVE00P2-B0NA00",
+    "price": 725.0
+  },
+  {
+    "vendor": "CORSAIR",
+    "category": "Other",
+    "name": "CORSAIR AX1600i 80 PLUS TITANIUM FULLY MODULAR POWER SUPPLY | CP-9020087-UK",
+    "price": 1935.0
+  },
+  {
+    "vendor": "CORSAIR",
+    "category": "Other",
+    "name": "CORSAIR CV550 80PLU BRONZE POWER SUPPLY | CP-9020210-UK",
+    "price": 152.38
+  },
+  {
+    "vendor": "CORSAIR",
+    "category": "Other",
+    "name": "CORSAIR HX1000i PLATINUM POWER SUPPLY | CP-9020529-UK",
+    "price": 850.0
+  },
+  {
+    "vendor": "CORSAIR",
+    "category": "Other",
+    "name": "CORSAIR HX1200i PLATINUM POWER SUPPLY | CP-9020081-UK",
+    "price": 1050.0
+  },
+  {
+    "vendor": "CORSAIR",
+    "category": "Other",
+    "name": "CORSAIR RM1000X SHIFT 80PLUS GOLD 1000W FULLY MODULAR ATX PSU | CP-9020253-UK",
+    "price": 800.0
+  },
+  {
+    "vendor": "CORSAIR",
+    "category": "Other",
+    "name": "CORSAIR RM1000X-V2 80PLUS GOLD POWER SUPPLY | CP-9020201-UK",
+    "price": 715.0
+  },
+  {
+    "vendor": "CORSAIR",
+    "category": "Other",
+    "name": "CORSAIR RM1200X SHIFT 80PLUS GOLD 1200W FULLY MODULAR ATX PSU | CP-9020254-UK",
+    "price": 0.0
+  },
+  {
+    "vendor": "CORSAIR",
+    "category": "Other",
+    "name": "CORSAIR RM550X 80 PLUS GOLD POWER SUPPLY | CP-9020197-UK",
+    "price": 0.0
+  },
+  {
+    "vendor": "CORSAIR",
+    "category": "Other",
+    "name": "CORSAIR RM850e 850W 80PLUS GOLD POWER SUPPLY | CP-8020263-UK",
+    "price": 520.0
+  },
+  {
+    "vendor": "CORSAIR",
+    "category": "Other",
+    "name": "CORSAIR RM850 V2 2021 80PLUS GOLD POWER SUPPLY WHITE | CP-9020232-UK|",
+    "price": 525.0
+  },
+  {
+    "vendor": "CORSAIR",
+    "category": "Other",
+    "name": "CORSAIR RM850X-V2 80PLUS GOLD POWER SUPPLY | CP-9020200-UK",
+    "price": 575.0
+  },
+  {
+    "vendor": "CORSAIR",
+    "category": "Other",
+    "name": "CORSAIR SF850L SFX 80PLUS GOLD 850W FULL MODULAR PSU | CP-9020245-UK",
+    "price": 775.0
+  },
+  {
+    "vendor": "DEEPCOOL",
+    "category": "Other",
+    "name": "DEEPCOOL PF650D- 650W 80PLUS POWER SUPPLY | R-PF650D-HA0B-UK",
+    "price": 0.0
+  },
+  {
+    "vendor": "DEEPCOOL",
+    "category": "Other",
+    "name": "DEEPCOOL PF750D- 750W 80PLUS POWER SUPPLY | R-PF750D-HA0B-UK",
+    "price": 175.0
+  },
+  {
+    "vendor": "DEEPCOOL",
+    "category": "Other",
+    "name": "DEEPCOOL PL750D 80 PLUS 750W ATX 3.0 PCLE 5.0 POWER SUPPLY - BLACK | R-PL750D-FC0B-UK",
+    "price": 230.0
+  },
+  {
+    "vendor": "DEEPCOOL",
+    "category": "Other",
+    "name": "DEEPCOOL PN750D 80PLUS GOLD NON-MODULAR POWER SUPPLY | R-PN750D-FC0B-UK",
+    "price": 295.0
+  },
+  {
+    "vendor": "DEEPCOOL",
+    "category": "Other",
+    "name": "DEEPCOOL PN850D 80PLUS GOLD POWER SUPPLY | R-PN850D-FC0B-UK",
+    "price": 350.0
+  },
+  {
+    "vendor": "DEEPCOOL",
+    "category": "Other",
+    "name": "DEEPCOOL PX1000G 80PLUS GOLD POWER SUPPLY | R-PX1000G-FC0B-UK",
+    "price": 510.0
+  },
+  {
+    "vendor": "DEEPCOOL",
+    "category": "Other",
+    "name": "DEEPCOOL PX1200G 12000W 80PLUS GOLD ATX3.0 POWER SUPPLY | R-PXC00G-FC0B-UK",
+    "price": 620.0
+  },
+  {
+    "vendor": "GIGABYTE",
+    "category": "Other",
+    "name": "GIGABYTE AORUS P750W 80PLUS GOLD MODULAR POWER SUPPLY | GP-AP750GM",
+    "price": 305.0
+  },
+  {
+    "vendor": "NZXT",
+    "category": "Other",
+    "name": "NZXT C1000 ATX 1000W 80PLUS GOLD FULL MODULAR POWER SUPPLY | PA-0G1BB-UK",
+    "price": 520.0
+  },
+  {
+    "vendor": "NZXT",
+    "category": "Other",
+    "name": "NZXT C850 GOLD 850W FULL MODULAR PSU | PA-8G1BB-UK",
+    "price": 0.0
+  },
+  {
+    "vendor": "RAIDMAX",
+    "category": "Other",
+    "name": "RAIDMAX RX-400XT POWER SUPPLY",
+    "price": 100.0
+  },
+  {
+    "vendor": "RAIDMAX",
+    "category": "Other",
+    "name": "RAIDMAX THUNDER RGB RX-735AP-R POWER SUPPLY",
+    "price": 355.0
+  },
+  {
+    "vendor": "SILVERSTONE",
+    "category": "Other",
+    "name": "SILVERSTONE ATTIS 750R 80 PLUS Bronze 750W ATX 3.1 ATX POWER SUPPLY | SST-AT750R-BF",
+    "price": 200.0
+  },
+  {
+    "vendor": "SILVERSTONE",
+    "category": "Other",
+    "name": "SILVERSTONE 1650W 80PLUS GOLD FULL MODULAR POWER SUPPLY | SST-DA1650G",
+    "price": 1000.0
+  },
+  {
+    "vendor": "SILVERSTONE",
+    "category": "Other",
+    "name": "SILVERSTONE STRIDER 600W 80 PLUS POWER SUPPLY | SST-ST60F-ES230",
+    "price": 145.0
+  },
+  {
+    "vendor": "SILVERSTONE",
+    "category": "Other",
+    "name": "SILVERSTONE STRIDER 750EF 80PLUS 750W ATX POWER SUPPLY (120mm SINGLE FAN) - BLAK | SST-ST750-EF",
+    "price": 0.0
+  },
+  {
+    "vendor": "SILVERSTONE",
+    "category": "Other",
+    "name": "SILVERSTONE DA1000R GOLD 1000W PSU l SST-DA1000R-GM",
+    "price": 0.0
+  },
+  {
+    "vendor": "SILVERSTONE",
+    "category": "Other",
+    "name": "SILVERSTONE DA850R WHITE POWER SUPPLY | SST-DA850R-GMA-WWW",
+    "price": 360.0
+  },
+  {
+    "vendor": "SILVERSTONE",
+    "category": "Other",
+    "name": "SILVERSTONE Extreme 500 Bronze 80 Plus Bronze 500W SFX Power Supply | SST-EX500-B",
+    "price": 145.0
+  },
+  {
+    "vendor": "SILVERSTONE",
+    "category": "Other",
+    "name": "SILVERSTONE HELA 850R PLATINUM 850W PSU | SST-HA850R-PM",
+    "price": 375.0
+  },
+  {
+    "vendor": "SILVERSTONER",
+    "category": "Other",
+    "name": "SILVERSTONER ST1300-TI 80 PLUS TITANIUM POWER SUPPLY | SST-ST1300-TI",
+    "price": 0.0
+  },
+  {
+    "vendor": "TORTOX",
+    "category": "Other",
+    "name": "TORTOX LX700 LOW NOISE POWER SUPPLY | TX231101 |",
+    "price": 145.0
+  },
+  {
+    "vendor": "THERMALTAKE",
+    "category": "Other",
+    "name": "THERMALTAKE LITEPOWER 650W POWER SUPPLY | LTP-0650NPCNUK-2",
+    "price": 164.52
+  },
+  {
+    "vendor": "HP",
+    "category": "Other",
+    "name": "THERMALTAKE TOUGHPOWER GX3 850W GOLD PLUS, 120mm Fan, PCIe Gen 5.0, Non-Modular POWER SUPPLY, - BLACK | PS-TPD-0850NNFAGK-C",
+    "price": 0.0
+  },
+  {
+    "vendor": "ZALMAN",
+    "category": "Other",
+    "name": "ZALMAN 1200W 80PLUS PLATINUM POWER SUPPLY | ZM1200-ARX",
+    "price": 0.0
+  },
+  {
+    "vendor": "ESET",
+    "category": "Other",
+    "name": "ESET NOD32 AV RP ME 2USER | ENA1M21Y",
+    "price": 25.0
+  },
+  {
+    "vendor": "KASPERSKY",
+    "category": "Other",
+    "name": "KASPERSKY SMALL OFFICE SECURITY 10PC+1 SRVR",
+    "price": 410.0
+  },
+  {
+    "vendor": "KASPERSKY",
+    "category": "Other",
+    "name": "KASPERSKY 2021 ANTIVIRUS 2PC",
+    "price": 30.0
+  },
+  {
+    "vendor": "KASPERSKY",
+    "category": "Other",
+    "name": "KASPERSKY INTERNET SECURITY 2021 -1+1 ME",
+    "price": 39.0
+  },
+  {
+    "vendor": "KASPERSKY",
+    "category": "Other",
+    "name": "KASPERSKY TOTAL SECURITY3+1 DEVICES",
+    "price": 64.0
+  },
+  {
+    "vendor": "MACAFE",
+    "category": "Other",
+    "name": "MACAFE TOTAL SECURITY",
+    "price": 0.0
+  },
+  {
+    "vendor": "NORTON",
+    "category": "Other",
+    "name": "NORTON 360 DELUXE 1USER 5 DEVICE -21405129",
+    "price": 105.0
+  },
+  {
+    "vendor": "NORTON",
+    "category": "Other",
+    "name": "NORTON ANTIVIRUS 1 DEVICE",
+    "price": 25.0
+  },
+  {
+    "vendor": "MICROSOFT",
+    "category": "Other",
+    "name": "MICROSOFT OFFICE HOME & BUSINESS 2021 | T5D-03514-M5",
+    "price": 715.0
+  },
+  {
+    "vendor": "MICROSOFT",
+    "category": "Other",
+    "name": "MICROSOFT OFFICE PROFESSIONAL 2016 ME (269-16811)",
+    "price": 1275.0
+  },
+  {
+    "vendor": "WINDOWS",
+    "category": "Other",
+    "name": "WINDOWS 10 PRO 64BIT | FQC-08929",
+    "price": 420.0
+  },
+  {
+    "vendor": "MS",
+    "category": "Other",
+    "name": "MS WINDOWS 11 PRO 64 BIT | FQC-10528",
+    "price": 425.0
+  },
+  {
+    "vendor": "2.5",
+    "category": "Storage",
+    "name": "2.5 TO 3.5 SSD BRACKETS",
+    "price": 25.0
+  },
+  {
+    "vendor": "CRUCIAL",
+    "category": "Storage",
+    "name": "CRUCIAL BX500 1TB 2.5\" SSD | CT1000BX500SSD1",
+    "price": 190.48
+  },
+  {
+    "vendor": "CRUCIAL",
+    "category": "Storage",
+    "name": "CRUCIAL MX500 500GB 2.5\" SSD | CT500MX500SSD1",
+    "price": 155.0
+  },
+  {
+    "vendor": "KINGSTON",
+    "category": "Storage",
+    "name": "KINGSTON 120GB SSD SA400S37/120G",
+    "price": 56.0
+  },
+  {
+    "vendor": "LEXAR",
+    "category": "Storage",
+    "name": "Lexar NS100 2.5 SATA III SSD 256GB| LNS100-256RB",
+    "price": 63.0
+  },
+  {
+    "vendor": "LEXAR",
+    "category": "Storage",
+    "name": "Lexar NS100 2.5 SATA III SSD 512GB | LNS100-512RGB",
+    "price": 125.0
+  },
+  {
+    "vendor": "PNY",
+    "category": "Storage",
+    "name": "PNY CS900 1TB 3D NAND 2.5\" SATA III Internal Solid State Drive (SSD) - (SSD7CS900-1TB-RB)",
+    "price": 170.0
+  },
+  {
+    "vendor": "SAMSUNG",
+    "category": "Storage",
+    "name": "SAMSUNG 1TB 870 EVO 2.5\" SSD| MZ-77E1T0BW",
+    "price": 325.0
+  },
+  {
+    "vendor": "SAMSUNG",
+    "category": "Storage",
+    "name": "SAMSUNG 2TB 870 EVO 2.5\" SSD| MZ-77E2T0BW",
+    "price": 540.0
+  },
+  {
+    "vendor": "SAMSUNG",
+    "category": "Storage",
+    "name": "SAMSUNG 4TB 870 EVO 2.5\" SSD| MZ-77E4T0BW",
+    "price": 1070.0
+  },
+  {
+    "vendor": "SAMSUNG",
+    "category": "Storage",
+    "name": "SAMSUNG 500GB 870EVO SSD | MZ-77E500-BW",
+    "price": 175.0
+  },
+  {
+    "vendor": "SANDISK",
+    "category": "Storage",
+    "name": "SANDISK 1TB PORTABLE SSD 800mbps | SDSSDE30-1T00-G26",
+    "price": 270.0
+  },
+  {
+    "vendor": "SANDISK",
+    "category": "Storage",
+    "name": "SanDisk E30 Portable SSD 2TB 800mbps | SDSSDE30-2TB-G26",
+    "price": 440.0
+  },
+  {
+    "vendor": "SANDISK",
+    "category": "Storage",
+    "name": "SanDisk 1TB Extreme 1050MB/s -USB-C, USB 3.2 Portable External SSD | SDSSDE61-1T00-G25",
+    "price": 325.0
+  },
+  {
+    "vendor": "SANDISK",
+    "category": "Storage",
+    "name": "SanDisk 2TB Extreme 1050MB/s Portable External SSD | SDSSDE61-2T00-G25",
+    "price": 520.0
+  },
+  {
+    "vendor": "TEAM",
+    "category": "Storage",
+    "name": "TEAM GROUP T-FORCE VULCAN Z QLC 1TB 2.5\" SSD | T253TZ001T0C101",
+    "price": 154.0
+  },
+  {
+    "vendor": "TEAM",
+    "category": "Storage",
+    "name": "TEAM GROUP T-FORCE VULCAN Z QLC 512GB 2.5\" SSD | T253TZ512G0C101",
+    "price": 100.0
+  },
+  {
+    "vendor": "WESTERN DIGITAL",
+    "category": "Storage",
+    "name": "WD BLUE 1TB SSD 2.5\" 7MM | WDS100T3B0A",
+    "price": 228.0
+  },
+  {
+    "vendor": "WALL",
+    "category": "Other",
+    "name": "WALL MOUNT STAND SKILLTECH SH23P 13-43",
+    "price": 0.0
+  },
+  {
+    "vendor": "WALL",
+    "category": "Other",
+    "name": "WALL MOUNT STAND SKILLTECH SH10P",
+    "price": 50.0
+  },
+  {
+    "vendor": "STEK",
+    "category": "Cable",
+    "name": "STEK USB MINI CABLE 1.8M",
+    "price": 10.0
+  },
+  {
+    "vendor": "STEK",
+    "category": "Mouse",
+    "name": "STEK GEL MOUSE PAD",
+    "price": 15.24
+  },
+  {
+    "vendor": "CORSAIR",
+    "category": "Other",
+    "name": "CORSAIR iCUE LS100 Smart Lighting Strip Expansion Kit 450mm | CD-9010001-WW",
+    "price": 125.0
+  },
+  {
+    "vendor": "COUGAR",
+    "category": "Other",
+    "name": "Cougar 2 x 300mm RGB LED Strip | CF-STR-RGB",
+    "price": 90.0
+  },
+  {
+    "vendor": "DEEPCOOL",
+    "category": "Other",
+    "name": "DEEPCOOL RGB 350 LED STRIP | DP-LED-RG350",
+    "price": 100.0
+  },
+  {
+    "vendor": "1ST",
+    "category": "Other",
+    "name": "1ST PLAYER L1 RGB LED STRIP",
+    "price": 60.0
+  },
+  {
+    "vendor": "HP",
+    "category": "Other",
+    "name": "LIAN LI STRIMER PLUS V2 12VHPWR ARGB 320MM EXTENSION 12+4 TO 12+4 | G89.PW16-8PV2",
+    "price": 160.0
+  },
+  {
+    "vendor": "HP",
+    "category": "Cable",
+    "name": "LIAN LI STRIMER PLUS V2 12VHPWR 320mm ARGB 12+4 to 3x8 CABLE | G89.PW168-8PV2.00",
+    "price": 160.0
+  },
+  {
+    "vendor": "LIAN",
+    "category": "Cable",
+    "name": "LIAN LI STRIMER Plus 24 Pin V2 ADD-RGB LED CABLE | G89.PW24.PV2.00",
+    "price": 195.0
+  },
+  {
+    "vendor": "PHANTEKS",
+    "category": "Other",
+    "name": "PHANTEKS NEON DIGITAL RGB LED STRIP- PHNELEDKT-M5",
+    "price": 65.0
+  },
+  {
+    "vendor": "SHARKOON",
+    "category": "Other",
+    "name": "SHARKOON SHARK BLADES RGB STRIP",
+    "price": 20.0
+  },
+  {
+    "vendor": "STEK",
+    "category": "Other",
+    "name": "STEK VGA SPLITTER 1X2",
+    "price": 60.0
+  },
+  {
+    "vendor": "SWICH",
+    "category": "Other",
+    "name": "SWICH-POWER-PSU-EXTERNAL",
+    "price": 0.0
+  },
+  {
+    "vendor": "SAMSUNG",
+    "category": "Other",
+    "name": "SAMSUNG TABLET A9+X210",
+    "price": 0.0
+  },
+  {
+    "vendor": "TERMINATOR",
+    "category": "Other",
+    "name": "TERMINATOR 4WAY 3M POWER EXTESNSION | TPB214SA-3M",
+    "price": 40.0
+  },
+  {
+    "vendor": "TERMINATOR",
+    "category": "Other",
+    "name": "TERMINATOR 5WAY 5M POWER EXTENSION|TPB-215SA-5M",
+    "price": 65.0
+  },
+  {
+    "vendor": "TERMINATOR",
+    "category": "Other",
+    "name": "TERMINATOR 5WAY POWER EXTENSION 3M |TPB-215SA",
+    "price": 40.0
+  },
+  {
+    "vendor": "TERMINATOR",
+    "category": "Other",
+    "name": "TERMINATOR 6WAY POWER EXTESNSION 3M",
+    "price": 41.0
+  },
+  {
+    "vendor": "TERMINATOR",
+    "category": "Other",
+    "name": "TERMINATOR 6WAY POWER EXTESNSION 5M | TPB-216SA-5M",
+    "price": 39.5
+  },
+  {
+    "vendor": "TERMINATOR",
+    "category": "Other",
+    "name": "TERMINATOR 4WAY POWER EXTESNSION 3M | TPB 4G",
+    "price": 29.5
+  },
+  {
+    "vendor": "TERMINATOR",
+    "category": "Other",
+    "name": "TERMINATOR 5WAY POWER EXTESNSION 3M | TPB 5G",
+    "price": 33.0
+  },
+  {
+    "vendor": "TP-LINK",
+    "category": "Other",
+    "name": "TP-LINK WA801ND 300mbps ACCESS POINT",
+    "price": 64.5
+  },
+  {
+    "vendor": "TP-LINK",
+    "category": "Other",
+    "name": "TP-LINK WN881ND 300mbps PCIE WL CARD",
+    "price": 0.0
+  },
+  {
+    "vendor": "TP-LINK",
+    "category": "Other",
+    "name": "TP-LINK TL-WA855RE N300 RANGE EXTENDER",
+    "price": 85.0
+  },
+  {
+    "vendor": "TP-LINK",
+    "category": "Adapter",
+    "name": "TP-Link TL-WN725N 150Mbps Wireless N Nano USB Adapter",
+    "price": 0.0
+  },
+  {
+    "vendor": "CANON",
+    "category": "Other",
+    "name": "Genuine Canon WT-202 (FM1-A606-040) Waste Toner Box",
+    "price": 243.0
+  },
+  {
+    "vendor": "HP",
+    "category": "Other",
+    "name": "TONER HP 771C RED B6Y08A",
+    "price": 855.0
+  },
+  {
+    "vendor": "TONER",
+    "category": "Other",
+    "name": "TONER B6Y15A 771A 775-ml Matte Black DesignJet Ink",
+    "price": 855.0
+  },
+  {
+    "vendor": "TONER",
+    "category": "Other",
+    "name": "TONER B6Y17A 771A 775-ml Magenta DesignJet Ink",
+    "price": 855.0
+  },
+  {
+    "vendor": "TONER",
+    "category": "Other",
+    "name": "TONER B6Y18A 771A 775-ml Yellow DesignJet Ink",
+    "price": 855.0
+  },
+  {
+    "vendor": "TONER",
+    "category": "Other",
+    "name": "TONER B6Y19A 771A 775-ml Light Magenta DesignJet.",
+    "price": 855.0
+  },
+  {
+    "vendor": "TONER",
+    "category": "Other",
+    "name": "TONER B6Y20A 771A 775-ml Light Cyan DesignJet Ink .",
+    "price": 855.0
+  },
+  {
+    "vendor": "TONER",
+    "category": "Other",
+    "name": "TONER B6Y21A 771A 775-ml Photo Black DesignJet Ink",
+    "price": 855.0
+  },
+  {
+    "vendor": "TONER",
+    "category": "Other",
+    "name": "TONER B6Y22A 771A 775-ml Light Gray DesignJet Ink",
+    "price": 855.0
+  },
+  {
+    "vendor": "HP",
+    "category": "Other",
+    "name": "TONER CH644A HP 771 DesignJet Maintenance Cartridge",
+    "price": 450.0
+  },
+  {
+    "vendor": "HP",
+    "category": "Other",
+    "name": "HP 151A Black Original LaserJet Toner Cartridge",
+    "price": 330.0
+  },
+  {
+    "vendor": "HP",
+    "category": "Other",
+    "name": "HP TONER CE505A",
+    "price": 250.0
+  },
+  {
+    "vendor": "TONER",
+    "category": "Other",
+    "name": "TONER COMPATABLE 26A CF226A",
+    "price": 120.0
+  },
+  {
+    "vendor": "RYLER",
+    "category": "Other",
+    "name": "RYLER TONER CF283A BLACK",
+    "price": 0.0
+  },
+  {
+    "vendor": "PUNCHDOWN",
+    "category": "Other",
+    "name": "PUNCHDOWN TOOL DLINK",
+    "price": 70.0
+  },
+  {
+    "vendor": "TP",
+    "category": "Other",
+    "name": "TP LINK MR200 4G LTE AC1750 DUAL BAND",
+    "price": 305.0
+  },
+  {
+    "vendor": "TP-LINK",
+    "category": "Adapter",
+    "name": "TP-LINK TG3468 PCI EXPRESS GIGA ADAPTER",
+    "price": 35.0
+  },
+  {
+    "vendor": "TP-LINK",
+    "category": "Other",
+    "name": "SF1048 TP-LINK 48 PORT SWITCH",
+    "price": 295.0
+  },
+  {
+    "vendor": "TARGUS",
+    "category": "Other",
+    "name": "TARGUS 4PORT USB 2.0 HUB - ACH114EU-90",
+    "price": 22.5
+  },
+  {
+    "vendor": "TARGUS",
+    "category": "Other",
+    "name": "TARGUS ACH119US 4PORT HUB WITH POWER",
+    "price": 55.0
+  },
+  {
+    "vendor": "TARGUS",
+    "category": "Other",
+    "name": "TARGUS AMP09EU PRESENTER",
+    "price": 110.0
+  },
+  {
+    "vendor": "TARGUS",
+    "category": "Bag",
+    "name": "TARGUS 15.6\" NOTEBOOK BAG - TAR300",
+    "price": 36.0
+  },
+  {
+    "vendor": "TWINMOS",
+    "category": "Other",
+    "name": "TWINMOS PCIE 2 PORT USB3.0 CARD",
+    "price": 49.0
+  },
+  {
+    "vendor": "UBIQUTI",
+    "category": "Other",
+    "name": "UBIQUTI M5-400 POER BEAM 5GHZ 25DBI",
+    "price": 255.0
+  },
+  {
+    "vendor": "UGREEN",
+    "category": "Other",
+    "name": "UGREEN MINI DO TO HDMI CONNECTOR.",
+    "price": 0.0
+  },
+  {
+    "vendor": "ELIX",
+    "category": "Other",
+    "name": "ELIX ATLAS UPS 650VA LED",
+    "price": 190.0
+  },
+  {
+    "vendor": "USB",
+    "category": "Other",
+    "name": "USB FEMAL TO USB FEMAL",
+    "price": 5.0
+  },
+  {
+    "vendor": "MICRO",
+    "category": "Cable",
+    "name": "MICRO USB CABLE 3MTR",
+    "price": 5.5
+  },
+  {
+    "vendor": "USB",
+    "category": "Other",
+    "name": "USB SOUND CARD 7.1",
+    "price": 9.18
+  },
+  {
+    "vendor": "VENTION",
+    "category": "Other",
+    "name": "VENTION HDMI F/F COUPLER H380HDFF",
+    "price": 10.0
+  },
+  {
+    "vendor": "VENTION",
+    "category": "Cable",
+    "name": "VENTION VASA59B300 USB PRINTER CABLE 3M",
+    "price": 15.0
+  },
+  {
+    "vendor": "VGA",
+    "category": "Other",
+    "name": "VGA TO VGA ADPTER",
+    "price": 15.0
+  },
+  {
+    "vendor": "AFOX",
+    "category": "Other",
+    "name": "AFOX GT610 2GB DDR3 VGA CARD",
+    "price": 110.0
+  },
+  {
+    "vendor": "AFOX",
+    "category": "Other",
+    "name": "AFOX GT710 2GB DDR3 PCIE",
+    "price": 120.0
+  },
+  {
+    "vendor": "AFOX",
+    "category": "Other",
+    "name": "AFOX GT730 4GB DDR3 PCIE",
+    "price": 185.0
+  },
+  {
+    "vendor": "ASUS",
+    "category": "GPU",
+    "name": "ASUS DUAL RTX4070 SUPER 12GB EVO WHITE | 90YV0KC8-M0NA00",
+    "price": 2310.0
+  },
+  {
+    "vendor": "ASUS",
+    "category": "GPU",
+    "name": "ASUS DUAL RTX-3050 OC 8GB GDDR6 VGA CARD | 90YV0GH6-M0NA00",
+    "price": 850.0
+  },
+  {
+    "vendor": "ASUS",
+    "category": "GPU",
+    "name": "ASUS DUAL RTX4060 OC 8GB DDR6 VGA | 90YV0JC7-M0NA00",
+    "price": 1095.0
+  },
+  {
+    "vendor": "ASUS",
+    "category": "GPU",
+    "name": "ASUS DUAL RTX4060TI 8GB GDDR6 VGA | 90YV0J40-MONA00",
+    "price": 1480.0
+  },
+  {
+    "vendor": "ASUS",
+    "category": "GPU",
+    "name": "ASUS DUAL RTX4060 GDDR6 08G OC WHITE VGA CARD | 90YV0JC2-M0NA00",
+    "price": 1212.14
+  },
+  {
+    "vendor": "ASUS",
+    "category": "Other",
+    "name": "ASUS GT730 2GB DDR5 PCIE | 90YV0H20-M0NA00",
+    "price": 0.0
+  },
+  {
+    "vendor": "ASUS",
+    "category": "GPU",
+    "name": "ASUS GTX1650 PHOENIX OC 4GB DDR6 PCIE | 90YV0EH2-M0NA00",
+    "price": 570.0
+  },
+  {
+    "vendor": "ASUS",
+    "category": "GPU",
+    "name": "ASUS ROG STRIX RTX4090 OC 24GB GDDR6X GRAPHIC CARD l 90YV0ID0-MONAOO",
+    "price": 8500.0
+  },
+  {
+    "vendor": "ASUS",
+    "category": "GPU",
+    "name": "ASUS ROG STRIX GEFORCE RTX4070 SUPER OC EDITION 12GB GDDR6X l 90YV0KD0-MONA00",
+    "price": 3060.0
+  },
+  {
+    "vendor": "ASUS",
+    "category": "Other",
+    "name": "ASUS TUF GAMING OC 4070 SUPER OC EDITION 12GB GDDR6X l 90YV0K80-M0NA00",
+    "price": 3000.0
+  },
+  {
+    "vendor": "ASUS",
+    "category": "GPU",
+    "name": "ASUS TUF RTX4070TI SUPER OC 16GB GDDR6X GAMING VGA CARD | 90YV0KF0-M0NA00",
+    "price": 3620.0
+  },
+  {
+    "vendor": "ASUS",
+    "category": "GPU",
+    "name": "ASUS TUF RTX4080 SUPER 16GB GDDR6X OC DLSS-3 VGA CARD | 90YV0KA0-M0NA00",
+    "price": 4260.0
+  },
+  {
+    "vendor": "ASUS",
+    "category": "GPU",
+    "name": "ASUS TUF RTX4090 OC 24GB GDDR6X GRAPHIC CARD | 90YV0IY3-MONA00",
+    "price": 0.0
+  },
+  {
+    "vendor": "LG",
+    "category": "Other",
+    "name": "GALAX GT730 4GB DDR3 PCIE 64BIT DVI-I,HDMI,VGA | 73GQF8HX00HD-GALG",
+    "price": 0.0
+  },
+  {
+    "vendor": "HP",
+    "category": "GPU",
+    "name": "GALAX RTX3050 6GB DDR6 VGA | G-A76LB-35NRLDHP9ODV-GALG",
+    "price": 660.0
+  },
+  {
+    "vendor": "LG",
+    "category": "GPU",
+    "name": "GALAX RTX 4070 12GB EX GAMER PINK GDDR6 | G-D46OB-47NOM7MD7LPK-GALG",
+    "price": 2075.0
+  },
+  {
+    "vendor": "GIGABYTE",
+    "category": "GPU",
+    "name": "GIGABYTE RTX3050 6GB DDR6 LOW PROFILE VGA CARD | GV-N3050OC-6GL",
+    "price": 780.0
+  },
+  {
+    "vendor": "GIGABYTE",
+    "category": "GPU",
+    "name": "GIGABYTE RTX4070 Ti SUPER AERO OC 16GB GDDR6X | GV-N407TSAEROOC-16GD",
+    "price": 0.0
+  },
+  {
+    "vendor": "GIGABYTE",
+    "category": "GPU",
+    "name": "GIGABYTE RTX4070TI SUPER EAGLE OC EDITION 16GB VGA CARD | GV-N407TSEAGLEOC-16GD",
+    "price": 0.0
+  },
+  {
+    "vendor": "GIGABYTE",
+    "category": "GPU",
+    "name": "GIGABYTE RTX4090 AERO OC 24GB GDDR6X VGA | GV-N4090AEROOC-24GD",
+    "price": 0.0
+  },
+  {
+    "vendor": "GIGABYTE",
+    "category": "GPU",
+    "name": "GIGABYTE RTX4090 GAMING OC 24GB GRAPHIC CARD | GV-N4090GAMINGOC-24GD",
+    "price": 7800.0
+  },
+  {
+    "vendor": "GIGABYTE",
+    "category": "GPU",
+    "name": "GIGABYTE RTX 4090 WINDFORCE 24GB GRAPHIC CARD | GV-N4090WF3V2-24GD",
+    "price": 0.0
+  },
+  {
+    "vendor": "MANLI",
+    "category": "GPU",
+    "name": "MANLI RTX3050 8GB DDR5 DUAL FAN VGA | M-NRTX3050/6RGHDP-M2524",
+    "price": 740.0
+  },
+  {
+    "vendor": "HP",
+    "category": "GPU",
+    "name": "MANLI RTX4060 8GB GDDR6 TWIN FAN , PCIe4.0, 3xDisplayPort, 1xHDMI, GRAPHICS CARD | M-NRTX4060/6RGHPPPV2-M2560",
+    "price": 2476.19
+  },
+  {
+    "vendor": "MSI",
+    "category": "GPU",
+    "name": "MSI RTX 4060TI VENTUS 2X OC 8GB BLACK VGA | 912-V512-005",
+    "price": 1650.0
+  },
+  {
+    "vendor": "MSI",
+    "category": "GPU",
+    "name": "MSI RTX4070 Ti SUPER 16G VENTUS 3X OC EDITION GDDR6X VGA CARD | 912-V513-870",
+    "price": 0.0
+  },
+  {
+    "vendor": "MSI",
+    "category": "GPU",
+    "name": "MSI RTX 4070 Ti SUPER 16G VENTUS 2X WHITE OC EDITION GDDR6X WHITE VGA CARD | 912-V513-629",
+    "price": 3250.0
+  },
+  {
+    "vendor": "MSI",
+    "category": "GPU",
+    "name": "MSI RTX 4080 SUPER 16G VENTUS 3X OC GDDR6X VGA CARD | 912-V511-233",
+    "price": 3880.0
+  },
+  {
+    "vendor": "MSI",
+    "category": "GPU",
+    "name": "MSI Geforce RTX 3060 Ventus 2X OC 12GB GDDR6 VGA | 912-V397-664",
+    "price": 100.0
+  },
+  {
+    "vendor": "MSI",
+    "category": "GPU",
+    "name": "MSI VGA GeForce RTX 4070 SUPER 12G VENTUS 2X OC |912-V513-641",
+    "price": 2250.0
+  },
+  {
+    "vendor": "PALIT",
+    "category": "GPU",
+    "name": "PALIT GTX1650 4GB DDR6 4GB PCIE | NE6165001BG1-1175A",
+    "price": 490.0
+  },
+  {
+    "vendor": "PALIT",
+    "category": "GPU",
+    "name": "PALIT DUAL RTX4070 12GB GDDR6X 192bit, 200W POWER VGA CARD | NED4070019K9-1047D",
+    "price": 0.0
+  },
+  {
+    "vendor": "NVIDIA",
+    "category": "GPU",
+    "name": "PNY NVIDIA QUADRO T1000 8GB GDDR6 VGA | VCNT10008GB-SB",
+    "price": 1245.0
+  },
+  {
+    "vendor": "PNY",
+    "category": "GPU",
+    "name": "PNY QUADRO RTX2000 ADA 16GB GDDR6 VGA CARD | VCNRTX2000ADA-SB",
+    "price": 2400.0
+  },
+  {
+    "vendor": "PNY",
+    "category": "GPU",
+    "name": "PNY GEFORCE RTX 4080 SUPER GDD6X 16GB OC VELOCITY | VCG4080S16TFXPB1-O",
+    "price": 4000.0
+  },
+  {
+    "vendor": "PNY",
+    "category": "GPU",
+    "name": "PNY QUADRO RTX-A2000 12GB DDR6 VGA CARD | VCNRTXA2000-12GB-SB",
+    "price": 2060.0
+  },
+  {
+    "vendor": "NVIDIA",
+    "category": "GPU",
+    "name": "PNY NVIDIA QUADRO RTXA4000 16GB DDR6 VGA CARD | VCNRTXA4000-SB",
+    "price": 3230.0
+  },
+  {
+    "vendor": "PNY",
+    "category": "GPU",
+    "name": "PNY QUADRO RTXA5000 24GB DDR6 VGA CARD | VCNRTXA5000-SB",
+    "price": 7450.0
+  },
+  {
+    "vendor": "NVIDIA",
+    "category": "Other",
+    "name": "PNY NVIDIA T400 4GB DDR6 VGA | VCNT400-4GB SB",
+    "price": 500.0
+  },
+  {
+    "vendor": "PNY",
+    "category": "GPU",
+    "name": "PNY GEFORCE RTX 4070Ti SUPER GDDR6X XLR8 16GB OC VELOCITY | VCG4070TS16TFXPB1-O",
+    "price": 3190.0
+  },
+  {
+    "vendor": "VGA",
+    "category": "Other",
+    "name": "VGA- SPLITER 1*4 VGA",
+    "price": 50.0
+  },
+  {
+    "vendor": "ZOTAC",
+    "category": "GPU",
+    "name": "ZOTAC RTX4060 TWIN EDGE 8GB GDDR6 BLACK EDITION l ZT-D40600E-10M",
+    "price": 1050.0
+  },
+  {
+    "vendor": "ZOTACT",
+    "category": "GPU",
+    "name": "ZOTACT RTX 4070TI AMP AIRO 12GB GDDR6X VGA | ZT-D40710F-10P",
+    "price": 3150.0
+  },
+  {
+    "vendor": "ZOTAC",
+    "category": "Other",
+    "name": "ZOTAC GT710 2GB DDR3 PCIE | ZT-71310-10L",
+    "price": 156.0
+  },
+  {
+    "vendor": "ZOTAC",
+    "category": "Other",
+    "name": "ZOTAC GT730 4GB DDR3 PCIE | ZT-71115-20L",
+    "price": 272.0
+  },
+  {
+    "vendor": "ZOTAC",
+    "category": "GPU",
+    "name": "ZOTAC GTX1650 AMP 4GB GDDR6 PCIE | ZT-T16520J-10L",
+    "price": 610.0
+  },
+  {
+    "vendor": "ZOTAC",
+    "category": "GPU",
+    "name": "ZOTAC GAMING SOLO RTX3050 6GB DDR6 VGA CARD | ZT-A30510G-10L",
+    "price": 665.0
+  },
+  {
+    "vendor": "ZOTAC",
+    "category": "GPU",
+    "name": "ZOTAC GAMING RTX3050 ECO EDITION 8GB GDDR6 VGA | ZT-A30500K-10M",
+    "price": 3200.0
+  },
+  {
+    "vendor": "ZOTAC",
+    "category": "GPU",
+    "name": "ZOTAC RTX3050 6GB GDDR6 LP VGA CARD | ZT-A30510L-10L",
+    "price": 665.0
+  },
+  {
+    "vendor": "ZOTAC",
+    "category": "GPU",
+    "name": "ZOTAC RTX4060TI TWIN EDGE 8GB GDDR6 | ZT-D40610E-10M",
+    "price": 1430.0
+  },
+  {
+    "vendor": "ZOTACT",
+    "category": "GPU",
+    "name": "ZOTACT RTX4070 TWIN EDGE 12GB GDDR6X VGA | ZT-D40700E-10M",
+    "price": 0.0
+  },
+  {
+    "vendor": "ZOTACT",
+    "category": "GPU",
+    "name": "ZOTACT RTX 4080 SUPER TRINITY 16GB GDDR6X BLACK EDITION | ZT-D40820D-10P",
+    "price": 0.0
+  },
+  {
+    "vendor": "ONE",
+    "category": "Other",
+    "name": "ONE YEAR WARRANTY ALL ITEM EXCEPT SOFTWARE&ACCESSORIES",
+    "price": 0.0
+  },
+  {
+    "vendor": "DELL",
+    "category": "Other",
+    "name": "DELL LATITUDE 3YEAR PRO SPT PLUS",
+    "price": 425.0
+  },
+  {
+    "vendor": "3YEAR",
+    "category": "Other",
+    "name": "3YEAR WARRANTY",
+    "price": 0.0
+  }
+]

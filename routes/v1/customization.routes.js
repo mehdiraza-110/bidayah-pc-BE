@@ -20,4 +20,10 @@ router.post(
   customizationController.upsertHeroMedia.bind(customizationController)
 );
 
+// Admin route: Create or update hero content (text/buttons/mode)
+router.put(
+  '/hero-content',
+  customizationController.upsertHeroContent.bind(customizationController)
+);
+
 module.exports = router;

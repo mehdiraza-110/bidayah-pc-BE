@@ -54,6 +54,7 @@ router.get('/products/:id', checkPublishedProduct, productController.getProductB
 // Public PC Builder Routes (only GET, only published products)
 router.get('/pc-builder/options', publicPcBuilderController.getOptions.bind(publicPcBuilderController));
 router.get('/pc-builder/products', publicPcBuilderController.getProducts.bind(publicPcBuilderController));
+router.get('/pc-builder/vendors', publicPcBuilderController.getVendorsForCategory.bind(publicPcBuilderController));
 
 // Public Vendors Routes (only GET)
 router.get('/vendors', vendorController.getAllVendors.bind(vendorController));
@@ -68,5 +69,8 @@ router.get('/billing', billingController.getBillingInfo.bind(billingController))
 
 // Public Hero Media Route (only GET)
 router.get('/hero-media', customizationController.getHeroMedia.bind(customizationController));
+
+// Public Hero Content Route (only GET)
+router.get('/hero-content', customizationController.getHeroContent.bind(customizationController));
 
 module.exports = router;

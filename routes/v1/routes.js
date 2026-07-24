@@ -10,6 +10,8 @@ const statisticsRoutes = require('./statistics.routes');
 const publicRoutes = require('./public.routes');
 const customizationRoutes = require('./customization.routes');
 const pcBuilderFilterRuleRoutes = require('./pc-builder-filter-rule.routes');
+const pcBuilderCategoryRoutes = require('./pc-builder-category.routes');
+const pcBuilderCategoryVendorRoutes = require('./pc-builder-category-vendor.routes');
 const keyFeatureRoutes = require('./key-feature.routes');
 
 // Public routes (read-only, no authentication required)
@@ -44,5 +46,11 @@ router.use('/customization', customizationRoutes);
 
 // PC builder filter rule routes (admin only)
 router.use('/pc-builder-filter-rules', pcBuilderFilterRuleRoutes);
+
+// PC builder category config routes (admin only)
+router.use('/pc-builder-categories', pcBuilderCategoryRoutes);
+
+// PC builder category-vendor config routes (admin only)
+router.use('/pc-builder-category-vendors', pcBuilderCategoryVendorRoutes);
 
 module.exports = router;

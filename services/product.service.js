@@ -95,6 +95,77 @@ class ProductService {
   
   // Get all products with optional filters
   async getAllProducts(filters = {}) {
+    // Build the shared WHERE clause once so the count query and the main
+    // query never drift apart.
+    const buildWhere = () => {
+      let clause = ' WHERE 1=1';
+      const whereParams = [];
+      let paramCount = 1;
+
+      if (filters.status) {
+        clause += ` AND p.status = $${paramCount++}`;
+        whereParams.push(filters.status);
+      }
+
+      if (filters.category_id) {
+        clause += ` AND p.category_id = $${paramCount++}`;
+        whereParams.push(filters.category_id);
+      }
+
+      if (filters.vendor_id) {
+        clause += ` AND EXISTS (SELECT 1 FROM product_vendors pv2 WHERE pv2.product_id = p.id AND pv2.vendor_id = $${paramCount++})`;
+        whereParams.push(filters.vendor_id);
+      }
+
+      if (filters.featured !== undefined) {
+        clause += ` AND p.featured = $${paramCount++}`;
+        whereParams.push(filters.featured);
+      }
+
+      if (filters.in_stock !== undefined) {
+        clause += ` AND p.in_stock = $${paramCount++}`;
+        whereParams.push(filters.in_stock);
+      }
+
+      if (filters.search) {
+        clause += ` AND (p.name ILIKE $${paramCount} OR p.description ILIKE $${paramCount})`;
+        whereParams.push(`%${filters.search}%`);
+        paramCount++;
+      }
+
+      return { clause, whereParams };
+    };
+
+    const { clause: whereClause, whereParams } = buildWhere();
+
+    // Pagination is opt-in via page/limit so existing callers that expect
+    // the full list back (e.g. admin dashboard) keep working unchanged.
+    const page = filters.page ? parseInt(filters.page, 10) : null;
+    const limit = filters.limit ? parseInt(filters.limit, 10) : null;
+    const isPaginated = page !== null || limit !== null;
+    const effectivePage = page && page > 0 ? page : 1;
+    const effectiveLimit = limit && limit > 0 ? limit : 24;
+
+    let total = null;
+    if (isPaginated) {
+      const countResult = await db.query(
+        `SELECT COUNT(*) FROM products p${whereClause}`,
+        whereParams
+      );
+      total = parseInt(countResult.rows[0].count, 10);
+    }
+
+    // Every ordering ends with p.id as a tiebreaker so LIMIT/OFFSET pagination
+    // is stable even when many rows share the same created_at/price/rating
+    // (e.g. a bulk import where CURRENT_TIMESTAMP is frozen for the whole transaction).
+    const sortOrderBy = {
+      newest: 'p.created_at DESC, p.id',
+      'price-low': 'p.price ASC, p.id',
+      'price-high': 'p.price DESC, p.id',
+      rating: 'p.rating DESC, p.id',
+      featured: 'p.featured DESC, p.created_at DESC, p.id',
+    }[filters.sort] || 'p.featured DESC, p.created_at DESC, p.id';
+
     let query = `
       SELECT
         p.*,
@@ -149,48 +220,34 @@ class ProductService {
       LEFT JOIN product_specs ps ON p.id = ps.product_id
       LEFT JOIN product_key_features pkf ON p.id = pkf.product_id
       LEFT JOIN category_key_features ckf ON pkf.category_key_feature_id = ckf.id
-      WHERE 1=1
+      ${whereClause}
+      GROUP BY p.id, c.category_name
+      ORDER BY ${sortOrderBy}
     `;
-    
-    const params = [];
-    let paramCount = 1;
-    
-    if (filters.status) {
-      query += ` AND p.status = $${paramCount++}`;
-      params.push(filters.status);
+
+    const params = [...whereParams];
+
+    if (isPaginated) {
+      const offset = (effectivePage - 1) * effectiveLimit;
+      query += ` LIMIT $${params.length + 1} OFFSET $${params.length + 2}`;
+      params.push(effectiveLimit, offset);
     }
-    
-    if (filters.category_id) {
-      query += ` AND p.category_id = $${paramCount++}`;
-      params.push(filters.category_id);
-    }
-    
-    if (filters.vendor_id) {
-      query += ` AND EXISTS (SELECT 1 FROM product_vendors pv2 WHERE pv2.product_id = p.id AND pv2.vendor_id = $${paramCount++})`;
-      params.push(filters.vendor_id);
-    }
-    
-    if (filters.featured !== undefined) {
-      query += ` AND p.featured = $${paramCount++}`;
-      params.push(filters.featured);
-    }
-    
-    if (filters.in_stock !== undefined) {
-      query += ` AND p.in_stock = $${paramCount++}`;
-      params.push(filters.in_stock);
-    }
-    
-    if (filters.search) {
-      query += ` AND (p.name ILIKE $${paramCount} OR p.description ILIKE $${paramCount})`;
-      params.push(`%${filters.search}%`);
-      paramCount++;
-    }
-    
-    query += ` GROUP BY p.id, c.category_name ORDER BY p.created_at DESC`;
-    
+
     const result = await db.query(query, params);
-    
-    return result.rows;
+
+    if (isPaginated) {
+      return {
+        rows: result.rows,
+        pagination: {
+          page: effectivePage,
+          limit: effectiveLimit,
+          total,
+          totalPages: Math.ceil(total / effectiveLimit),
+        },
+      };
+    }
+
+    return { rows: result.rows, pagination: null };
   }
   
   // Get product by ID

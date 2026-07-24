@@ -151,7 +151,7 @@ class CustomizationController {
   async getHeroMedia(req, res) {
     try {
       const heroMedia = await customizationService.getHeroMedia();
-      
+
       res.status(200).json({
         success: true,
         message: 'Hero media retrieved successfully',
@@ -162,6 +162,80 @@ class CustomizationController {
       res.status(500).json({
         success: false,
         message: 'Error fetching hero media',
+        error: error.message
+      });
+    }
+  }
+
+  // Get hero content - text/buttons/mode (public)
+  async getHeroContent(req, res) {
+    try {
+      const heroContent = await customizationService.getHeroContent();
+
+      res.status(200).json({
+        success: true,
+        message: 'Hero content retrieved successfully',
+        data: heroContent
+      });
+    } catch (error) {
+      console.error('Error fetching hero content:', error);
+      res.status(500).json({
+        success: false,
+        message: 'Error fetching hero content',
+        error: error.message
+      });
+    }
+  }
+
+  // Create or update hero content - text/buttons/mode (admin)
+  async upsertHeroContent(req, res) {
+    try {
+      const {
+        mode,
+        headline_line_1,
+        headline_line_2,
+        subtext,
+        button_1_text,
+        button_1_link,
+        button_2_text,
+        button_2_link
+      } = req.body;
+
+      if (!['single', 'slideshow'].includes(mode)) {
+        return res.status(400).json({
+          success: false,
+          message: "mode must be 'single' or 'slideshow'"
+        });
+      }
+
+      if (!headline_line_1 || !subtext || !button_1_text || !button_1_link || !button_2_text || !button_2_link) {
+        return res.status(400).json({
+          success: false,
+          message: 'headline_line_1, subtext, and both button texts/links are required'
+        });
+      }
+
+      const heroContent = await customizationService.upsertHeroContent({
+        mode,
+        headline_line_1,
+        headline_line_2: headline_line_2 || '',
+        subtext,
+        button_1_text,
+        button_1_link,
+        button_2_text,
+        button_2_link
+      });
+
+      res.status(200).json({
+        success: true,
+        message: 'Hero content updated successfully',
+        data: heroContent
+      });
+    } catch (error) {
+      console.error('Error updating hero content:', error);
+      res.status(500).json({
+        success: false,
+        message: 'Error updating hero content',
         error: error.message
       });
     }

@@ -109,6 +109,64 @@ class CustomizationService {
       throw error;
     }
   }
+
+  // Get hero content (text/buttons/mode) — singleton row
+  async getHeroContent() {
+    const result = await db.query(
+      `SELECT * FROM hero_content ORDER BY created_at ASC LIMIT 1`
+    );
+
+    return result.rows[0] || null;
+  }
+
+  // Create or update hero content — enforces a single row
+  async upsertHeroContent(content) {
+    const existing = await db.query('SELECT id FROM hero_content LIMIT 1');
+
+    const values = [
+      content.mode,
+      content.headline_line_1,
+      content.headline_line_2,
+      content.subtext,
+      content.button_1_text,
+      content.button_1_link,
+      content.button_2_text,
+      content.button_2_link,
+    ];
+
+    if (existing.rows.length > 0) {
+      const result = await db.query(
+        `UPDATE hero_content SET
+           mode = $1,
+           headline_line_1 = $2,
+           headline_line_2 = $3,
+           subtext = $4,
+           button_1_text = $5,
+           button_1_link = $6,
+           button_2_text = $7,
+           button_2_link = $8,
+           updated_at = CURRENT_TIMESTAMP
+         WHERE id = $9
+         RETURNING *`,
+        [...values, existing.rows[0].id]
+      );
+
+      return result.rows[0];
+    }
+
+    const result = await db.query(
+      `INSERT INTO hero_content (
+         mode, headline_line_1, headline_line_2, subtext,
+         button_1_text, button_1_link, button_2_text, button_2_link,
+         created_at, updated_at
+       )
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+       RETURNING *`,
+      values
+    );
+
+    return result.rows[0];
+  }
 }
 
 module.exports = new CustomizationService();

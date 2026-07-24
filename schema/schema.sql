@@ -264,6 +264,65 @@ CREATE TRIGGER update_pc_builder_filter_rules_updated_at BEFORE UPDATE ON pc_bui
 
 
 -- ============================================
+-- PC BUILDER CATEGORIES TABLE
+-- Controls which categories appear as steps in the
+-- PC Builder wizard, and in what order
+-- ============================================
+
+CREATE TABLE pc_builder_categories (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    category_id UUID NOT NULL UNIQUE,
+    display_order INTEGER NOT NULL DEFAULT 0 CHECK (display_order >= 0),
+    is_active BOOLEAN NOT NULL DEFAULT TRUE,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE CASCADE
+);
+
+CREATE INDEX idx_pc_builder_categories_is_active ON pc_builder_categories(is_active);
+CREATE INDEX idx_pc_builder_categories_display_order ON pc_builder_categories(display_order);
+
+CREATE TRIGGER update_pc_builder_categories_updated_at BEFORE UPDATE ON pc_builder_categories
+    FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+
+-- Seed existing categories so the PC Builder keeps working exactly as it
+-- does today until an admin curates the list from the new admin panel.
+INSERT INTO pc_builder_categories (category_id, display_order, is_active)
+SELECT id, (ROW_NUMBER() OVER (ORDER BY created_at DESC) - 1), TRUE
+FROM categories
+ON CONFLICT (category_id) DO NOTHING;
+
+
+-- ============================================
+-- PC BUILDER CATEGORY VENDORS TABLE
+-- Which vendors are valid options for a category's
+-- step in the PC Builder (e.g. CPU -> Intel, AMD only).
+-- No rows for a category means "no restriction" (all
+-- vendors are shown), so this is safe to leave unconfigured.
+-- ============================================
+
+CREATE TABLE pc_builder_category_vendors (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    category_id UUID NOT NULL,
+    vendor_id UUID NOT NULL,
+    display_order INTEGER NOT NULL DEFAULT 0 CHECK (display_order >= 0),
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE CASCADE,
+    FOREIGN KEY (vendor_id) REFERENCES vendors(id) ON DELETE CASCADE,
+    CONSTRAINT unique_pc_builder_category_vendor UNIQUE (category_id, vendor_id)
+);
+
+CREATE INDEX idx_pc_builder_category_vendors_category_id ON pc_builder_category_vendors(category_id);
+CREATE INDEX idx_pc_builder_category_vendors_vendor_id ON pc_builder_category_vendors(vendor_id);
+
+CREATE TRIGGER update_pc_builder_category_vendors_updated_at BEFORE UPDATE ON pc_builder_category_vendors
+    FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+
+
+-- ============================================
 -- BILLING INFORMATION TABLE (Admin Banking Info)
 -- ============================================
 
@@ -389,6 +448,33 @@ CREATE INDEX idx_hero_media_type ON hero_media(type);
 
 
 -- ============================================
+-- HERO CONTENT TABLE (Homepage Hero Section text/buttons/mode)
+-- Singleton table: exactly one row, enforced in the application layer.
+-- mode = 'single'    -> use only hero_media at display_index 0, no slideshow controls
+-- mode = 'slideshow' -> cycle through every hero_media row with arrows/dots
+-- ============================================
+
+CREATE TYPE hero_mode AS ENUM ('single', 'slideshow');
+
+CREATE TABLE hero_content (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    mode hero_mode NOT NULL DEFAULT 'single',
+    headline_line_1 VARCHAR(255) NOT NULL DEFAULT 'Gaming PCs,',
+    headline_line_2 VARCHAR(255) NOT NULL DEFAULT 'Built To Win.',
+    subtext TEXT NOT NULL DEFAULT 'Hand-built rigs with real component transparency and a 3-year warranty. Configure your own build or shop ready-to-ship systems today.',
+    button_1_text VARCHAR(100) NOT NULL DEFAULT 'Shop Gaming PCs',
+    button_1_link VARCHAR(500) NOT NULL DEFAULT '/products',
+    button_2_text VARCHAR(100) NOT NULL DEFAULT 'Start Custom Build',
+    button_2_link VARCHAR(500) NOT NULL DEFAULT '/pc-builder',
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TRIGGER update_hero_content_updated_at BEFORE UPDATE ON hero_content
+    FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+
+
+-- ============================================
 -- MIGRATION: products vendor_id -> product_vendors
 -- Run this block against an existing database instead of the full schema above.
 -- ============================================
@@ -475,4 +561,26 @@ CREATE INDEX idx_hero_media_type ON hero_media(type);
 -- CREATE INDEX IF NOT EXISTS idx_product_key_features_category_key_feature_id ON product_key_features(category_key_feature_id);
 -- CREATE INDEX IF NOT EXISTS idx_product_key_features_feature_value ON product_key_features(feature_value);
 -- CREATE TRIGGER update_product_key_features_updated_at BEFORE UPDATE ON product_key_features
+--     FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+
+
+-- ============================================
+-- MIGRATION: add hero content (text/buttons/mode)
+-- Run this block against an existing database instead of the full schema above.
+-- ============================================
+-- CREATE TYPE hero_mode AS ENUM ('single', 'slideshow');
+-- CREATE TABLE IF NOT EXISTS hero_content (
+--     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+--     mode hero_mode NOT NULL DEFAULT 'single',
+--     headline_line_1 VARCHAR(255) NOT NULL DEFAULT 'Gaming PCs,',
+--     headline_line_2 VARCHAR(255) NOT NULL DEFAULT 'Built To Win.',
+--     subtext TEXT NOT NULL DEFAULT 'Hand-built rigs with real component transparency and a 3-year warranty. Configure your own build or shop ready-to-ship systems today.',
+--     button_1_text VARCHAR(100) NOT NULL DEFAULT 'Shop Gaming PCs',
+--     button_1_link VARCHAR(500) NOT NULL DEFAULT '/products',
+--     button_2_text VARCHAR(100) NOT NULL DEFAULT 'Start Custom Build',
+--     button_2_link VARCHAR(500) NOT NULL DEFAULT '/pc-builder',
+--     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+--     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+-- );
+-- CREATE TRIGGER update_hero_content_updated_at BEFORE UPDATE ON hero_content
 --     FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();

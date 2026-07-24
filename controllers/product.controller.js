@@ -160,19 +160,23 @@ class ProductController {
         vendor_id: req.query.vendor_id,
         featured: req.query.featured === 'true' ? true : req.query.featured === 'false' ? false : undefined,
         in_stock: req.query.in_stock === 'true' ? true : req.query.in_stock === 'false' ? false : undefined,
-        search: req.query.search
+        search: req.query.search,
+        sort: req.query.sort,
+        page: req.query.page,
+        limit: req.query.limit
       };
-      
+
       // Remove undefined filters
       Object.keys(filters).forEach(key => filters[key] === undefined && delete filters[key]);
-      
-      const products = await productService.getAllProducts(filters);
-      
+
+      const { rows: products, pagination } = await productService.getAllProducts(filters);
+
       res.status(200).json({
         success: true,
         message: 'Products retrieved successfully',
         data: products,
-        count: products.length
+        count: products.length,
+        pagination
       });
     } catch (error) {
       console.error('Error fetching products:', error);
@@ -503,8 +507,8 @@ class ProductController {
       // Remove undefined filters
       Object.keys(filters).forEach(key => filters[key] === undefined && delete filters[key]);
       
-      const products = await productService.getAllProducts(filters);
-      
+      const { rows: products } = await productService.getAllProducts(filters);
+
       res.status(200).json({
         success: true,
         message: 'Featured products retrieved successfully',

@@ -1,6 +1,6 @@
-const categoryService = require('../services/category.service');
 const vendorService = require('../services/vendor.service');
 const pcBuilderFilterRuleService = require('../services/pcBuilderFilterRule.service');
+const pcBuilderCategoryService = require('../services/pcBuilderCategory.service');
 
 class PublicPcBuilderController {
   parseBoolean(value) {
@@ -11,10 +11,29 @@ class PublicPcBuilderController {
     return value === true || value === 'true';
   }
 
+  parsePriorSelections(value) {
+    if (!value) {
+      return [];
+    }
+
+    try {
+      const parsed = JSON.parse(value);
+      if (!Array.isArray(parsed)) {
+        return [];
+      }
+
+      return parsed
+        .filter(item => item && item.category_id && item.vendor_id)
+        .map(item => ({ category_id: item.category_id, vendor_id: item.vendor_id }));
+    } catch (error) {
+      return [];
+    }
+  }
+
   async getOptions(req, res) {
     try {
       const [categories, vendors] = await Promise.all([
-        categoryService.getAllCategories(),
+        pcBuilderCategoryService.getActiveOrdered(),
         vendorService.getAllVendors()
       ]);
 
@@ -44,6 +63,7 @@ class PublicPcBuilderController {
     try {
       const selectedCategoryId = req.query.selected_category_id || req.query.category_id;
       const selectedVendorId = req.query.selected_vendor_id || req.query.vendor_id;
+      const priorSelections = this.parsePriorSelections(req.query.prior_selections);
 
       if (!selectedCategoryId) {
         return res.status(400).json({
@@ -52,38 +72,55 @@ class PublicPcBuilderController {
         });
       }
 
-      const filters = {
-        selected_category_id: selectedCategoryId,
-        selected_vendor_id: selectedVendorId,
-        result_category_id: req.query.result_category_id,
+      const products = await pcBuilderFilterRuleService.getProductsForCategorySelection({
+        categoryId: selectedCategoryId,
+        vendorId: selectedVendorId,
+        priorSelections,
         status: 'published',
-        in_stock: this.parseBoolean(req.query.in_stock)
-      };
-
-      Object.keys(filters).forEach(key => filters[key] === undefined && delete filters[key]);
-
-      const result = await pcBuilderFilterRuleService.getProductsForSelection(filters);
+        inStock: this.parseBoolean(req.query.in_stock)
+      });
 
       res.status(200).json({
         success: true,
         message: 'Matching PC builder products retrieved successfully',
-        data: result.products,
-        applied_rules: result.rules.map(rule => ({
-          id: rule.id,
-          rule_name: rule.rule_name,
-          selected_category_id: rule.selected_category_id,
-          selected_vendor_id: rule.selected_vendor_id,
-          result_category_id: rule.result_category_id,
-          result_vendor_id: rule.result_vendor_id,
-          priority: rule.priority
-        })),
-        count: result.products.length
+        data: products,
+        count: products.length
       });
     } catch (error) {
       console.error('Error fetching public PC builder products:', error);
       res.status(500).json({
         success: false,
         message: 'Error fetching PC builder products',
+        error: error.message
+      });
+    }
+  }
+
+  async getVendorsForCategory(req, res) {
+    try {
+      const categoryId = req.query.category_id;
+      const priorSelections = this.parsePriorSelections(req.query.prior_selections);
+
+      if (!categoryId) {
+        return res.status(400).json({
+          success: false,
+          message: 'category_id is required'
+        });
+      }
+
+      const vendors = await pcBuilderFilterRuleService.getVendorsForSelection(categoryId, priorSelections);
+
+      res.status(200).json({
+        success: true,
+        message: 'PC builder vendors retrieved successfully',
+        data: vendors,
+        count: vendors.length
+      });
+    } catch (error) {
+      console.error('Error fetching public PC builder vendors:', error);
+      res.status(500).json({
+        success: false,
+        message: 'Error fetching PC builder vendors',
         error: error.message
       });
     }

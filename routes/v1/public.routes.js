@@ -58,8 +58,12 @@ router.get('/pc-builder/options', publicPcBuilderController.getOptions.bind(publ
 router.get('/pc-builder/products', publicPcBuilderController.getProducts.bind(publicPcBuilderController));
 router.get('/pc-builder/vendors', publicPcBuilderController.getVendorsForCategory.bind(publicPcBuilderController));
 
-// Public Vendors Routes (only GET)
-router.get('/vendors', vendorController.getAllVendors.bind(vendorController));
+// Public Vendors Routes (only GET, only published vendors)
+router.get('/vendors', (req, res, next) => {
+  // Force is_published filter for public endpoints
+  req.query.is_published = 'true';
+  next();
+}, vendorController.getAllVendors.bind(vendorController));
 router.get('/vendors/:id', vendorController.getVendorById.bind(vendorController));
 
 // Public Store Locations Route (only GET, only active locations)
@@ -69,8 +73,12 @@ router.get('/store-locations', (req, res, next) => {
   next();
 }, storeLocationController.getAllStoreLocations.bind(storeLocationController));
 
-// Public Categories Routes (only GET)
-router.get('/categories', categoryController.getAllCategories.bind(categoryController));
+// Public Categories Routes (only GET, only published categories)
+router.get('/categories', (req, res, next) => {
+  // Force is_published filter for public endpoints
+  req.query.is_published = 'true';
+  next();
+}, categoryController.getAllCategories.bind(categoryController));
 router.get('/categories/:id', categoryController.getCategoryById.bind(categoryController));
 
 // Public Billing Information Route (only GET)

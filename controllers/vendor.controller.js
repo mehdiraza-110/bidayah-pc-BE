@@ -44,8 +44,13 @@ class VendorController {
   // Get all vendors
   async getAllVendors(req, res) {
     try {
-      const vendors = await vendorService.getAllVendors();
-      
+      const filters = {};
+      if (req.query.is_published !== undefined) {
+        filters.is_published = req.query.is_published === 'true';
+      }
+
+      const vendors = await vendorService.getAllVendors(filters);
+
       res.status(200).json({
         success: true,
         message: 'Vendors retrieved successfully',
@@ -138,6 +143,77 @@ class VendorController {
     }
   }
   
+  // Preview how many currently-published products would be unpublished
+  // if this vendor were unpublished (read-only, for a confirmation prompt)
+  async getUnpublishImpact(req, res) {
+    try {
+      const { id } = req.params;
+      const vendor = await vendorService.getVendorById(id);
+
+      if (!vendor) {
+        return res.status(404).json({
+          success: false,
+          message: 'Vendor not found'
+        });
+      }
+
+      const impact = await vendorService.getUnpublishImpact(id);
+
+      res.status(200).json({
+        success: true,
+        message: 'Vendor unpublish impact retrieved successfully',
+        data: impact
+      });
+    } catch (error) {
+      console.error('Error fetching vendor unpublish impact:', error);
+      res.status(500).json({
+        success: false,
+        message: 'Error fetching vendor unpublish impact',
+        error: error.message
+      });
+    }
+  }
+
+  // Publish/unpublish a vendor. Unpublishing cascades to its products.
+  async setPublishStatus(req, res) {
+    try {
+      const { id } = req.params;
+      const { is_published } = req.body;
+
+      if (typeof is_published !== 'boolean') {
+        return res.status(400).json({
+          success: false,
+          message: 'is_published (boolean) is required'
+        });
+      }
+
+      const result = await vendorService.setPublished(id, is_published);
+
+      res.status(200).json({
+        success: true,
+        message: is_published
+          ? 'Vendor published successfully'
+          : `Vendor unpublished successfully (${result.unpublishedProductCount} product(s) unpublished)`,
+        data: result
+      });
+    } catch (error) {
+      console.error('Error updating vendor publish status:', error);
+
+      if (error.message === 'Vendor not found') {
+        return res.status(404).json({
+          success: false,
+          message: 'Vendor not found'
+        });
+      }
+
+      res.status(500).json({
+        success: false,
+        message: 'Error updating vendor publish status',
+        error: error.message
+      });
+    }
+  }
+
   // Delete vendor
   async deleteVendor(req, res) {
     try {

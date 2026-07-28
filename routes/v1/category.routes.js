@@ -16,6 +16,12 @@ router.get('/:id', categoryController.getCategoryById.bind(categoryController));
 router.put('/:id', upload.single('image'), categoryController.updateCategory.bind(categoryController));
 router.patch('/:id', upload.single('image'), categoryController.updateCategory.bind(categoryController));
 
+// Preview cascade impact of unpublishing this category
+router.get('/:id/unpublish-impact', categoryController.getUnpublishImpact.bind(categoryController));
+
+// Publish/unpublish (cascades to the category's vendors, then their products, when unpublishing)
+router.patch('/:id/publish-status', categoryController.setPublishStatus.bind(categoryController));
+
 // Delete category
 router.delete('/:id', categoryController.deleteCategory.bind(categoryController));
 

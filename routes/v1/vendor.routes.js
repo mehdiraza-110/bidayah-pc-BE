@@ -15,6 +15,12 @@ router.get('/:id', vendorController.getVendorById.bind(vendorController));
 router.put('/:id', vendorController.updateVendor.bind(vendorController));
 router.patch('/:id', vendorController.updateVendor.bind(vendorController));
 
+// Preview cascade impact of unpublishing this vendor
+router.get('/:id/unpublish-impact', vendorController.getUnpublishImpact.bind(vendorController));
+
+// Publish/unpublish (cascades to the vendor's products when unpublishing)
+router.patch('/:id/publish-status', vendorController.setPublishStatus.bind(vendorController));
+
 // Delete vendor
 router.delete('/:id', vendorController.deleteVendor.bind(vendorController));
 

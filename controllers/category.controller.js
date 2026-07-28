@@ -64,8 +64,13 @@ class CategoryController {
   // Get all categories
   async getAllCategories(req, res) {
     try {
-      const categories = await categoryService.getAllCategories();
-      
+      const filters = {};
+      if (req.query.is_published !== undefined) {
+        filters.is_published = req.query.is_published === 'true';
+      }
+
+      const categories = await categoryService.getAllCategories(filters);
+
       res.status(200).json({
         success: true,
         message: 'Categories retrieved successfully',
@@ -205,6 +210,79 @@ class CategoryController {
     }
   }
   
+  // Preview how many currently-published vendors (and their currently-
+  // published products) would be unpublished if this category were
+  // unpublished (read-only, for a confirmation prompt)
+  async getUnpublishImpact(req, res) {
+    try {
+      const { id } = req.params;
+      const category = await categoryService.getCategoryById(id);
+
+      if (!category) {
+        return res.status(404).json({
+          success: false,
+          message: 'Category not found'
+        });
+      }
+
+      const impact = await categoryService.getUnpublishImpact(id);
+
+      res.status(200).json({
+        success: true,
+        message: 'Category unpublish impact retrieved successfully',
+        data: impact
+      });
+    } catch (error) {
+      console.error('Error fetching category unpublish impact:', error);
+      res.status(500).json({
+        success: false,
+        message: 'Error fetching category unpublish impact',
+        error: error.message
+      });
+    }
+  }
+
+  // Publish/unpublish a category. Unpublishing cascades to its vendors and,
+  // transitively, their products.
+  async setPublishStatus(req, res) {
+    try {
+      const { id } = req.params;
+      const { is_published } = req.body;
+
+      if (typeof is_published !== 'boolean') {
+        return res.status(400).json({
+          success: false,
+          message: 'is_published (boolean) is required'
+        });
+      }
+
+      const result = await categoryService.setPublished(id, is_published);
+
+      res.status(200).json({
+        success: true,
+        message: is_published
+          ? 'Category published successfully'
+          : `Category unpublished successfully (${result.unpublishedVendorCount} vendor(s), ${result.unpublishedProductCount} product(s) unpublished)`,
+        data: result
+      });
+    } catch (error) {
+      console.error('Error updating category publish status:', error);
+
+      if (error.message === 'Category not found') {
+        return res.status(404).json({
+          success: false,
+          message: 'Category not found'
+        });
+      }
+
+      res.status(500).json({
+        success: false,
+        message: 'Error updating category publish status',
+        error: error.message
+      });
+    }
+  }
+
   // Delete category
   async deleteCategory(req, res) {
     try {

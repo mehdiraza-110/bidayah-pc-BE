@@ -49,23 +49,27 @@ INSERT INTO roles (name) VALUES ('commoner');
 CREATE TABLE vendors (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     vendor_name VARCHAR(255) NOT NULL UNIQUE,
+    is_published BOOLEAN NOT NULL DEFAULT true,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE INDEX idx_vendor_name ON vendors(vendor_name);
 CREATE INDEX idx_created_at ON vendors(created_at);
+CREATE INDEX idx_vendors_is_published ON vendors(is_published);
 
 
 CREATE TABLE categories (
    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     category_name VARCHAR(255) NOT NULL UNIQUE,
    image TEXT NULL,
+    is_published BOOLEAN NOT NULL DEFAULT true,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE INDEX idx_created_at ON categories(created_at);
+CREATE INDEX idx_categories_is_published ON categories(is_published);
 
 
 -- ============================================

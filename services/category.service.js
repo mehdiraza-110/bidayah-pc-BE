@@ -13,30 +13,37 @@ class CategoryService {
     return result.rows[0];
   }
   
-  // Get all categories
-  async getAllCategories() {
-    const result = await db.query(
-      `SELECT id, category_name, image, created_at, updated_at
-       FROM categories
-       ORDER BY created_at DESC`
-    );
-    
+  // Get all categories. Pass { is_published: true } (set by the public route
+  // middleware) to hide unpublished categories from the storefront; admin
+  // calls this with no filter so it sees everything.
+  async getAllCategories(filters = {}) {
+    let query = `SELECT id, category_name, image, is_published, created_at, updated_at FROM categories`;
+    const params = [];
+
+    if (filters.is_published !== undefined) {
+      params.push(filters.is_published);
+      query += ` WHERE is_published = $${params.length}`;
+    }
+
+    query += ` ORDER BY created_at DESC`;
+
+    const result = await db.query(query, params);
     return result.rows;
   }
-  
+
   // Get category by ID
   async getCategoryById(categoryId) {
     const result = await db.query(
-      `SELECT id, category_name, image, created_at, updated_at
+      `SELECT id, category_name, image, is_published, created_at, updated_at
        FROM categories
        WHERE id = $1`,
       [categoryId]
     );
-    
+
     if (result.rows.length === 0) {
       return null;
     }
-    
+
     return result.rows[0];
   }
   
@@ -95,6 +102,105 @@ class CategoryService {
     return result.rows[0];
   }
   
+  // How many currently-published vendors (and, transitively, their
+  // currently-published products) would be unpublished if this category
+  // were unpublished right now. Read-only — safe for a confirmation prompt.
+  async getUnpublishImpact(categoryId) {
+    const vendorsResult = await db.query(
+      `SELECT DISTINCT pv.vendor_id
+       FROM product_vendors pv
+       JOIN products p ON p.id = pv.product_id
+       JOIN vendors v ON v.id = pv.vendor_id
+       WHERE p.category_id = $1 AND v.is_published = true`,
+      [categoryId]
+    );
+    const vendorIds = vendorsResult.rows.map((row) => row.vendor_id);
+
+    if (vendorIds.length === 0) {
+      return { vendorCount: 0, productCount: 0 };
+    }
+
+    const productsResult = await db.query(
+      `SELECT COUNT(DISTINCT p.id)::int AS product_count
+       FROM products p
+       JOIN product_vendors pv ON pv.product_id = p.id
+       WHERE pv.vendor_id = ANY($1::uuid[]) AND p.status = 'published'`,
+      [vendorIds]
+    );
+
+    return { vendorCount: vendorIds.length, productCount: productsResult.rows[0].product_count };
+  }
+
+  // Publish/unpublish a category. Unpublishing cascades: every currently-
+  // published vendor selling in this category is unpublished, which in turn
+  // unpublishes every currently-published product of those vendors (same
+  // rule as VendorService#setPublished) — all via bulk UPDATEs in one
+  // transaction, not per-row loops. Publishing a category back does NOT
+  // resurrect vendors/products — that's a deliberate, separate admin action.
+  async setPublished(categoryId, isPublished) {
+    const client = await db.getClient();
+    try {
+      await client.query('BEGIN');
+
+      const categoryResult = await client.query(
+        `UPDATE categories
+         SET is_published = $1, updated_at = CURRENT_TIMESTAMP
+         WHERE id = $2
+         RETURNING id, category_name, image, is_published, created_at, updated_at`,
+        [isPublished, categoryId]
+      );
+
+      if (categoryResult.rows.length === 0) {
+        throw new Error('Category not found');
+      }
+
+      let unpublishedVendorCount = 0;
+      let unpublishedProductCount = 0;
+
+      if (!isPublished) {
+        const vendorsResult = await client.query(
+          `UPDATE vendors
+           SET is_published = false, updated_at = CURRENT_TIMESTAMP
+           WHERE is_published = true
+             AND id IN (
+               SELECT DISTINCT pv.vendor_id
+               FROM product_vendors pv
+               JOIN products p ON p.id = pv.product_id
+               WHERE p.category_id = $1
+             )
+           RETURNING id`,
+          [categoryId]
+        );
+        unpublishedVendorCount = vendorsResult.rows.length;
+        const vendorIds = vendorsResult.rows.map((row) => row.id);
+
+        if (vendorIds.length > 0) {
+          const productsResult = await client.query(
+            `UPDATE products
+             SET status = 'draft', updated_at = CURRENT_TIMESTAMP
+             WHERE status = 'published'
+               AND id IN (SELECT product_id FROM product_vendors WHERE vendor_id = ANY($1::uuid[]))
+             RETURNING id`,
+            [vendorIds]
+          );
+          unpublishedProductCount = productsResult.rows.length;
+        }
+      }
+
+      await client.query('COMMIT');
+      return {
+        category: categoryResult.rows[0],
+        unpublishedVendorCount,
+        unpublishedProductCount,
+      };
+    } catch (error) {
+      await client.query('ROLLBACK');
+      throw error;
+    } finally {
+      client.release();
+    }
+  }
+
   // Delete category
   async deleteCategory(categoryId) {
     // Get category first to get image URL for deletion from S3

@@ -72,19 +72,25 @@ class PublicPcBuilderController {
         });
       }
 
-      const products = await pcBuilderFilterRuleService.getProductsForCategorySelection({
+      const limit = req.query.limit ? parseInt(req.query.limit, 10) : 20;
+      const offset = req.query.offset ? parseInt(req.query.offset, 10) : 0;
+
+      const { products, hasMore } = await pcBuilderFilterRuleService.getProductsForCategorySelection({
         categoryId: selectedCategoryId,
         vendorId: selectedVendorId,
         priorSelections,
         status: 'published',
-        inStock: this.parseBoolean(req.query.in_stock)
+        inStock: this.parseBoolean(req.query.in_stock),
+        limit,
+        offset
       });
 
       res.status(200).json({
         success: true,
         message: 'Matching PC builder products retrieved successfully',
         data: products,
-        count: products.length
+        count: products.length,
+        has_more: hasMore
       });
     } catch (error) {
       console.error('Error fetching public PC builder products:', error);

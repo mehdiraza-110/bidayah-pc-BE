@@ -9,6 +9,8 @@ const orderRoutes = require('./order.routes');
 const statisticsRoutes = require('./statistics.routes');
 const publicRoutes = require('./public.routes');
 const customizationRoutes = require('./customization.routes');
+const siteSettingsRoutes = require('./site-settings.routes');
+const storeLocationRoutes = require('./store-location.routes');
 const pcBuilderFilterRuleRoutes = require('./pc-builder-filter-rule.routes');
 const pcBuilderCategoryRoutes = require('./pc-builder-category.routes');
 const pcBuilderCategoryVendorRoutes = require('./pc-builder-category-vendor.routes');
@@ -22,6 +24,9 @@ router.use('/users', userRoutes);
 
 // Vendor routes
 router.use('/vendors', vendorRoutes);
+
+// Store location routes
+router.use('/store-locations', storeLocationRoutes);
 
 // Category routes
 router.use('/categories', categoryRoutes);
@@ -43,6 +48,9 @@ router.use('/statistics', statisticsRoutes);
 
 // Customization routes (admin only)
 router.use('/customization', customizationRoutes);
+
+// Site settings routes (admin only)
+router.use('/site-settings', siteSettingsRoutes);
 
 // PC builder filter rule routes (admin only)
 router.use('/pc-builder-filter-rules', pcBuilderFilterRuleRoutes);

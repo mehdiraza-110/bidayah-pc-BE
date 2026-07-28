@@ -6,6 +6,8 @@ const categoryController = require('../../controllers/category.controller');
 const billingController = require('../../controllers/billing.controller');
 const customizationController = require('../../controllers/customization.controller');
 const publicPcBuilderController = require('../../controllers/publicPcBuilder.controller');
+const siteSettingsController = require('../../controllers/siteSettings.controller');
+const storeLocationController = require('../../controllers/storeLocation.controller');
 
 // Middleware to check if product is published (for public routes)
 const checkPublishedProduct = async (req, res, next) => {
@@ -60,6 +62,13 @@ router.get('/pc-builder/vendors', publicPcBuilderController.getVendorsForCategor
 router.get('/vendors', vendorController.getAllVendors.bind(vendorController));
 router.get('/vendors/:id', vendorController.getVendorById.bind(vendorController));
 
+// Public Store Locations Route (only GET, only active locations)
+router.get('/store-locations', (req, res, next) => {
+  // Force active_only filter for public endpoints
+  req.query.active_only = 'true';
+  next();
+}, storeLocationController.getAllStoreLocations.bind(storeLocationController));
+
 // Public Categories Routes (only GET)
 router.get('/categories', categoryController.getAllCategories.bind(categoryController));
 router.get('/categories/:id', categoryController.getCategoryById.bind(categoryController));
@@ -72,5 +81,8 @@ router.get('/hero-media', customizationController.getHeroMedia.bind(customizatio
 
 // Public Hero Content Route (only GET)
 router.get('/hero-content', customizationController.getHeroContent.bind(customizationController));
+
+// Public Site Settings Route (only GET)
+router.get('/site-settings', siteSettingsController.getSiteSettings.bind(siteSettingsController));
 
 module.exports = router;

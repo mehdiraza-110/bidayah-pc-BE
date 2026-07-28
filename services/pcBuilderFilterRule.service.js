@@ -410,7 +410,7 @@ class PcBuilderFilterRuleService {
   // Products for a category + vendor selection, additionally constrained by
   // any compatibility rules the customer's other selections trigger. Works
   // even when no rules exist at all (plain category/vendor lookup).
-  async getProductsForCategorySelection({ categoryId, vendorId, priorSelections = [], status, inStock }) {
+  async getProductsForCategorySelection({ categoryId, vendorId, priorSelections = [], status, inStock, limit, offset }) {
     const constraintsPerTrigger = await this.getCompatibilityConstraints(categoryId, priorSelections);
 
     let query = `
@@ -515,8 +515,24 @@ class PcBuilderFilterRuleService {
 
     query += ` GROUP BY p.id, c.category_name ORDER BY p.created_at DESC`;
 
+    const effectiveLimit = limit && limit > 0 ? limit : null;
+    const effectiveOffset = offset && offset > 0 ? offset : 0;
+
+    if (effectiveLimit) {
+      // Fetch one extra row to detect whether more pages exist, without a second COUNT query.
+      query += ` LIMIT $${paramCount++} OFFSET $${paramCount++}`;
+      params.push(effectiveLimit + 1, effectiveOffset);
+    }
+
     const result = await db.query(query, params);
-    return result.rows;
+    const rows = result.rows;
+
+    if (!effectiveLimit) {
+      return { products: rows, hasMore: false };
+    }
+
+    const hasMore = rows.length > effectiveLimit;
+    return { products: hasMore ? rows.slice(0, effectiveLimit) : rows, hasMore };
   }
 }
 

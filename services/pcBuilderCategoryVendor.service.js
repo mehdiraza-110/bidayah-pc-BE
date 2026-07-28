@@ -1,9 +1,9 @@
 const db = require('../config/db.config');
-const vendorService = require('./vendor.service');
 
 class PcBuilderCategoryVendorService {
-  // Vendors valid for a category. Falls back to every vendor when the
-  // category has no configured restriction yet.
+  // Vendors valid for a category. An empty result means "unrestricted" —
+  // the storefront shows no vendor filter at all for that step rather than
+  // dumping every vendor in the system.
   async getVendorsForCategory(categoryId) {
     const result = await db.query(
       `SELECT v.id, v.vendor_name, v.created_at, v.updated_at
@@ -13,10 +13,6 @@ class PcBuilderCategoryVendorService {
        ORDER BY pcv.display_order ASC`,
       [categoryId]
     );
-
-    if (result.rows.length === 0) {
-      return vendorService.getAllVendors();
-    }
 
     return result.rows;
   }

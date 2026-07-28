@@ -475,6 +475,42 @@ CREATE TRIGGER update_hero_content_updated_at BEFORE UPDATE ON hero_content
 
 
 -- ============================================
+-- SITE SETTINGS TABLE
+-- Singleton table: exactly one row, enforced in the application layer.
+-- ============================================
+
+CREATE TABLE site_settings (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    whatsapp_number VARCHAR(32),
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TRIGGER update_site_settings_updated_at BEFORE UPDATE ON site_settings
+    FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+
+
+-- ============================================
+-- STORE LOCATIONS TABLE
+-- ============================================
+
+CREATE TABLE store_locations (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    name VARCHAR(255) NOT NULL,
+    address TEXT NOT NULL,
+    city VARCHAR(255),
+    is_active BOOLEAN NOT NULL DEFAULT true,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX idx_store_location_active ON store_locations(is_active);
+
+CREATE TRIGGER update_store_locations_updated_at BEFORE UPDATE ON store_locations
+    FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+
+
+-- ============================================
 -- MIGRATION: products vendor_id -> product_vendors
 -- Run this block against an existing database instead of the full schema above.
 -- ============================================
@@ -583,4 +619,36 @@ CREATE TRIGGER update_hero_content_updated_at BEFORE UPDATE ON hero_content
 --     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 -- );
 -- CREATE TRIGGER update_hero_content_updated_at BEFORE UPDATE ON hero_content
+--     FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+
+
+-- ============================================
+-- MIGRATION: add site settings (whatsapp number)
+-- Run this block against an existing database instead of the full schema above.
+-- ============================================
+-- CREATE TABLE IF NOT EXISTS site_settings (
+--     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+--     whatsapp_number VARCHAR(32),
+--     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+--     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+-- );
+-- CREATE TRIGGER update_site_settings_updated_at BEFORE UPDATE ON site_settings
+--     FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+
+
+-- ============================================
+-- MIGRATION: add store locations
+-- Run this block against an existing database instead of the full schema above.
+-- ============================================
+-- CREATE TABLE IF NOT EXISTS store_locations (
+--     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+--     name VARCHAR(255) NOT NULL,
+--     address TEXT NOT NULL,
+--     city VARCHAR(255),
+--     is_active BOOLEAN NOT NULL DEFAULT true,
+--     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+--     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+-- );
+-- CREATE INDEX IF NOT EXISTS idx_store_location_active ON store_locations(is_active);
+-- CREATE TRIGGER update_store_locations_updated_at BEFORE UPDATE ON store_locations
 --     FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();

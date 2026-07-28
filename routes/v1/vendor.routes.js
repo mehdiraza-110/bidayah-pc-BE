@@ -17,6 +17,7 @@ router.patch('/:id', vendorController.updateVendor.bind(vendorController));
 
 // Preview cascade impact of unpublishing this vendor
 router.get('/:id/unpublish-impact', vendorController.getUnpublishImpact.bind(vendorController));
+router.get('/:id/unpublish-impact/products', vendorController.getUnpublishImpactProducts.bind(vendorController));
 
 // Publish/unpublish (cascades to the vendor's products when unpublishing)
 router.patch('/:id/publish-status', vendorController.setPublishStatus.bind(vendorController));

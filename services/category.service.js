@@ -102,10 +102,10 @@ class CategoryService {
     return result.rows[0];
   }
   
-  // How many currently-published vendors (and, transitively, their
-  // currently-published products) would be unpublished if this category
-  // were unpublished right now. Read-only — safe for a confirmation prompt.
-  async getUnpublishImpact(categoryId) {
+  // Currently-published vendors selling in this category — the set that
+  // would be unpublished (and whose products would cascade-unpublish) if
+  // this category were unpublished right now.
+  async getAffectedVendorIds(categoryId) {
     const vendorsResult = await db.query(
       `SELECT DISTINCT pv.vendor_id
        FROM product_vendors pv
@@ -114,7 +114,14 @@ class CategoryService {
        WHERE p.category_id = $1 AND v.is_published = true`,
       [categoryId]
     );
-    const vendorIds = vendorsResult.rows.map((row) => row.vendor_id);
+    return vendorsResult.rows.map((row) => row.vendor_id);
+  }
+
+  // How many currently-published vendors (and, transitively, their
+  // currently-published products) would be unpublished if this category
+  // were unpublished right now. Read-only — safe for a confirmation prompt.
+  async getUnpublishImpact(categoryId) {
+    const vendorIds = await this.getAffectedVendorIds(categoryId);
 
     if (vendorIds.length === 0) {
       return { vendorCount: 0, productCount: 0 };
@@ -129,6 +136,39 @@ class CategoryService {
     );
 
     return { vendorCount: vendorIds.length, productCount: productsResult.rows[0].product_count };
+  }
+
+  // Paginated list of the actual currently-published products that would be
+  // unpublished (same product set as getUnpublishImpact, but the rows
+  // instead of a count) — lets the admin see exactly what's affected before
+  // confirming. A product can carry more than one affected vendor, so the
+  // de-dup happens in a subquery before pagination is applied.
+  async getUnpublishImpactProducts(categoryId, { limit = 7, offset = 0 } = {}) {
+    const vendorIds = await this.getAffectedVendorIds(categoryId);
+
+    if (vendorIds.length === 0) {
+      return { products: [], hasMore: false };
+    }
+
+    const result = await db.query(
+      `SELECT sub.id, sub.name, sub.price, sub.category_name, sub.vendor_name
+       FROM (
+         SELECT DISTINCT ON (p.id) p.id, p.name, p.price, c.category_name, v.vendor_name
+         FROM products p
+         LEFT JOIN categories c ON c.id = p.category_id
+         JOIN product_vendors pv ON pv.product_id = p.id
+         JOIN vendors v ON v.id = pv.vendor_id
+         WHERE pv.vendor_id = ANY($1::uuid[]) AND p.status = 'published'
+         ORDER BY p.id, v.vendor_name
+       ) sub
+       ORDER BY sub.name ASC
+       LIMIT $2 OFFSET $3`,
+      [vendorIds, limit + 1, offset]
+    );
+
+    const hasMore = result.rows.length > limit;
+    const products = hasMore ? result.rows.slice(0, limit) : result.rows;
+    return { products, hasMore };
   }
 
   // Publish/unpublish a category. Unpublishing cascades: every currently-

@@ -242,6 +242,41 @@ class CategoryController {
     }
   }
 
+  // Preview the actual currently-published products that would be
+  // unpublished (paginated) if this category were unpublished
+  async getUnpublishImpactProducts(req, res) {
+    try {
+      const { id } = req.params;
+      const category = await categoryService.getCategoryById(id);
+
+      if (!category) {
+        return res.status(404).json({
+          success: false,
+          message: 'Category not found'
+        });
+      }
+
+      const limit = req.query.limit ? parseInt(req.query.limit, 10) : 7;
+      const offset = req.query.offset ? parseInt(req.query.offset, 10) : 0;
+
+      const { products, hasMore } = await categoryService.getUnpublishImpactProducts(id, { limit, offset });
+
+      res.status(200).json({
+        success: true,
+        message: 'Category unpublish impact products retrieved successfully',
+        data: products,
+        has_more: hasMore
+      });
+    } catch (error) {
+      console.error('Error fetching category unpublish impact products:', error);
+      res.status(500).json({
+        success: false,
+        message: 'Error fetching category unpublish impact products',
+        error: error.message
+      });
+    }
+  }
+
   // Publish/unpublish a category. Unpublishing cascades to its vendors and,
   // transitively, their products.
   async setPublishStatus(req, res) {

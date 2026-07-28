@@ -95,6 +95,26 @@ class VendorService {
     return { productCount: result.rows[0].product_count };
   }
 
+  // Paginated list of the actual currently-published products that would be
+  // unpublished (same rule as getUnpublishImpact, but the rows instead of a
+  // count) — lets the admin see exactly what's affected before confirming.
+  async getUnpublishImpactProducts(vendorId, { limit = 7, offset = 0 } = {}) {
+    const result = await db.query(
+      `SELECT p.id, p.name, p.price, c.category_name
+       FROM products p
+       LEFT JOIN categories c ON c.id = p.category_id
+       WHERE p.status = 'published'
+         AND p.id IN (SELECT product_id FROM product_vendors WHERE vendor_id = $1)
+       ORDER BY p.name ASC
+       LIMIT $2 OFFSET $3`,
+      [vendorId, limit + 1, offset]
+    );
+
+    const hasMore = result.rows.length > limit;
+    const products = hasMore ? result.rows.slice(0, limit) : result.rows;
+    return { products, hasMore };
+  }
+
   // Publish/unpublish a vendor. Unpublishing cascades to every currently-
   // published product carrying this vendor (single bulk UPDATE, not a
   // per-row loop). Publishing a vendor back does NOT resurrect its

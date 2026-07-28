@@ -18,6 +18,7 @@ router.patch('/:id', upload.single('image'), categoryController.updateCategory.b
 
 // Preview cascade impact of unpublishing this category
 router.get('/:id/unpublish-impact', categoryController.getUnpublishImpact.bind(categoryController));
+router.get('/:id/unpublish-impact/products', categoryController.getUnpublishImpactProducts.bind(categoryController));
 
 // Publish/unpublish (cascades to the category's vendors, then their products, when unpublishing)
 router.patch('/:id/publish-status', categoryController.setPublishStatus.bind(categoryController));

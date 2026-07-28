@@ -174,6 +174,41 @@ class VendorController {
     }
   }
 
+  // Preview the actual currently-published products that would be
+  // unpublished (paginated) if this vendor were unpublished
+  async getUnpublishImpactProducts(req, res) {
+    try {
+      const { id } = req.params;
+      const vendor = await vendorService.getVendorById(id);
+
+      if (!vendor) {
+        return res.status(404).json({
+          success: false,
+          message: 'Vendor not found'
+        });
+      }
+
+      const limit = req.query.limit ? parseInt(req.query.limit, 10) : 7;
+      const offset = req.query.offset ? parseInt(req.query.offset, 10) : 0;
+
+      const { products, hasMore } = await vendorService.getUnpublishImpactProducts(id, { limit, offset });
+
+      res.status(200).json({
+        success: true,
+        message: 'Vendor unpublish impact products retrieved successfully',
+        data: products,
+        has_more: hasMore
+      });
+    } catch (error) {
+      console.error('Error fetching vendor unpublish impact products:', error);
+      res.status(500).json({
+        success: false,
+        message: 'Error fetching vendor unpublish impact products',
+        error: error.message
+      });
+    }
+  }
+
   // Publish/unpublish a vendor. Unpublishing cascades to its products.
   async setPublishStatus(req, res) {
     try {

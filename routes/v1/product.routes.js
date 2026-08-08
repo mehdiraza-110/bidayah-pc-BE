@@ -46,6 +46,10 @@ router.patch(
   productController.updateProduct.bind(productController)
 );
 
+// Bulk delete products
+// body: { ids: string[] }
+router.post('/bulk-delete', productController.bulkDeleteProducts.bind(productController));
+
 // Delete product
 router.delete('/:id', productController.deleteProduct.bind(productController));
 

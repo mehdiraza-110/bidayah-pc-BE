@@ -34,7 +34,7 @@ class PublicPcBuilderController {
     try {
       const [categories, vendors] = await Promise.all([
         pcBuilderCategoryService.getActiveOrdered(),
-        vendorService.getAllVendors()
+        vendorService.getAllVendors({ is_published: true })
       ]);
 
       res.status(200).json({

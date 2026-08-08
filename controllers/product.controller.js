@@ -163,7 +163,8 @@ class ProductController {
         search: req.query.search,
         sort: req.query.sort,
         page: req.query.page,
-        limit: req.query.limit
+        limit: req.query.limit,
+        public_only: req.query.public_only === 'true' ? true : undefined
       };
 
       // Remove undefined filters
@@ -455,7 +456,62 @@ class ProductController {
       });
     }
   }
-  
+
+  // Bulk delete products
+  async bulkDeleteProducts(req, res) {
+    try {
+      const { ids } = req.body;
+
+      if (!Array.isArray(ids) || ids.length === 0) {
+        return res.status(400).json({
+          success: false,
+          message: 'ids must be a non-empty array of product IDs'
+        });
+      }
+
+      const result = await productService.bulkDeleteProducts(ids);
+
+      // Delete each product's main image and media from S3
+      for (const product of result.deleted) {
+        if (product.image) {
+          try {
+            await deleteFromS3(product.image);
+          } catch (deleteError) {
+            console.error(`Error deleting main image from S3 for product ${product.id}:`, deleteError);
+          }
+        }
+
+        if (product.media && product.media.length > 0) {
+          for (const mediaUrl of product.media) {
+            try {
+              await deleteFromS3(mediaUrl);
+            } catch (deleteError) {
+              console.error(`Error deleting media from S3 for product ${product.id}:`, deleteError);
+            }
+          }
+        }
+      }
+
+      res.status(200).json({
+        success: true,
+        message: `${result.deleted.length} product(s) deleted successfully`,
+        data: {
+          deletedIds: result.deleted.map((p) => p.id),
+          deletedCount: result.deleted.length,
+          notFound: result.notFound
+        }
+      });
+    } catch (error) {
+      console.error('Error bulk deleting products:', error);
+
+      res.status(500).json({
+        success: false,
+        message: 'Error bulk deleting products',
+        error: error.message
+      });
+    }
+  }
+
   // Toggle featured status
   async toggleFeatured(req, res) {
     try {
@@ -501,6 +557,7 @@ class ProductController {
       const filters = {
         status: 'published',
         featured: true,
+        public_only: true,
         in_stock: req.query.in_stock === 'true' ? true : req.query.in_stock === 'false' ? false : undefined
       };
       

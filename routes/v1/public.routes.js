@@ -9,29 +9,23 @@ const publicPcBuilderController = require('../../controllers/publicPcBuilder.con
 const siteSettingsController = require('../../controllers/siteSettings.controller');
 const storeLocationController = require('../../controllers/storeLocation.controller');
 
-// Middleware to check if product is published (for public routes)
+// Middleware to check if a product is actually visible on the storefront
+// (own status published, AND its category/vendors haven't since been
+// unpublished — see ProductService#isPubliclyVisible).
 const checkPublishedProduct = async (req, res, next) => {
   const productService = require('../../services/product.service');
   const { id } = req.params;
-  
+
   try {
-    const product = await productService.getProductById(id);
-    
-    if (!product) {
+    const visible = await productService.isPubliclyVisible(id);
+
+    if (!visible) {
       return res.status(404).json({
         success: false,
         message: 'Product not found'
       });
     }
-    
-    if (product.status !== 'published') {
-      return res.status(404).json({
-        success: false,
-        message: 'Product not found'
-      });
-    }
-    
-    // Product is published, continue to controller
+
     next();
   } catch (error) {
     res.status(500).json({
@@ -46,8 +40,9 @@ const checkPublishedProduct = async (req, res, next) => {
 router.get('/products/featured', productController.getFeaturedProducts.bind(productController));
 
 router.get('/products', (req, res, next) => {
-  // Force status filter to 'published' for public endpoints
+  // Force status + published-category/vendor filters for public endpoints
   req.query.status = 'published';
+  req.query.public_only = 'true';
   next();
 }, productController.getAllProducts.bind(productController));
 
@@ -64,7 +59,10 @@ router.get('/vendors', (req, res, next) => {
   req.query.is_published = 'true';
   next();
 }, vendorController.getAllVendors.bind(vendorController));
-router.get('/vendors/:id', vendorController.getVendorById.bind(vendorController));
+router.get('/vendors/:id', (req, res, next) => {
+  req.query.public_only = 'true';
+  next();
+}, vendorController.getVendorById.bind(vendorController));
 
 // Public Store Locations Route (only GET, only active locations)
 router.get('/store-locations', (req, res, next) => {
@@ -79,7 +77,10 @@ router.get('/categories', (req, res, next) => {
   req.query.is_published = 'true';
   next();
 }, categoryController.getAllCategories.bind(categoryController));
-router.get('/categories/:id', categoryController.getCategoryById.bind(categoryController));
+router.get('/categories/:id', (req, res, next) => {
+  req.query.public_only = 'true';
+  next();
+}, categoryController.getCategoryById.bind(categoryController));
 
 // Public Billing Information Route (only GET)
 router.get('/billing', billingController.getBillingInfo.bind(billingController));

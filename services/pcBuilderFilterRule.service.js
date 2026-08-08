@@ -442,6 +442,12 @@ class PcBuilderFilterRuleService {
       LEFT JOIN product_media pm ON p.id = pm.product_id
       LEFT JOIN product_specs ps ON p.id = ps.product_id
       WHERE p.category_id = $1
+        AND (c.id IS NULL OR c.is_published = true)
+        AND NOT EXISTS (
+          SELECT 1 FROM product_vendors epv
+          JOIN vendors ev ON ev.id = epv.vendor_id
+          WHERE epv.product_id = p.id AND ev.is_published = false
+        )
     `;
 
     const params = [categoryId];

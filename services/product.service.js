@@ -2,13 +2,55 @@ const db = require('../config/db.config');
 const keyFeatureService = require('./keyFeature.service');
 
 class ProductService {
+  // A product can never be 'published' while its category or any of its
+  // vendors is unpublished — this closes the create/update path so the same
+  // rule enforced for storefront visibility (see isPubliclyVisible /
+  // getAllProducts' public_only filter) also holds for the product's own
+  // status, instead of silently relying on hidden-but-marked-"published".
+  // Pass the client mid-transaction so this reads consistently with the rest
+  // of the create/update.
+  async resolvePublishableStatus(client, requestedStatus, categoryId, vendorIds) {
+    if (requestedStatus === 'draft') {
+      return 'draft';
+    }
+
+    if (categoryId) {
+      const categoryResult = await client.query(
+        'SELECT is_published FROM categories WHERE id = $1',
+        [categoryId]
+      );
+      if (categoryResult.rows.length > 0 && categoryResult.rows[0].is_published === false) {
+        return 'draft';
+      }
+    }
+
+    if (vendorIds && vendorIds.length > 0) {
+      const vendorResult = await client.query(
+        'SELECT 1 FROM vendors WHERE id = ANY($1::uuid[]) AND is_published = false LIMIT 1',
+        [vendorIds]
+      );
+      if (vendorResult.rows.length > 0) {
+        return 'draft';
+      }
+    }
+
+    return requestedStatus || 'published';
+  }
+
   // Create a new product with media and specs
   async createProduct(productData) {
     const client = await db.getClient();
-    
+
     try {
       await client.query('BEGIN');
-      
+
+      const effectiveStatus = await this.resolvePublishableStatus(
+        client,
+        productData.status,
+        productData.category_id || null,
+        productData.vendor_ids || []
+      );
+
       // Insert product
       const productResult = await client.query(
         `INSERT INTO products (
@@ -26,7 +68,7 @@ class ProductService {
           productData.image,
           productData.description || null,
           productData.stock || 0,
-          productData.status || 'published',
+          effectiveStatus,
           productData.featured || false,
           productData.new_product || false,
           productData.rating || 0.00,
@@ -115,6 +157,24 @@ class ProductService {
       if (filters.vendor_id) {
         clause += ` AND EXISTS (SELECT 1 FROM product_vendors pv2 WHERE pv2.product_id = p.id AND pv2.vendor_id = $${paramCount++})`;
         whereParams.push(filters.vendor_id);
+      }
+
+      // Storefront-only defense-in-depth: even if a product's own status is
+      // still 'published', hide it when its category or any of its vendors
+      // has since been unpublished (covers products added/edited after a
+      // category/vendor was unpublished, not just the cascade at the moment
+      // of unpublishing). Self-contained subqueries so this works whether
+      // buildWhere() is used against a bare `FROM products p` (count query)
+      // or the fully-joined main query.
+      if (filters.public_only) {
+        clause += ` AND (p.category_id IS NULL OR EXISTS (
+          SELECT 1 FROM categories pc_cat WHERE pc_cat.id = p.category_id AND pc_cat.is_published = true
+        ))`;
+        clause += ` AND NOT EXISTS (
+          SELECT 1 FROM product_vendors ppv
+          JOIN vendors pv_v ON pv_v.id = ppv.vendor_id
+          WHERE ppv.product_id = p.id AND pv_v.is_published = false
+        )`;
       }
 
       if (filters.featured !== undefined) {
@@ -314,17 +374,84 @@ class ProductService {
     if (result.rows.length === 0) {
       return null;
     }
-    
+
     return result.rows[0];
   }
-  
+
+  // Lightweight check for the public single-product route: is this product
+  // actually visible on the storefront right now? Checks its own status plus
+  // whether its category or any of its vendors has since been unpublished —
+  // much cheaper than pulling the full getProductById() payload just to
+  // inspect .status.
+  async isPubliclyVisible(productId) {
+    const result = await db.query(
+      `SELECT
+        p.status,
+        (p.category_id IS NULL OR c.is_published = true) AS category_ok,
+        NOT EXISTS (
+          SELECT 1 FROM product_vendors pv
+          JOIN vendors v ON v.id = pv.vendor_id
+          WHERE pv.product_id = p.id AND v.is_published = false
+        ) AS vendor_ok
+      FROM products p
+      LEFT JOIN categories c ON c.id = p.category_id
+      WHERE p.id = $1`,
+      [productId]
+    );
+
+    if (result.rows.length === 0) {
+      return false;
+    }
+
+    const row = result.rows[0];
+    return row.status === 'published' && row.category_ok && row.vendor_ok;
+  }
+
   // Update product
   async updateProduct(productId, productData) {
     const client = await db.getClient();
-    
+
     try {
       await client.query('BEGIN');
-      
+
+      // Re-resolve publishability whenever status, category, or vendor
+      // assignment changes — never let an update leave the product
+      // 'published' under an unpublished category/vendor. If status wasn't
+      // explicitly touched, this preserves whatever the product's current
+      // status already was (an existing 'draft' stays 'draft' — changing a
+      // product's category doesn't silently republish it).
+      const needsPublishabilityCheck =
+        productData.status !== undefined ||
+        productData.category_id !== undefined ||
+        productData.vendor_ids !== undefined;
+
+      if (needsPublishabilityCheck) {
+        const currentResult = await client.query(
+          'SELECT category_id, status FROM products WHERE id = $1',
+          [productId]
+        );
+
+        if (currentResult.rows.length === 0) {
+          await client.query('ROLLBACK');
+          throw new Error('Product not found');
+        }
+
+        const current = currentResult.rows[0];
+        const effectiveCategoryId = productData.category_id !== undefined ? productData.category_id : current.category_id;
+
+        let effectiveVendorIds = productData.vendor_ids;
+        if (effectiveVendorIds === undefined) {
+          const currentVendorsResult = await client.query(
+            'SELECT vendor_id FROM product_vendors WHERE product_id = $1',
+            [productId]
+          );
+          effectiveVendorIds = currentVendorsResult.rows.map((row) => row.vendor_id);
+        }
+
+        const requestedStatus = productData.status !== undefined ? productData.status : current.status;
+        productData.status = await this.resolvePublishableStatus(client, requestedStatus, effectiveCategoryId, effectiveVendorIds);
+      }
+
       // Build update query dynamically
       const updateFields = [];
       const values = [];
@@ -476,7 +603,54 @@ class ProductService {
       media: product.media || []
     };
   }
-  
+
+  // Bulk delete products
+  async bulkDeleteProducts(productIds) {
+    if (!Array.isArray(productIds) || productIds.length === 0) {
+      throw new Error('No product IDs provided');
+    }
+
+    // Find which of the requested ids actually exist first, so we can
+    // report skipped ids and still fetch their media for S3 cleanup.
+    const existingResult = await db.query(
+      `SELECT id, name, image FROM products WHERE id = ANY($1::uuid[])`,
+      [productIds]
+    );
+
+    const foundIds = existingResult.rows.map((row) => row.id);
+    const notFound = productIds.filter((id) => !foundIds.includes(id));
+
+    if (foundIds.length === 0) {
+      return { deleted: [], notFound };
+    }
+
+    const mediaResult = await db.query(
+      `SELECT product_id, url FROM product_media WHERE product_id = ANY($1::uuid[])`,
+      [foundIds]
+    );
+    const mediaByProduct = {};
+    mediaResult.rows.forEach((row) => {
+      if (!mediaByProduct[row.product_id]) mediaByProduct[row.product_id] = [];
+      mediaByProduct[row.product_id].push(row.url);
+    });
+
+    // FK constraints on product_vendors/product_media/product_specs/
+    // product_key_features are ON DELETE CASCADE, same as single deleteProduct.
+    const deleteResult = await db.query(
+      `DELETE FROM products WHERE id = ANY($1::uuid[]) RETURNING id, name, image`,
+      [foundIds]
+    );
+
+    const deleted = deleteResult.rows.map((row) => ({
+      id: row.id,
+      name: row.name,
+      image: row.image,
+      media: mediaByProduct[row.id] || []
+    }));
+
+    return { deleted, notFound };
+  }
+
   // Get product media by product ID
   async getProductMedia(productId) {
     const result = await db.query(

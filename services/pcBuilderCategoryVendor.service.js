@@ -3,13 +3,14 @@ const db = require('../config/db.config');
 class PcBuilderCategoryVendorService {
   // Vendors valid for a category. An empty result means "unrestricted" —
   // the storefront shows no vendor filter at all for that step rather than
-  // dumping every vendor in the system.
+  // dumping every vendor in the system. Unpublished vendors never show as a
+  // filter chip even if still configured here.
   async getVendorsForCategory(categoryId) {
     const result = await db.query(
       `SELECT v.id, v.vendor_name, v.created_at, v.updated_at
        FROM pc_builder_category_vendors pcv
        JOIN vendors v ON v.id = pcv.vendor_id
-       WHERE pcv.category_id = $1
+       WHERE pcv.category_id = $1 AND v.is_published = true
        ORDER BY pcv.display_order ASC`,
       [categoryId]
     );

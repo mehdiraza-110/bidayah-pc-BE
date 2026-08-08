@@ -18,14 +18,16 @@ class PcBuilderCategoryService {
     return result.rows;
   }
 
-  // Categories included in the PC Builder, in admin-defined order (public consumption)
+  // Categories included in the PC Builder, in admin-defined order (public consumption).
+  // Requires both the PC Builder step itself AND the underlying category to be published —
+  // unpublishing a category must hide it here too, not just from the main category listing.
   async getActiveOrdered() {
     const result = await db.query(
       `SELECT
         c.id, c.category_name, c.image, c.created_at, c.updated_at
       FROM categories c
       INNER JOIN pc_builder_categories pbc ON pbc.category_id = c.id
-      WHERE pbc.is_active = true
+      WHERE pbc.is_active = true AND c.is_published = true
       ORDER BY pbc.display_order ASC`
     );
 

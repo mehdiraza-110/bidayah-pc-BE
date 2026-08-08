@@ -92,14 +92,22 @@ class CategoryController {
     try {
       const { id } = req.params;
       const category = await categoryService.getCategoryById(id);
-      
+
       if (!category) {
         return res.status(404).json({
           success: false,
           message: 'Category not found'
         });
       }
-      
+
+      // Public route sets this so unpublished categories 404 like they don't exist
+      if (req.query.public_only === 'true' && category.is_published === false) {
+        return res.status(404).json({
+          success: false,
+          message: 'Category not found'
+        });
+      }
+
       res.status(200).json({
         success: true,
         message: 'Category retrieved successfully',

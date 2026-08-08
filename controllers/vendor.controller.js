@@ -72,14 +72,22 @@ class VendorController {
     try {
       const { id } = req.params;
       const vendor = await vendorService.getVendorById(id);
-      
+
       if (!vendor) {
         return res.status(404).json({
           success: false,
           message: 'Vendor not found'
         });
       }
-      
+
+      // Public route sets this so unpublished vendors 404 like they don't exist
+      if (req.query.public_only === 'true' && vendor.is_published === false) {
+        return res.status(404).json({
+          success: false,
+          message: 'Vendor not found'
+        });
+      }
+
       res.status(200).json({
         success: true,
         message: 'Vendor retrieved successfully',

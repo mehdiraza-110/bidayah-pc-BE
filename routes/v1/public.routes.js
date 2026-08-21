@@ -82,6 +82,9 @@ router.get('/categories/:id', (req, res, next) => {
   next();
 }, categoryController.getCategoryById.bind(categoryController));
 
+// Public "Specifications" filters for a category's product-listing page
+router.get('/categories/:id/filters', categoryController.getCategoryFilters.bind(categoryController));
+
 // Public Billing Information Route (only GET)
 router.get('/billing', billingController.getBillingInfo.bind(billingController));
 

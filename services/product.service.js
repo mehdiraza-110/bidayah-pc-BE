@@ -193,6 +193,23 @@ class ProductService {
         paramCount++;
       }
 
+      // Dynamic "Specifications" filters — one EXISTS check per selected
+      // category_key_feature, ANDed together, so picking values from two
+      // different spec rows (e.g. RAM = 16GB AND Socket = AM5) narrows
+      // correctly instead of matching either.
+      if (Array.isArray(filters.key_features)) {
+        filters.key_features.forEach((kf) => {
+          if (!kf || !kf.id || !Array.isArray(kf.values) || kf.values.length === 0) return;
+          clause += ` AND EXISTS (
+            SELECT 1 FROM product_key_features pkf2
+            WHERE pkf2.product_id = p.id
+              AND pkf2.category_key_feature_id = $${paramCount++}
+              AND pkf2.feature_value = ANY($${paramCount++})
+          )`;
+          whereParams.push(kf.id, kf.values);
+        });
+      }
+
       return { clause, whereParams };
     };
 

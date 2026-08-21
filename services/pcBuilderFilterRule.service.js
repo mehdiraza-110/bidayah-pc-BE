@@ -1,7 +1,147 @@
 const db = require('../config/db.config');
 const pcBuilderCategoryVendorService = require('./pcBuilderCategoryVendor.service');
 
+// Generic, admin-rule-free compatibility layer on top of `category_key_features` /
+// `product_key_features` (the structured spec data every category was imported with —
+// Socket Type, Memory Type, Recommended PSU, etc.). This runs ALONGSIDE the
+// `pc_builder_filter_rules` mechanism below (both are AND'd together): a rule row is still
+// the right tool for vendor-restriction UX (e.g. "only show ASUS/GIGABYTE GPUs"), but real
+// hardware compatibility (a CPU's socket must match a motherboard's socket, a PSU must supply
+// enough wattage for a GPU, ...) is driven directly off the actual selected product's own spec
+// values here, so it doesn't need one hand-authored rule per CPU model.
+//
+// Each entry says: "if the selected product has `selectedKey`, and the result category has a
+// key feature called `resultKey`, the candidate product's `resultKey` value must satisfy this
+// relationship with the selected product's `selectedKey` value."
+const KEY_FEATURE_MATCHERS = [
+  // CPU <-> Motherboard: platform brand and physical socket must both agree.
+  { selectedKey: 'CPU Brand', resultKey: 'CPU Brand', type: 'equals' },
+  { selectedKey: 'Socket Type', resultKey: 'Socket Type', type: 'equals' },
+  // CPU or Motherboard socket <-> CPU Cooler's supported-socket list.
+  { selectedKey: 'Socket Type', resultKey: 'Compatible Sockets', type: 'result_list_contains_selected' },
+  { selectedKey: 'Compatible Sockets', resultKey: 'Socket Type', type: 'selected_list_contains_result' },
+  // RAM <-> Motherboard: DDR generation must match.
+  { selectedKey: 'Memory Type', resultKey: 'Memory Type', type: 'equals' },
+  // GPU <-> PSU: the PSU's wattage must meet or exceed the GPU's recommended wattage, in
+  // whichever order the customer picks them.
+  { selectedKey: 'Recommended PSU', resultKey: 'Wattage', type: 'result_numeric_gte_selected' },
+  { selectedKey: 'Wattage', resultKey: 'Recommended PSU', type: 'result_numeric_lte_selected' },
+];
+
 class PcBuilderFilterRuleService {
+  // feature_key -> feature_value for one product, e.g. { 'Socket Type': 'AM5', 'CPU Brand': 'AMD' }.
+  async getProductKeyFeatures(productId) {
+    const result = await db.query(
+      `SELECT ckf.feature_key, pkf.feature_value
+       FROM product_key_features pkf
+       JOIN category_key_features ckf ON ckf.id = pkf.category_key_feature_id
+       WHERE pkf.product_id = $1`,
+      [productId]
+    );
+
+    const featuresByKey = {};
+    for (const row of result.rows) {
+      featuresByKey[row.feature_key] = row.feature_value;
+    }
+    return featuresByKey;
+  }
+
+  // Which feature_key names a category actually has defined (so we only build a clause for a
+  // matcher when the result category could possibly have that feature).
+  async getCategoryFeatureKeys(categoryId) {
+    const result = await db.query(
+      `SELECT feature_key FROM category_key_features WHERE category_id = $1 AND is_active = true`,
+      [categoryId]
+    );
+    return new Set(result.rows.map(row => row.feature_key));
+  }
+
+  // Builds the SQL fragment(s) requiring a candidate product (aliased `p` in the caller's query)
+  // to be spec-compatible with whatever real products were already picked in this build.
+  // Returns { clauses, params } — clauses is an array of standalone boolean SQL fragments meant
+  // to be AND'd together by the caller; params must be appended to the caller's param list in
+  // order, starting at `startParamIndex`.
+  async buildKeyFeatureConstraintClauses(resultCategoryId, priorSelections = [], startParamIndex) {
+    const resultFeatureKeys = await this.getCategoryFeatureKeys(resultCategoryId);
+    const clauses = [];
+    const params = [];
+    let paramCount = startParamIndex;
+
+    if (resultFeatureKeys.size === 0) {
+      return { clauses, params };
+    }
+
+    for (const selection of priorSelections) {
+      if (!selection || !selection.product_id) continue;
+      if (selection.category_id === resultCategoryId) continue;
+
+      const selectedFeatures = await this.getProductKeyFeatures(selection.product_id);
+      if (Object.keys(selectedFeatures).length === 0) continue;
+
+      const perSelectionClauses = [];
+
+      for (const matcher of KEY_FEATURE_MATCHERS) {
+        if (!(matcher.selectedKey in selectedFeatures)) continue;
+        if (!resultFeatureKeys.has(matcher.resultKey)) continue;
+
+        const selectedValue = selectedFeatures[matcher.selectedKey];
+
+        if (matcher.type === 'equals') {
+          perSelectionClauses.push(`EXISTS (
+            SELECT 1 FROM product_key_features mpkf
+            JOIN category_key_features mckf ON mckf.id = mpkf.category_key_feature_id
+            WHERE mpkf.product_id = p.id AND mckf.feature_key = $${paramCount++}
+              AND LOWER(TRIM(mpkf.feature_value)) = LOWER(TRIM($${paramCount++}))
+          )`);
+          params.push(matcher.resultKey, selectedValue);
+        } else if (matcher.type === 'result_list_contains_selected') {
+          perSelectionClauses.push(`EXISTS (
+            SELECT 1 FROM product_key_features mpkf
+            JOIN category_key_features mckf ON mckf.id = mpkf.category_key_feature_id
+            WHERE mpkf.product_id = p.id AND mckf.feature_key = $${paramCount++}
+              AND EXISTS (
+                SELECT 1 FROM unnest(string_to_array(mpkf.feature_value, ',')) AS item
+                WHERE LOWER(TRIM(item)) = LOWER(TRIM($${paramCount++}))
+              )
+          )`);
+          params.push(matcher.resultKey, selectedValue);
+        } else if (matcher.type === 'selected_list_contains_result') {
+          const selectedList = String(selectedValue)
+            .split(',')
+            .map(v => v.trim().toLowerCase())
+            .filter(Boolean);
+          if (selectedList.length === 0) continue;
+
+          perSelectionClauses.push(`EXISTS (
+            SELECT 1 FROM product_key_features mpkf
+            JOIN category_key_features mckf ON mckf.id = mpkf.category_key_feature_id
+            WHERE mpkf.product_id = p.id AND mckf.feature_key = $${paramCount++}
+              AND LOWER(TRIM(mpkf.feature_value)) = ANY($${paramCount++}::text[])
+          )`);
+          params.push(matcher.resultKey, selectedList);
+        } else if (matcher.type === 'result_numeric_gte_selected' || matcher.type === 'result_numeric_lte_selected') {
+          const selectedNumeric = parseFloat(String(selectedValue).replace(/[^0-9.]/g, ''));
+          if (Number.isNaN(selectedNumeric)) continue;
+          const operator = matcher.type === 'result_numeric_gte_selected' ? '>=' : '<=';
+
+          perSelectionClauses.push(`EXISTS (
+            SELECT 1 FROM product_key_features mpkf
+            JOIN category_key_features mckf ON mckf.id = mpkf.category_key_feature_id
+            WHERE mpkf.product_id = p.id AND mckf.feature_key = $${paramCount++}
+              AND NULLIF(regexp_replace(mpkf.feature_value, '[^0-9.]', '', 'g'), '')::numeric ${operator} $${paramCount++}
+          )`);
+          params.push(matcher.resultKey, selectedNumeric);
+        }
+      }
+
+      if (perSelectionClauses.length > 0) {
+        clauses.push(`(${perSelectionClauses.join(' AND ')})`);
+      }
+    }
+
+    return { clauses, params };
+  }
+
   normalizeSpecTerms(specMatchTerms) {
     if (specMatchTerms === undefined) {
       return undefined;
@@ -400,6 +540,21 @@ class PcBuilderFilterRuleService {
         : new Set([...allowedVendorIds].filter(id => setForTrigger.has(id)));
     }
 
+    const { clauses: kfClauses, params: kfParams } = await this.buildKeyFeatureConstraintClauses(categoryId, priorSelections, 2);
+    if (kfClauses.length > 0) {
+      const vendorResult = await db.query(
+        `SELECT DISTINCT pv.vendor_id
+         FROM products p
+         JOIN product_vendors pv ON pv.product_id = p.id
+         WHERE p.category_id = $1 AND ${kfClauses.join(' AND ')}`,
+        [categoryId, ...kfParams]
+      );
+      const keyFeatureVendorIds = new Set(vendorResult.rows.map(row => row.vendor_id));
+      allowedVendorIds = allowedVendorIds === null
+        ? keyFeatureVendorIds
+        : new Set([...allowedVendorIds].filter(id => keyFeatureVendorIds.has(id)));
+    }
+
     if (allowedVendorIds === null) {
       return baseVendors;
     }
@@ -517,6 +672,13 @@ class PcBuilderFilterRuleService {
       if (orClauses.length > 0) {
         query += ` AND (${orClauses.join(' OR ')})`;
       }
+    }
+
+    const { clauses: kfClauses, params: kfParams } = await this.buildKeyFeatureConstraintClauses(categoryId, priorSelections, paramCount);
+    if (kfClauses.length > 0) {
+      query += ` AND ${kfClauses.join(' AND ')}`;
+      params.push(...kfParams);
+      paramCount += kfParams.length;
     }
 
     query += ` GROUP BY p.id, c.category_name ORDER BY p.created_at DESC`;

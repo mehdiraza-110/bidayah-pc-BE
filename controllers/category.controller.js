@@ -5,9 +5,10 @@ class CategoryController {
   // Create a new category
   async createCategory(req, res) {
     try {
-      const { category_name } = req.body;
-      let imageUrl = null;
-      
+      const { category_name, hero_tagline, hero_description } = req.body;
+      let imageUrl = req.body.image || null;
+      let heroImageUrl = req.body.hero_image || null;
+
       // Validation
       if (!category_name) {
         return res.status(400).json({
@@ -15,7 +16,7 @@ class CategoryController {
           message: 'Category name is required'
         });
       }
-      
+
       // Check if category already exists
       const existingCategory = await categoryService.getCategoryByName(category_name);
       if (existingCategory) {
@@ -24,26 +25,35 @@ class CategoryController {
           message: 'Category with this name already exists'
         });
       }
-      
-      // Upload image to S3 if provided
-      if (req.file) {
-        try {
-          imageUrl = await uploadToS3(req.file, 'categories');
-        } catch (uploadError) {
-          console.error('Error uploading image to S3:', uploadError);
-          return res.status(500).json({
-            success: false,
-            message: 'Error uploading image to S3',
-            error: uploadError.message
-          });
+
+      // Upload image(s) to S3 if provided
+      const imageFile = req.files?.image?.[0] || req.file || null;
+      const heroImageFile = req.files?.hero_image?.[0] || null;
+
+      try {
+        if (imageFile) {
+          imageUrl = await uploadToS3(imageFile, 'categories');
         }
+        if (heroImageFile) {
+          heroImageUrl = await uploadToS3(heroImageFile, 'category-hero');
+        }
+      } catch (uploadError) {
+        console.error('Error uploading image to S3:', uploadError);
+        return res.status(500).json({
+          success: false,
+          message: 'Error uploading image to S3',
+          error: uploadError.message
+        });
       }
-      
-      const categoryData = { 
+
+      const categoryData = {
         category_name,
-        image: imageUrl
+        image: imageUrl,
+        hero_image: heroImageUrl,
+        hero_tagline: hero_tagline || null,
+        hero_description: hero_description || null,
       };
-      
+
       const newCategory = await categoryService.createCategory(categoryData);
       
       res.status(201).json({
@@ -123,12 +133,43 @@ class CategoryController {
     }
   }
   
+  // Dynamic "Specifications" filters for this category's product-listing
+  // page — see CategoryService#getCategoryFilters.
+  async getCategoryFilters(req, res) {
+    try {
+      const { id } = req.params;
+      const category = await categoryService.getCategoryById(id);
+
+      if (!category) {
+        return res.status(404).json({
+          success: false,
+          message: 'Category not found'
+        });
+      }
+
+      const filters = await categoryService.getCategoryFilters(id, req.query.vendor_id || null);
+
+      res.status(200).json({
+        success: true,
+        message: 'Category filters retrieved successfully',
+        data: filters
+      });
+    } catch (error) {
+      console.error('Error fetching category filters:', error);
+      res.status(500).json({
+        success: false,
+        message: 'Error fetching category filters',
+        error: error.message
+      });
+    }
+  }
+
   // Update category
   async updateCategory(req, res) {
     try {
       const { id } = req.params;
-      const { category_name } = req.body;
-      
+      const { category_name, hero_tagline, hero_description } = req.body;
+
       // Get current category to check for existing image
       const currentCategory = await categoryService.getCategoryById(id);
       if (!currentCategory) {
@@ -137,9 +178,9 @@ class CategoryController {
           message: 'Category not found'
         });
       }
-      
+
       const categoryData = {};
-      
+
       if (category_name !== undefined) {
         // Check if category name is already taken by another category
         const existingCategory = await categoryService.getCategoryByName(category_name);
@@ -151,14 +192,29 @@ class CategoryController {
         }
         categoryData.category_name = category_name;
       }
-      
-      // Handle image update
-      if (req.file) {
-        try {
-          // Upload new image to S3
-          const newImageUrl = await uploadToS3(req.file, 'categories');
-          
-          // Delete old image from S3 if it exists
+
+      if (hero_tagline !== undefined) {
+        categoryData.hero_tagline = hero_tagline || null;
+      }
+      if (hero_description !== undefined) {
+        categoryData.hero_description = hero_description || null;
+      }
+      // A plain URL string for image/hero_image (no new file) is passed straight through
+      if (req.body.image !== undefined && !req.files?.image?.[0] && !req.file) {
+        categoryData.image = req.body.image || null;
+      }
+      if (req.body.hero_image !== undefined && !req.files?.hero_image?.[0]) {
+        categoryData.hero_image = req.body.hero_image || null;
+      }
+
+      // Handle image update(s)
+      const imageFile = req.files?.image?.[0] || req.file || null;
+      const heroImageFile = req.files?.hero_image?.[0] || null;
+
+      try {
+        if (imageFile) {
+          const newImageUrl = await uploadToS3(imageFile, 'categories');
+
           if (currentCategory.image) {
             try {
               await deleteFromS3(currentCategory.image);
@@ -167,18 +223,33 @@ class CategoryController {
               // Continue even if deletion fails
             }
           }
-          
+
           categoryData.image = newImageUrl;
-        } catch (uploadError) {
-          console.error('Error uploading image to S3:', uploadError);
-          return res.status(500).json({
-            success: false,
-            message: 'Error uploading image to S3',
-            error: uploadError.message
-          });
         }
+
+        if (heroImageFile) {
+          const newHeroImageUrl = await uploadToS3(heroImageFile, 'category-hero');
+
+          if (currentCategory.hero_image) {
+            try {
+              await deleteFromS3(currentCategory.hero_image);
+            } catch (deleteError) {
+              console.error('Error deleting old hero image from S3:', deleteError);
+              // Continue even if deletion fails
+            }
+          }
+
+          categoryData.hero_image = newHeroImageUrl;
+        }
+      } catch (uploadError) {
+        console.error('Error uploading image to S3:', uploadError);
+        return res.status(500).json({
+          success: false,
+          message: 'Error uploading image to S3',
+          error: uploadError.message
+        });
       }
-      
+
       if (Object.keys(categoryData).length === 0) {
         return res.status(400).json({
           success: false,
@@ -332,7 +403,7 @@ class CategoryController {
       const { id } = req.params;
       const result = await categoryService.deleteCategory(id);
       
-      // Delete image from S3 if it exists
+      // Delete image(s) from S3 if they exist
       if (result.image) {
         try {
           await deleteFromS3(result.image);
@@ -341,7 +412,15 @@ class CategoryController {
           // Continue even if deletion fails
         }
       }
-      
+      if (result.hero_image) {
+        try {
+          await deleteFromS3(result.hero_image);
+        } catch (deleteError) {
+          console.error('Error deleting hero image from S3:', deleteError);
+          // Continue even if deletion fails
+        }
+      }
+
       res.status(200).json({
         success: true,
         message: result.message,

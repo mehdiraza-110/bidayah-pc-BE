@@ -64,6 +64,9 @@ CREATE TABLE categories (
     category_name VARCHAR(255) NOT NULL UNIQUE,
    image TEXT NULL,
     is_published BOOLEAN NOT NULL DEFAULT true,
+    hero_image TEXT NULL,
+    hero_tagline VARCHAR(255) NULL,
+    hero_description TEXT NULL,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
@@ -656,3 +659,13 @@ CREATE TRIGGER update_store_locations_updated_at BEFORE UPDATE ON store_location
 -- CREATE INDEX IF NOT EXISTS idx_store_location_active ON store_locations(is_active);
 -- CREATE TRIGGER update_store_locations_updated_at BEFORE UPDATE ON store_locations
 --     FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+
+
+-- ============================================
+-- MIGRATION: add per-category hero banner fields
+-- Run this block against an existing database instead of the full schema above.
+-- ============================================
+-- ALTER TABLE categories
+--   ADD COLUMN IF NOT EXISTS hero_image TEXT NULL,
+--   ADD COLUMN IF NOT EXISTS hero_tagline VARCHAR(255) NULL,
+--   ADD COLUMN IF NOT EXISTS hero_description TEXT NULL;

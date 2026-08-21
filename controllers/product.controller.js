@@ -154,6 +154,24 @@ class ProductController {
   // Get all products with optional filters
   async getAllProducts(req, res) {
     try {
+      // Dynamic "Specifications" filters — a JSON-encoded array of
+      // { id: <category_key_feature_id>, values: [<feature_value>, ...] },
+      // e.g. ?key_features=[{"id":"...","values":["16GB","32GB"]}]
+      let keyFeatures;
+      if (req.query.key_features) {
+        try {
+          const parsed = JSON.parse(req.query.key_features);
+          if (Array.isArray(parsed)) {
+            keyFeatures = parsed.filter(
+              (kf) => kf && typeof kf.id === 'string' && Array.isArray(kf.values) && kf.values.every((v) => typeof v === 'string')
+            );
+          }
+        } catch (parseError) {
+          // Malformed filter — ignore it rather than failing the whole request
+          keyFeatures = undefined;
+        }
+      }
+
       const filters = {
         status: req.query.status,
         category_id: req.query.category_id,
@@ -164,7 +182,8 @@ class ProductController {
         sort: req.query.sort,
         page: req.query.page,
         limit: req.query.limit,
-        public_only: req.query.public_only === 'true' ? true : undefined
+        public_only: req.query.public_only === 'true' ? true : undefined,
+        key_features: keyFeatures
       };
 
       // Remove undefined filters

@@ -4,12 +4,18 @@ class CategoryService {
   // Create a new category
   async createCategory(categoryData) {
     const result = await db.query(
-      `INSERT INTO categories (category_name, image, created_at, updated_at)
-       VALUES ($1, $2, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
-       RETURNING id, category_name, image, created_at, updated_at`,
-      [categoryData.category_name, categoryData.image || null]
+      `INSERT INTO categories (category_name, image, hero_image, hero_tagline, hero_description, created_at, updated_at)
+       VALUES ($1, $2, $3, $4, $5, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+       RETURNING id, category_name, image, hero_image, hero_tagline, hero_description, created_at, updated_at`,
+      [
+        categoryData.category_name,
+        categoryData.image || null,
+        categoryData.hero_image || null,
+        categoryData.hero_tagline || null,
+        categoryData.hero_description || null,
+      ]
     );
-    
+
     return result.rows[0];
   }
   
@@ -17,7 +23,7 @@ class CategoryService {
   // middleware) to hide unpublished categories from the storefront; admin
   // calls this with no filter so it sees everything.
   async getAllCategories(filters = {}) {
-    let query = `SELECT id, category_name, image, is_published, created_at, updated_at FROM categories`;
+    let query = `SELECT id, category_name, image, is_published, hero_image, hero_tagline, hero_description, created_at, updated_at FROM categories`;
     const params = [];
 
     if (filters.is_published !== undefined) {
@@ -34,7 +40,7 @@ class CategoryService {
   // Get category by ID
   async getCategoryById(categoryId) {
     const result = await db.query(
-      `SELECT id, category_name, image, is_published, created_at, updated_at
+      `SELECT id, category_name, image, is_published, hero_image, hero_tagline, hero_description, created_at, updated_at
        FROM categories
        WHERE id = $1`,
       [categoryId]
@@ -50,7 +56,7 @@ class CategoryService {
   // Get category by name
   async getCategoryByName(categoryName) {
     const result = await db.query(
-      `SELECT id, category_name, image, created_at, updated_at
+      `SELECT id, category_name, image, hero_image, hero_tagline, hero_description, created_at, updated_at
        FROM categories
        WHERE category_name = $1`,
       [categoryName]
@@ -59,10 +65,70 @@ class CategoryService {
     if (result.rows.length === 0) {
       return null;
     }
-    
+
     return result.rows[0];
   }
-  
+
+  // Vendors that actually have at least one published product in this category —
+  // e.g. picking "Ram" only ever offers Corsair/Samsung/Kingston/XPG, never GPU-only
+  // brands like NVIDIA. Real-data-driven, same spirit as getCategoryFilters below;
+  // deliberately independent of pc_builder_category_vendors, which is an admin-curated
+  // allow-list for the PC Builder flow specifically, not the general storefront.
+  async getCategoryVendors(categoryId) {
+    const result = await db.query(
+      `SELECT DISTINCT v.id, v.vendor_name
+       FROM vendors v
+       JOIN product_vendors pv ON pv.vendor_id = v.id
+       JOIN products p ON p.id = pv.product_id
+       WHERE p.category_id = $1 AND p.status = 'published' AND v.is_published = true
+       ORDER BY v.vendor_name`,
+      [categoryId]
+    );
+
+    return result.rows;
+  }
+
+  // Dynamic filters for a category's product-listing page: every active
+  // category_key_feature that at least one published product in this category
+  // actually has a value for (with the distinct values in use), plus the vendors
+  // that actually sell in this category. A category with no products/specs yet
+  // simply returns empty arrays — no dead/empty filter groups.
+  //
+  // When `vendorId` is given, the Specifications values are narrowed to only what
+  // THAT vendor's products in this category actually have — e.g. selecting AMD
+  // under CPU should stop offering "Intel" as a CPU Brand value or LGA1700/LGA1851
+  // as Socket Type options, since no AMD product has those values. The vendor list
+  // itself stays category-wide (not further narrowed by vendorId) — it's the set of
+  // choices being picked FROM, not a result of the current pick.
+  async getCategoryFilters(categoryId, vendorId = null) {
+    const keyFeatureParams = [categoryId];
+    let vendorClause = '';
+    if (vendorId) {
+      keyFeatureParams.push(vendorId);
+      vendorClause = ` AND EXISTS (
+        SELECT 1 FROM product_vendors pv
+        WHERE pv.product_id = p.id AND pv.vendor_id = $${keyFeatureParams.length}
+      )`;
+    }
+
+    const [keyFeatureResult, vendors] = await Promise.all([
+      db.query(
+        `SELECT ckf.id, ckf.feature_key, ckf.display_order,
+                array_agg(DISTINCT pkf.feature_value ORDER BY pkf.feature_value) AS values
+         FROM category_key_features ckf
+         JOIN product_key_features pkf ON pkf.category_key_feature_id = ckf.id
+         JOIN products p ON p.id = pkf.product_id AND p.status = 'published'
+         WHERE ckf.category_id = $1 AND ckf.is_active = true${vendorClause}
+         GROUP BY ckf.id, ckf.feature_key, ckf.display_order
+         ORDER BY ckf.display_order`,
+        keyFeatureParams
+      ),
+      this.getCategoryVendors(categoryId),
+    ]);
+
+    return { key_features: keyFeatureResult.rows, vendors };
+  }
+
   // Update category
   async updateCategory(categoryId, categoryData) {
     // Build update query dynamically
@@ -78,19 +144,31 @@ class CategoryService {
       updateFields.push(`image = $${paramCount++}`);
       values.push(categoryData.image);
     }
-    
+    if (categoryData.hero_image !== undefined) {
+      updateFields.push(`hero_image = $${paramCount++}`);
+      values.push(categoryData.hero_image);
+    }
+    if (categoryData.hero_tagline !== undefined) {
+      updateFields.push(`hero_tagline = $${paramCount++}`);
+      values.push(categoryData.hero_tagline);
+    }
+    if (categoryData.hero_description !== undefined) {
+      updateFields.push(`hero_description = $${paramCount++}`);
+      values.push(categoryData.hero_description);
+    }
+
     if (updateFields.length === 0) {
       throw new Error('No fields to update');
     }
-    
+
     updateFields.push(`updated_at = CURRENT_TIMESTAMP`);
     values.push(categoryId);
-    
+
     const updateQuery = `
-      UPDATE categories 
+      UPDATE categories
       SET ${updateFields.join(', ')}
       WHERE id = $${paramCount}
-      RETURNING id, category_name, image, created_at, updated_at
+      RETURNING id, category_name, image, hero_image, hero_tagline, hero_description, created_at, updated_at
     `;
     
     const result = await db.query(updateQuery, values);
@@ -186,7 +264,7 @@ class CategoryService {
         `UPDATE categories
          SET is_published = $1, updated_at = CURRENT_TIMESTAMP
          WHERE id = $2
-         RETURNING id, category_name, image, is_published, created_at, updated_at`,
+         RETURNING id, category_name, image, is_published, hero_image, hero_tagline, hero_description, created_at, updated_at`,
         [isPublished, categoryId]
       );
 
@@ -251,15 +329,16 @@ class CategoryService {
     }
     
     const result = await db.query(
-      `DELETE FROM categories WHERE id = $1 RETURNING id, category_name, image`,
+      `DELETE FROM categories WHERE id = $1 RETURNING id, category_name, image, hero_image`,
       [categoryId]
     );
-    
-    return { 
-      message: 'Category deleted successfully', 
-      id: result.rows[0].id, 
+
+    return {
+      message: 'Category deleted successfully',
+      id: result.rows[0].id,
       category_name: result.rows[0].category_name,
-      image: result.rows[0].image // Return image URL so controller can delete from S3
+      image: result.rows[0].image, // Return image URL so controller can delete from S3
+      hero_image: result.rows[0].hero_image // Return hero image URL so controller can delete from S3
     };
   }
 }

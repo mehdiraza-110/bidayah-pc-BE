@@ -24,7 +24,13 @@ class PublicPcBuilderController {
 
       return parsed
         .filter(item => item && item.category_id && item.vendor_id)
-        .map(item => ({ category_id: item.category_id, vendor_id: item.vendor_id }));
+        .map(item => ({
+          category_id: item.category_id,
+          vendor_id: item.vendor_id,
+          // Optional: lets the compatibility engine match on the selected product's own spec
+          // values (Socket Type, Memory Type, Recommended PSU, ...), not just its vendor.
+          product_id: item.product_id || null,
+        }));
     } catch (error) {
       return [];
     }

@@ -498,6 +498,20 @@ class PcBuilderFilterRuleService {
     return result.rows;
   }
 
+  // Categories that actually drive a compatibility rule elsewhere (e.g. CPU
+  // narrowing Motherboard by socket/vendor). Lets the builder UI only
+  // auto-apply a vendor filter after a pick for categories where it's
+  // meaningful — trivial categories (fans, keyboards, ...) shouldn't have
+  // their own remaining choices narrowed down to whatever vendor was just
+  // picked.
+  async getActiveTriggerCategoryIds() {
+    const result = await db.query(
+      `SELECT DISTINCT selected_category_id FROM pc_builder_filter_rules WHERE is_active = true`
+    );
+
+    return result.rows.map(row => row.selected_category_id);
+  }
+
   // One entry per prior selection (elsewhere in the build) that has at least
   // one active rule constraining `resultCategoryId`. Rules within one entry
   // are alternatives (OR); entries combine as requirements (AND).
@@ -565,7 +579,7 @@ class PcBuilderFilterRuleService {
   // Products for a category + vendor selection, additionally constrained by
   // any compatibility rules the customer's other selections trigger. Works
   // even when no rules exist at all (plain category/vendor lookup).
-  async getProductsForCategorySelection({ categoryId, vendorId, priorSelections = [], status, inStock, limit, offset }) {
+  async getProductsForCategorySelection({ categoryId, vendorId, priorSelections = [], status, inStock, search, limit, offset }) {
     const constraintsPerTrigger = await this.getCompatibilityConstraints(categoryId, priorSelections);
 
     let query = `
@@ -624,6 +638,11 @@ class PcBuilderFilterRuleService {
     if (inStock !== undefined) {
       query += ` AND p.in_stock = $${paramCount++}`;
       params.push(inStock);
+    }
+
+    if (search && search.trim()) {
+      query += ` AND p.name ILIKE $${paramCount++}`;
+      params.push(`%${search.trim()}%`);
     }
 
     for (const triggerRules of constraintsPerTrigger) {

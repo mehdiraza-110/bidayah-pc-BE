@@ -236,11 +236,39 @@ class ProductController {
     }
   }
   
+  // Get product by slug (clean storefront URLs)
+  async getProductBySlug(req, res) {
+    try {
+      const { slug } = req.params;
+      const product = await productService.getProductBySlug(slug);
+
+      if (!product) {
+        return res.status(404).json({
+          success: false,
+          message: 'Product not found'
+        });
+      }
+
+      res.status(200).json({
+        success: true,
+        message: 'Product retrieved successfully',
+        data: product
+      });
+    } catch (error) {
+      console.error('Error fetching product by slug:', error);
+      res.status(500).json({
+        success: false,
+        message: 'Error fetching product',
+        error: error.message
+      });
+    }
+  }
+
   // Update product
   async updateProduct(req, res) {
     try {
       const { id } = req.params;
-      
+
       // Get current product to check for existing images
       const currentProduct = await productService.getProductById(id);
       if (!currentProduct) {

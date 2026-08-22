@@ -38,9 +38,10 @@ class PublicPcBuilderController {
 
   async getOptions(req, res) {
     try {
-      const [categories, vendors] = await Promise.all([
+      const [categories, vendors, triggerCategoryIds] = await Promise.all([
         pcBuilderCategoryService.getActiveOrdered(),
-        vendorService.getAllVendors({ is_published: true })
+        vendorService.getAllVendors({ is_published: true }),
+        pcBuilderFilterRuleService.getActiveTriggerCategoryIds()
       ]);
 
       res.status(200).json({
@@ -48,7 +49,8 @@ class PublicPcBuilderController {
         message: 'PC builder options retrieved successfully',
         data: {
           categories,
-          vendors
+          vendors,
+          trigger_category_ids: triggerCategoryIds
         },
         counts: {
           categories: categories.length,
@@ -87,6 +89,7 @@ class PublicPcBuilderController {
         priorSelections,
         status: 'published',
         inStock: this.parseBoolean(req.query.in_stock),
+        search: req.query.search,
         limit,
         offset
       });

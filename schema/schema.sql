@@ -84,6 +84,7 @@ CREATE TYPE product_status AS ENUM ('published', 'draft');
 CREATE TABLE products (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     name VARCHAR(255) NOT NULL,
+    slug VARCHAR(255) NULL UNIQUE,
     category_id UUID NULL,
     price DECIMAL(10, 2) NOT NULL CHECK (price >= 0),
     original_price DECIMAL(10, 2) NULL CHECK (original_price >= 0),
@@ -108,6 +109,7 @@ CREATE INDEX idx_products_featured ON products(featured);
 CREATE INDEX idx_products_in_stock ON products(in_stock);
 CREATE INDEX idx_products_created_at ON products(created_at);
 CREATE INDEX idx_products_name ON products(name);
+CREATE INDEX idx_products_slug ON products(slug);
 
 
 -- ============================================
@@ -234,6 +236,47 @@ CREATE TRIGGER update_product_key_features_updated_at BEFORE UPDATE ON product_k
 
 
 -- ============================================
+-- BLOGS TABLE
+-- Admin-authored blog posts. `category` is a free-text tag (not tied to the
+-- product categories taxonomy). SEO fields are fully admin-editable so a
+-- post's title/description/keywords/social image can differ from its own
+-- title/excerpt/featured_image where needed.
+-- ============================================
+
+CREATE TYPE blog_status AS ENUM ('published', 'draft');
+
+CREATE TABLE blogs (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    title VARCHAR(255) NOT NULL,
+    slug VARCHAR(255) NULL UNIQUE,
+    category VARCHAR(255) NULL,
+    excerpt TEXT NULL,
+    content TEXT NOT NULL,
+    featured_image TEXT NULL,
+    status blog_status NOT NULL DEFAULT 'draft',
+    featured BOOLEAN NOT NULL DEFAULT FALSE,
+
+    -- SEO
+    seo_title VARCHAR(255) NULL,
+    seo_description VARCHAR(500) NULL,
+    seo_keywords VARCHAR(500) NULL,
+    og_image TEXT NULL,
+
+    published_at TIMESTAMP WITH TIME ZONE NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX idx_blogs_status ON blogs(status);
+CREATE INDEX idx_blogs_featured ON blogs(featured);
+CREATE INDEX idx_blogs_slug ON blogs(slug);
+CREATE INDEX idx_blogs_created_at ON blogs(created_at);
+
+CREATE TRIGGER update_blogs_updated_at BEFORE UPDATE ON blogs
+    FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+
+
+-- ============================================
 -- PC BUILDER FILTER RULES TABLE
 -- ============================================
 
@@ -281,6 +324,7 @@ CREATE TABLE pc_builder_categories (
     category_id UUID NOT NULL UNIQUE,
     display_order INTEGER NOT NULL DEFAULT 0 CHECK (display_order >= 0),
     is_active BOOLEAN NOT NULL DEFAULT TRUE,
+    max_quantity INTEGER NOT NULL DEFAULT 1 CHECK (max_quantity >= 1),
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
 
@@ -669,3 +713,60 @@ CREATE TRIGGER update_store_locations_updated_at BEFORE UPDATE ON store_location
 --   ADD COLUMN IF NOT EXISTS hero_image TEXT NULL,
 --   ADD COLUMN IF NOT EXISTS hero_tagline VARCHAR(255) NULL,
 --   ADD COLUMN IF NOT EXISTS hero_description TEXT NULL;
+
+
+-- ============================================
+-- MIGRATION: add max_quantity to PC builder categories
+-- Lets admins allow a builder step (e.g. Storage, Fans) to accept more
+-- than one selected product. Defaults to 1 so existing steps keep
+-- today's single-select behavior until an admin raises the limit.
+-- Run this block against an existing database instead of the full schema above.
+-- ============================================
+-- ALTER TABLE pc_builder_categories
+--   ADD COLUMN IF NOT EXISTS max_quantity INTEGER NOT NULL DEFAULT 1 CHECK (max_quantity >= 1);
+
+
+-- ============================================
+-- MIGRATION: add slug to products
+-- Clean storefront URLs (/product/<category>/<slug>) instead of exposing the
+-- raw product id. Existing rows are backfilled by a one-off script, not here
+-- — this block only adds the column/index; new + edited products populate it
+-- via ProductService#createProduct / #updateProduct.
+-- Run this block against an existing database instead of the full schema above.
+-- ============================================
+-- ALTER TABLE products
+--   ADD COLUMN IF NOT EXISTS slug VARCHAR(255) NULL UNIQUE;
+-- CREATE INDEX IF NOT EXISTS idx_products_slug ON products(slug);
+
+
+-- ============================================
+-- MIGRATION: add blogs
+-- Admin-authored blog posts with full SEO field control + a "featured" flag
+-- for homepage placement. Run this block against an existing database
+-- instead of the full schema above.
+-- ============================================
+-- CREATE TYPE blog_status AS ENUM ('published', 'draft');
+-- CREATE TABLE IF NOT EXISTS blogs (
+--     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+--     title VARCHAR(255) NOT NULL,
+--     slug VARCHAR(255) NULL UNIQUE,
+--     category VARCHAR(255) NULL,
+--     excerpt TEXT NULL,
+--     content TEXT NOT NULL,
+--     featured_image TEXT NULL,
+--     status blog_status NOT NULL DEFAULT 'draft',
+--     featured BOOLEAN NOT NULL DEFAULT FALSE,
+--     seo_title VARCHAR(255) NULL,
+--     seo_description VARCHAR(500) NULL,
+--     seo_keywords VARCHAR(500) NULL,
+--     og_image TEXT NULL,
+--     published_at TIMESTAMP WITH TIME ZONE NULL,
+--     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+--     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+-- );
+-- CREATE INDEX IF NOT EXISTS idx_blogs_status ON blogs(status);
+-- CREATE INDEX IF NOT EXISTS idx_blogs_featured ON blogs(featured);
+-- CREATE INDEX IF NOT EXISTS idx_blogs_slug ON blogs(slug);
+-- CREATE INDEX IF NOT EXISTS idx_blogs_created_at ON blogs(created_at);
+-- CREATE TRIGGER update_blogs_updated_at BEFORE UPDATE ON blogs
+--     FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();

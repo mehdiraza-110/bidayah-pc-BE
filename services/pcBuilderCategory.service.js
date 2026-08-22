@@ -9,7 +9,8 @@ class PcBuilderCategoryService {
         c.category_name,
         c.image,
         COALESCE(pbc.display_order, 0) AS display_order,
-        COALESCE(pbc.is_active, false) AS is_active
+        COALESCE(pbc.is_active, false) AS is_active,
+        COALESCE(pbc.max_quantity, 1) AS max_quantity
       FROM categories c
       LEFT JOIN pc_builder_categories pbc ON pbc.category_id = c.id
       ORDER BY COALESCE(pbc.is_active, false) DESC, COALESCE(pbc.display_order, 0) ASC, c.category_name ASC`
@@ -24,7 +25,7 @@ class PcBuilderCategoryService {
   async getActiveOrdered() {
     const result = await db.query(
       `SELECT
-        c.id, c.category_name, c.image, c.created_at, c.updated_at
+        c.id, c.category_name, c.image, c.created_at, c.updated_at, pbc.max_quantity
       FROM categories c
       INNER JOIN pc_builder_categories pbc ON pbc.category_id = c.id
       WHERE pbc.is_active = true AND c.is_published = true
@@ -51,18 +52,22 @@ class PcBuilderCategoryService {
           throw new Error('Each item requires a category_id');
         }
 
+        const maxQuantity = Math.max(1, parseInt(item.max_quantity, 10) || 1);
+
         await client.query(
-          `INSERT INTO pc_builder_categories (category_id, display_order, is_active, created_at, updated_at)
-           VALUES ($1, $2, $3, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+          `INSERT INTO pc_builder_categories (category_id, display_order, is_active, max_quantity, created_at, updated_at)
+           VALUES ($1, $2, $3, $4, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
            ON CONFLICT (category_id)
            DO UPDATE SET
              display_order = EXCLUDED.display_order,
              is_active = EXCLUDED.is_active,
+             max_quantity = EXCLUDED.max_quantity,
              updated_at = CURRENT_TIMESTAMP`,
           [
             item.category_id,
             item.display_order ?? i,
-            item.is_active !== undefined ? item.is_active : false
+            item.is_active !== undefined ? item.is_active : false,
+            maxQuantity
           ]
         );
       }

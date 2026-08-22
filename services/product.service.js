@@ -1,5 +1,6 @@
 const db = require('../config/db.config');
 const keyFeatureService = require('./keyFeature.service');
+const { generateUniqueProductSlug } = require('../utils/slug.util');
 
 class ProductService {
   // A product can never be 'published' while its category or any of its
@@ -51,17 +52,22 @@ class ProductService {
         productData.vendor_ids || []
       );
 
+      // Slugified name, used for clean storefront URLs (/product/<category>/<slug>)
+      // instead of the raw id — deduped against existing products' slugs.
+      const slug = await generateUniqueProductSlug(productData.name, { client });
+
       // Insert product
       const productResult = await client.query(
         `INSERT INTO products (
-          name, category_id, price, original_price, image, description,
+          name, slug, category_id, price, original_price, image, description,
           stock, status, featured, new_product, rating, reviews_count,
           created_at, updated_at
         )
-        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
         RETURNING *`,
         [
           productData.name,
+          slug,
           productData.category_id || null,
           productData.price,
           productData.original_price || null,
@@ -387,7 +393,76 @@ class ProductService {
       GROUP BY p.id, c.category_name`,
       [productId]
     );
-    
+
+    if (result.rows.length === 0) {
+      return null;
+    }
+
+    return result.rows[0];
+  }
+
+  // Same as getProductById, but looked up by its slug — used by the
+  // storefront's clean product URLs (/product/<category>/<slug>).
+  async getProductBySlug(slug) {
+    const result = await db.query(
+      `SELECT
+        p.*,
+        c.category_name,
+        COALESCE(
+          json_agg(
+            DISTINCT jsonb_build_object(
+              'id', v.id,
+              'vendor_name', v.vendor_name
+            )
+          ) FILTER (WHERE v.id IS NOT NULL),
+          '[]'::json
+        ) as vendors,
+        COALESCE(
+          json_agg(
+            DISTINCT jsonb_build_object(
+              'id', pm.id,
+              'url', pm.url,
+              'type', pm.type,
+              'display_order', pm.display_order
+            )
+          ) FILTER (WHERE pm.id IS NOT NULL),
+          '[]'::json
+        ) as media,
+        COALESCE(
+          json_agg(
+            DISTINCT jsonb_build_object(
+              'id', ps.id,
+              'spec_text', ps.spec_text,
+              'display_order', ps.display_order
+            )
+          ) FILTER (WHERE ps.id IS NOT NULL),
+          '[]'::json
+        ) as specs,
+        COALESCE(
+          json_agg(
+            DISTINCT jsonb_build_object(
+              'id', pkf.id,
+              'key_feature_id', ckf.id,
+              'feature_key', ckf.feature_key,
+              'feature_value', pkf.feature_value,
+              'display_order', pkf.display_order
+            )
+          ) FILTER (WHERE pkf.id IS NOT NULL),
+          '[]'::json
+        ) as key_features
+      FROM products p
+      LEFT JOIN categories c ON p.category_id = c.id
+      LEFT JOIN product_vendors pv ON p.id = pv.product_id
+      LEFT JOIN vendors v ON pv.vendor_id = v.id
+      LEFT JOIN product_media pm ON p.id = pm.product_id
+      LEFT JOIN product_specs ps ON p.id = ps.product_id
+      LEFT JOIN product_key_features pkf ON p.id = pkf.product_id
+      LEFT JOIN category_key_features ckf ON pkf.category_key_feature_id = ckf.id
+      WHERE p.slug = $1
+      GROUP BY p.id, c.category_name`,
+      [slug]
+    );
+
     if (result.rows.length === 0) {
       return null;
     }
@@ -414,6 +489,33 @@ class ProductService {
       LEFT JOIN categories c ON c.id = p.category_id
       WHERE p.id = $1`,
       [productId]
+    );
+
+    if (result.rows.length === 0) {
+      return false;
+    }
+
+    const row = result.rows[0];
+    return row.status === 'published' && row.category_ok && row.vendor_ok;
+  }
+
+  // Same as isPubliclyVisible, but looked up by slug — used by the public
+  // get-by-slug route.
+  async isPubliclyVisibleBySlug(slug) {
+    const result = await db.query(
+      `SELECT
+        p.id,
+        p.status,
+        (p.category_id IS NULL OR c.is_published = true) AS category_ok,
+        NOT EXISTS (
+          SELECT 1 FROM product_vendors pv
+          JOIN vendors v ON v.id = pv.vendor_id
+          WHERE pv.product_id = p.id AND v.is_published = false
+        ) AS vendor_ok
+      FROM products p
+      LEFT JOIN categories c ON c.id = p.category_id
+      WHERE p.slug = $1`,
+      [slug]
     );
 
     if (result.rows.length === 0) {
@@ -469,13 +571,21 @@ class ProductService {
         productData.status = await this.resolvePublishableStatus(client, requestedStatus, effectiveCategoryId, effectiveVendorIds);
       }
 
+      // Renaming a product regenerates its slug (unless the caller explicitly
+      // set one) so the storefront URL stays in sync with the new name — the
+      // id is still what's actually looked up on old links, so this never
+      // breaks anything, it just keeps new links readable.
+      if (productData.name !== undefined && productData.slug === undefined) {
+        productData.slug = await generateUniqueProductSlug(productData.name, { client, excludeProductId: productId });
+      }
+
       // Build update query dynamically
       const updateFields = [];
       const values = [];
       let paramCount = 1;
-      
+
       const allowedFields = [
-        'name', 'category_id', 'price', 'original_price', 'image', 'description',
+        'name', 'slug', 'category_id', 'price', 'original_price', 'image', 'description',
         'stock', 'status', 'featured', 'new_product', 'rating', 'reviews_count'
       ];
       

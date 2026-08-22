@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const productController = require('../../controllers/product.controller');
+const blogController = require('../../controllers/blog.controller');
 const vendorController = require('../../controllers/vendor.controller');
 const categoryController = require('../../controllers/category.controller');
 const billingController = require('../../controllers/billing.controller');
@@ -36,6 +37,31 @@ const checkPublishedProduct = async (req, res, next) => {
   }
 };
 
+// Same as checkPublishedProduct, but for the slug-based lookup route.
+const checkPublishedProductBySlug = async (req, res, next) => {
+  const productService = require('../../services/product.service');
+  const { slug } = req.params;
+
+  try {
+    const visible = await productService.isPubliclyVisibleBySlug(slug);
+
+    if (!visible) {
+      return res.status(404).json({
+        success: false,
+        message: 'Product not found'
+      });
+    }
+
+    next();
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: 'Error checking product status',
+      error: error.message
+    });
+  }
+};
+
 // Public Products Routes (only GET, only published products)
 router.get('/products/featured', productController.getFeaturedProducts.bind(productController));
 
@@ -46,6 +72,7 @@ router.get('/products', (req, res, next) => {
   next();
 }, productController.getAllProducts.bind(productController));
 
+router.get('/products/slug/:slug', checkPublishedProductBySlug, productController.getProductBySlug.bind(productController));
 router.get('/products/:id', checkPublishedProduct, productController.getProductById.bind(productController));
 
 // Public PC Builder Routes (only GET, only published products)
@@ -87,6 +114,38 @@ router.get('/categories/:id/filters', categoryController.getCategoryFilters.bind
 
 // Public Billing Information Route (only GET)
 router.get('/billing', billingController.getBillingInfo.bind(billingController));
+
+// Same as checkPublishedProduct/BySlug, but for blogs.
+const checkPublishedBlogBySlug = async (req, res, next) => {
+  const blogService = require('../../services/blog.service');
+  const { slug } = req.params;
+
+  try {
+    const visible = await blogService.isPubliclyVisibleBySlug(slug);
+
+    if (!visible) {
+      return res.status(404).json({
+        success: false,
+        message: 'Blog not found'
+      });
+    }
+
+    next();
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: 'Error checking blog status',
+      error: error.message
+    });
+  }
+};
+
+// Public Blogs Routes (only GET, only published posts)
+router.get('/blogs', (req, res, next) => {
+  req.query.status = 'published';
+  next();
+}, blogController.getAllBlogs.bind(blogController));
+router.get('/blogs/slug/:slug', checkPublishedBlogBySlug, blogController.getBlogBySlug.bind(blogController));
 
 // Public Hero Media Route (only GET)
 router.get('/hero-media', customizationController.getHeroMedia.bind(customizationController));

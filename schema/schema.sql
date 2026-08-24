@@ -325,6 +325,10 @@ CREATE TABLE pc_builder_categories (
     display_order INTEGER NOT NULL DEFAULT 0 CHECK (display_order >= 0),
     is_active BOOLEAN NOT NULL DEFAULT TRUE,
     max_quantity INTEGER NOT NULL DEFAULT 1 CHECK (max_quantity >= 1),
+    -- When true (and max_quantity > 1), a customer can add the SAME product to
+    -- this step more than once (e.g. 2x of one fan) instead of only being able
+    -- to pick that many DIFFERENT products.
+    allow_duplicate_products BOOLEAN NOT NULL DEFAULT FALSE,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
 
@@ -533,6 +537,9 @@ CREATE TRIGGER update_hero_content_updated_at BEFORE UPDATE ON hero_content
 CREATE TABLE site_settings (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     whatsapp_number VARCHAR(32),
+    -- How many active Featured Gaming PCs show on the homepage, admin-managed
+    -- from the Featured Gaming PCs page alongside the builds themselves.
+    featured_gaming_pcs_limit INTEGER NOT NULL DEFAULT 4 CHECK (featured_gaming_pcs_limit >= 0),
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
@@ -559,6 +566,68 @@ CREATE INDEX idx_store_location_active ON store_locations(is_active);
 
 CREATE TRIGGER update_store_locations_updated_at BEFORE UPDATE ON store_locations
     FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+
+
+-- ============================================
+-- FEATURED GAMING PCS TABLES
+-- Admin-curated builds shown on the homepage before "Shop By Category".
+-- Each has its own price (the bundle price, not a sum of parts) and adds to
+-- the cart as a single bundle item listing its component products.
+-- ============================================
+
+CREATE TABLE featured_gaming_pcs (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    name VARCHAR(255) NOT NULL,
+    -- Clean storefront URL (/gaming-pc/<slug>) instead of exposing the raw id —
+    -- same convention as products. Regenerated whenever the name changes.
+    slug VARCHAR(255) NULL UNIQUE,
+    description TEXT NULL,
+    price DECIMAL(10, 2) NOT NULL CHECK (price >= 0),
+    key_features TEXT[] NOT NULL DEFAULT ARRAY[]::TEXT[],
+    is_active BOOLEAN NOT NULL DEFAULT TRUE,
+    display_order INTEGER NOT NULL DEFAULT 0 CHECK (display_order >= 0),
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX idx_featured_gaming_pcs_is_active ON featured_gaming_pcs(is_active);
+CREATE INDEX idx_featured_gaming_pcs_display_order ON featured_gaming_pcs(display_order);
+CREATE INDEX idx_featured_gaming_pcs_slug ON featured_gaming_pcs(slug);
+
+CREATE TRIGGER update_featured_gaming_pcs_updated_at BEFORE UPDATE ON featured_gaming_pcs
+    FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+
+-- Up to 5 gallery photos per build (at least 1 required, enforced in the app layer).
+CREATE TABLE featured_gaming_pc_images (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    gaming_pc_id UUID NOT NULL,
+    url TEXT NOT NULL,
+    display_order INTEGER NOT NULL DEFAULT 0 CHECK (display_order >= 0 AND display_order < 5),
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (gaming_pc_id) REFERENCES featured_gaming_pcs(id) ON DELETE CASCADE,
+    CONSTRAINT unique_gaming_pc_image_order UNIQUE (gaming_pc_id, display_order)
+);
+
+CREATE INDEX idx_featured_gaming_pc_images_gaming_pc_id ON featured_gaming_pc_images(gaming_pc_id);
+
+-- Which real products this build is made of — shown to the customer both on
+-- the homepage card and inside the cart bundle line item. `quantity` lets the
+-- same product appear more than once (e.g. 2x 32GB RAM sticks) instead of
+-- only being addable a single time.
+CREATE TABLE featured_gaming_pc_products (
+    gaming_pc_id UUID NOT NULL,
+    product_id UUID NOT NULL,
+    quantity INTEGER NOT NULL DEFAULT 1 CHECK (quantity >= 1),
+    display_order INTEGER NOT NULL DEFAULT 0 CHECK (display_order >= 0),
+
+    PRIMARY KEY (gaming_pc_id, product_id),
+    FOREIGN KEY (gaming_pc_id) REFERENCES featured_gaming_pcs(id) ON DELETE CASCADE,
+    FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE
+);
+
+CREATE INDEX idx_featured_gaming_pc_products_gaming_pc_id ON featured_gaming_pc_products(gaming_pc_id);
+CREATE INDEX idx_featured_gaming_pc_products_product_id ON featured_gaming_pc_products(product_id);
 
 
 -- ============================================
@@ -727,6 +796,18 @@ CREATE TRIGGER update_store_locations_updated_at BEFORE UPDATE ON store_location
 
 
 -- ============================================
+-- MIGRATION: add allow_duplicate_products to PC builder categories
+-- Lets a customer add the SAME product to a builder step more than once
+-- (e.g. 2x of one fan) instead of only being able to pick that many
+-- DIFFERENT products. Defaults to false so existing steps keep today's
+-- behavior until an admin turns it on. Run this block against an existing
+-- database instead of the full schema above.
+-- ============================================
+-- ALTER TABLE pc_builder_categories
+--   ADD COLUMN IF NOT EXISTS allow_duplicate_products BOOLEAN NOT NULL DEFAULT FALSE;
+
+
+-- ============================================
 -- MIGRATION: add slug to products
 -- Clean storefront URLs (/product/<category>/<slug>) instead of exposing the
 -- raw product id. Existing rows are backfilled by a one-off script, not here
@@ -737,6 +818,57 @@ CREATE TRIGGER update_store_locations_updated_at BEFORE UPDATE ON store_location
 -- ALTER TABLE products
 --   ADD COLUMN IF NOT EXISTS slug VARCHAR(255) NULL UNIQUE;
 -- CREATE INDEX IF NOT EXISTS idx_products_slug ON products(slug);
+
+
+-- ============================================
+-- HOMEPAGE SECTIONS TABLE
+-- Admin-managed, ordered list of category showcase rows on the homepage
+-- (e.g. "Graphics Cards", "Monitors"). Replaces the previous hardcoded
+-- CATEGORY_SHOWCASES array in the frontend. bg_color_light/bg_color_dark
+-- are free-form CSS color strings (hex/hsl/etc) applied as the section's
+-- background per theme; NULL means "no override, use the page default".
+-- ============================================
+
+CREATE TABLE homepage_sections (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    category_id UUID NOT NULL UNIQUE,
+    title VARCHAR(255) NOT NULL,
+    display_order INTEGER NOT NULL DEFAULT 0 CHECK (display_order >= 0),
+    is_active BOOLEAN NOT NULL DEFAULT TRUE,
+    product_limit INTEGER NOT NULL DEFAULT 12 CHECK (product_limit > 0),
+    bg_color_light VARCHAR(32) NULL,
+    bg_color_dark VARCHAR(32) NULL,
+    -- Optional full-bleed photo for the section's pinned "category tile" on the
+    -- homepage. NULL falls back to the plain icon tile.
+    image TEXT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE CASCADE
+);
+
+CREATE INDEX idx_homepage_sections_is_active ON homepage_sections(is_active);
+CREATE INDEX idx_homepage_sections_display_order ON homepage_sections(display_order);
+CREATE INDEX idx_homepage_sections_category_id ON homepage_sections(category_id);
+
+CREATE TRIGGER update_homepage_sections_updated_at BEFORE UPDATE ON homepage_sections
+    FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+
+-- Seed the sections that exist on the homepage today (matching the previous
+-- hardcoded CATEGORY_SHOWCASES list), so the storefront keeps working exactly
+-- as it does now until an admin curates the list from the new admin panel.
+-- "Gaming Laptops" is intentionally skipped — there's no matching category.
+INSERT INTO homepage_sections (category_id, title, display_order, is_active, product_limit)
+SELECT id, 'Graphics Cards', 0, TRUE, 12 FROM categories WHERE category_name ILIKE '%gpu%' OR category_name ILIKE '%graphic%'
+UNION ALL
+SELECT id, 'Monitors', 1, TRUE, 6 FROM categories WHERE category_name ILIKE '%monitor%'
+UNION ALL
+SELECT id, 'Processors', 2, TRUE, 6 FROM categories WHERE category_name ILIKE '%cpu%' OR category_name ILIKE '%processor%'
+UNION ALL
+SELECT id, 'Motherboards', 3, TRUE, 6 FROM categories WHERE category_name ILIKE '%motherboard%' OR category_name ILIKE '%mobo%'
+UNION ALL
+SELECT id, 'RAM', 4, TRUE, 6 FROM categories WHERE category_name ILIKE '%ram%' OR category_name ILIKE '%memory%'
+ON CONFLICT (category_id) DO NOTHING;
 
 
 -- ============================================
@@ -770,3 +902,122 @@ CREATE TRIGGER update_store_locations_updated_at BEFORE UPDATE ON store_location
 -- CREATE INDEX IF NOT EXISTS idx_blogs_created_at ON blogs(created_at);
 -- CREATE TRIGGER update_blogs_updated_at BEFORE UPDATE ON blogs
 --     FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+
+
+-- ============================================
+-- MIGRATION: add homepage sections
+-- Admin-managed, ordered list of category showcase rows on the homepage.
+-- Run this block against an existing database instead of the full schema above.
+-- ============================================
+-- CREATE TABLE IF NOT EXISTS homepage_sections (
+--     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+--     category_id UUID NOT NULL UNIQUE,
+--     title VARCHAR(255) NOT NULL,
+--     display_order INTEGER NOT NULL DEFAULT 0 CHECK (display_order >= 0),
+--     is_active BOOLEAN NOT NULL DEFAULT TRUE,
+--     product_limit INTEGER NOT NULL DEFAULT 12 CHECK (product_limit > 0),
+--     bg_color_light VARCHAR(32) NULL,
+--     bg_color_dark VARCHAR(32) NULL,
+--     image TEXT NULL,
+--     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+--     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+--     FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE CASCADE
+-- );
+-- CREATE INDEX IF NOT EXISTS idx_homepage_sections_is_active ON homepage_sections(is_active);
+-- CREATE INDEX IF NOT EXISTS idx_homepage_sections_display_order ON homepage_sections(display_order);
+-- CREATE INDEX IF NOT EXISTS idx_homepage_sections_category_id ON homepage_sections(category_id);
+-- CREATE TRIGGER update_homepage_sections_updated_at BEFORE UPDATE ON homepage_sections
+--     FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+-- INSERT INTO homepage_sections (category_id, title, display_order, is_active, product_limit)
+-- SELECT id, 'Graphics Cards', 0, TRUE, 12 FROM categories WHERE category_name ILIKE '%gpu%' OR category_name ILIKE '%graphic%'
+-- UNION ALL
+-- SELECT id, 'Monitors', 1, TRUE, 6 FROM categories WHERE category_name ILIKE '%monitor%'
+-- UNION ALL
+-- SELECT id, 'Processors', 2, TRUE, 6 FROM categories WHERE category_name ILIKE '%cpu%' OR category_name ILIKE '%processor%'
+-- UNION ALL
+-- SELECT id, 'Motherboards', 3, TRUE, 6 FROM categories WHERE category_name ILIKE '%motherboard%' OR category_name ILIKE '%mobo%'
+-- UNION ALL
+-- SELECT id, 'RAM', 4, TRUE, 6 FROM categories WHERE category_name ILIKE '%ram%' OR category_name ILIKE '%memory%'
+-- ON CONFLICT (category_id) DO NOTHING;
+
+
+-- ============================================
+-- MIGRATION: add image to homepage sections
+-- Optional full-bleed photo for the pinned category tile. Run this block
+-- against a database that already has homepage_sections from the migration
+-- above.
+-- ============================================
+-- ALTER TABLE homepage_sections
+--   ADD COLUMN IF NOT EXISTS image TEXT NULL;
+
+
+-- ============================================
+-- MIGRATION: add featured gaming PCs
+-- Admin-curated builds shown on the homepage before "Shop By Category".
+-- Run this block against an existing database instead of the full schema above.
+-- ============================================
+-- ALTER TABLE site_settings
+--   ADD COLUMN IF NOT EXISTS featured_gaming_pcs_limit INTEGER NOT NULL DEFAULT 4 CHECK (featured_gaming_pcs_limit >= 0);
+--
+-- CREATE TABLE IF NOT EXISTS featured_gaming_pcs (
+--     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+--     name VARCHAR(255) NOT NULL,
+--     slug VARCHAR(255) NULL UNIQUE,
+--     description TEXT NULL,
+--     price DECIMAL(10, 2) NOT NULL CHECK (price >= 0),
+--     key_features TEXT[] NOT NULL DEFAULT ARRAY[]::TEXT[],
+--     is_active BOOLEAN NOT NULL DEFAULT TRUE,
+--     display_order INTEGER NOT NULL DEFAULT 0 CHECK (display_order >= 0),
+--     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+--     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+-- );
+-- CREATE INDEX IF NOT EXISTS idx_featured_gaming_pcs_is_active ON featured_gaming_pcs(is_active);
+-- CREATE INDEX IF NOT EXISTS idx_featured_gaming_pcs_display_order ON featured_gaming_pcs(display_order);
+-- CREATE INDEX IF NOT EXISTS idx_featured_gaming_pcs_slug ON featured_gaming_pcs(slug);
+-- CREATE TRIGGER update_featured_gaming_pcs_updated_at BEFORE UPDATE ON featured_gaming_pcs
+--     FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+--
+-- CREATE TABLE IF NOT EXISTS featured_gaming_pc_images (
+--     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+--     gaming_pc_id UUID NOT NULL,
+--     url TEXT NOT NULL,
+--     display_order INTEGER NOT NULL DEFAULT 0 CHECK (display_order >= 0 AND display_order < 5),
+--     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+--     FOREIGN KEY (gaming_pc_id) REFERENCES featured_gaming_pcs(id) ON DELETE CASCADE,
+--     CONSTRAINT unique_gaming_pc_image_order UNIQUE (gaming_pc_id, display_order)
+-- );
+-- CREATE INDEX IF NOT EXISTS idx_featured_gaming_pc_images_gaming_pc_id ON featured_gaming_pc_images(gaming_pc_id);
+--
+-- CREATE TABLE IF NOT EXISTS featured_gaming_pc_products (
+--     gaming_pc_id UUID NOT NULL,
+--     product_id UUID NOT NULL,
+--     quantity INTEGER NOT NULL DEFAULT 1 CHECK (quantity >= 1),
+--     display_order INTEGER NOT NULL DEFAULT 0 CHECK (display_order >= 0),
+--     PRIMARY KEY (gaming_pc_id, product_id),
+--     FOREIGN KEY (gaming_pc_id) REFERENCES featured_gaming_pcs(id) ON DELETE CASCADE,
+--     FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE
+-- );
+-- CREATE INDEX IF NOT EXISTS idx_featured_gaming_pc_products_gaming_pc_id ON featured_gaming_pc_products(gaming_pc_id);
+-- CREATE INDEX IF NOT EXISTS idx_featured_gaming_pc_products_product_id ON featured_gaming_pc_products(product_id);
+
+
+-- ============================================
+-- MIGRATION: add quantity to featured gaming PC products
+-- Lets the same product appear more than once in a build (e.g. 2x RAM sticks).
+-- Run this block against a database that already has featured_gaming_pc_products
+-- from the migration above.
+-- ============================================
+-- ALTER TABLE featured_gaming_pc_products
+--   ADD COLUMN IF NOT EXISTS quantity INTEGER NOT NULL DEFAULT 1 CHECK (quantity >= 1);
+
+
+-- ============================================
+-- MIGRATION: add slug to featured gaming PCs
+-- Clean storefront URL (/gaming-pc/<slug>) instead of exposing the raw id.
+-- Existing rows are backfilled by a one-off script, not here — this block
+-- only adds the column/index; new + edited builds populate it via
+-- FeaturedGamingPcService#create/#update.
+-- ============================================
+-- ALTER TABLE featured_gaming_pcs
+--   ADD COLUMN IF NOT EXISTS slug VARCHAR(255) NULL UNIQUE;
+-- CREATE INDEX IF NOT EXISTS idx_featured_gaming_pcs_slug ON featured_gaming_pcs(slug);

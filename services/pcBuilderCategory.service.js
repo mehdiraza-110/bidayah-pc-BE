@@ -10,7 +10,8 @@ class PcBuilderCategoryService {
         c.image,
         COALESCE(pbc.display_order, 0) AS display_order,
         COALESCE(pbc.is_active, false) AS is_active,
-        COALESCE(pbc.max_quantity, 1) AS max_quantity
+        COALESCE(pbc.max_quantity, 1) AS max_quantity,
+        COALESCE(pbc.allow_duplicate_products, false) AS allow_duplicate_products
       FROM categories c
       LEFT JOIN pc_builder_categories pbc ON pbc.category_id = c.id
       ORDER BY COALESCE(pbc.is_active, false) DESC, COALESCE(pbc.display_order, 0) ASC, c.category_name ASC`
@@ -25,7 +26,8 @@ class PcBuilderCategoryService {
   async getActiveOrdered() {
     const result = await db.query(
       `SELECT
-        c.id, c.category_name, c.image, c.created_at, c.updated_at, pbc.max_quantity
+        c.id, c.category_name, c.image, c.created_at, c.updated_at,
+        pbc.max_quantity, pbc.allow_duplicate_products
       FROM categories c
       INNER JOIN pc_builder_categories pbc ON pbc.category_id = c.id
       WHERE pbc.is_active = true AND c.is_published = true
@@ -53,21 +55,26 @@ class PcBuilderCategoryService {
         }
 
         const maxQuantity = Math.max(1, parseInt(item.max_quantity, 10) || 1);
+        // Only meaningful when maxQuantity > 1 — a single-select step has
+        // nothing to duplicate, so force it off rather than store a stale true.
+        const allowDuplicateProducts = maxQuantity > 1 && Boolean(item.allow_duplicate_products);
 
         await client.query(
-          `INSERT INTO pc_builder_categories (category_id, display_order, is_active, max_quantity, created_at, updated_at)
-           VALUES ($1, $2, $3, $4, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+          `INSERT INTO pc_builder_categories (category_id, display_order, is_active, max_quantity, allow_duplicate_products, created_at, updated_at)
+           VALUES ($1, $2, $3, $4, $5, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
            ON CONFLICT (category_id)
            DO UPDATE SET
              display_order = EXCLUDED.display_order,
              is_active = EXCLUDED.is_active,
              max_quantity = EXCLUDED.max_quantity,
+             allow_duplicate_products = EXCLUDED.allow_duplicate_products,
              updated_at = CURRENT_TIMESTAMP`,
           [
             item.category_id,
             item.display_order ?? i,
             item.is_active !== undefined ? item.is_active : false,
-            maxQuantity
+            maxQuantity,
+            allowDuplicateProducts
           ]
         );
       }

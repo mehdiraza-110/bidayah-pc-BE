@@ -23,9 +23,18 @@ class SiteSettingsController {
   // Create or update site settings (admin)
   async upsertSiteSettings(req, res) {
     try {
-      const { whatsapp_number } = req.body;
+      const { whatsapp_number, featured_gaming_pcs_limit } = req.body;
+      const updatePayload = {};
+      if (whatsapp_number !== undefined) updatePayload.whatsapp_number = whatsapp_number;
+      if (featured_gaming_pcs_limit !== undefined) {
+        const parsedLimit = parseInt(featured_gaming_pcs_limit, 10);
+        if (isNaN(parsedLimit) || parsedLimit < 0) {
+          return res.status(400).json({ success: false, message: 'featured_gaming_pcs_limit must be a non-negative integer' });
+        }
+        updatePayload.featured_gaming_pcs_limit = parsedLimit;
+      }
 
-      const settings = await siteSettingsService.upsertSiteSettings({ whatsapp_number });
+      const settings = await siteSettingsService.upsertSiteSettings(updatePayload);
 
       res.status(200).json({
         success: true,

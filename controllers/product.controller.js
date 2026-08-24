@@ -279,23 +279,24 @@ class ProductController {
       }
       
       const productData = {};
-      
-      // Handle main image update
+
+      // Every URL currently referenced by this product (main image + gallery)
+      // — used below to work out which S3 objects genuinely became orphaned
+      // by this update, as opposed to an image that just moved between the
+      // cover slot and the gallery (which must NOT be deleted).
+      const previousUrls = new Set(
+        [currentProduct.image, ...((currentProduct.media || []).map(m => m.url))].filter(Boolean)
+      );
+      let imageTouched = false;
+      let mediaTouched = false;
+
+      // Handle main image update — either a new file upload, or an explicit
+      // URL passthrough (e.g. "use this existing gallery photo as the cover"
+      // — no re-upload needed since the file is already on S3).
       if (req.files && req.files.main_image) {
         try {
-          // Upload new main image to S3
-          const newImageUrl = await uploadToS3(req.files.main_image[0], 'products');
-          
-          // Delete old main image from S3 if it exists
-          if (currentProduct.image) {
-            try {
-              await deleteFromS3(currentProduct.image);
-            } catch (deleteError) {
-              console.error('Error deleting old main image from S3:', deleteError);
-            }
-          }
-          
-          productData.image = newImageUrl;
+          productData.image = await uploadToS3(req.files.main_image[0], 'products');
+          imageTouched = true;
         } catch (uploadError) {
           console.error('Error uploading main image to S3:', uploadError);
           return res.status(500).json({
@@ -304,40 +305,75 @@ class ProductController {
             error: uploadError.message
           });
         }
+      } else if (req.body.main_image !== undefined && req.body.main_image !== currentProduct.image) {
+        productData.image = req.body.main_image || null;
+        imageTouched = true;
       }
-      
-      // Handle product media update
-      if (req.files && req.files.media && req.files.media.length > 0) {
-        // Delete old media from S3
-        if (currentProduct.media && currentProduct.media.length > 0) {
-          for (const mediaItem of currentProduct.media) {
+
+      // Handle gallery update via a manifest — each of up to 5 slots is either
+      // `{ source: 'existing', url, type }` (kept, in this position) or
+      // `{ source: 'new', type }` (consumes the next file in req.files.media,
+      // in upload order). This is what makes reordering, replacing a single
+      // slot, and removing a slot all possible without re-uploading every
+      // image every time — the caller sends the FULL desired final order.
+      if (req.body.media_manifest !== undefined) {
+        let manifest = [];
+        try {
+          manifest = JSON.parse(req.body.media_manifest);
+          if (!Array.isArray(manifest)) manifest = [];
+        } catch (e) {
+          manifest = [];
+        }
+
+        const newFiles = (req.files && req.files.media) || [];
+        const media = [];
+        let fileCursor = 0;
+
+        try {
+          for (let i = 0; i < Math.min(manifest.length, 5); i++) {
+            const item = manifest[i] || {};
+            if (item.source === 'new') {
+              const file = newFiles[fileCursor++];
+              if (!file) continue;
+              const mediaUrl = await uploadToS3(file, 'products/media');
+              media.push({ url: mediaUrl, type: file.mimetype.startsWith('video/') ? 'video' : 'image' });
+            } else if (item.url) {
+              media.push({ url: item.url, type: item.type === 'video' ? 'video' : 'image' });
+            }
+          }
+        } catch (uploadError) {
+          console.error('Error uploading product media to S3:', uploadError);
+          return res.status(500).json({
+            success: false,
+            message: 'Error uploading media to S3',
+            error: uploadError.message
+          });
+        }
+
+        productData.media = media;
+        mediaTouched = true;
+      }
+
+      // Clean up S3 objects that are no longer referenced anywhere on this
+      // product — computed from the FINAL state (new value if touched, else
+      // whatever it already was), so an image moved between the cover slot
+      // and the gallery is correctly recognized as still in use.
+      if (imageTouched || mediaTouched) {
+        const finalImage = imageTouched ? productData.image : currentProduct.image;
+        const finalMedia = mediaTouched ? productData.media : (currentProduct.media || []);
+        const keptUrls = new Set([finalImage, ...finalMedia.map(m => m.url)].filter(Boolean));
+
+        for (const url of previousUrls) {
+          if (!keptUrls.has(url)) {
             try {
-              await deleteFromS3(mediaItem.url);
+              await deleteFromS3(url);
             } catch (deleteError) {
-              console.error('Error deleting old media from S3:', deleteError);
+              console.error('Error deleting orphaned product image from S3:', deleteError);
             }
           }
         }
-        
-        // Upload new media
-        const media = [];
-        for (let i = 0; i < Math.min(req.files.media.length, 5); i++) {
-          try {
-            const file = req.files.media[i];
-            const mediaUrl = await uploadToS3(file, 'products/media');
-            media.push({
-              url: mediaUrl,
-              type: file.mimetype.startsWith('video/') ? 'video' : 'image',
-              display_order: i
-            });
-          } catch (uploadError) {
-            console.error(`Error uploading media ${i} to S3:`, uploadError);
-          }
-        }
-        
-        productData.media = media;
       }
-      
+
       // Handle other fields
       const {
         name,

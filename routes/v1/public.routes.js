@@ -9,6 +9,8 @@ const customizationController = require('../../controllers/customization.control
 const publicPcBuilderController = require('../../controllers/publicPcBuilder.controller');
 const siteSettingsController = require('../../controllers/siteSettings.controller');
 const storeLocationController = require('../../controllers/storeLocation.controller');
+const homepageSectionController = require('../../controllers/homepageSection.controller');
+const featuredGamingPcController = require('../../controllers/featuredGamingPc.controller');
 
 // Middleware to check if a product is actually visible on the storefront
 // (own status published, AND its category/vendors haven't since been
@@ -155,5 +157,14 @@ router.get('/hero-content', customizationController.getHeroContent.bind(customiz
 
 // Public Site Settings Route (only GET)
 router.get('/site-settings', siteSettingsController.getSiteSettings.bind(siteSettingsController));
+
+// Public Homepage Sections Route (only GET, only active sections w/ published category)
+router.get('/homepage-sections', homepageSectionController.getActiveForPublic.bind(homepageSectionController));
+
+// Public Featured Gaming PCs Routes (only GET, only active builds)
+router.get('/featured-gaming-pcs', featuredGamingPcController.getActiveForPublic.bind(featuredGamingPcController));
+// Must be registered before /:id so "slug" isn't swallowed by the :id param route.
+router.get('/featured-gaming-pcs/slug/:slug', featuredGamingPcController.getBySlugForPublic.bind(featuredGamingPcController));
+router.get('/featured-gaming-pcs/:id', featuredGamingPcController.getByIdForPublic.bind(featuredGamingPcController));
 
 module.exports = router;

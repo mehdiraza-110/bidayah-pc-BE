@@ -37,7 +37,7 @@ class OrderService {
       // Calculate totals
       const subtotal = orderData.items.reduce((sum, item) => sum + (parseFloat(item.price) * parseInt(item.quantity)), 0);
       const shipping = 0; // Shipping is always 0
-      const tax = subtotal * 0.05; // VAT is 5% of subtotal
+      const tax = 0; // VAT removed
       const total = subtotal + shipping + tax;
       
       // Insert order
@@ -150,7 +150,7 @@ class OrderService {
       // Calculate totals
       const subtotal = orderData.items.reduce((sum, item) => sum + (parseFloat(item.price) * parseInt(item.quantity)), 0);
       const shipping = 0; // Shipping is always 0
-      const tax = subtotal * 0.05; // VAT is 5% of subtotal
+      const tax = 0; // VAT removed
       const total = subtotal + shipping + tax;
       
       // Insert order

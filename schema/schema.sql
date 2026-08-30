@@ -584,6 +584,21 @@ CREATE TABLE featured_gaming_pcs (
     description TEXT NULL,
     price DECIMAL(10, 2) NOT NULL CHECK (price >= 0),
     key_features TEXT[] NOT NULL DEFAULT ARRAY[]::TEXT[],
+    -- Optional PC Series placement: assigning a series_type_id is what makes
+    -- this build show up as a card on that series' landing page (grouped by
+    -- tier_name, color-switched by color_name) instead of/in addition to the
+    -- plain homepage "Featured Gaming PCs" row. The FK to pc_series_types is
+    -- added further down (that table is defined later in this file).
+    series_type_id UUID NULL,
+    -- Groups color siblings of the "same" build together on the series
+    -- landing page (e.g. "PLUS") — leave null for a one-off build with no
+    -- color variants.
+    tier_name VARCHAR(100) NULL,
+    color_name VARCHAR(100) NULL,
+    color_swatch_hex VARCHAR(7) NULL,
+    -- Manually entered — no automated benchmarking.
+    fps_score INTEGER NULL CHECK (fps_score IS NULL OR fps_score >= 0),
+    fps_settings_label VARCHAR(100) NULL,
     is_active BOOLEAN NOT NULL DEFAULT TRUE,
     display_order INTEGER NOT NULL DEFAULT 0 CHECK (display_order >= 0),
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
@@ -593,6 +608,7 @@ CREATE TABLE featured_gaming_pcs (
 CREATE INDEX idx_featured_gaming_pcs_is_active ON featured_gaming_pcs(is_active);
 CREATE INDEX idx_featured_gaming_pcs_display_order ON featured_gaming_pcs(display_order);
 CREATE INDEX idx_featured_gaming_pcs_slug ON featured_gaming_pcs(slug);
+CREATE INDEX idx_featured_gaming_pcs_series_type_id ON featured_gaming_pcs(series_type_id);
 
 CREATE TRIGGER update_featured_gaming_pcs_updated_at BEFORE UPDATE ON featured_gaming_pcs
     FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
@@ -628,6 +644,88 @@ CREATE TABLE featured_gaming_pc_products (
 
 CREATE INDEX idx_featured_gaming_pc_products_gaming_pc_id ON featured_gaming_pc_products(gaming_pc_id);
 CREATE INDEX idx_featured_gaming_pc_products_product_id ON featured_gaming_pc_products(product_id);
+
+
+-- ============================================
+-- PC SERIES (prebuilt PC lines, e.g. "PLAY" / "LUMEN")
+-- Hierarchy: pc_series -> pc_series_types -> pc_series_variants -> pc_series_variant_colors.
+-- A "variant" is one spec tier (e.g. "PLUS") shared across its colors — the
+-- component list and FPS score live on the variant; price/photos/swatch live
+-- on each color, since those are the only things that actually change per color.
+-- ============================================
+
+CREATE TYPE pc_series_badge_status AS ENUM ('in_stock', 'made_to_order');
+
+CREATE TABLE pc_series (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    name VARCHAR(255) NOT NULL,
+    slug VARCHAR(255) NOT NULL UNIQUE,
+    -- Homepage card CTA text — admin-editable per series (e.g. "Configurations
+    -- and prices" vs "Configurator" for a build-your-own-style series).
+    action_button_text VARCHAR(100) NOT NULL DEFAULT 'Configurations and prices',
+    card_image TEXT NULL,
+    hero_video TEXT NULL,
+    badge_status pc_series_badge_status NOT NULL DEFAULT 'in_stock',
+    -- One or two short lines shown on the homepage card under the name (e.g.
+    -- "Any configuration to your specs" / "Custom gaming PC") — admin enters
+    -- each line on its own row in a textarea, rendered as separate lines.
+    card_description TEXT NULL,
+    -- Overrides the computed price_from (MIN of active colors) on the
+    -- homepage card. Mainly for the "Build your own" card below, which has no
+    -- real colors to compute a price from, but any series can set one.
+    starting_price DECIMAL(10, 2) NULL CHECK (starting_price IS NULL OR starting_price >= 0),
+    -- Paired with starting_price to show "from AED X to AED Y" on the
+    -- homepage card instead of a single price. Ignored unless starting_price
+    -- is also set — there's nothing to pair it with otherwise (the computed
+    -- price_to already covers series with real priced builds).
+    ending_price DECIMAL(10, 2) NULL CHECK (ending_price IS NULL OR ending_price >= 0),
+    -- At most one series may have this set (enforced by the partial unique
+    -- index below) — the pinned "Build your own" homepage card. It always
+    -- sorts last regardless of display_order and links straight to the PC
+    -- Builder instead of a series landing page.
+    is_custom_build BOOLEAN NOT NULL DEFAULT FALSE,
+    is_active BOOLEAN NOT NULL DEFAULT TRUE,
+    display_order INTEGER NOT NULL DEFAULT 0 CHECK (display_order >= 0),
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX idx_pc_series_is_active ON pc_series(is_active);
+CREATE INDEX idx_pc_series_display_order ON pc_series(display_order);
+CREATE INDEX idx_pc_series_slug ON pc_series(slug);
+CREATE UNIQUE INDEX idx_pc_series_one_custom_build ON pc_series(is_custom_build) WHERE is_custom_build = true;
+
+CREATE TRIGGER update_pc_series_updated_at BEFORE UPDATE ON pc_series
+    FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+
+-- One section on the series landing page (e.g. "PLAY 1").
+CREATE TABLE pc_series_types (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    series_id UUID NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    subtitle TEXT NULL,
+    is_active BOOLEAN NOT NULL DEFAULT TRUE,
+    display_order INTEGER NOT NULL DEFAULT 0 CHECK (display_order >= 0),
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (series_id) REFERENCES pc_series(id) ON DELETE CASCADE
+);
+
+CREATE INDEX idx_pc_series_types_series_id ON pc_series_types(series_id);
+CREATE INDEX idx_pc_series_types_is_active ON pc_series_types(is_active);
+
+CREATE TRIGGER update_pc_series_types_updated_at BEFORE UPDATE ON pc_series_types
+    FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+
+-- A series type's actual purchasable builds are featured_gaming_pcs rows
+-- with this type_id set (see the series_type_id column on that table,
+-- defined earlier in this file) — grouped by tier_name and color-switched by
+-- color_name on the series landing page. Deferred here since pc_series_types
+-- didn't exist yet when featured_gaming_pcs was created above.
+ALTER TABLE featured_gaming_pcs
+    ADD CONSTRAINT featured_gaming_pcs_series_type_id_fkey
+    FOREIGN KEY (series_type_id) REFERENCES pc_series_types(id) ON DELETE SET NULL;
 
 
 -- ============================================

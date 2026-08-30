@@ -18,6 +18,7 @@ const keyFeatureRoutes = require('./key-feature.routes');
 const blogRoutes = require('./blog.routes');
 const homepageSectionRoutes = require('./homepage-section.routes');
 const featuredGamingPcRoutes = require('./featured-gaming-pc.routes');
+const pcSeriesRoutes = require('./pc-series.routes');
 
 // Public routes (read-only, no authentication required)
 router.use('/public', publicRoutes);
@@ -72,5 +73,8 @@ router.use('/homepage-sections', homepageSectionRoutes);
 
 // Featured Gaming PC routes (admin only)
 router.use('/featured-gaming-pcs', featuredGamingPcRoutes);
+
+// PC series routes
+router.use('/pc-series', pcSeriesRoutes);
 
 module.exports = router;

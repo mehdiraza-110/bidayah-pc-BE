@@ -37,7 +37,13 @@ const generateUniqueProductSlug = async (name, { client, excludeProductId } = {}
 // Generalized version of generateUniqueProductSlug, parameterized by table —
 // `table` is always a hardcoded string from our own call sites, never user
 // input, so interpolating it directly into the query is safe here.
-const generateUniqueSlug = async (name, table, { client, excludeId } = {}) => {
+//
+// `scopeColumn`/`scopeValue` narrow the uniqueness check to rows sharing that
+// column's value instead of the whole table — e.g. a pc_series_variant_colors
+// slug only needs to be unique within its own series_id, not globally, since
+// the public URL is "/gaming-pc/:seriesSlug/:colorSlug". `scopeColumn` is
+// always a hardcoded string from our own call sites too.
+const generateUniqueSlug = async (name, table, { client, excludeId, scopeColumn, scopeValue } = {}) => {
   const db = require('../config/db.config');
   const runner = client || db;
   const base = slugify(name) || table;
@@ -46,10 +52,19 @@ const generateUniqueSlug = async (name, table, { client, excludeId } = {}) => {
 
   // eslint-disable-next-line no-constant-condition
   while (true) {
-    const query = excludeId
-      ? `SELECT 1 FROM ${table} WHERE slug = $1 AND id != $2`
-      : `SELECT 1 FROM ${table} WHERE slug = $1`;
-    const params = excludeId ? [candidate, excludeId] : [candidate];
+    const conditions = ['slug = $1'];
+    const params = [candidate];
+
+    if (scopeColumn) {
+      params.push(scopeValue);
+      conditions.push(`${scopeColumn} = $${params.length}`);
+    }
+    if (excludeId) {
+      params.push(excludeId);
+      conditions.push(`id != $${params.length}`);
+    }
+
+    const query = `SELECT 1 FROM ${table} WHERE ${conditions.join(' AND ')}`;
     const result = await runner.query(query, params);
 
     if (result.rows.length === 0) {

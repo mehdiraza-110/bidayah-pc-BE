@@ -132,7 +132,13 @@ class FeaturedGamingPcController {
         key_features: keyFeatures,
         is_active: is_active !== undefined ? (is_active === 'true' || is_active === true) : true,
         images: imageUrls,
-        products
+        products,
+        series_type_id: req.body.series_type_id || undefined,
+        tier_name: req.body.tier_name,
+        color_name: req.body.color_name,
+        color_swatch_hex: req.body.color_swatch_hex,
+        fps_score: req.body.fps_score !== undefined && req.body.fps_score !== '' ? parseInt(req.body.fps_score, 10) : undefined,
+        fps_settings_label: req.body.fps_settings_label
       });
 
       res.status(201).json({ success: true, message: 'Featured gaming PC created successfully', data: gamingPc });
@@ -163,6 +169,17 @@ class FeaturedGamingPcController {
         updateData.price = parsedPrice;
       }
       if (is_active !== undefined) updateData.is_active = is_active === 'true' || is_active === true;
+
+      // Empty string means "unassign" (clear the FK / plain field) —
+      // multipart form fields can't send a real null.
+      if (req.body.series_type_id !== undefined) updateData.series_type_id = req.body.series_type_id || null;
+      if (req.body.tier_name !== undefined) updateData.tier_name = req.body.tier_name || null;
+      if (req.body.color_name !== undefined) updateData.color_name = req.body.color_name || null;
+      if (req.body.color_swatch_hex !== undefined) updateData.color_swatch_hex = req.body.color_swatch_hex || null;
+      if (req.body.fps_score !== undefined) {
+        updateData.fps_score = req.body.fps_score === '' ? null : parseInt(req.body.fps_score, 10);
+      }
+      if (req.body.fps_settings_label !== undefined) updateData.fps_settings_label = req.body.fps_settings_label || null;
 
       const keyFeatures = parseArrayField(req.body.key_features);
       if (keyFeatures !== undefined) updateData.key_features = keyFeatures;

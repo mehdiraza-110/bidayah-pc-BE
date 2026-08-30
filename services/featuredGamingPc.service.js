@@ -91,7 +91,10 @@ class FeaturedGamingPcService {
   }
 
   async create(data) {
-    const { name, description, price, key_features, is_active, images, products } = data;
+    const {
+      name, description, price, key_features, is_active, images, products,
+      series_type_id, tier_name, color_name, color_swatch_hex, fps_score, fps_settings_label
+    } = data;
 
     if (!name || !name.trim()) throw new Error('name is required');
     if (price === undefined || price === null || isNaN(price) || price < 0) {
@@ -112,8 +115,10 @@ class FeaturedGamingPcService {
       const slug = await generateUniqueSlug(name.trim(), 'featured_gaming_pcs', { client });
 
       const insertResult = await client.query(
-        `INSERT INTO featured_gaming_pcs (name, slug, description, price, key_features, is_active, display_order)
-         VALUES ($1, $2, $3, $4, $5, $6, $7)
+        `INSERT INTO featured_gaming_pcs
+           (name, slug, description, price, key_features, is_active, display_order,
+            series_type_id, tier_name, color_name, color_swatch_hex, fps_score, fps_settings_label)
+         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)
          RETURNING *`,
         [
           name.trim(),
@@ -122,7 +127,13 @@ class FeaturedGamingPcService {
           price,
           key_features || [],
           is_active !== undefined ? is_active : true,
-          displayOrder
+          displayOrder,
+          series_type_id || null,
+          tier_name || null,
+          color_name || null,
+          color_swatch_hex || null,
+          fps_score ?? null,
+          fps_settings_label || null
         ]
       );
       const gamingPc = insertResult.rows[0];
@@ -185,7 +196,10 @@ class FeaturedGamingPcService {
       const fields = [];
       const values = [];
       let i = 1;
-      const assignable = ['name', 'slug', 'description', 'price', 'key_features', 'is_active', 'display_order'];
+      const assignable = [
+        'name', 'slug', 'description', 'price', 'key_features', 'is_active', 'display_order',
+        'series_type_id', 'tier_name', 'color_name', 'color_swatch_hex', 'fps_score', 'fps_settings_label'
+      ];
       for (const key of assignable) {
         if (data[key] !== undefined) {
           fields.push(`${key} = $${i}`);

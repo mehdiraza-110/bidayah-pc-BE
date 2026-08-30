@@ -11,6 +11,7 @@ const siteSettingsController = require('../../controllers/siteSettings.controlle
 const storeLocationController = require('../../controllers/storeLocation.controller');
 const homepageSectionController = require('../../controllers/homepageSection.controller');
 const featuredGamingPcController = require('../../controllers/featuredGamingPc.controller');
+const pcSeriesController = require('../../controllers/pcSeries.controller');
 
 // Middleware to check if a product is actually visible on the storefront
 // (own status published, AND its category/vendors haven't since been
@@ -166,5 +167,14 @@ router.get('/featured-gaming-pcs', featuredGamingPcController.getActiveForPublic
 // Must be registered before /:id so "slug" isn't swallowed by the :id param route.
 router.get('/featured-gaming-pcs/slug/:slug', featuredGamingPcController.getBySlugForPublic.bind(featuredGamingPcController));
 router.get('/featured-gaming-pcs/:id', featuredGamingPcController.getByIdForPublic.bind(featuredGamingPcController));
+
+// Public PC Series Routes (only GET, only active series/types + their
+// assigned Featured Gaming PCs). Individual builds are still fetched via the
+// featured-gaming-pcs routes above (by their own slug) — a series page just
+// groups/links to them.
+router.get('/pc-series', pcSeriesController.getActiveSeriesForPublic.bind(pcSeriesController));
+// Must be registered before /:slug-less lookups collide — kept for symmetry
+// even though "slug" can't itself collide with anything else under /pc-series.
+router.get('/pc-series/slug/:slug', pcSeriesController.getSeriesBySlugForPublic.bind(pcSeriesController));
 
 module.exports = router;

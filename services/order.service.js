@@ -153,7 +153,11 @@ class OrderService {
       const tax = 0; // VAT removed
       const total = subtotal + shipping + tax;
       
-      // Insert order
+      // One combined name/email/phone/address is used for both shipping and
+      // billing — the `orders` table still has separate shipping_*/billing_*
+      // columns (unchanged schema, avoids a live migration), so the same
+      // values are mirrored into both, and the city/state/zip/country columns
+      // (no longer collected) are stored as empty strings.
       const orderResult = await client.query(
         `INSERT INTO orders (
           order_number, status, payment_method,
@@ -170,23 +174,23 @@ class OrderService {
           orderNumber,
           'agent_review',
           'agent',
-          orderData.shipping_first_name,
-          orderData.shipping_last_name,
-          orderData.shipping_email,
-          orderData.shipping_phone,
-          orderData.shipping_address,
-          orderData.shipping_city,
-          orderData.shipping_state,
-          orderData.shipping_zip_code,
-          orderData.shipping_country,
-          orderData.billing_first_name,
-          orderData.billing_last_name,
-          orderData.billing_email,
-          orderData.billing_address,
-          orderData.billing_city,
-          orderData.billing_state,
-          orderData.billing_zip_code,
-          orderData.billing_country,
+          orderData.name,
+          '',
+          orderData.email,
+          orderData.phone,
+          orderData.address,
+          '',
+          '',
+          '',
+          '',
+          orderData.name,
+          '',
+          orderData.email,
+          orderData.address,
+          '',
+          '',
+          '',
+          '',
           subtotal,
           shipping,
           tax,

@@ -277,6 +277,46 @@ CREATE TRIGGER update_blogs_updated_at BEFORE UPDATE ON blogs
 
 
 -- ============================================
+-- NEWS TABLE
+-- ============================================
+-- Same shape as blogs — a separate content type/admin section so News and
+-- Blog posts can be managed and browsed independently.
+-- ============================================
+
+CREATE TYPE news_status AS ENUM ('published', 'draft');
+
+CREATE TABLE news (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    title VARCHAR(255) NOT NULL,
+    slug VARCHAR(255) NULL UNIQUE,
+    category VARCHAR(255) NULL,
+    excerpt TEXT NULL,
+    content TEXT NOT NULL,
+    featured_image TEXT NULL,
+    status news_status NOT NULL DEFAULT 'draft',
+    featured BOOLEAN NOT NULL DEFAULT FALSE,
+
+    -- SEO
+    seo_title VARCHAR(255) NULL,
+    seo_description VARCHAR(500) NULL,
+    seo_keywords VARCHAR(500) NULL,
+    og_image TEXT NULL,
+
+    published_at TIMESTAMP WITH TIME ZONE NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX idx_news_status ON news(status);
+CREATE INDEX idx_news_featured ON news(featured);
+CREATE INDEX idx_news_slug ON news(slug);
+CREATE INDEX idx_news_created_at ON news(created_at);
+
+CREATE TRIGGER update_news_updated_at BEFORE UPDATE ON news
+    FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+
+
+-- ============================================
 -- PC BUILDER FILTER RULES TABLE
 -- ============================================
 
@@ -530,6 +570,47 @@ CREATE TRIGGER update_hero_content_updated_at BEFORE UPDATE ON hero_content
 
 
 -- ============================================
+-- TEAM PAGE BANNER TABLE ("Our Team" page hero banner)
+-- Singleton table: exactly one row, enforced in the application layer.
+-- ============================================
+
+CREATE TABLE team_page_banner (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    image_url TEXT NULL,
+    heading VARCHAR(255) NOT NULL DEFAULT 'Meet Our Team',
+    subtext TEXT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TRIGGER update_team_page_banner_updated_at BEFORE UPDATE ON team_page_banner
+    FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+
+
+-- ============================================
+-- TEAM MEMBERS TABLE ("Our Team" page roster)
+-- ============================================
+
+CREATE TABLE team_members (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    name VARCHAR(255) NOT NULL,
+    role VARCHAR(255) NOT NULL,
+    bio TEXT NULL,
+    photo_url TEXT NULL,
+    display_order INTEGER NOT NULL DEFAULT 0,
+    is_active BOOLEAN NOT NULL DEFAULT true,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX idx_team_members_display_order ON team_members(display_order);
+CREATE INDEX idx_team_members_is_active ON team_members(is_active);
+
+CREATE TRIGGER update_team_members_updated_at BEFORE UPDATE ON team_members
+    FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+
+
+-- ============================================
 -- SITE SETTINGS TABLE
 -- Singleton table: exactly one row, enforced in the application layer.
 -- ============================================
@@ -565,6 +646,31 @@ CREATE TABLE store_locations (
 CREATE INDEX idx_store_location_active ON store_locations(is_active);
 
 CREATE TRIGGER update_store_locations_updated_at BEFORE UPDATE ON store_locations
+    FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+
+
+-- ============================================
+-- CONTACT MESSAGES TABLE
+-- ============================================
+-- Submissions from the public "Contact Us" page — admin reviews them in the
+-- admin panel (no reply-from-app feature, just a read/unread inbox).
+
+CREATE TABLE contact_messages (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(350) NOT NULL,
+    phone VARCHAR(50),
+    subject VARCHAR(255),
+    message TEXT NOT NULL,
+    is_read BOOLEAN NOT NULL DEFAULT false,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX idx_contact_messages_is_read ON contact_messages(is_read);
+CREATE INDEX idx_contact_messages_created_at ON contact_messages(created_at);
+
+CREATE TRIGGER update_contact_messages_updated_at BEFORE UPDATE ON contact_messages
     FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
 
 

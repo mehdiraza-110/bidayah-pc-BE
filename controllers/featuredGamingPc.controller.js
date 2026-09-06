@@ -187,10 +187,66 @@ class FeaturedGamingPcController {
       const products = parseArrayField(req.body.products);
       if (products !== undefined) updateData.products = products;
 
-      // Images fully replace the existing set — only touched when new files
-      // are uploaded this request (see service.update's comment).
+      // Images: omit both `image_order` and files to leave the gallery
+      // untouched. `image_order` (when sent) is the full desired gallery —
+      // a mix of kept existing URLs and "new" placeholders consumed in order
+      // from the uploaded files — so the admin can reorder (set a different
+      // cover) or drop existing photos without re-uploading everything.
       const imageFiles = req.files?.images || [];
-      if (imageFiles.length > 0) {
+      const imageOrderRaw = req.body.image_order;
+
+      if (imageOrderRaw !== undefined) {
+        let imageOrder;
+        try {
+          imageOrder = JSON.parse(imageOrderRaw);
+        } catch (e) {
+          return res.status(400).json({ success: false, message: 'image_order must be a JSON array' });
+        }
+        if (!Array.isArray(imageOrder) || imageOrder.length === 0 || imageOrder.length > 5) {
+          return res.status(400).json({ success: false, message: 'images must be between 1 and 5' });
+        }
+
+        const currentSet = new Set(currentGamingPc.images);
+        const newSlotCount = imageOrder.filter((item) => item && item.type === 'new').length;
+        if (newSlotCount !== imageFiles.length) {
+          return res.status(400).json({ success: false, message: 'image_order does not match the number of uploaded files' });
+        }
+        for (const item of imageOrder) {
+          if (!item || (item.type !== 'new' && (item.type !== 'existing' || !currentSet.has(item.url)))) {
+            return res.status(400).json({ success: false, message: 'image_order references an invalid image' });
+          }
+        }
+
+        try {
+          const uploadedUrls = [];
+          for (let i = 0; i < imageFiles.length; i++) {
+            uploadedUrls.push(await uploadToS3(imageFiles[i], 'featured-gaming-pcs'));
+          }
+
+          let uploadIndex = 0;
+          const finalImages = imageOrder.map((item) =>
+            item.type === 'new' ? uploadedUrls[uploadIndex++] : item.url
+          );
+          updateData.images = finalImages;
+
+          // Old images dropped from the gallery are only deleted from S3 after
+          // the DB swap succeeds, so a failed update never leaves the row
+          // referencing images we just deleted.
+          const keptUrls = new Set(finalImages);
+          for (const oldUrl of currentGamingPc.images) {
+            if (keptUrls.has(oldUrl)) continue;
+            try {
+              await deleteFromS3(oldUrl);
+            } catch (deleteError) {
+              console.error('Error deleting old featured gaming PC image from S3:', deleteError);
+            }
+          }
+        } catch (uploadError) {
+          console.error('Error uploading featured gaming PC images to S3:', uploadError);
+          return res.status(500).json({ success: false, message: 'Error uploading images to S3', error: uploadError.message });
+        }
+      } else if (imageFiles.length > 0) {
+        // Back-compat path: files uploaded with no image_order fully replace the gallery.
         try {
           const imageUrls = [];
           for (let i = 0; i < Math.min(imageFiles.length, 5); i++) {
@@ -198,8 +254,6 @@ class FeaturedGamingPcController {
           }
           updateData.images = imageUrls;
 
-          // Old images are only deleted from S3 after the DB swap succeeds, so a
-          // failed update never leaves the row referencing images we just deleted.
           for (const oldUrl of currentGamingPc.images) {
             try {
               await deleteFromS3(oldUrl);

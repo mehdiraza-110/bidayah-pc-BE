@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const productController = require('../../controllers/product.controller');
 const blogController = require('../../controllers/blog.controller');
+const newsController = require('../../controllers/news.controller');
+const teamController = require('../../controllers/team.controller');
 const vendorController = require('../../controllers/vendor.controller');
 const categoryController = require('../../controllers/category.controller');
 const billingController = require('../../controllers/billing.controller');
@@ -149,6 +151,42 @@ router.get('/blogs', (req, res, next) => {
   next();
 }, blogController.getAllBlogs.bind(blogController));
 router.get('/blogs/slug/:slug', checkPublishedBlogBySlug, blogController.getBlogBySlug.bind(blogController));
+
+// Same as checkPublishedBlogBySlug, but for news posts.
+const checkPublishedNewsBySlug = async (req, res, next) => {
+  const newsService = require('../../services/news.service');
+  const { slug } = req.params;
+
+  try {
+    const visible = await newsService.isPubliclyVisibleBySlug(slug);
+
+    if (!visible) {
+      return res.status(404).json({
+        success: false,
+        message: 'News post not found'
+      });
+    }
+
+    next();
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: 'Error checking news status',
+      error: error.message
+    });
+  }
+};
+
+// Public News Routes (only GET, only published posts)
+router.get('/news', (req, res, next) => {
+  req.query.status = 'published';
+  next();
+}, newsController.getAllNews.bind(newsController));
+router.get('/news/slug/:slug', checkPublishedNewsBySlug, newsController.getNewsBySlug.bind(newsController));
+
+// Public Team Page Routes (only GET)
+router.get('/team/banner', teamController.getBanner.bind(teamController));
+router.get('/team/members', teamController.getActiveMembers.bind(teamController));
 
 // Public Hero Media Route (only GET)
 router.get('/hero-media', customizationController.getHeroMedia.bind(customizationController));

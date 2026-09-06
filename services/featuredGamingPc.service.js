@@ -19,11 +19,18 @@ class FeaturedGamingPcService {
         [ids]
       ),
       db.query(
-        `SELECT fgp.gaming_pc_id, fgp.display_order, fgp.quantity, p.id, p.name, p.image, p.price, p.category_id, c.category_name
+        `SELECT fgp.gaming_pc_id, fgp.display_order, fgp.quantity, p.id, p.name, p.image, p.price, p.category_id, c.category_name,
+                COALESCE(
+                  json_agg(DISTINCT jsonb_build_object('id', pm.id, 'url', pm.url, 'type', pm.type, 'display_order', pm.display_order))
+                    FILTER (WHERE pm.id IS NOT NULL),
+                  '[]'::json
+                ) AS media
          FROM featured_gaming_pc_products fgp
          INNER JOIN products p ON p.id = fgp.product_id
          LEFT JOIN categories c ON c.id = p.category_id
+         LEFT JOIN product_media pm ON pm.product_id = p.id
          WHERE fgp.gaming_pc_id = ANY($1::uuid[])
+         GROUP BY fgp.gaming_pc_id, fgp.display_order, fgp.quantity, p.id, p.name, p.image, p.price, p.category_id, c.category_name
          ORDER BY fgp.gaming_pc_id, fgp.display_order ASC`,
         [ids]
       )
@@ -45,7 +52,8 @@ class FeaturedGamingPcService {
         price: row.price,
         category_id: row.category_id,
         category_name: row.category_name,
-        quantity: row.quantity
+        quantity: row.quantity,
+        media: row.media
       });
     }
 

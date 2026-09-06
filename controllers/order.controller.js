@@ -187,64 +187,38 @@ class OrderController {
     }
   }
   
-  // Create order with agent payment
+  // Create order — always goes to agent review (a sales agent quotes the
+  // final price afterward). One combined name/email/phone/address is used
+  // for both shipping and billing; no payment method is collected up front.
   async createAgentOrder(req, res) {
     try {
-      const {
-        shipping_first_name,
-        shipping_last_name,
-        shipping_email,
-        shipping_phone,
-        shipping_address,
-        shipping_city,
-        shipping_state,
-        shipping_zip_code,
-        shipping_country,
-        billing_first_name,
-        billing_last_name,
-        billing_email,
-        billing_address,
-        billing_city,
-        billing_state,
-        billing_zip_code,
-        billing_country,
-        items
-      } = req.body;
-      
+      const { name, email, phone, address, items } = req.body;
+
       // Validation
-      if (!shipping_first_name || !shipping_last_name || !shipping_email || !shipping_phone ||
-          !shipping_address || !shipping_city || !shipping_state || !shipping_zip_code || !shipping_country) {
+      if (!name || !email || !phone || !address) {
         return res.status(400).json({
           success: false,
-          message: 'All shipping fields are required'
+          message: 'Name, email, phone, and address are all required'
         });
       }
-      
-      if (!billing_first_name || !billing_last_name || !billing_email ||
-          !billing_address || !billing_city || !billing_state || !billing_zip_code || !billing_country) {
-        return res.status(400).json({
-          success: false,
-          message: 'All billing fields are required'
-        });
-      }
-      
+
       // Validate email format
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(shipping_email) || !emailRegex.test(billing_email)) {
+      if (!emailRegex.test(email)) {
         return res.status(400).json({
           success: false,
           message: 'Invalid email format'
         });
       }
-      
+
       // Validate phone
-      if (shipping_phone.length < 10) {
+      if (phone.length < 10) {
         return res.status(400).json({
           success: false,
           message: 'Phone number must be at least 10 characters'
         });
       }
-      
+
       // Validate items
       if (!items || !Array.isArray(items) || items.length === 0) {
         return res.status(400).json({
@@ -252,7 +226,7 @@ class OrderController {
           message: 'At least one item is required'
         });
       }
-      
+
       for (const item of items) {
         if (!item.id || !item.name || !item.price || !item.quantity) {
           return res.status(400).json({
@@ -273,28 +247,9 @@ class OrderController {
           });
         }
       }
-      
-      const orderData = {
-        shipping_first_name,
-        shipping_last_name,
-        shipping_email,
-        shipping_phone,
-        shipping_address,
-        shipping_city,
-        shipping_state,
-        shipping_zip_code,
-        shipping_country,
-        billing_first_name,
-        billing_last_name,
-        billing_email,
-        billing_address,
-        billing_city,
-        billing_state,
-        billing_zip_code,
-        billing_country,
-        items
-      };
-      
+
+      const orderData = { name, email, phone, address, items };
+
       const newOrder = await orderService.createAgentOrder(orderData);
       
       res.status(201).json({

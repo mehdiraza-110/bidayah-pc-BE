@@ -82,7 +82,54 @@ const series = {
                  WHERE t.series_id = s.id AND f.is_active = true) AS price_to
        FROM pc_series s WHERE s.is_active = true ORDER BY s.is_custom_build ASC, s.display_order ASC`
     );
-    return result.rows;
+    return series.attachCardImages(result.rows);
+  },
+
+  // Attaches `card_images` — the series' own card_image (if set) followed by
+  // the cover photo of each of its active tier/color builds, deduped. Lets
+  // the homepage series card cycle through spec-tier/color variants on
+  // hover, the same way a product card cycles its gallery.
+  async attachCardImages(seriesRows) {
+    const candidateIds = seriesRows.filter(s => !s.is_custom_build).map(s => s.id);
+    if (candidateIds.length === 0) {
+      return seriesRows.map(s => ({ ...s, card_images: s.card_image ? [s.card_image] : [] }));
+    }
+
+    const buildsResult = await db.query(
+      `SELECT f.id, t.series_id
+       FROM featured_gaming_pcs f
+       INNER JOIN pc_series_types t ON t.id = f.series_type_id
+       WHERE t.series_id = ANY($1::uuid[]) AND f.is_active = true AND t.is_active = true
+       ORDER BY t.series_id, f.tier_name NULLS FIRST, f.color_name NULLS FIRST, f.display_order ASC`,
+      [candidateIds]
+    );
+
+    const pcIds = buildsResult.rows.map(r => r.id);
+    const coversResult = pcIds.length
+      ? await db.query(
+          `SELECT gaming_pc_id, url FROM featured_gaming_pc_images
+           WHERE gaming_pc_id = ANY($1::uuid[]) AND display_order = 0`,
+          [pcIds]
+        )
+      : { rows: [] };
+    const coverByPc = new Map(coversResult.rows.map(r => [r.gaming_pc_id, r.url]));
+
+    const variantImagesBySeries = new Map();
+    for (const row of buildsResult.rows) {
+      const cover = coverByPc.get(row.id);
+      if (!cover) continue;
+      if (!variantImagesBySeries.has(row.series_id)) variantImagesBySeries.set(row.series_id, []);
+      const images = variantImagesBySeries.get(row.series_id);
+      if (!images.includes(cover)) images.push(cover);
+    }
+
+    return seriesRows.map(s => {
+      const variantImages = variantImagesBySeries.get(s.id) || [];
+      const images = s.card_image
+        ? [s.card_image, ...variantImages.filter(url => url !== s.card_image)]
+        : variantImages;
+      return { ...s, card_images: images.slice(0, 6) };
+    });
   },
 
   // Admin workbench / public landing page: full nested tree. `activeOnly`

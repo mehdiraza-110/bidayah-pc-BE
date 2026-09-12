@@ -374,6 +374,64 @@ class OrderController {
       });
     }
   }
+
+  // Full admin edit: customer info, shipping/tax, and item list
+  async updateOrder(req, res) {
+    try {
+      const { id } = req.params;
+      const { shipping_info, billing_info, items, shipping, tax, total } = req.body;
+
+      if (!items || !Array.isArray(items) || items.length === 0) {
+        return res.status(400).json({
+          success: false,
+          message: 'At least one item is required'
+        });
+      }
+
+      for (const item of items) {
+        if (!item.name || item.price == null || item.quantity == null) {
+          return res.status(400).json({
+            success: false,
+            message: 'Each item must have: name, price, and quantity'
+          });
+        }
+        if (parseInt(item.quantity) < 1) {
+          return res.status(400).json({
+            success: false,
+            message: 'Item quantity must be at least 1'
+          });
+        }
+        if (parseFloat(item.price) <= 0) {
+          return res.status(400).json({
+            success: false,
+            message: 'Item price must be greater than 0'
+          });
+        }
+      }
+
+      const updatedOrder = await orderService.updateOrder(id, { shipping_info, billing_info, items, shipping, tax, total });
+
+      res.status(200).json({
+        success: true,
+        message: 'Order updated successfully',
+        data: updatedOrder
+      });
+    } catch (error) {
+      console.error('Error updating order:', error);
+
+      if (error.message === 'Order not found') {
+        return res.status(404).json({
+          success: false,
+          message: 'Order not found'
+        });
+      }
+
+      res.status(400).json({
+        success: false,
+        message: error.message || 'Error updating order'
+      });
+    }
+  }
 }
 
 module.exports = new OrderController();

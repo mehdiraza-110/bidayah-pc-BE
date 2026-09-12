@@ -448,8 +448,131 @@ class OrderService {
     
     // Get updated order with items
     const updatedOrder = await this.getOrderById(orderId);
-    
+
     return updatedOrder;
+  }
+
+  // Full admin edit: customer (shipping/billing) info, shipping/tax overrides,
+  // and the item list itself (edit price/qty, add, remove) — items are
+  // replaced wholesale each save since order_items has no stable id exposed
+  // to the client (only product_id, which the client generates and isn't
+  // guaranteed unique across edits), so a delete-and-reinsert is simplest and
+  // always leaves subtotal/total consistent with what's on screen.
+  async updateOrder(orderId, updateData) {
+    const client = await db.getClient();
+
+    try {
+      await client.query('BEGIN');
+
+      const existing = await client.query('SELECT id FROM orders WHERE id = $1', [orderId]);
+      if (existing.rows.length === 0) {
+        throw new Error('Order not found');
+      }
+
+      const { shipping_info, billing_info, items, shipping, tax, total: totalOverride } = updateData;
+
+      if (!Array.isArray(items) || items.length === 0) {
+        throw new Error('At least one item is required');
+      }
+
+      for (const item of items) {
+        if (!item.name || item.price == null || item.quantity == null) {
+          throw new Error('Each item must have: name, price, and quantity');
+        }
+        if (parseInt(item.quantity) < 1) {
+          throw new Error('Item quantity must be at least 1');
+        }
+        if (parseFloat(item.price) <= 0) {
+          throw new Error('Item price must be greater than 0');
+        }
+      }
+
+      const subtotal = items.reduce((sum, item) => sum + (parseFloat(item.price) * parseInt(item.quantity)), 0);
+      const shippingCost = shipping != null ? parseFloat(shipping) : 0;
+      const taxCost = tax != null ? parseFloat(tax) : 0;
+      // Total normally follows subtotal+shipping+tax, but the admin can type
+      // a final quoted price directly (e.g. a manual discount) — when sent,
+      // that explicit value wins instead of being re-derived from the items.
+      const total = totalOverride != null && totalOverride !== ''
+        ? parseFloat(totalOverride)
+        : subtotal + shippingCost + taxCost;
+
+      if (Number.isNaN(total) || total <= 0) {
+        throw new Error('Total must be a positive number');
+      }
+
+      const si = shipping_info || {};
+      const bi = billing_info || {};
+
+      await client.query(
+        `UPDATE orders SET
+          shipping_first_name = COALESCE($1, shipping_first_name),
+          shipping_last_name = COALESCE($2, shipping_last_name),
+          shipping_email = COALESCE($3, shipping_email),
+          shipping_phone = COALESCE($4, shipping_phone),
+          shipping_address = COALESCE($5, shipping_address),
+          shipping_city = COALESCE($6, shipping_city),
+          shipping_state = COALESCE($7, shipping_state),
+          shipping_zip_code = COALESCE($8, shipping_zip_code),
+          shipping_country = COALESCE($9, shipping_country),
+          billing_first_name = COALESCE($10, billing_first_name),
+          billing_last_name = COALESCE($11, billing_last_name),
+          billing_email = COALESCE($12, billing_email),
+          billing_address = COALESCE($13, billing_address),
+          billing_city = COALESCE($14, billing_city),
+          billing_state = COALESCE($15, billing_state),
+          billing_zip_code = COALESCE($16, billing_zip_code),
+          billing_country = COALESCE($17, billing_country),
+          subtotal = $18,
+          shipping = $19,
+          tax = $20,
+          total = $21,
+          updated_at = CURRENT_TIMESTAMP
+        WHERE id = $22`,
+        [
+          si.first_name ?? null, si.last_name ?? null, si.email ?? null, si.phone ?? null,
+          si.address ?? null, si.city ?? null, si.state ?? null, si.zip_code ?? null, si.country ?? null,
+          bi.first_name ?? null, bi.last_name ?? null, bi.email ?? null,
+          bi.address ?? null, bi.city ?? null, bi.state ?? null, bi.zip_code ?? null, bi.country ?? null,
+          subtotal, shippingCost, taxCost, total,
+          orderId
+        ]
+      );
+
+      await client.query('DELETE FROM order_items WHERE order_id = $1', [orderId]);
+
+      for (const item of items) {
+        const itemSubtotal = parseFloat(item.price) * parseInt(item.quantity);
+        await client.query(
+          `INSERT INTO order_items (
+            order_id, product_id, product_name, price, quantity, subtotal,
+            category, vendor_id, product_image, components, created_at, updated_at
+          )
+          VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)`,
+          [
+            orderId,
+            item.id || `item-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+            item.name,
+            parseFloat(item.price),
+            parseInt(item.quantity),
+            itemSubtotal,
+            item.category || null,
+            item.vendor_id || null,
+            item.image || null,
+            item.components ? JSON.stringify(item.components) : null
+          ]
+        );
+      }
+
+      await client.query('COMMIT');
+
+      return await this.getOrderById(orderId);
+    } catch (error) {
+      await client.query('ROLLBACK');
+      throw error;
+    } finally {
+      client.release();
+    }
   }
 }
 

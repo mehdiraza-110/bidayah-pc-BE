@@ -29,4 +29,8 @@ router.get('/:id', orderController.getOrderById.bind(orderController));
 router.patch('/:id/status', orderController.updateOrderStatus.bind(orderController));
 router.put('/:id/status', orderController.updateOrderStatus.bind(orderController));
 
+// Full order edit (customer info, shipping/tax, item list)
+router.patch('/:id', orderController.updateOrder.bind(orderController));
+router.put('/:id', orderController.updateOrder.bind(orderController));
+
 module.exports = router;

@@ -511,11 +511,16 @@ CREATE TABLE order_items (
     category VARCHAR(255),
     vendor_id VARCHAR(255),
     product_image VARCHAR(500),
+    components JSONB,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    
+
     FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE
 );
+
+-- components: itemized breakdown for bundled items (e.g. a Custom PC Build),
+-- stored as JSON array of { category, name, vendor, quantity }. NULL for
+-- regular single-product order items.
 
 CREATE INDEX idx_order_items_order_id ON order_items(order_id);
 CREATE INDEX idx_order_items_product_id ON order_items(product_id);

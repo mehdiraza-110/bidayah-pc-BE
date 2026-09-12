@@ -90,9 +90,9 @@ class OrderService {
         await client.query(
           `INSERT INTO order_items (
             order_id, product_id, product_name, price, quantity, subtotal,
-            category, vendor_id, product_image, created_at, updated_at
+            category, vendor_id, product_image, components, created_at, updated_at
           )
-          VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)`,
+          VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)`,
           [
             newOrder.id,
             item.id,
@@ -102,16 +102,17 @@ class OrderService {
             itemSubtotal,
             item.category || null,
             item.vendor_id || null,
-            item.image || null
+            item.image || null,
+            item.components ? JSON.stringify(item.components) : null
           ]
         );
       }
-      
+
       await client.query('COMMIT');
-      
+
       // Get order with items
       const orderWithItems = await this.getOrderById(newOrder.id);
-      
+
       return orderWithItems;
     } catch (error) {
       await client.query('ROLLBACK');
@@ -120,7 +121,7 @@ class OrderService {
       client.release();
     }
   }
-  
+
   // Create order with agent payment
   async createAgentOrder(orderData) {
     const client = await db.getClient();
@@ -206,9 +207,9 @@ class OrderService {
         await client.query(
           `INSERT INTO order_items (
             order_id, product_id, product_name, price, quantity, subtotal,
-            category, vendor_id, product_image, created_at, updated_at
+            category, vendor_id, product_image, components, created_at, updated_at
           )
-          VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)`,
+          VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)`,
           [
             newOrder.id,
             item.id,
@@ -218,16 +219,17 @@ class OrderService {
             itemSubtotal,
             item.category || null,
             item.vendor_id || null,
-            item.image || null
+            item.image || null,
+            item.components ? JSON.stringify(item.components) : null
           ]
         );
       }
-      
+
       await client.query('COMMIT');
-      
+
       // Get order with items
       const orderWithItems = await this.getOrderById(newOrder.id);
-      
+
       return orderWithItems;
     } catch (error) {
       await client.query('ROLLBACK');
@@ -236,7 +238,7 @@ class OrderService {
       client.release();
     }
   }
-  
+
   // Get order by ID with items
   async getOrderById(orderId) {
     const orderResult = await db.query(
@@ -293,7 +295,8 @@ class OrderService {
         subtotal: parseFloat(item.subtotal),
         category: item.category,
         vendor_id: item.vendor_id,
-        image: item.product_image
+        image: item.product_image,
+        components: item.components || null
       })),
       subtotal: parseFloat(order.subtotal),
       shipping: parseFloat(order.shipping),
@@ -406,7 +409,8 @@ class OrderService {
           subtotal: parseFloat(item.subtotal),
           category: item.category,
           vendor_id: item.vendor_id,
-          image: item.product_image
+          image: item.product_image,
+          components: item.components || null
         })),
         items_count: parseInt(order.items_count),
         subtotal: parseFloat(order.subtotal),

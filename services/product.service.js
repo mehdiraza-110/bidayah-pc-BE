@@ -778,6 +778,37 @@ class ProductService {
     return { deleted, notFound };
   }
 
+  // Bulk update price for all products, or those in a category/vendor, by a
+  // percentage or fixed amount. Computed and applied in a single UPDATE so
+  // it scales to large product sets without one round-trip per row.
+  async bulkUpdatePrice({ scope, categoryId, vendorId, direction, type, amount }) {
+    const params = [amount];
+    const conditions = [];
+
+    if (scope === 'category') {
+      params.push(categoryId);
+      conditions.push(`category_id = $${params.length}`);
+    } else if (scope === 'vendor') {
+      params.push(vendorId);
+      conditions.push(`id IN (SELECT product_id FROM product_vendors WHERE vendor_id = $${params.length})`);
+    }
+
+    const whereClause = conditions.length > 0 ? `WHERE ${conditions.join(' AND ')}` : '';
+    const sign = direction === 'decrease' ? '-' : '+';
+    const deltaExpr = type === 'percentage' ? `price * ($1::numeric / 100)` : `$1::numeric`;
+
+    const query = `
+      UPDATE products
+      SET price = GREATEST(ROUND((price ${sign} (${deltaExpr}))::numeric, 2), 0),
+          updated_at = CURRENT_TIMESTAMP
+      ${whereClause}
+      RETURNING id, price
+    `;
+
+    const result = await db.query(query, params);
+    return result.rows;
+  }
+
   // Get product media by product ID
   async getProductMedia(productId) {
     const result = await db.query(

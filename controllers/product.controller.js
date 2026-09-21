@@ -595,6 +595,83 @@ class ProductController {
     }
   }
 
+  // Bulk update price for all products, or those in a category/vendor
+  async bulkUpdatePrice(req, res) {
+    try {
+      const { scope, category_id, vendor_id, direction, type, amount } = req.body;
+
+      const validScopes = ['all', 'category', 'vendor'];
+      const validDirections = ['increase', 'decrease'];
+      const validTypes = ['percentage', 'value'];
+
+      if (!validScopes.includes(scope)) {
+        return res.status(400).json({
+          success: false,
+          message: `scope must be one of: ${validScopes.join(', ')}`
+        });
+      }
+      if (!validDirections.includes(direction)) {
+        return res.status(400).json({
+          success: false,
+          message: `direction must be one of: ${validDirections.join(', ')}`
+        });
+      }
+      if (!validTypes.includes(type)) {
+        return res.status(400).json({
+          success: false,
+          message: `type must be one of: ${validTypes.join(', ')}`
+        });
+      }
+
+      const parsedAmount = parseFloat(amount);
+      if (isNaN(parsedAmount) || parsedAmount <= 0) {
+        return res.status(400).json({
+          success: false,
+          message: 'amount must be a positive number'
+        });
+      }
+
+      if (scope === 'category' && !category_id) {
+        return res.status(400).json({
+          success: false,
+          message: 'category_id is required when scope is "category"'
+        });
+      }
+      if (scope === 'vendor' && !vendor_id) {
+        return res.status(400).json({
+          success: false,
+          message: 'vendor_id is required when scope is "vendor"'
+        });
+      }
+
+      const updated = await productService.bulkUpdatePrice({
+        scope,
+        categoryId: category_id,
+        vendorId: vendor_id,
+        direction,
+        type,
+        amount: parsedAmount
+      });
+
+      res.status(200).json({
+        success: true,
+        message: `Price updated for ${updated.length} product(s)`,
+        data: {
+          updatedCount: updated.length,
+          updatedIds: updated.map((p) => p.id)
+        }
+      });
+    } catch (error) {
+      console.error('Error bulk updating price:', error);
+
+      res.status(500).json({
+        success: false,
+        message: 'Error bulk updating price',
+        error: error.message
+      });
+    }
+  }
+
   // Toggle featured status
   async toggleFeatured(req, res) {
     try {

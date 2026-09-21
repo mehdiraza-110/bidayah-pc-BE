@@ -50,6 +50,10 @@ router.patch(
 // body: { ids: string[] }
 router.post('/bulk-delete', productController.bulkDeleteProducts.bind(productController));
 
+// Bulk update price
+// body: { scope: 'all'|'category'|'vendor', category_id?, vendor_id?, direction: 'increase'|'decrease', type: 'percentage'|'value', amount: number }
+router.post('/bulk-update-price', productController.bulkUpdatePrice.bind(productController));
+
 // Delete product
 router.delete('/:id', productController.deleteProduct.bind(productController));
 

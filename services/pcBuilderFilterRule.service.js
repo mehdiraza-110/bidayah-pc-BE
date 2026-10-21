@@ -56,6 +56,29 @@ class PcBuilderFilterRuleService {
     return new Set(result.rows.map(row => row.feature_key));
   }
 
+  // Product ids (from `priorSelections`) whose own spec data already fully
+  // determines compatibility with `resultCategoryId` — i.e. at least one
+  // key-feature matcher applies. For those, the product-level match above is
+  // authoritative, so the coarser vendor-only admin rules must not also be
+  // applied: they would AND against it and wrongly empty the list (e.g. an
+  // "ASUS motherboard -> INTEL CPU" rule hiding every AM5 CPU next to an AM5
+  // ASUS board).
+  async getKeyFeatureCoveredProductIds(resultCategoryId, priorSelections = []) {
+    const covered = new Set();
+    const resultFeatureKeys = await this.getCategoryFeatureKeys(resultCategoryId);
+    if (resultFeatureKeys.size === 0) return covered;
+
+    for (const selection of priorSelections) {
+      if (!selection || !selection.product_id || selection.category_id === resultCategoryId) continue;
+      const selectedFeatures = await this.getProductKeyFeatures(selection.product_id);
+      const applies = KEY_FEATURE_MATCHERS.some(
+        (m) => m.selectedKey in selectedFeatures && resultFeatureKeys.has(m.resultKey)
+      );
+      if (applies) covered.add(selection.product_id);
+    }
+    return covered;
+  }
+
   // Builds the SQL fragment(s) requiring a candidate product (aliased `p` in the caller's query)
   // to be spec-compatible with whatever real products were already picked in this build.
   // Returns { clauses, params } — clauses is an array of standalone boolean SQL fragments meant
@@ -517,10 +540,12 @@ class PcBuilderFilterRuleService {
   // are alternatives (OR); entries combine as requirements (AND).
   async getCompatibilityConstraints(resultCategoryId, priorSelections = []) {
     const constraintsPerTrigger = [];
+    const keyFeatureCovered = await this.getKeyFeatureCoveredProductIds(resultCategoryId, priorSelections);
 
     for (const selection of priorSelections) {
       if (!selection || !selection.category_id || !selection.vendor_id) continue;
       if (selection.category_id === resultCategoryId) continue;
+      if (selection.product_id && keyFeatureCovered.has(selection.product_id)) continue;
 
       const rules = await this.getRulesForTrigger({
         categoryId: selection.category_id,

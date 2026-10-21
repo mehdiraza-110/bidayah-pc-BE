@@ -36,8 +36,13 @@ class FeaturedGamingPcController {
 
   async getActiveForPublic(req, res) {
     try {
-      const settings = await siteSettingsService.getSiteSettings();
-      const limit = settings.featured_gaming_pcs_limit ?? 4;
+      // ?all=true is used by the Gaming PCs listing page: every active build,
+      // ignoring the homepage cap (and regardless of series).
+      let limit = null;
+      if (req.query.all !== 'true') {
+        const settings = await siteSettingsService.getSiteSettings();
+        limit = settings.featured_gaming_pcs_limit ?? 4;
+      }
       const gamingPcs = await featuredGamingPcService.getActiveOrdered(limit);
       res.status(200).json({
         success: true,

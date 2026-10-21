@@ -93,7 +93,7 @@ class FeaturedGamingPcService {
   async getActiveOrdered(limit) {
     const result = await db.query(
       `SELECT * FROM featured_gaming_pcs WHERE is_active = true ORDER BY display_order ASC LIMIT $1`,
-      [limit]
+      [limit] // null = no limit
     );
     return this.attachRelations(result.rows);
   }

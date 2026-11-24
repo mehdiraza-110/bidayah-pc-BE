@@ -114,9 +114,19 @@ class CategoryService {
     const [keyFeatureResult, vendors] = await Promise.all([
       db.query(
         `SELECT ckf.id, ckf.feature_key, ckf.display_order,
-                array_agg(DISTINCT pkf.feature_value ORDER BY pkf.feature_value) AS values
+                array_agg(DISTINCT opt.value ORDER BY opt.value) AS values
          FROM category_key_features ckf
          JOIN product_key_features pkf ON pkf.category_key_feature_id = ckf.id
+         -- Socket lists are stored as one comma-separated string per product
+         -- ("LGA1700, AM5, AM4"); offer each socket as its own filter value.
+         -- Other features keep commas inside a value ("Dual Tower, 140mm fan").
+         CROSS JOIN LATERAL (
+           SELECT trim(v) AS value
+           FROM unnest(CASE WHEN ckf.feature_key ILIKE '%socket%'
+                            THEN regexp_split_to_array(pkf.feature_value, '\\s*,\\s*')
+                            ELSE ARRAY[pkf.feature_value] END) AS v
+           WHERE trim(v) <> ''
+         ) opt
          JOIN products p ON p.id = pkf.product_id AND p.status = 'published'
          WHERE ckf.category_id = $1 AND ckf.is_active = true${vendorClause}
          GROUP BY ckf.id, ckf.feature_key, ckf.display_order

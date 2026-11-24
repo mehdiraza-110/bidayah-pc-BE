@@ -210,7 +210,14 @@ class ProductService {
             SELECT 1 FROM product_key_features pkf2
             WHERE pkf2.product_id = p.id
               AND pkf2.category_key_feature_id = $${paramCount++}
-              AND pkf2.feature_value = ANY($${paramCount++})
+              AND (
+                pkf2.feature_value = ANY($${paramCount}::text[])
+                OR (
+                  EXISTS (SELECT 1 FROM category_key_features ckf2
+                          WHERE ckf2.id = pkf2.category_key_feature_id AND ckf2.feature_key ILIKE '%socket%')
+                  AND regexp_split_to_array(pkf2.feature_value, '\\s*,\\s*') && $${paramCount++}::text[]
+                )
+              )
           )`;
           whereParams.push(kf.id, kf.values);
         });

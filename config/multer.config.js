@@ -6,7 +6,10 @@ const fs = require('fs');
 const storage = multer.memoryStorage();
 
 const upload = multer({ storage,
-  limits: { fileSize: 500 * 1024 * 1024 } // Limit 500MB
+  limits: {
+    fileSize: 500 * 1024 * 1024, // Limit 500MB
+    fieldSize: 50 * 1024 * 1024, // text fields (e.g. rich-text blog content); default is 1MB
+  }
  });
 
 const saveFileToDisk = (file) => {
